@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">FitnessGear</string>
+
+    <string-array name="menu_array">
+        <item>Home</item>
+        <item>Start Workout</item>
+        <item>Find A Plan</item>
+        <item>Exercise Library</item>
+        <item>Report</item>
+        <item>Logs</item>
+        <item>Backup</item>
+        <item>Setting</item>
+    </string-array>
+
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_home</item>
+        <item>@drawable/ic_people</item>
+        <item>@drawable/ic_photos</item>
+        <item>@drawable/ic_communities</item>
+        <item>@drawable/ic_pages</item>
+        <item>@drawable/ic_whats_hot</item>
+        <item>@drawable/ic_home</item>
+    </array>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
+    <string name="desc_list_item_icon">Item Icon</string>
+    <string name="Apply">Apply</string>
+    <string name="Phase">Phase 1</string>
+    <string name="Microcycles">Microcycles 1 - 4</string>
+    <string name="title_activity_start_work_out_detail">StartWorkOutDetail</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+
+</resources>

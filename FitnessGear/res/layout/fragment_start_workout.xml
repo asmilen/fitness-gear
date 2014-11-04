@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <AbsoluteLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp" >
+
+        <TextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="171dp"
+            android:layout_y="68dp"
+            android:text="BodySpace"
+            android:textColor="#000000"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/exerciseImage"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_x="18dp"
+            android:layout_y="25dp"
+            android:src="@drawable/ic_home" />
+
+        <TextView
+            android:id="@+id/planName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="86dp"
+            android:layout_y="33dp"
+            android:text="JAMIE EASON&apos;S LIVEFIT TRAINER"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_x="95dp"
+            android:layout_y="68dp"
+            android:text="Created By:" />
+    </AbsoluteLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:background="@drawable/custom_bg" >
+
+        <LinearLayout
+            android:layout_width="268px"
+            android:layout_height="match_parent"
+            android:background="#fff"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/programFor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="Program For"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtGender"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Everyone"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="268px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/mainGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="Main Goal"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtMainGoal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Build Muscle"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="268px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/level"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="Level"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtLevelTrain"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="ALL LEVELS"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="270px"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="2px"
+            android:background="#fff"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/dateCreated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:paddingTop="5dp"
+                android:text="Date Created"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtDateCreated"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="22 - 12 - 2012"
+                android:textSize="11sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="85dp"
+        android:background="#3F4145" >
+
+        <LinearLayout
+            android:layout_width="216px"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/totalWeeks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TOTAL WEEKS"
+                android:textColor="#FEFEFE"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtTotalWeeks"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:background="#333232"
+                android:gravity="center"
+                android:text="12"
+                android:textColor="#D3D3D0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="216px"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/averageDays"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="AVERAGE DAYS/WEEK"
+                android:textColor="#FEFEFE"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtAverageDay"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#333232"
+                android:gravity="center"
+                android:text="5.5"
+                android:textColor="#D3D3D0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="216px"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/averageTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="AVERAGE WORKOUT TIME"
+                android:textColor="#FEFEFE"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtArverageTime"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#333232"
+                android:gravity="center"
+                android:text="00:48"
+                android:textColor="#D3D3D0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="216px"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/totalTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TOTAL TIME/WEEK"
+                android:textColor="#FEFEFE"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtTotalTime"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:background="#333232"
+                android:gravity="center"
+                android:text="04:27"
+                android:textColor="#D3D3D0"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="216px"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/totalCadio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="TOTAL CADIO"
+                android:textColor="#FEFEFE"
+                android:textSize="8sp" />
+
+            <TextView
+                android:id="@+id/txtTotalCadio"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="15dp"
+                android:background="#333232"
+                android:gravity="center"
+                android:text="01:34"
+                android:textColor="#D3D3D0"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <GridView
+            android:id="@+id/listExerciseOnPlan"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
+            android:divider="@drawable/divider"
+            android:gravity="center"
+            android:horizontalSpacing="1dp"
+            android:numColumns="7"
+            android:verticalSpacing="30dp" >
+        </GridView>
+    </LinearLayout>
+
+</LinearLayout>
