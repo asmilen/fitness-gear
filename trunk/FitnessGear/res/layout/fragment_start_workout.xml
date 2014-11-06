@@ -227,17 +227,23 @@
                 android:textColor="#FEFEFE"
                 android:textSize="8sp" />
 
-            <TextView
-                android:id="@+id/txtArverageTime"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:gravity="center"
-                android:text="00:48"
-                android:textColor="#D3D3D0"
-                android:textSize="12sp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txtArverageTime"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="5dp"
+                    android:background="#333232"
+                    android:gravity="center"
+                    android:text="00:48"
+                    android:textColor="#D3D3D0"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -259,7 +265,7 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:background="#333232"
                 android:gravity="center"
                 android:text="04:27"
