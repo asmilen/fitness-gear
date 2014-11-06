@@ -68,8 +68,8 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		//Khoi tao database
-		dbHelper = new CreateDatabase(this);
-		dbHelper.getReadableDatabase();
+//		dbHelper = new CreateDatabase(this);
+//		dbHelper.getReadableDatabase();
 		
 		mTitle = mDrawerTitle = getTitle();
 		

@@ -1,10 +1,5 @@
 package com.fitnessgear.database;
 
-import com.example.fitnessgear.R;
-import com.example.fitnessgear.R.id;
-import com.example.fitnessgear.R.layout;
-import com.example.fitnessgear.R.menu;
-
 import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -31,7 +26,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
 			"AveWorkoutTime	REAL NOT NULL," +
 			"TotalCardioTime	INTEGER NOT NULL,	" +
 			"TotalTimeAWeek	INTEGER NOT NULL);";
-	public static String INSERT_INTO_PLAN = "INSERT INTO `Plan` VALUES ('1','Big Man on the Campus','Build Muscle','Male ','Beginner','Nam Vu','11/06/2014','12','5.0','48.0','98','200');";
+	public static String INSERT_INTO_PLAN = "INSERT INTO `Plan` VALUES ('1','Big Man on the Campus','Build Muscle','Male ','Beginner','Nam Vu','11/06/2014','12','5.5','48.5','98','200');";
 	
 	public CreateDatabase(Context context) {
 		super(context,DATABASE_NAME,null,VERSION);
