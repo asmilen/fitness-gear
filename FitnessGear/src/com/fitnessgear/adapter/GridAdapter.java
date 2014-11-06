@@ -1,10 +1,10 @@
-package com.example.fitnessgear.adapter;
+package com.fitnessgear.adapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import com.example.fitnessgear.R;
-import com.example.fitnessgear.model.GridItem;
+import com.fitnessgear.model.GridItem;
 
 import android.app.Activity;
 import android.content.Context;

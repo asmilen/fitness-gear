@@ -1,12 +1,13 @@
-package com.example.fitnessgear;
+package com.fitnessgear;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import com.example.fitnessgear.adapter.GridAdapter;
-import com.example.fitnessgear.model.GridItem;
+import com.example.fitnessgear.R;
+import com.fitnessgear.adapter.GridAdapter;
+import com.fitnessgear.model.GridItem;
 
 import android.app.Fragment;
 import android.content.Context;

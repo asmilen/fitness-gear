@@ -1,4 +1,6 @@
-package com.example.fitnessgear;
+package com.fitnessgear;
+
+import com.example.fitnessgear.R;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -6,16 +8,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Home extends Fragment {
+public class Report extends Fragment {
 
-	public Home() {
+	public Report() {
 		// TODO Auto-generated constructor stub
 	}
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+View rootView = inflater.inflate(R.layout.fragment_report, container, false);
 		
 		return rootView;
 	}

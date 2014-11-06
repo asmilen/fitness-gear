@@ -1,10 +1,11 @@
-package com.example.fitnessgear;
+package com.fitnessgear;
 
 import java.util.ArrayList;
 import java.util.Locale;
 
-import com.example.fitnessgear.adapter.ListAdapter;
-import com.example.fitnessgear.model.NavDrawerItem;
+import com.example.fitnessgear.R;
+import com.fitnessgear.adapter.ListAdapter;
+import com.fitnessgear.model.NavDrawerItem;
 
 import android.app.ActionBar;
 import android.app.Activity;

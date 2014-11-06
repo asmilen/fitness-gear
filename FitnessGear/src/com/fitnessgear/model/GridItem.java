@@ -1,4 +1,4 @@
-package com.example.fitnessgear.model;
+package com.fitnessgear.model;
 
 public class GridItem {
 

@@ -1,9 +1,9 @@
-package com.example.fitnessgear.adapter;
+package com.fitnessgear.adapter;
 
 import java.util.ArrayList;
 
 import com.example.fitnessgear.R;
-import com.example.fitnessgear.model.NavDrawerItem;
+import com.fitnessgear.model.NavDrawerItem;
 
 import android.app.Activity;
 import android.content.Context;
