@@ -3,7 +3,6 @@ package com.fitnessgear;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import com.example.fitnessgear.R;
 import com.fitnessgear.adapter.ListAdapter;
 import com.fitnessgear.database.CreateDatabase;
 import com.fitnessgear.model.NavDrawerItem;

@@ -1,6 +1,5 @@
 package com.fitnessgear;
 
-import com.example.fitnessgear.R;
 
 import android.R.anim;
 import android.app.ActionBar;

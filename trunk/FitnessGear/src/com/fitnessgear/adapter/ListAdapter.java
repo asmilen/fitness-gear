@@ -2,7 +2,7 @@ package com.fitnessgear.adapter;
 
 import java.util.ArrayList;
 
-import com.example.fitnessgear.R;
+import com.fitnessgear.R;
 import com.fitnessgear.model.NavDrawerItem;
 
 import android.app.Activity;

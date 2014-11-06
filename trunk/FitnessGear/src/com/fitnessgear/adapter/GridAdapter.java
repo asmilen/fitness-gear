@@ -3,7 +3,7 @@ package com.fitnessgear.adapter;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.fitnessgear.R;
+import com.fitnessgear.R;
 import com.fitnessgear.model.GridItem;
 
 import android.app.Activity;
