@@ -1,0 +1,21 @@
+<resources>
+    <application name="FitnessGear">
+        <serviceProfile
+            id="/system/fitnessgear"
+            name="fitnessgear"
+            role="provider"
+            serviceImpl="com.fitnessgear.sapservices.SAPServiceProvider"
+            version="1.0"
+            serviceLimit="ANY"
+            serviceTimeout="10">
+            <supportedTransports>
+                <transport type="TRANSPORT_BLUETOOTH"/>
+            </supportedTransports>
+            <serviceChannel
+                id="123"
+                dataRate="low"
+                priority="low"
+                reliability="enable"/>
+        </serviceProfile>
+    </application>
+</resources>
