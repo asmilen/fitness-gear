@@ -1253,23 +1253,25 @@ containing a value of this type.
         public static final int abc_search_dropdown_item_icons_2line=0x7f030015;
         public static final int abc_search_view=0x7f030016;
         public static final int abc_simple_decor=0x7f030017;
-        public static final int activity_main=0x7f030018;
-        public static final int activity_start_work_out_detail=0x7f030019;
-        public static final int drawer_list_item=0x7f03001a;
-        public static final int fragment_backup=0x7f03001b;
-        public static final int fragment_exercise_library=0x7f03001c;
-        public static final int fragment_find_a_plan=0x7f03001d;
-        public static final int fragment_home=0x7f03001e;
-        public static final int fragment_logs=0x7f03001f;
-        public static final int fragment_report=0x7f030020;
-        public static final int fragment_setting=0x7f030021;
-        public static final int fragment_start_workout=0x7f030022;
-        public static final int grid_item=0x7f030023;
-        public static final int support_simple_spinner_dropdown_item=0x7f030024;
+        public static final int activity_create_database=0x7f030018;
+        public static final int activity_main=0x7f030019;
+        public static final int activity_start_work_out_detail=0x7f03001a;
+        public static final int drawer_list_item=0x7f03001b;
+        public static final int fragment_backup=0x7f03001c;
+        public static final int fragment_exercise_library=0x7f03001d;
+        public static final int fragment_find_a_plan=0x7f03001e;
+        public static final int fragment_home=0x7f03001f;
+        public static final int fragment_logs=0x7f030020;
+        public static final int fragment_report=0x7f030021;
+        public static final int fragment_setting=0x7f030022;
+        public static final int fragment_start_workout=0x7f030023;
+        public static final int grid_item=0x7f030024;
+        public static final int support_simple_spinner_dropdown_item=0x7f030025;
     }
     public static final class menu {
-        public static final int main=0x7f0d0000;
-        public static final int start_work_out_detail=0x7f0d0001;
+        public static final int create_database=0x7f0d0000;
+        public static final int main=0x7f0d0001;
+        public static final int start_work_out_detail=0x7f0d0002;
     }
     public static final class string {
         public static final int Apply=0x7f0a0011;
@@ -1321,6 +1323,7 @@ containing a value of this type.
         public static final int drawer_close=0x7f0a000f;
         public static final int drawer_open=0x7f0a000e;
         public static final int hello_world=0x7f0a0015;
+        public static final int title_activity_create_database=0x7f0a0017;
         public static final int title_activity_start_work_out_detail=0x7f0a0014;
     }
     public static final class style {

@@ -26,6 +26,10 @@
             android:name=".StartWorkOutDetail"
             android:label="@string/title_activity_start_work_out_detail" >
         </activity>
+        <activity
+            android:name=".CreateDatabase"
+            android:label="@string/title_activity_create_database" >
+        </activity>
     </application>
 
 </manifest>
