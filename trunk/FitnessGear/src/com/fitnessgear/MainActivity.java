@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import com.example.fitnessgear.R;
 import com.fitnessgear.adapter.ListAdapter;
+import com.fitnessgear.database.CreateDatabase;
 import com.fitnessgear.model.NavDrawerItem;
 
 import android.app.ActionBar;
@@ -58,10 +59,17 @@ public class MainActivity extends Activity {
     private ArrayList<NavDrawerItem> navDrawerItems;
 	private ListAdapter adapter;
 	
+	//database
+	private CreateDatabase dbHelper;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		
+		//Khoi tao database
+		dbHelper = new CreateDatabase(this);
+		dbHelper.getReadableDatabase();
 		
 		mTitle = mDrawerTitle = getTitle();
 		
