@@ -6,34 +6,50 @@ import com.example.fitnessgear.R.layout;
 import com.example.fitnessgear.R.menu;
 
 import android.app.Activity;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteDatabase.CursorFactory;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class CreateDatabase extends Activity {
-
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_create_database);
+public class CreateDatabase extends SQLiteOpenHelper {
+	
+	public static String DATABASE_NAME = "fitnessGear.db";
+	public static int VERSION = 1;
+	public static String CREATE_PLAN_TABLE = "CREATE TABLE Plan (	" +
+			"PlanID	INTEGER PRIMARY KEY AUTOINCREMENT,	" +
+			"PlanName	TEXT NOT NULL,	" +
+			"MainGoal	TEXT,	" +
+			"Gender	TEXT,	" +
+			"FitnessLevel	TEXT,	" +
+			"CreatedBy	TEXT,	" +
+			"DateCreated	TEXT," +
+			"TotalWeeks	INTEGER NOT NULL,	" +
+			"AveDay	REAL NOT NULL,	" +
+			"AveWorkoutTime	REAL NOT NULL," +
+			"TotalCardioTime	INTEGER NOT NULL,	" +
+			"TotalTimeAWeek	INTEGER NOT NULL);";
+	public static String INSERT_INTO_PLAN = "INSERT INTO `Plan` VALUES ('1','Big Man on the Campus','Build Muscle','Male ','Beginner','Nam Vu','11/06/2014','12','5.0','48.0','98','200');";
+	
+	public CreateDatabase(Context context) {
+		super(context,DATABASE_NAME,null,VERSION);
+		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_database, menu);
-		return true;
+	public void onCreate(SQLiteDatabase db) {
+		// TODO Auto-generated method stub
+		db.execSQL(CREATE_PLAN_TABLE);
+		db.execSQL(INSERT_INTO_PLAN);
 	}
 
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+		// TODO Auto-generated method stub
+		
 	}
+
+	
 }
