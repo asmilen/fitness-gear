@@ -1,10 +1,11 @@
 package com.fitnessgear;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import com.fitnessgear.adapter.ListAdapter;
-import com.fitnessgear.database.CreateDatabase;
+import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.model.NavDrawerItem;
 
 import android.app.ActionBar;
@@ -59,7 +60,7 @@ public class MainActivity extends Activity {
 	private ListAdapter adapter;
 	
 	//database
-	private CreateDatabase dbHelper;
+	private DataBaseHelper dbHelper;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +68,15 @@ public class MainActivity extends Activity {
 		setContentView(R.layout.activity_main);
 		
 		//Khoi tao database
-//		dbHelper = new CreateDatabase(this);
-//		dbHelper.getReadableDatabase();
+		dbHelper = new DataBaseHelper(this);
+		
+		try {
+			dbHelper.createDataBase();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		
 		mTitle = mDrawerTitle = getTitle();
 		

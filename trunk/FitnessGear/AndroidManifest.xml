@@ -33,10 +33,6 @@
             android:name="com.fitnessgear.StartWorkOutDetail"
             android:label="@string/title_activity_start_work_out_detail" >
         </activity>
-        <activity
-            android:name="com.fitnessgear.database.CreateDatabase"
-            android:label="@string/title_activity_create_database" >
-        </activity>
         <service android:name="com.fitnessgear.sappservices.SAPServiceProvider">
         </service>
         <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
