@@ -6,7 +6,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.fitnessgear.adapter.GridAdapter;
-import com.fitnessgear.database.CreateDatabase;
+import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.model.GridItem;
 
 import android.app.Fragment;
@@ -47,7 +47,7 @@ public class StartWorkOut extends Fragment {
 	
 	private ArrayList<GridItem> item;
 	
-	private CreateDatabase helper;
+	private DataBaseHelper helper;
 	private SQLiteDatabase db = null;
 
 	public StartWorkOut() {
@@ -60,12 +60,10 @@ public class StartWorkOut extends Fragment {
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.fragment_start_workout,
 				container, false);
+		
 		//Khoi Tao Databse
-		helper = new CreateDatabase(getActivity());
-		helper.getReadableDatabase();
-		
-		
-		
+		helper = new DataBaseHelper(getActivity());
+						
 		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
 
 		planName = (TextView) rootView.findViewById(R.id.planName);
@@ -111,9 +109,10 @@ public class StartWorkOut extends Fragment {
 
 		return rootView;
 	}
+	
 	public void getData(){
 		db = helper.getReadableDatabase();
-		Cursor c = db.rawQuery("Select * FROM Plan WHERE PlanID = 1", null);
+		Cursor c = db.rawQuery("Select * FROM Plan WHERE 'PlanID' = '1'",null);
 		ArrayList<String> data = new ArrayList<String>();
 		while(c.moveToNext()){
 			//Lam bien dong
