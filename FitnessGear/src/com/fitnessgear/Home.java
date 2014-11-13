@@ -1,5 +1,7 @@
 package com.fitnessgear;
 
+import com.fitnessgear.sapservices.SAPServiceProvider;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,7 +18,6 @@ public class Home extends Fragment {
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.fragment_home, container, false);
-		
 		return rootView;
 	}
 
