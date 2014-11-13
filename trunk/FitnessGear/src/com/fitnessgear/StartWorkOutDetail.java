@@ -1,6 +1,9 @@
 package com.fitnessgear;
 
 
+import com.fitnessgear.sapservices.HelloAccessoryProviderService;
+import com.fitnessgear.sapservices.HelloAccessoryProviderService.HelloAccessoryProviderConnection;
+
 import android.R.anim;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -19,6 +22,8 @@ public class StartWorkOutDetail extends Activity {
 		setContentView(R.layout.activity_start_work_out_detail);
 
 		ActionBar actionBar = getActionBar();
+		
+		HelloAccessoryProviderService.setMessage("XXX");
 
 		if (actionBar != null) {
 			actionBar.setHomeButtonEnabled(true);
