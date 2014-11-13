@@ -79,6 +79,7 @@ public class SAPServiceProvider extends SAAgent {
         }
 		
 	}
+	
 
 	@Override
 	protected void onServiceConnectionRequested(SAPeerAgent peerAgent) {
@@ -108,7 +109,9 @@ public class SAPServiceProvider extends SAAgent {
 		@Override
 		public void onReceive(int channelID, byte[] data) {
 			// TODO Auto-generated method stub
-			final String message = "";
+			String strToUpdateUI = new String(data);
+			
+			final String message =  strToUpdateUI.concat("Dmthangchonam");
 
 			final SAPServiceProviderConnection uHandler = connectionMap
 					.get(Integer.parseInt(String.valueOf(connectionID)));
@@ -118,8 +121,7 @@ public class SAPServiceProvider extends SAAgent {
 			new Thread(new Runnable() {
 				public void run() {
 					try {
-						uHandler.send(SAP_SERVICE_CHANNEL_ID,
-								message.getBytes());
+						uHandler.send(SAP_SERVICE_CHANNEL_ID,message.getBytes());
 					} catch (IOException e) {
 						e.printStackTrace();
 					}
