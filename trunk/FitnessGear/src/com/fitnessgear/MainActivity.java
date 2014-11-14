@@ -17,6 +17,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -72,6 +74,7 @@ public class MainActivity extends Activity {
 		
 		try {
 			dbHelper.createDataBase();
+		    //Toast.makeText(this, c.getString(c.getColumnIndex("PlanName")), Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
