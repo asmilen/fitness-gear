@@ -35,5 +35,10 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_database">CreateDatabase</string>
+    <string name="title_activity_track_workout">TrackWorkout</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_trackworkout_detail">TrackworkoutDetail</string>
 
 </resources>
