@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fitnessgear.database.CreateDatabase;
+import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService.HelloAccessoryProviderConnection;
@@ -49,7 +50,8 @@ public class StartWorkOutDetail extends Activity {
 		try {
 			Bundle extras = getIntent().getExtras();
 			String workoutId = extras.getInt("Day") + "";
-			CreateDatabase helper = new CreateDatabase(getApplicationContext());
+			
+			DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
 			SQLiteDatabase db = helper.getReadableDatabase();
 
 			myListExercise = new ArrayList<String>();
@@ -57,12 +59,15 @@ public class StartWorkOutDetail extends Activity {
 
 			Cursor c = db.rawQuery(
 					"Select * FROM Workout_Exercise Where WorkoutID=1", null);
+			int i = 0;
 			while (c.moveToNext()) {
+				Toast.makeText(getApplicationContext(), i+"",
+						Toast.LENGTH_LONG).show();
 				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
 				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
 				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
 				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
-				String img1 = null, img2 = null;
+				String img1 = "", img2 = "";
 				Cursor c1 = db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
 				while (c1.moveToNext()) {
 					// Set img base64
@@ -71,8 +76,9 @@ public class StartWorkOutDetail extends Activity {
 				}
 
 				message += ExerciseID + "." + img1 + "." + img2 + "." + Sets
-						+ "." + Reps + "." + "Rests" + ";";
+						+ "." + Reps + "." + Rests + ";";
 				myListExercise.add(ExerciseID);
+				i++;
 			}
 		} catch (SQLiteException ex) {
 			Toast.makeText(getApplicationContext(), ex.getMessage(),
