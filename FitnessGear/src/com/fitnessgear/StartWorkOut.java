@@ -51,6 +51,7 @@ public class StartWorkOut extends Fragment {
 	private ArrayList<GridItem> item;
 
 	private CreateDatabase helper;
+	private DataBaseHelper test;
 	private SQLiteDatabase db = null;
 
 	public StartWorkOut() {
@@ -66,6 +67,7 @@ public class StartWorkOut extends Fragment {
 
 		// Khoi Tao Databse
 		helper = new CreateDatabase(getActivity());
+		test = new DataBaseHelper(getActivity());
 
 		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
 
@@ -120,6 +122,7 @@ public class StartWorkOut extends Fragment {
 
 		try {
 			db = helper.getReadableDatabase();
+			db = test.getReadableDatabase();
 			Cursor c = db.rawQuery("Select * FROM Plan Where PlanID=1", null);
 
 			ArrayList<String> data = new ArrayList<String>();
@@ -155,6 +158,11 @@ public class StartWorkOut extends Fragment {
 		} catch (SQLiteException ex) {
 			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
 					.show();
+		}
+		catch (Exception ex)
+		{
+			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
+			.show();
 		}
 	}
 }
