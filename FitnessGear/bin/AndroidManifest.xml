@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.fitnessgear"
+    package="com.fitnessgear"
     android:versionCode="1"
     android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="com.samsung.accessory.permission.ACCESSORY_FRAMEWORK" />
+    <uses-permission android:name="com.samsung.wmanager.APP" />
+    <uses-permission android:name="com.samsung.wmanager.ENABLE_NOTIFICATION" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
+    <uses-permission android:name="com.samsung.WATCH_APP_TYPE.Integrated" />
 
     <uses-sdk
         android:minSdkVersion="17"
@@ -14,7 +22,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.fitnessgear.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,12 +31,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.fitnessgear.StartWorkOutDetail"
+            android:name=".StartWorkOutDetail"
             android:label="@string/title_activity_start_work_out_detail" >
         </activity>
+
+        <service android:name=".sapservices.HelloAccessoryProviderService" >
+        </service>
+
+        <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.accessory.service.action.ACCESSORY_SERVICE_CONNECTION_IND" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver" >
+            <intent-filter>
+                <action android:name="android.accessory.device.action.REGISTER_AFTER_INSTALL" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="AccessoryServicesLocation"
+            android:value="/res/xml/accessoryservices.xml" />
+        <meta-data
+            android:name="GearAppType"
+            android:value="wgt" />
+
         <activity
-            android:name="com.fitnessgear.database.CreateDatabase"
-            android:label="@string/title_activity_create_database" >
+            android:name=".Test"
+            android:label="@string/title_activity_test" >
+        </activity>
+        <activity
+            android:name=".TrackWorkout"
+            android:label="@string/title_activity_track_workout" >
         </activity>
     </application>
 

@@ -58,7 +58,7 @@ public class StartWorkOutDetail extends Activity {
 			message = "";
 
 			Cursor c = db.rawQuery(
-					"Select * FROM Workout_Exercise Where WorkoutID=1", null);
+					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
 			int i = 0;
 			Toast.makeText(getApplicationContext(), workoutId,
 					Toast.LENGTH_LONG).show();
@@ -93,7 +93,7 @@ public class StartWorkOutDetail extends Activity {
 
 	// Track workout on Phone
 	public void OnPhone(View e) {
-		Intent intent = new Intent(StartWorkOutDetail.this, StartWorkOut.class);
+		Intent intent = new Intent(StartWorkOutDetail.this, TrackWorkout.class);
 		intent.putExtra("listExercise", myListExercise);
 		startActivity(intent);
 	}
@@ -103,12 +103,12 @@ public class StartWorkOutDetail extends Activity {
 		HelloAccessoryProviderService.setMessage(message);
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.start_work_out_detail, menu);
-		return true;
-	}
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.start_work_out_detail, menu);
+//		return true;
+//	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
