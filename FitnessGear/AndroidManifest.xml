@@ -57,13 +57,14 @@
             android:value="wgt" />
 
         <activity
-            android:name=".Test"
-            android:label="@string/title_activity_test" >
-        </activity>
-        <activity
             android:name=".TrackWorkout"
             android:label="@string/title_activity_track_workout" >
         </activity>
+        <activity
+            android:name=".model.TrackworkoutDetail"
+            android:label="@string/title_activity_trackworkout_detail" >
+        </activity>
+
     </application>
 
 </manifest>
