@@ -19,6 +19,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,7 +51,7 @@ public class StartWorkOut extends Fragment {
 
 	private ArrayList<GridItem> item;
 
-	private CreateDatabase helper;
+	private DataBaseHelper helper;
 	private DataBaseHelper test;
 	private SQLiteDatabase db = null;
 
@@ -66,8 +67,21 @@ public class StartWorkOut extends Fragment {
 				container, false);
 
 		// Khoi Tao Databse
-		helper = new CreateDatabase(getActivity());
-		test = new DataBaseHelper(getActivity());
+		helper = new DataBaseHelper(getActivity());
+		db = helper.getReadableDatabase();
+
+		Cursor workout = db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
+				null);
+		
+		item = new ArrayList<GridItem>();
+		while (workout.moveToNext()) {
+			item.add(new GridItem(
+					workout.getString(workout.getColumnIndex("WorkoutID")),
+					workout.getString(workout.getColumnIndex("WorkoutName")),
+					workout.getString(workout.getColumnIndex("Description"))));
+			Log.i("WorkoutName",workout.getString(workout.getColumnIndex("WorkoutName")) );
+			Log.i("Description", workout.getString(workout.getColumnIndex("Description")));
+		}
 
 		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
 
@@ -85,20 +99,17 @@ public class StartWorkOut extends Fragment {
 		txtTotalTime = (TextView) rootView.findViewById(R.id.txtTotalTime);
 		txtTotalCadio = (TextView) rootView.findViewById(R.id.txtTotalCadio);
 
-		// FrameLayout f = (FrameLayout)
-		// getActivity().findViewById(R.id.content_frame);
-		// planName.setText("Width: " + f.getMeasuredWidth());
-		// author.setText("Heigh: " + f.getMeasuredHeight());
-
 		// Call method
 		getData();
 
-		Calendar cal = Calendar.getInstance();
-		int numOfDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		item = new ArrayList<GridItem>();
-		for (int i = 1; i <= numOfDay; i++) {
-			item.add(new GridItem("Day " + i, "Chest, Triceps and Cavle " + i));
-		}
+		// Calendar cal = Calendar.getInstance();
+		// int numOfDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
+		// int numOfDay = Integer.parseInt(txtTotalWeeks.getText().toString()) *
+		// 7;
+		// item = new ArrayList<GridItem>();
+		// for (int i = 1; i <= numOfDay; i++) {
+		// item.add(new GridItem("Day " + i, "Chest, Triceps and Cavle " + i));
+		// }
 
 		GridAdapter adapter = new GridAdapter(getActivity(), item);
 
@@ -110,7 +121,8 @@ public class StartWorkOut extends Fragment {
 					int position, long id) {
 				Intent intent = new Intent(getActivity(),
 						StartWorkOutDetail.class);
-				intent.putExtra("Day", position);
+//				item.get(position).getWorkoutID();
+				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
 				startActivity(intent);
 			}
 		});
@@ -122,7 +134,6 @@ public class StartWorkOut extends Fragment {
 
 		try {
 			db = helper.getReadableDatabase();
-			db = test.getReadableDatabase();
 			Cursor c = db.rawQuery("Select * FROM Plan Where PlanID=1", null);
 
 			ArrayList<String> data = new ArrayList<String>();
@@ -158,11 +169,9 @@ public class StartWorkOut extends Fragment {
 		} catch (SQLiteException ex) {
 			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
 					.show();
-		}
-		catch (Exception ex)
-		{
+		} catch (Exception ex) {
 			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
-			.show();
+					.show();
 		}
 	}
 }
