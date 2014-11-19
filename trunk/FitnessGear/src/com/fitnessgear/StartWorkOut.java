@@ -8,6 +8,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.fitnessgear.adapter.GridAdapter;
+import com.fitnessgear.adapter.ListWorkoutAdapter;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.model.GridItem;
 
@@ -29,12 +30,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.GridView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class StartWorkOut extends Fragment {
 
-	private GridView grid;
+//	private GridView grid;
+	private ListView listWorkout;
 
 	private TextView planName;
 	private TextView author;
@@ -72,18 +75,11 @@ public class StartWorkOut extends Fragment {
 
 		Cursor workout = db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
 				null);
-		
-		item = new ArrayList<GridItem>();
-		while (workout.moveToNext()) {
-			item.add(new GridItem(
-					workout.getString(workout.getColumnIndex("WorkoutID")),
-					workout.getString(workout.getColumnIndex("WorkoutName")),
-					workout.getString(workout.getColumnIndex("Description"))));
-			Log.i("WorkoutName",workout.getString(workout.getColumnIndex("WorkoutName")) );
-			Log.i("Description", workout.getString(workout.getColumnIndex("Description")));
-		}
 
-		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
+		item = new ArrayList<GridItem>();
+
+//		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
+		listWorkout = (ListView) rootView.findViewById(R.id.listWorkout);
 
 		planName = (TextView) rootView.findViewById(R.id.planName);
 		author = (TextView) rootView.findViewById(R.id.author);
@@ -111,17 +107,28 @@ public class StartWorkOut extends Fragment {
 		// item.add(new GridItem("Day " + i, "Chest, Triceps and Cavle " + i));
 		// }
 
+		for (int i = 1; i <= Integer.parseInt(txtTotalWeeks.getText()
+				.toString()); i++) {
+			item.add(new GridItem("Week " + i));
+			while (workout.moveToNext()) {
+				item.add(new GridItem(
+						workout.getString(workout.getColumnIndex("WorkoutID")),
+						workout.getString(workout.getColumnIndex("WorkoutName")),
+						workout.getString(workout.getColumnIndex("Description"))));
+			}
+		}
+
 		GridAdapter adapter = new GridAdapter(getActivity(), item);
 
-		grid.setAdapter(adapter);
+		listWorkout.setAdapter(adapter);
 
-		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		listWorkout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				Intent intent = new Intent(getActivity(),
 						StartWorkOutDetail.class);
-//				item.get(position).getWorkoutID();
+				// item.get(position).getWorkoutID();
 				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
 				startActivity(intent);
 			}

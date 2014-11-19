@@ -2,6 +2,7 @@ package com.fitnessgear.model;
 
 public class GridItem {
 
+	private String header;
 	private String workoutID;
 	private String txtTime;
 	private String txtExercise;
@@ -10,10 +11,23 @@ public class GridItem {
 		// TODO Auto-generated constructor stub
 	}
 
+	public GridItem(String header) {
+		super();
+		this.header = header;
+	}
+
 	public GridItem(String workoutID, String txtTime, String txtExercise ) {
 		this.workoutID = workoutID;
 		this.txtTime = txtTime;
 		this.txtExercise = txtExercise;
+	}
+
+	public String getHeader() {
+		return header;
+	}
+
+	public void setHeader(String header) {
+		this.header = header;
 	}
 
 	public String getWorkoutID() {

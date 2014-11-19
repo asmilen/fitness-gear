@@ -7,6 +7,7 @@ import com.fitnessgear.adapter.ViewPagerAdapter;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -17,6 +18,7 @@ public class TrackWorkout extends ActionBarActivity {
 
 	ViewPager pager;
 	ViewPagerAdapter adapter;
+	PagerTitleStrip pagerTitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +32,8 @@ public class TrackWorkout extends ActionBarActivity {
 		}
 		
 		pager = (ViewPager) findViewById(R.id.pager);
+		pagerTitle = (PagerTitleStrip) findViewById(R.id.pagerTitle);
+		pagerTitle.setTextSize(1, 31);
 		adapter = new ViewPagerAdapter(getSupportFragmentManager());
 		
 		//lay list exercise
