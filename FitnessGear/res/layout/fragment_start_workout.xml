@@ -305,17 +305,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <GridView
-            android:id="@+id/listExerciseOnPlan"
+        <!-- <GridView -->
+        <!-- android:id="@+id/listExerciseOnPlan" -->
+        <!-- android:layout_width="match_parent" -->
+        <!-- android:layout_height="match_parent" -->
+        <!-- android:columnWidth="100dp" -->
+        <!-- android:divider="@drawable/divider" -->
+        <!-- android:gravity="center" -->
+        <!-- android:horizontalSpacing="1dp" -->
+        <!-- android:numColumns="7" -->
+        <!-- android:verticalSpacing="30dp" > -->
+        <!-- </GridView> -->
+
+        <ListView
+            android:id="@+id/listWorkout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:columnWidth="100dp"
-            android:divider="@drawable/divider"
-            android:gravity="center"
-            android:horizontalSpacing="1dp"
-            android:numColumns="7"
-            android:verticalSpacing="30dp" >
-        </GridView>
+            android:layout_height="wrap_content"
+            android:gravity="center" >
+        </ListView>
     </LinearLayout>
 
 </LinearLayout>

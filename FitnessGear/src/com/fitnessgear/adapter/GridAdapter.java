@@ -18,19 +18,24 @@ public class GridAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private final ArrayList<GridItem> item;
-	private TextView txtTime;
-	private TextView txtExercise;
-	private TextView header;
-	
-	
-	public GridAdapter(Context c,ArrayList<GridItem> item) {
+
+	public GridAdapter(Context c, ArrayList<GridItem> item) {
 		// TODO Auto-generated constructor stub
 		mContext = c;
 		this.item = item;
 	}
 	
-	
-	
+	@Override
+	public int getItemViewType(int position) {
+		// TODO Auto-generated method stub
+		return super.getItemViewType(position);
+	}
+	@Override
+	public int getViewTypeCount() {
+		// TODO Auto-generated method stub
+		return 2;
+	}
+
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
@@ -40,40 +45,101 @@ public class GridAdapter extends BaseAdapter {
 	@Override
 	public Object getItem(int position) {
 		// TODO Auto-generated method stub
-		return null;
+		return item.get(position);
 	}
 
 	@Override
 	public long getItemId(int position) {
 		// TODO Auto-generated method stub
-		return 0;
+		return position;
 	}
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		// TODO Auto-generated method stub
-		View grid;
-		LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(
-				Context.LAYOUT_INFLATER_SERVICE);
+		convertView = null;
+		ViewHolder holder = null;
+		GridItem gridItem = item.get(position);
+		LayoutInflater inflater = (LayoutInflater) mContext
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+
 		
-		if(convertView == null){
-			grid = new View(mContext);
-			grid = inflater.inflate(R.layout.grid_item, null);
-			
+		if (convertView == null) {
+			holder = new ViewHolder();
+			if (gridItem.getHeader() == null) {
+				convertView = inflater.inflate(R.layout.grid_item, null);
+				holder.txtTime = (TextView) convertView.findViewById(R.id.txtTime);
+				holder.txtExercise = (TextView) convertView.findViewById(R.id.txtExercise);
+			}
+			else {
+				convertView = inflater.inflate(R.layout.list_section, null);
+				holder.header = (TextView) convertView.findViewById(R.id.header);
+			}
+			convertView.setTag(holder);
+		} else {
+			holder = (ViewHolder) convertView.getTag();
 		}
-		else{
-			grid = (View) convertView;
+		// header = (TextView) grid.findViewById(R.id.header);
+
+		if (gridItem.getHeader() == null) {
+			holder.txtTime.setText(item.get(position).getTxtTime());
+			holder.txtExercise.setText(item.get(position).getTxtExercise());
+		} else {
+			holder.header.setText(item.get(position).getHeader());
 		}
-//		header = (TextView) grid.findViewById(R.id.header);
-		
-		
-		txtTime = (TextView) grid.findViewById(R.id.txtTime);
-		txtTime.setText(item.get(position).getTxtTime());
-		
-		txtExercise = (TextView) grid.findViewById(R.id.txtExercise);
-		txtExercise.setText(item.get(position).getTxtExercise());
-		
-		return grid;
+		return convertView;
+	}
+//	@Override
+//	public View getView(int position, View convertView, ViewGroup parent) {
+//		// TODO Auto-generated method stub
+////		convertView = null;
+//		ViewHolder holder = null;
+//		GridItem gridItem = item.get(position);
+//		LayoutInflater inflater = (LayoutInflater) mContext
+//				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//
+//		
+//		if (convertView == null) {
+//			holder = new ViewHolder();
+//			if (gridItem.getHeader() == null) {
+//				convertView = inflater.inflate(R.layout.grid_item, null);
+//				holder.txtTime = (TextView) convertView.findViewById(R.id.txtTime);
+//				holder.txtExercise = (TextView) convertView.findViewById(R.id.txtExercise);
+//			}
+//			else {
+//				convertView = inflater.inflate(R.layout.list_section, null);
+//				holder.header = (TextView) convertView.findViewById(R.id.header);
+//			}
+//			convertView.setTag(holder);
+//		} else {
+//			holder = (ViewHolder) convertView.getTag();
+//		}
+//		// header = (TextView) grid.findViewById(R.id.header);
+//
+//		if (gridItem.getHeader() == null) {
+//			holder.txtTime.setText(item.get(position).getTxtTime());
+//			holder.txtExercise.setText(item.get(position).getTxtExercise());
+//		} else {
+//			holder.header.setText(item.get(position).getHeader());
+//		}
+//
+//		return convertView;
+//	}
+	
+	public static class ViewHolder {
+		public TextView header;
+		public TextView txtExercise;
+		public TextView txtTime;
 	}
 
+	@Override
+	public boolean isEnabled(int position) {
+		// TODO Auto-generated method stub
+		GridItem gridItem = item.get(position);
+		if (gridItem.getHeader() == null) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 }
