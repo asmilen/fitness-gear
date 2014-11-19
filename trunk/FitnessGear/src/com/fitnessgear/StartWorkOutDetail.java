@@ -49,7 +49,7 @@ public class StartWorkOutDetail extends Activity {
 
 		try {
 			Bundle extras = getIntent().getExtras();
-			String workoutId = extras.getInt("Day") + "";
+			String workoutId = extras.getString("WorkoutID");
 			
 			DataBaseHelper helper = new DataBaseHelper(getApplicationContext());
 			SQLiteDatabase db = helper.getReadableDatabase();
@@ -60,9 +60,9 @@ public class StartWorkOutDetail extends Activity {
 			Cursor c = db.rawQuery(
 					"Select * FROM Workout_Exercise Where WorkoutID=1", null);
 			int i = 0;
+			Toast.makeText(getApplicationContext(), workoutId,
+					Toast.LENGTH_LONG).show();
 			while (c.moveToNext()) {
-				Toast.makeText(getApplicationContext(), i+"",
-						Toast.LENGTH_LONG).show();
 				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
 				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
 				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
@@ -93,8 +93,8 @@ public class StartWorkOutDetail extends Activity {
 
 	// Track workout on Phone
 	public void OnPhone(View e) {
-		Intent intent = new Intent(getApplicationContext(), TrackWorkout.class);
-		intent.putStringArrayListExtra("listExercise", myListExercise);
+		Intent intent = new Intent(StartWorkOutDetail.this, StartWorkOut.class);
+		intent.putExtra("listExercise", myListExercise);
 		startActivity(intent);
 	}
 
