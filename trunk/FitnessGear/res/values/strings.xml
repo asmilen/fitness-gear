@@ -40,5 +40,6 @@
     <string name="title_section2">Section 2</string>
     <string name="title_section3">Section 3</string>
     <string name="title_activity_trackworkout_detail">TrackworkoutDetail</string>
+    <string name="title_activity_test">Test</string>
 
 </resources>
