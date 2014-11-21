@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import com.fitnessgear.adapter.ListAdapter;
+import com.fitnessgear.adapter.NavigationDrawerAdapter;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.model.NavDrawerItem;
 
@@ -59,7 +59,7 @@ public class MainActivity extends Activity {
     private TypedArray navMenuIcons;
     
     private ArrayList<NavDrawerItem> navDrawerItems;
-	private ListAdapter adapter;
+	private NavigationDrawerAdapter adapter;
 	
 	//database
 	private DataBaseHelper dbHelper;
@@ -80,16 +80,16 @@ public class MainActivity extends Activity {
 			e.printStackTrace();
 		}
 		
-		
+		//Get title of activity
 		mTitle = mDrawerTitle = getTitle();
-		
+		//Get title resources from string.xml
 		mMenuTitle = getResources().getStringArray(R.array.menu_array);
-		
+		//Get name's icon resources from string.xml
 		navMenuIcons = getResources().obtainTypedArray(R.array.nav_drawer_icons);
 		
 		mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
-        
+        //Define a ArrayList of NavDrawerItem class
         navDrawerItems = new ArrayList<NavDrawerItem>();
         
         // adding nav drawer items to array
@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
 		mDrawerList.setOnItemClickListener(new SlideMenuClickListener());
         
         // set up the drawer's list view with items and click listener
-        adapter = new ListAdapter(getApplicationContext(), navDrawerItems);
+        adapter = new NavigationDrawerAdapter(getApplicationContext(), navDrawerItems);
         mDrawerList.setAdapter(adapter);
         mDrawerList.setSelector(R.drawable.list_selector);
         

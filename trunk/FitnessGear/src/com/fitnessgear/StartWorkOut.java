@@ -8,9 +8,8 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.fitnessgear.adapter.GridAdapter;
-import com.fitnessgear.adapter.ListWorkoutAdapter;
 import com.fitnessgear.database.DataBaseHelper;
-import com.fitnessgear.model.GridItem;
+import com.fitnessgear.model.WorkoutItem;
 
 import android.app.Fragment;
 import android.content.Context;
@@ -36,8 +35,8 @@ import android.widget.Toast;
 
 public class StartWorkOut extends Fragment {
 
-//	private GridView grid;
-	private ListView listWorkout;
+	private GridView grid;
+//	private ListView listWorkout;
 
 	private TextView planName;
 	private TextView author;
@@ -52,7 +51,7 @@ public class StartWorkOut extends Fragment {
 	private TextView txtTotalTime;
 	private TextView txtTotalCadio;
 
-	private ArrayList<GridItem> item;
+	private ArrayList<WorkoutItem> item;
 
 	private DataBaseHelper helper;
 	private DataBaseHelper test;
@@ -76,10 +75,10 @@ public class StartWorkOut extends Fragment {
 		Cursor workout = db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
 				null);
 
-		item = new ArrayList<GridItem>();
+		item = new ArrayList<WorkoutItem>();
 
-//		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
-		listWorkout = (ListView) rootView.findViewById(R.id.listWorkout);
+		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
+//		listWorkout = (ListView) rootView.findViewById(R.id.listWorkout);
 
 		planName = (TextView) rootView.findViewById(R.id.planName);
 		author = (TextView) rootView.findViewById(R.id.author);
@@ -93,43 +92,48 @@ public class StartWorkOut extends Fragment {
 		txtArverageTime = (TextView) rootView
 				.findViewById(R.id.txtArverageTime);
 		txtTotalTime = (TextView) rootView.findViewById(R.id.txtTotalTime);
-		txtTotalCadio = (TextView) rootView.findViewById(R.id.txtTotalCadio);
+		txtTotalCadio = (TextView) rootView.findViewById(R.id.txtTotalCardio);
 
 		// Call method
 		getData();
-
-		// Calendar cal = Calendar.getInstance();
-		// int numOfDay = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-		// int numOfDay = Integer.parseInt(txtTotalWeeks.getText().toString()) *
-		// 7;
-		// item = new ArrayList<GridItem>();
-		// for (int i = 1; i <= numOfDay; i++) {
-		// item.add(new GridItem("Day " + i, "Chest, Triceps and Cavle " + i));
-		// }
-
-		for (int i = 1; i <= Integer.parseInt(txtTotalWeeks.getText()
-				.toString()); i++) {
-			item.add(new GridItem("Week " + i));
+		//Add value to ArrayList
+//		for (int i = 1; i <= Integer.parseInt(txtTotalWeeks.getText()
+//				.toString()); i++) {
+//			item.add(new WorkoutItem("Week " + i));
 			while (workout.moveToNext()) {
-				item.add(new GridItem(
+				item.add(new WorkoutItem(
 						workout.getString(workout.getColumnIndex("WorkoutID")),
 						workout.getString(workout.getColumnIndex("WorkoutName")),
-						workout.getString(workout.getColumnIndex("Description"))));
+						workout.getString(workout.getColumnIndex("Description")),
+						workout.getString(workout.getColumnIndex("TotalWorkoutTime")),
+						workout.getString(workout.getColumnIndex("TotalCardioTime")),
+						workout.getString(workout.getColumnIndex("TotalExercises")),
+						workout.getString(workout.getColumnIndex("TotalSets"))));
 			}
-		}
+//		}
 
 		GridAdapter adapter = new GridAdapter(getActivity(), item);
 
-		listWorkout.setAdapter(adapter);
-
-		listWorkout.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+		grid.setAdapter(adapter);
+		//Set click for Grid View Start Workout
+		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
+				int pos = position;
 				Intent intent = new Intent(getActivity(),
 						StartWorkOutDetail.class);
 				// item.get(position).getWorkoutID();
 				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
+				intent.putExtra("TotalWorkoutTime", item.get(position).getTotalWorkoutTime());
+				intent.putExtra("TotalCardioTime", item.get(position).getTotalCardioTime());
+				intent.putExtra("TotalExercises", item.get(position).getTotalExercises());
+				intent.putExtra("TotalSets", item.get(position).getTotalSets());
+				intent.putExtra("Day", (position+1)+"");
+				intent.putExtra("CreatedBy", author.getText().toString());
+				intent.putExtra("ProgramFor", txtGender.getText().toString());
+				intent.putExtra("MainGoal", txtMainGoal.getText().toString());
+				intent.putExtra("Level", txtLevelTrain.getText().toString());
 				startActivity(intent);
 			}
 		});
@@ -141,7 +145,7 @@ public class StartWorkOut extends Fragment {
 
 		try {
 			db = helper.getReadableDatabase();
-			Cursor c = db.rawQuery("Select * FROM Plan Where PlanID=1", null);
+			Cursor c = db.rawQuery("Select * FROM Plan Where PlanID = 1", null);
 
 			ArrayList<String> data = new ArrayList<String>();
 			while (c.moveToNext()) {

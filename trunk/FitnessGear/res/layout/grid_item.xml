@@ -1,32 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/list_selector"
  >
  <TextView
         android:id="@+id/txtTime"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_centerVertical="true"
         android:text="Duong"
         android:textAlignment="center"
         android:textColor="#00AEEF"
-        android:textSize="20sp"
-        android:textAllCaps="true" />
+        android:textSize="10sp"
+        android:textAllCaps="true"
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/txtExercise"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_centerVertical="true"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
         android:padding="5dp"
         android:text="Hoang"
         android:textColor="#FFE1A4"
-        android:textSize="15sp" />
+        android:textSize="7sp"
+        android:gravity="center"
+        android:textAlignment="center" />
 
     
 
-</RelativeLayout>
+</LinearLayout>
