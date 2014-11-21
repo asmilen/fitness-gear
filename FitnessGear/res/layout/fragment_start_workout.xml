@@ -13,7 +13,7 @@
             android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="171dp"
+            android:layout_x="175dp"
             android:layout_y="68dp"
             android:text="BodySpace"
             android:textColor="#000000"
@@ -31,13 +31,13 @@
             android:id="@+id/planName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="86dp"
+            android:layout_x="95dp"
             android:layout_y="33dp"
             android:text="JAMIE EASON&apos;S LIVEFIT TRAINER"
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/textView1"
+            android:id="@+id/createdBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_x="95dp"
@@ -167,23 +167,38 @@
             <TextView
                 android:id="@+id/totalWeeks"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:gravity="center"
                 android:text="TOTAL WEEKS"
                 android:textColor="#FEFEFE"
                 android:textSize="8sp" />
 
-            <TextView
-                android:id="@+id/txtTotalWeeks"
+            <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:background="#333232"
-                android:gravity="center"
-                android:text="12"
-                android:textColor="#D3D3D0"
-                android:textSize="12sp" />
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txtTotalWeeks"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="12"
+                    android:textColor="#D3D3D0"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/time_per_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="Weeks"
+                    android:textColor="#D3D3D0"
+                    android:textSize="10sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -194,23 +209,38 @@
             <TextView
                 android:id="@+id/averageDays"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:gravity="center"
                 android:text="AVERAGE DAYS/WEEK"
                 android:textColor="#FEFEFE"
                 android:textSize="8sp" />
 
-            <TextView
-                android:id="@+id/txtAverageDay"
+            <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:background="#333232"
-                android:gravity="center"
-                android:text="5.5"
-                android:textColor="#D3D3D0"
-                android:textSize="12sp" />
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txtAverageDay"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="5.5"
+                    android:textColor="#D3D3D0"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/day_per_start_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="Days"
+                    android:textColor="#D3D3D0"
+                    android:textSize="10sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -221,28 +251,37 @@
             <TextView
                 android:id="@+id/averageTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:gravity="center"
                 android:text="AVERAGE WORKOUT TIME"
                 android:textColor="#FEFEFE"
                 android:textSize="8sp" />
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="5dp"
+                android:background="#333232"
                 android:orientation="vertical" >
 
                 <TextView
                     android:id="@+id/txtArverageTime"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="5dp"
-                    android:background="#333232"
-                    android:gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="bottom|center_horizontal"
                     android:text="00:48"
                     android:textColor="#D3D3D0"
-                    android:textSize="12sp" />
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/time_per_start"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="Mins"
+                    android:textColor="#D3D3D0"
+                    android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
 
@@ -254,23 +293,38 @@
             <TextView
                 android:id="@+id/totalTime"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:gravity="center"
                 android:text="TOTAL TIME/WEEK"
                 android:textColor="#FEFEFE"
                 android:textSize="8sp" />
 
-            <TextView
-                android:id="@+id/txtTotalTime"
+            <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="5dp"
                 android:background="#333232"
-                android:gravity="center"
-                android:text="04:27"
-                android:textColor="#D3D3D0"
-                android:textSize="12sp" />
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txtTotalTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="04:27"
+                    android:textColor="#D3D3D0"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/time_per_week"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="Mins"
+                    android:textColor="#D3D3D0"
+                    android:textSize="10sp" />
+            </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
@@ -279,25 +333,40 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/totalCadio"
+                android:id="@+id/totalCardio"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:gravity="center"
                 android:text="TOTAL CADIO"
                 android:textColor="#FEFEFE"
                 android:textSize="8sp" />
 
-            <TextView
-                android:id="@+id/txtTotalCadio"
+            <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="5dp"
                 android:background="#333232"
-                android:gravity="center"
-                android:text="01:34"
-                android:textColor="#D3D3D0"
-                android:textSize="12sp" />
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/txtTotalCardio"
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:gravity="bottom|center_horizontal"
+                    android:text="01:34"
+                    android:textColor="#D3D3D0"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/cardio_per_plan"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:gravity="center"
+                    android:text="Mins"
+                    android:textColor="#D3D3D0"
+                    android:textSize="10sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
@@ -305,24 +374,24 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" >
 
-        <!-- <GridView -->
-        <!-- android:id="@+id/listExerciseOnPlan" -->
-        <!-- android:layout_width="match_parent" -->
-        <!-- android:layout_height="match_parent" -->
-        <!-- android:columnWidth="100dp" -->
-        <!-- android:divider="@drawable/divider" -->
-        <!-- android:gravity="center" -->
-        <!-- android:horizontalSpacing="1dp" -->
-        <!-- android:numColumns="7" -->
-        <!-- android:verticalSpacing="30dp" > -->
-        <!-- </GridView> -->
-
-        <ListView
-            android:id="@+id/listWorkout"
+        <GridView
+            android:id="@+id/listExerciseOnPlan"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center" >
-        </ListView>
+            android:layout_height="match_parent"
+            android:columnWidth="100dp"
+            android:divider="@drawable/divider"
+            android:gravity="center"
+            android:horizontalSpacing="1dp"
+            android:numColumns="7"
+            android:verticalSpacing="1dp" >
+        </GridView>
+
+        <!-- <ListView -->
+        <!-- android:id="@+id/listWorkout" -->
+        <!-- android:layout_width="match_parent" -->
+        <!-- android:layout_height="wrap_content" -->
+        <!-- android:gravity="center" > -->
+        <!-- </ListView> -->
     </LinearLayout>
 
 </LinearLayout>
