@@ -102,52 +102,52 @@ public class StartWorkOutDetail extends Activity {
 		txtArverageTime.setText(totalWorkoutTime);
 		txtTotalCardio.setText(totalCardio);
 		
-		Cursor listExercises = db.rawQuery(
-				"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
+//		Cursor listExercises = db.rawQuery(
+//				"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
 		
 		// Load list exercise tu database
-		try {
-			Bundle extras = getIntent().getExtras();
+//		try {
+//			Bundle extras = getIntent().getExtras();
 //			String workoutId = extras.getString("WorkoutID");
 			
-			helper = new DataBaseHelper(getApplicationContext());
-			db = helper.getReadableDatabase();
-
-			myListExercise = new ArrayList<String>();
-			message = "";
-
-			Cursor c = db.rawQuery(
-					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
-			int i = 0;
-			Toast.makeText(getApplicationContext(), workoutId,
-					Toast.LENGTH_LONG).show();
-			while (c.moveToNext()) {
-				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
-				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
-				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
-				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
-				String img1 = "", img2 = "";
-				Cursor c1 = db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
-				while (c1.moveToNext()) {
-					// Set img base64
-					img1 = c1.getString(c1.getColumnIndex("Image1"));
-					img2 = c1.getString(c1.getColumnIndex("Image2"));
-				}
-
-				message += ExerciseID + "." + img1 + "." + img2 + "." + Sets
-						+ "." + Reps + "." + Rests + ";";
-				myListExercise.add(ExerciseID);
-				i++;
-			}
-		} catch (SQLiteException ex) {
-			Toast.makeText(getApplicationContext(), ex.getMessage(),
-					Toast.LENGTH_LONG).show();
-		}
-		catch (Exception ex)
-		{
-			Toast.makeText(getApplicationContext(), ex.getMessage(),
-					Toast.LENGTH_LONG).show();
-		}
+//			helper = new DataBaseHelper(getApplicationContext());
+//			db = helper.getReadableDatabase();
+//
+//			myListExercise = new ArrayList<String>();
+//			message = "";
+//
+//			Cursor c = db.rawQuery(
+//					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
+//			int i = 0;
+//			Toast.makeText(getApplicationContext(), workoutId,
+//					Toast.LENGTH_LONG).show();
+//			while (c.moveToNext()) {
+//				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
+//				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
+//				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
+//				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
+//				String img1 = "", img2 = "";
+//				Cursor c1 = db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
+//				while (c1.moveToNext()) {
+//					// Set img base64
+//					img1 = c1.getString(c1.getColumnIndex("Image1"));
+//					img2 = c1.getString(c1.getColumnIndex("Image2"));
+//				}
+//
+//				message += ExerciseID + "." + img1 + "." + img2 + "." + Sets
+//						+ "." + Reps + "." + Rests + ";";
+//				myListExercise.add(ExerciseID);
+//				i++;
+//			}
+//		} catch (SQLiteException ex) {
+//			Toast.makeText(getApplicationContext(), ex.getMessage(),
+//					Toast.LENGTH_LONG).show();
+//		}
+//		catch (Exception ex)
+//		{
+//			Toast.makeText(getApplicationContext(), ex.getMessage(),
+//					Toast.LENGTH_LONG).show();
+//		}
 	}
 
 	// Track workout on Phone
