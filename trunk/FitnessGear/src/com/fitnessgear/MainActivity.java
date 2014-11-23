@@ -62,7 +62,8 @@ public class MainActivity extends Activity {
 	private NavigationDrawerAdapter adapter;
 	
 	//database
-	private DataBaseHelper dbHelper;
+	public static DataBaseHelper dbHelper;
+	public static SQLiteDatabase db = null;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
