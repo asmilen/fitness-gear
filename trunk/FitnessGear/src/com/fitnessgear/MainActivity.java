@@ -75,6 +75,7 @@ public class MainActivity extends Activity {
 		
 		try {
 			dbHelper.createDataBase();
+			db = dbHelper.getReadableDatabase();
 		    //Toast.makeText(this, c.getString(c.getColumnIndex("PlanName")), Toast.LENGTH_LONG).show();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
