@@ -2,9 +2,9 @@
     android:shape="rectangle" >
 
     <gradient
-        android:angle="90"
+        android:angle="360"
         android:centerColor="@color/list_background_pressed_center"
-        android:centerX="0.95"
+        android:centerX="0.9"
         android:endColor="@color/list_background_pressed_end"
         android:startColor="@color/list_background_pressed_start" />
 

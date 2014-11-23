@@ -42,5 +42,6 @@
     <string name="title_activity_trackworkout_detail">TrackworkoutDetail</string>
     <string name="title_activity_test">Test</string>
     <string name="track_workout">Track Workout</string>
+    <string name="title_activity_exercise_detail">ExerciseDetail</string>
 
 </resources>
