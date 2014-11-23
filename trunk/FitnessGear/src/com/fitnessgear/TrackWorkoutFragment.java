@@ -1,5 +1,7 @@
 package com.fitnessgear;
 
+import com.fitnessgear.adapter.ListExercisesAdapter;
+import com.fitnessgear.adapter.ListSetTrackWorkoutAdapter;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.ListExercisesItem;
@@ -14,73 +16,70 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class TrackWorkoutFragment extends Fragment {
-	 
+
 	public TrackWorkoutFragment() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static TrackWorkoutFragment newInStance(ListExercisesItem listExercisesItem, int position)
-	{
+	public static TrackWorkoutFragment newInStance(
+			ListExercisesItem listExercisesItem, int position) {
 		TrackWorkoutFragment myTrack = new TrackWorkoutFragment();
-		
+
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("listExercisesItem", listExercisesItem);
-		bundle.putString("position", position+"");
+		bundle.putString("position", position + "");
 		myTrack.setArguments(bundle);
 		return myTrack;
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.fragment_track_workout, 
-				container,false);
-		
-		//Set ID
-		TextView textviewtargetSet = (TextView)rootView.findViewById(R.id.textViewTargetSets);
-		TextView textviewtotalReps = (TextView)rootView.findViewById(R.id.textViewTotalReps);
-		TextView textViewEName = (TextView)rootView.findViewById(R.id.textViewEName);
-		TextView textViewpostion = (TextView)rootView.findViewById(R.id.textViewPosition);
-		
-		ImageView img1 = (ImageView)rootView.findViewById(R.id.imageView1);
-		ImageView img2 = (ImageView)rootView.findViewById(R.id.imageView2);
+		View rootView = inflater.inflate(R.layout.fragment_track_workout,
+				container, false);
 
-		//Get arguments
+		// Set ID
+		TextView textviewtargetSet = (TextView) rootView
+				.findViewById(R.id.textViewTargetSets);
+		TextView textviewtotalReps = (TextView) rootView
+				.findViewById(R.id.textViewTotalReps);
+		TextView textViewEName = (TextView) rootView
+				.findViewById(R.id.textViewEName);
+		TextView textViewpostion = (TextView) rootView
+				.findViewById(R.id.textViewPosition);
+
+		ImageView img1 = (ImageView) rootView.findViewById(R.id.imageView1);
+		ImageView img2 = (ImageView) rootView.findViewById(R.id.imageView2);
+
+		ListView mylistView = (ListView) rootView.findViewById(R.id.listSet);
+
+		// Get arguments
 		String position = getArguments().getString("position");
-		ListExercisesItem item = (ListExercisesItem) getArguments().getSerializable("listExercisesItem");
-		
-		
-		textViewpostion.setText(position);
-		
-		textViewEName.setText(item.getExerciseName());
-		
-//		DataBaseHelper helper = new DataBaseHelper(getActivity());
-//		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
+		ListExercisesItem item = (ListExercisesItem) getArguments()
+				.getSerializable("listExercisesItem");
 
-		
-//		Cursor c = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ExerciseID,null);
-//		while (c.moveToNext())
-//		{
-//			textViewEName.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.ExerciseName));
-//					
-//			//Set img base64
-//			String strBase64 = c.getString(c.getColumnIndex("Image1"));
-//			byte[] decodedString = Base64.decode(strBase64, Base64.DEFAULT);
-//			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
-//			img1.setImageBitmap(decodedByte);
-//			
-//			strBase64 = c.getString(c.getColumnIndex("Image2"));
-//			decodedString = Base64.decode(strBase64, Base64.DEFAULT);
-//			decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
-//			img2.setImageBitmap(decodedByte);
-//		}
-		
-		
+		textViewpostion.setText(position);
+
+		textViewEName.setText(item.getExerciseName());
+
+		// Custom Listview
+		try {
+			ListSetTrackWorkoutAdapter adapter = new ListSetTrackWorkoutAdapter(
+					getActivity(),item.getSets(),item.getRepsmin(), item.getRepsmax());
+			mylistView.setAdapter(adapter);
+		} catch (Exception ex) {
+			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
+					.show();
+		}
+
 		return rootView;
 	}
 }

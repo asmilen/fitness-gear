@@ -17,14 +17,15 @@ public class ListExercisesItem  implements Serializable{
 	private String img2;
 	private String description;
 	private String sets;
-	private String reps;
-	private String kq;
+	private String repsmin;
+	private String repsmax;
+	private String kg;
 	private String rests;
 	
 	public ListExercisesItem(String exerciseID, String exerciseName,
 			String exerciseType, String muscleTarget, String equipment,
 			String rating, String img1, String img2, String description,
-			String sets, String reps, String kq, String rests) {
+			String sets, String repsmin,String repsmax, String kg, String rests) {
 		super();
 		this.exerciseID = exerciseID;
 		this.exerciseName = exerciseName;
@@ -36,8 +37,9 @@ public class ListExercisesItem  implements Serializable{
 		this.img2 = img2;
 		this.description = description;
 		this.sets = sets;
-		this.reps = reps;
-		this.kq = kq;
+		this.repsmin = repsmin;
+		this.repsmax = repsmax;
+		this.kg = kg;
 		this.rests = rests;
 	}
 
@@ -121,20 +123,30 @@ public class ListExercisesItem  implements Serializable{
 		this.sets = sets;
 	}
 
-	public String getReps() {
-		return reps;
+	
+
+	public String getRepsmin() {
+		return repsmin;
 	}
 
-	public void setReps(String reps) {
-		this.reps = reps;
+	public void setRepsmin(String repsmin) {
+		this.repsmin = repsmin;
 	}
 
-	public String getKq() {
-		return kq;
+	public String getRepsmax() {
+		return repsmax;
 	}
 
-	public void setKq(String kq) {
-		this.kq = kq;
+	public void setRepsmax(String repsmax) {
+		this.repsmax = repsmax;
+	}
+
+	public String getKg() {
+		return kg;
+	}
+
+	public void setKg(String kg) {
+		this.kg = kg;
 	}
 
 	public String getRests() {
