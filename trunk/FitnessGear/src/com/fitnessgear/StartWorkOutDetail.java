@@ -196,25 +196,7 @@ public class StartWorkOutDetail extends Activity {
 		}
 	}
 
-	// Track workout on Phone
-	public void OnPhone() {
-		try
-		{
-			Intent intent = new Intent(StartWorkOutDetail.this, TrackWorkout.class);
-			intent.putExtra("listExercise", myListExercise);
-			intent.putExtra("workoutID", workoutID);
-			startActivity(intent);
-		}
-		catch (Exception ex)
-		{
-			Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
-		}
-	}
-
-	// Track workout on Watch
-	public void OnWatch(View e) {
-		HelloAccessoryProviderService.setMessage(message);
-	}
+	
 
 	//Create Menu
 	@Override
@@ -237,7 +219,11 @@ public class StartWorkOutDetail extends Activity {
 		}
 		//Set action for Track Workout
 		if(id==R.id.track_workout){
-			OnPhone();
+			Intent track_intent = new Intent(getApplicationContext(),TrackWorkoutDialog.class);
+			track_intent.putExtra("listExercise", myListExercise);
+			track_intent.putExtra("workoutID", workoutID);
+			track_intent.putExtra("message", message);
+			startActivity(track_intent);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
