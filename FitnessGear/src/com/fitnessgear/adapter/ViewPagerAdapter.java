@@ -14,6 +14,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 
 	public ArrayList<String> myListExercise;
 	private PagerTitleStrip pagerTitle;
+	public String workoutID;
 	
 	public ViewPagerAdapter(FragmentManager fm) {
 		super(fm);
@@ -23,7 +24,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 	@Override
 	public Fragment getItem(int position) {
 		// TODO Auto-generated method stub
-		return TrackWorkoutFragment.newInStance(myListExercise.get(position));
+		return TrackWorkoutFragment.newInStance(myListExercise.get(position),workoutID,position);
 	}
 
 	@Override
