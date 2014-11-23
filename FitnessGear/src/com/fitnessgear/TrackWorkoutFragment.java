@@ -1,6 +1,7 @@
 package com.fitnessgear;
 
 import com.fitnessgear.database.DataBaseHelper;
+import com.fitnessgear.database.DatabaseUltility;
 
 import android.support.v4.app.Fragment;
 import android.database.Cursor;
@@ -21,12 +22,14 @@ public class TrackWorkoutFragment extends Fragment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static TrackWorkoutFragment newInStance(String id)
+	public static TrackWorkoutFragment newInStance(String ExerciseID,String wortkoutID, int position)
 	{
 		TrackWorkoutFragment myTrack = new TrackWorkoutFragment();
 		
 		Bundle bundle = new Bundle();
-		bundle.putString("id", id);
+		bundle.putString("ExerciseID", ExerciseID);
+		bundle.putString("wortkoutID", wortkoutID);
+		bundle.putString("position", position+"");
 		myTrack.setArguments(bundle);
 		return myTrack;
 	}
@@ -37,26 +40,32 @@ public class TrackWorkoutFragment extends Fragment {
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.fragment_track_workout, 
 				container,false);
-		TextView textview = (TextView)rootView.findViewById(R.id.textView3);
-		TextView textview1 = (TextView)rootView.findViewById(R.id.textView1);
-		TextView textview2 = (TextView)rootView.findViewById(R.id.textView2);
+		
+		//Set ID
+		TextView textviewtargetSet = (TextView)rootView.findViewById(R.id.textViewTargetSets);
+		TextView textviewtotalReps = (TextView)rootView.findViewById(R.id.textViewTotalReps);
+		TextView textViewEName = (TextView)rootView.findViewById(R.id.textViewEName);
+		TextView textViewpostion = (TextView)rootView.findViewById(R.id.textViewPosition);
 		
 		ImageView img1 = (ImageView)rootView.findViewById(R.id.imageView1);
 		ImageView img2 = (ImageView)rootView.findViewById(R.id.imageView2);
 
-		String id = getArguments().getString("id");
-		textview.setText(id);
+		//Get arguments
+		String position = getArguments().getString("position");
+		String ExerciseID = getArguments().getString("ExerciseID");
+		
+		
+		textViewpostion.setText(position);
 		
 //		DataBaseHelper helper = new DataBaseHelper(getActivity());
 		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
+
 		
-		Cursor c = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+id,null);
+		Cursor c = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ExerciseID,null);
 		while (c.moveToNext())
 		{
-			textview.setText(c.getString(c.getColumnIndex("Description")));
-			textview1.setText(c.getString(c.getColumnIndex("ExerciseName")));
-			textview2.setText(c.getString(c.getColumnIndex("MuscleTarget")));
-			
+			textViewEName.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.ExerciseName));
+					
 			//Set img base64
 			String strBase64 = c.getString(c.getColumnIndex("Image1"));
 			byte[] decodedString = Base64.decode(strBase64, Base64.DEFAULT);
