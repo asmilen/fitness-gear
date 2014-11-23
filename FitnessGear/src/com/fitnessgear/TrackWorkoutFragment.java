@@ -58,7 +58,7 @@ public class TrackWorkoutFragment extends Fragment {
 		textViewpostion.setText(position);
 		
 //		DataBaseHelper helper = new DataBaseHelper(getActivity());
-		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
+//		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 
 		
 		Cursor c = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ExerciseID,null);

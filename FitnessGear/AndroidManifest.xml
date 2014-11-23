@@ -61,6 +61,10 @@
             android:label="@string/title_activity_track_workout" >
         </activity>
         <activity
+            android:name=".ExerciseDetail"
+            android:label="@string/title_activity_exercise_detail" >
+        </activity>
+        <activity
             android:name=".model.TrackworkoutDetail"
             android:label="@string/title_activity_trackworkout_detail" >
         </activity>
