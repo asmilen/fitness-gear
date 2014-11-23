@@ -35,7 +35,7 @@
             android:label="@string/title_activity_start_work_out_detail" >
         </activity>
 
-        <service android:name=".sapservices.HelloAccessoryProviderService" >
+        <service android:name="com.fitnessgear.sapservices.HelloAccessoryProviderService" >
         </service>
 
         <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
@@ -68,7 +68,12 @@
             android:name=".model.TrackworkoutDetail"
             android:label="@string/title_activity_trackworkout_detail" >
         </activity>
-
+        <activity
+            android:name=".TrackWorkoutDialog"
+            android:label="@string/title_activity_track_workout_dialog" 
+            android:theme="@android:style/Theme.Dialog" >
+       
+        </activity>
     </application>
 
 </manifest>
