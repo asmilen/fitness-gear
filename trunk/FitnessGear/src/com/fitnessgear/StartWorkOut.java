@@ -17,6 +17,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.provider.ContactsContract.Contacts.Data;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,7 +68,7 @@ public class StartWorkOut extends Fragment {
 
 		// Khoi Tao Databse
 //		MainActivity.dbHelper = new DataBaseHelper(getActivity());
-		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
+//		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 
 		Cursor workout = MainActivity.db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
 				null);
@@ -99,13 +100,20 @@ public class StartWorkOut extends Fragment {
 //			item.add(new WorkoutItem("Week " + i));
 			while (workout.moveToNext()) {
 				item.add(new WorkoutItem(
-						workout.getString(workout.getColumnIndex("WorkoutID")),
-						workout.getString(workout.getColumnIndex("WorkoutName")),
-						workout.getString(workout.getColumnIndex("Description")),
-						workout.getString(workout.getColumnIndex("TotalWorkoutTime")),
-						workout.getString(workout.getColumnIndex("TotalCardioTime")),
-						workout.getString(workout.getColumnIndex("TotalExercises")),
-						workout.getString(workout.getColumnIndex("TotalSets"))));
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.WorkoutID),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.WorkoutName),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.Description),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalWorkoutTime),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalCardioTime),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalExercises),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalSets)));
+//						workout.getString(workout.getColumnIndex("WorkoutID")),
+//						workout.getString(workout.getColumnIndex("WorkoutName")),
+//						workout.getString(workout.getColumnIndex("Description")),
+//						workout.getString(workout.getColumnIndex("TotalWorkoutTime")),
+//						workout.getString(workout.getColumnIndex("TotalCardioTime")),
+//						workout.getString(workout.getColumnIndex("TotalExercises")),
+//						workout.getString(workout.getColumnIndex("TotalSets"))));
 			}
 //		}
 
@@ -155,24 +163,18 @@ public class StartWorkOut extends Fragment {
 
 				// planName.setText(DatabaseUltility.GetColumnValue(c,
 				// DatabaseUltility.PlanName)+"");
-				planName.setText(c.getString(c.getColumnIndex("PlanName")) + "");
-				author.setText(c.getString(c.getColumnIndex("CreatedBy")) + "");
-				txtGender.setText(c.getString(c.getColumnIndex("Gender")));
-				txtMainGoal.setText(c.getString(c.getColumnIndex("MainGoal")));
-				txtLevelTrain.setText(c.getString(c
-						.getColumnIndex("FitnessLevel")));
-				txtDateCreated.setText(c.getString(c
-						.getColumnIndex("DateCreated")));
+				planName.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.PlanName));
+				author.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.CreatedBy));
+				txtGender.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.Gender));
+				txtMainGoal.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.MainGoal));
+				txtLevelTrain.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.FitnessLevel));
+				txtDateCreated.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.DateCreated));
 
-				txtTotalWeeks.setText(c.getString(c
-						.getColumnIndex("TotalWeeks")));
-				txtAverageDay.setText(c.getString(c.getColumnIndex("AveDay")));
-				txtArverageTime.setText(c.getString(c
-						.getColumnIndex("AveWorkoutTime")));
-				txtTotalTime.setText(c.getString(c
-						.getColumnIndex("TotalTimeAWeek")));
-				txtTotalCadio.setText(c.getString(c
-						.getColumnIndex("TotalCardioTime")));
+				txtTotalWeeks.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.TotalWeeks));
+				txtAverageDay.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.AveDay));
+				txtArverageTime.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.AveWorkoutTime));
+				txtTotalTime.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.TotalTimeAWeek));
+				txtTotalCadio.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.TotalCardioTime));
 			}
 		} catch (SQLiteException ex) {
 			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
