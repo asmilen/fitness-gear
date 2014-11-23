@@ -3,8 +3,10 @@ package com.fitnessgear;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.ListExercisesItem;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService.HelloAccessoryProviderConnection;
 
@@ -30,8 +32,9 @@ import android.widget.Toast;
 
 public class StartWorkOutDetail extends Activity {
 
-	ArrayList<String> myListExercise;
-	String message;
+	private ArrayList<ListExercisesItem> myListExercise;
+	private ListExercisesAdapter adapter;
+	private String message;
 	String workoutID;
 	
 //	private SQLiteDatabase db;
@@ -108,34 +111,69 @@ public class StartWorkOutDetail extends Activity {
 		try {
 			Bundle extras = getIntent().getExtras();
 			workoutID = extras.getString("WorkoutID");
-			
-//			MainActivity.dbHelper = new DataBaseHelper(getApplicationContext());
-			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 
-			myListExercise = new ArrayList<String>();
+			//Khoi tao ArrayList tu ListExercisesItem class va String message
+			myListExercise = new ArrayList<ListExercisesItem>();
 			message = "";
-
-			Cursor c = MainActivity.db.rawQuery(
-					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutID, null);
+			Cursor listExercise = MainActivity.db.rawQuery(
+					"Select * " +
+					"FROM Workout_Exercise,Exercise " +
+					"Where Workout_exercise.ExerciseID = Exercise.ExerciseID " +
+					"AND WorkoutID = " + workoutID, null);
 			int i = 0;
-			Toast.makeText(getApplicationContext(), workoutID,
-					Toast.LENGTH_LONG).show();
-			while (c.moveToNext()) {
-				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
-				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
-				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
-				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
-				String img1 = "", img2 = "";
-				Cursor c1 = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
-				while (c1.moveToNext()) {
-					// Set img base64
-					img1 = c1.getString(c1.getColumnIndex("Image1"));
-					img2 = c1.getString(c1.getColumnIndex("Image2"));
-				}
+//			Toast.makeText(getApplicationContext(), workoutId,
+//					Toast.LENGTH_LONG).show();
+			while (listExercise.moveToNext()) {
+				myListExercise.add(new ListExercisesItem(
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.ExerciseID),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.ExerciseName),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.ExerciseType),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.MuscleTarget),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Equipment),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Rating),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Image1),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Image2),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Description),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Sets),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Reps),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Kq),
+						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Rests)));
+//				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
+//				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
+//				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
+//				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
+//				String img1 = "", img2 = "";
+//				Cursor c1 = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
+//				while (c1.moveToNext()) {
+//					// Set img base64
+//					img1 = c1.getString(c1.getColumnIndex("Image1"));
+//					img2 = c1.getString(c1.getColumnIndex("Image2"));
+//				}
+//=======
+//			Toast.makeText(getApplicationContext(), workoutID,
+//					Toast.LENGTH_LONG).show();
+//			while (c.moveToNext()) {
+//				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
+//				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
+//				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
+//				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
+//				String img1 = "", img2 = "";
+//				Cursor c1 = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
+//				while (c1.moveToNext()) {
+//					// Set img base64
+//					img1 = c1.getString(c1.getColumnIndex("Image1"));
+//					img2 = c1.getString(c1.getColumnIndex("Image2"));
+//				}
+//>>>>>>> .r49
 
-				message += ExerciseID + "." + img1 + "." + img2 + "." + Sets
-						+ "." + Reps + "." + Rests + ";";
-				myListExercise.add(ExerciseID);
+				message += myListExercise.get(i).getExerciseID() 
+						+ "." + myListExercise.get(i).getImg1() 
+						+ "." + myListExercise.get(i).getImg2() 
+						+ "." + myListExercise.get(i).getSets()
+						+ "." + myListExercise.get(i).getReps()
+						+ "." + myListExercise.get(i).getRests() + ";";
+				
+//				myListExercise.add(ExerciseID);
 				i++;
 			}
 		} catch (SQLiteException ex) {
