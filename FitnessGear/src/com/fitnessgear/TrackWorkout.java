@@ -39,7 +39,7 @@ public class TrackWorkout extends ActionBarActivity {
 		//lay list exercise
 		Bundle extras = getIntent().getExtras();
 		adapter.myListExercise = extras.getStringArrayList("listExercise");
-		
+		adapter.workoutID = extras.getString("workoutID");
 		
 		pager.setAdapter(adapter);
 	}
