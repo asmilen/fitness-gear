@@ -24,7 +24,10 @@ public class TrackWorkoutDialog extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_track_workout_dialog);
-		message = getIntent().getExtras().getString("message");
+		Bundle extras = getIntent().getExtras();
+		myListExercise = (ArrayList<ListExercisesItem>) extras.getSerializable("listExercise");
+		workoutID = extras.getString("workoutID");
+		message = extras.getString("message");
 	}
 
 	@Override
@@ -50,7 +53,9 @@ public class TrackWorkoutDialog extends Activity {
 		public void OnPhone(View e) {
 			try
 			{
-				Intent intent = new Intent(TrackWorkoutDialog.this, TrackWorkout.class);
+				Intent intent = new Intent(getApplicationContext(), TrackWorkout.class);
+				intent.putExtra("listExercise", myListExercise);
+				intent.putExtra("workoutID", workoutID);
 				startActivity(intent);
 			}
 			catch (Exception ex)

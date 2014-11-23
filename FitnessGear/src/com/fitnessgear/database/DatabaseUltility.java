@@ -35,8 +35,9 @@ public class DatabaseUltility {
 	// Workout_Exercise Table
 	public static final String ExerciseID = "ExerciseID";
 	public static final String Sets = "Sets";
-	public static final String Reps = "Reps";
-	public static final String Kq = "Kq";
+	public static final String RepsMin = "RepsMin";
+	public static final String RepsMax = "RepsMax";
+	public static final String Kg = "Kg";
 	public static final String Rests = "Rests";
 
 	// Exercises Table

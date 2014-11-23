@@ -141,7 +141,7 @@ public class StartWorkOutDetail extends Activity {
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Sets),
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.RepsMin),
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.RepsMax),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Kq),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Kg),
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Rests)));
 //				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
 //				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
@@ -171,13 +171,15 @@ public class StartWorkOutDetail extends Activity {
 //				}
 //>>>>>>> .r49
 
+				int aveReps = (Integer.valueOf(myListExercise.get(i).getRepsmin())
+						+	Integer.valueOf(myListExercise.get(i).getRepsmax()))/2;
+				
 				message += myListExercise.get(i).getExerciseID() 
 						+ "." + myListExercise.get(i).getImg1() 
 						+ "." + myListExercise.get(i).getImg2() 
 						+ "." + myListExercise.get(i).getSets()
-						+ "." + myListExercise.get(i).getRepsmin()
-						+ "." + myListExercise.get(i).getRepsmax()
-						+ "." + myListExercise.get(i).getKq()
+						+ "." + String.valueOf(aveReps)
+						+ "." + myListExercise.get(i).getKg()
 						+ "." + myListExercise.get(i).getRests() + ";";
 				
 //				myListExercise.add(ExerciseID);
