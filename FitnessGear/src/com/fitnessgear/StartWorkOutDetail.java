@@ -3,7 +3,6 @@ package com.fitnessgear;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fitnessgear.database.CreateDatabase;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService;
@@ -34,8 +33,7 @@ public class StartWorkOutDetail extends Activity {
 	ArrayList<String> myListExercise;
 	String message;
 	
-	private DataBaseHelper helper;
-	private SQLiteDatabase db;
+//	private SQLiteDatabase db;
 	
 	private TextView txtNumOfDay;
 	private TextView txtNumOfWeek;
@@ -75,7 +73,7 @@ public class StartWorkOutDetail extends Activity {
 		
 		Bundle bund = getIntent().getExtras();
 		
-		String workoutId = bund.getString("WorkoutID");
+//		String workoutId = bund.getString("WorkoutID");
 		
 		String day = bund.getString("Day");
 		String week = (((Integer.parseInt(day)-1)/7)+1)+ "";
@@ -106,48 +104,48 @@ public class StartWorkOutDetail extends Activity {
 //				"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
 		
 		// Load list exercise tu database
-//		try {
-//			Bundle extras = getIntent().getExtras();
-//			String workoutId = extras.getString("WorkoutID");
+		try {
+			Bundle extras = getIntent().getExtras();
+			String workoutId = extras.getString("WorkoutID");
 			
-//			helper = new DataBaseHelper(getApplicationContext());
-//			db = helper.getReadableDatabase();
-//
-//			myListExercise = new ArrayList<String>();
-//			message = "";
-//
-//			Cursor c = db.rawQuery(
-//					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
-//			int i = 0;
-//			Toast.makeText(getApplicationContext(), workoutId,
-//					Toast.LENGTH_LONG).show();
-//			while (c.moveToNext()) {
-//				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
-//				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
-//				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
-//				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
-//				String img1 = "", img2 = "";
-//				Cursor c1 = db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
-//				while (c1.moveToNext()) {
-//					// Set img base64
-//					img1 = c1.getString(c1.getColumnIndex("Image1"));
-//					img2 = c1.getString(c1.getColumnIndex("Image2"));
-//				}
-//
-//				message += ExerciseID + "." + img1 + "." + img2 + "." + Sets
-//						+ "." + Reps + "." + Rests + ";";
-//				myListExercise.add(ExerciseID);
-//				i++;
-//			}
-//		} catch (SQLiteException ex) {
-//			Toast.makeText(getApplicationContext(), ex.getMessage(),
-//					Toast.LENGTH_LONG).show();
-//		}
-//		catch (Exception ex)
-//		{
-//			Toast.makeText(getApplicationContext(), ex.getMessage(),
-//					Toast.LENGTH_LONG).show();
-//		}
+//			MainActivity.dbHelper = new DataBaseHelper(getApplicationContext());
+			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
+
+			myListExercise = new ArrayList<String>();
+			message = "";
+
+			Cursor c = MainActivity.db.rawQuery(
+					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
+			int i = 0;
+			Toast.makeText(getApplicationContext(), workoutId,
+					Toast.LENGTH_LONG).show();
+			while (c.moveToNext()) {
+				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
+				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
+				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
+				String Rests = c.getString(c.getColumnIndex("Rests")) + "";
+				String img1 = "", img2 = "";
+				Cursor c1 = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ ExerciseID, null);
+				while (c1.moveToNext()) {
+					// Set img base64
+					img1 = c1.getString(c1.getColumnIndex("Image1"));
+					img2 = c1.getString(c1.getColumnIndex("Image2"));
+				}
+
+				message += ExerciseID + "." + img1 + "." + img2 + "." + Sets
+						+ "." + Reps + "." + Rests + ";";
+				myListExercise.add(ExerciseID);
+				i++;
+			}
+		} catch (SQLiteException ex) {
+			Toast.makeText(getApplicationContext(), ex.getMessage(),
+					Toast.LENGTH_LONG).show();
+		}
+		catch (Exception ex)
+		{
+			Toast.makeText(getApplicationContext(), ex.getMessage(),
+					Toast.LENGTH_LONG).show();
+		}
 	}
 
 	// Track workout on Phone

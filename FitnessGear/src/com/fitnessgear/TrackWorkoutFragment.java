@@ -1,6 +1,6 @@
 package com.fitnessgear;
 
-import com.fitnessgear.database.CreateDatabase;
+import com.fitnessgear.database.DataBaseHelper;
 
 import android.support.v4.app.Fragment;
 import android.database.Cursor;
@@ -47,10 +47,10 @@ public class TrackWorkoutFragment extends Fragment {
 		String id = getArguments().getString("id");
 		textview.setText(id);
 		
-		CreateDatabase helper = new CreateDatabase(getActivity());
-		SQLiteDatabase db = helper.getReadableDatabase();
+//		DataBaseHelper helper = new DataBaseHelper(getActivity());
+		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 		
-		Cursor c = db.rawQuery("Select * FROM Exercise Where ExerciseID="+id,null);
+		Cursor c = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+id,null);
 		while (c.moveToNext())
 		{
 			textview.setText(c.getString(c.getColumnIndex("Description")));

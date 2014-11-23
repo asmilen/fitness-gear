@@ -1,6 +1,5 @@
 package com.fitnessgear;
 
-import com.fitnessgear.database.CreateDatabase;
 import com.fitnessgear.database.DatabaseUltility;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -53,9 +52,7 @@ public class StartWorkOut extends Fragment {
 
 	private ArrayList<WorkoutItem> item;
 
-	private DataBaseHelper helper;
-	private DataBaseHelper test;
-	private SQLiteDatabase db = null;
+//	private SQLiteDatabase db = null;
 
 	public StartWorkOut() {
 		// TODO Auto-generated constructor stub
@@ -69,10 +66,10 @@ public class StartWorkOut extends Fragment {
 				container, false);
 
 		// Khoi Tao Databse
-		helper = new DataBaseHelper(getActivity());
-		db = helper.getReadableDatabase();
+//		MainActivity.dbHelper = new DataBaseHelper(getActivity());
+		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 
-		Cursor workout = db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
+		Cursor workout = MainActivity.db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
 				null);
 
 		item = new ArrayList<WorkoutItem>();
@@ -144,8 +141,8 @@ public class StartWorkOut extends Fragment {
 	public void getData() {
 
 		try {
-			db = helper.getReadableDatabase();
-			Cursor c = db.rawQuery("Select * FROM Plan Where PlanID = 1", null);
+			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
+			Cursor c = MainActivity.db.rawQuery("Select * FROM Plan Where PlanID = 1", null);
 
 			ArrayList<String> data = new ArrayList<String>();
 			while (c.moveToNext()) {
