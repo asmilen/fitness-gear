@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -38,6 +39,7 @@ public class StartWorkOutDetail extends Activity {
 	String workoutID;
 	
 //	private SQLiteDatabase db;
+	private ListView listExercise;
 	
 	private TextView txtNumOfDay;
 	private TextView txtNumOfWeek;
@@ -62,6 +64,8 @@ public class StartWorkOutDetail extends Activity {
 			actionBar.setHomeButtonEnabled(true);
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
+		
+		listExercise = (ListView) findViewById(R.id.listExercises);
 
 		txtNumOfDay = (TextView) findViewById(R.id.txtNumOfDay);
 		txtNumOfWeek = (TextView) findViewById(R.id.txtNumOfWeek);
@@ -115,7 +119,7 @@ public class StartWorkOutDetail extends Activity {
 			//Khoi tao ArrayList tu ListExercisesItem class va String message
 			myListExercise = new ArrayList<ListExercisesItem>();
 			message = "";
-			Cursor listExercise = MainActivity.db.rawQuery(
+			Cursor listExerciseCursor = MainActivity.db.rawQuery(
 					"Select * " +
 					"FROM Workout_Exercise,Exercise " +
 					"Where Workout_exercise.ExerciseID = Exercise.ExerciseID " +
@@ -123,21 +127,21 @@ public class StartWorkOutDetail extends Activity {
 			int i = 0;
 //			Toast.makeText(getApplicationContext(), workoutId,
 //					Toast.LENGTH_LONG).show();
-			while (listExercise.moveToNext()) {
+			while (listExerciseCursor.moveToNext()) {
 				myListExercise.add(new ListExercisesItem(
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.ExerciseID),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.ExerciseName),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.ExerciseType),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.MuscleTarget),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Equipment),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Rating),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Image1),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Image2),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Description),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Sets),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Reps),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Kq),
-						DatabaseUltility.GetColumnValue(listExercise, DatabaseUltility.Rests)));
+						DatabaseUltility.GetColumnValue(listExerciseCursor, "Workout_Exercise." + DatabaseUltility.ExerciseID),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.ExerciseName),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.ExerciseType),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.MuscleTarget),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Equipment),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Rating),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Image1),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Image2),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Description),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Sets),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Reps),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Kq),
+						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Rests)));
 //				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
 //				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
 //				String Reps = c.getString(c.getColumnIndex("Reps")) + "";
@@ -176,6 +180,11 @@ public class StartWorkOutDetail extends Activity {
 //				myListExercise.add(ExerciseID);
 				i++;
 			}
+			
+			adapter = new ListExercisesAdapter(getApplicationContext(), myListExercise);
+			
+			listExercise.setAdapter(adapter);
+			
 		} catch (SQLiteException ex) {
 			Toast.makeText(getApplicationContext(), ex.getMessage(),
 					Toast.LENGTH_LONG).show();
