@@ -1,9 +1,11 @@
 package com.fitnessgear.model;
 
+import java.io.Serializable;
+
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ListExercisesItem {
+public class ListExercisesItem  implements Serializable{
 
 	private String exerciseID;
 	private String exerciseName;

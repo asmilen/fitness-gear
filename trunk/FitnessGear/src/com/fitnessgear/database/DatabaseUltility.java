@@ -22,12 +22,11 @@ public class DatabaseUltility {
 	public static final String AveWorkoutTime = "AveWorkoutTime";
 	public static final String TotalTimeAWeek = "TotalTimeAWeek";
 	public static final String TotalCardioTime = "TotalCardioTime";
+	
 	// Workout Table
 	public static final String WorkoutID = "WorkoutID";
-	// public static final String PlanID = "PlanID";
 	public static final String WorkoutName = "WorkoutName";
 	public static final String TotalWorkoutTime = "TotalWorkoutTime";
-	// public static final String TotalCardioTime = "TotalCardioTime";
 	public static final String TotalExercises = "TotalExercises";
 	public static final String TotalSets = "TotalSets";
 	public static final String AvaImage = "AvaImage";
@@ -41,13 +40,11 @@ public class DatabaseUltility {
 	public static final String Rests = "Rests";
 
 	// Exercises Table
-	// public static final String ExerciseID = "ExerciseID";
 	public static final String ExerciseName = "ExerciseName";
 	public static final String ExerciseType = "ExerciseType";
 	public static final String MuscleTarget = "MuscleTarget";
 	public static final String Equipment = "Equipment";
 	public static final String Rating = "Rating";
-	// public static final String Description = "Description";
 	public static final String Image1 = "Image1";
 	public static final String Image2 = "Image2";
 	// Get data from table
