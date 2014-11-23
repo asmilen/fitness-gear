@@ -27,6 +27,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -189,6 +192,19 @@ public class StartWorkOutDetail extends Activity {
 			adapter = new ListExercisesAdapter(getApplicationContext(), myListExercise);
 			
 			listExercise.setAdapter(adapter);
+			
+			listExercise.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					Intent exerciseDetailIntent = new Intent(getApplicationContext(),ExerciseDetail.class);
+					exerciseDetailIntent.putExtra("ExerciseID", myListExercise.get(position).getExerciseID());
+//					exerciseDetailIntent.putExtra("workoutID", workoutID);
+					startActivity(exerciseDetailIntent);
+				}
+			});
 			
 		} catch (SQLiteException ex) {
 			Toast.makeText(getApplicationContext(), ex.getMessage(),
