@@ -32,6 +32,7 @@ public class StartWorkOutDetail extends Activity {
 
 	ArrayList<String> myListExercise;
 	String message;
+	String workoutID;
 	
 //	private SQLiteDatabase db;
 	
@@ -106,7 +107,7 @@ public class StartWorkOutDetail extends Activity {
 		// Load list exercise tu database
 		try {
 			Bundle extras = getIntent().getExtras();
-			String workoutId = extras.getString("WorkoutID");
+			workoutID = extras.getString("WorkoutID");
 			
 //			MainActivity.dbHelper = new DataBaseHelper(getApplicationContext());
 			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
@@ -115,9 +116,9 @@ public class StartWorkOutDetail extends Activity {
 			message = "";
 
 			Cursor c = MainActivity.db.rawQuery(
-					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutId, null);
+					"Select * FROM Workout_Exercise Where WorkoutID = " + workoutID, null);
 			int i = 0;
-			Toast.makeText(getApplicationContext(), workoutId,
+			Toast.makeText(getApplicationContext(), workoutID,
 					Toast.LENGTH_LONG).show();
 			while (c.moveToNext()) {
 				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
@@ -150,9 +151,17 @@ public class StartWorkOutDetail extends Activity {
 
 	// Track workout on Phone
 	public void OnPhone() {
-		Intent intent = new Intent(StartWorkOutDetail.this, TrackWorkout.class);
-		intent.putExtra("listExercise", myListExercise);
-		startActivity(intent);
+		try
+		{
+			Intent intent = new Intent(StartWorkOutDetail.this, TrackWorkout.class);
+			intent.putExtra("listExercise", myListExercise);
+			intent.putExtra("workoutID", workoutID);
+			startActivity(intent);
+		}
+		catch (Exception ex)
+		{
+			Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
+		}
 	}
 
 	// Track workout on Watch
