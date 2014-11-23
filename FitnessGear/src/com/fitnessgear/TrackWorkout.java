@@ -3,6 +3,7 @@ package com.fitnessgear;
 import java.util.ArrayList;
 
 import com.fitnessgear.adapter.ViewPagerAdapter;
+import com.fitnessgear.model.ListExercisesItem;
 
 import android.app.ActionBar;
 import android.app.Activity;
@@ -38,7 +39,7 @@ public class TrackWorkout extends ActionBarActivity {
 		
 		//lay list exercise
 		Bundle extras = getIntent().getExtras();
-		adapter.myListExercise = extras.getStringArrayList("listExercise");
+		adapter.myListExercise = (ArrayList<ListExercisesItem>) extras.getSerializable("listExercise");
 		adapter.workoutID = extras.getString("workoutID");
 		
 		pager.setAdapter(adapter);

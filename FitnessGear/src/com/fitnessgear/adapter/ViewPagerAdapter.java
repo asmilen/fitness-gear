@@ -3,6 +3,7 @@ package com.fitnessgear.adapter;
 import java.util.ArrayList;
 
 import com.fitnessgear.TrackWorkoutFragment;
+import com.fitnessgear.model.ListExercisesItem;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -12,7 +13,7 @@ import android.support.v4.view.ViewPager.PageTransformer;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 
-	public ArrayList<String> myListExercise;
+	public ArrayList<ListExercisesItem> myListExercise;
 	private PagerTitleStrip pagerTitle;
 	public String workoutID;
 	
@@ -24,7 +25,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 	@Override
 	public Fragment getItem(int position) {
 		// TODO Auto-generated method stub
-		return TrackWorkoutFragment.newInStance(myListExercise.get(position),workoutID,position);
+		return TrackWorkoutFragment.newInStance(myListExercise.get(position),position);
 	}
 
 	@Override
@@ -32,11 +33,11 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 		// TODO Auto-generated method stub
 		return myListExercise.size();
 	}
-	@Override
-	public CharSequence getPageTitle(int position) {
-		// TODO Auto-generated method stub
-		
-		return "Exercise " + (position+1);
-	}
+//	@Override
+//	public CharSequence getPageTitle(int position) {
+//		// TODO Auto-generated method stub
+//		
+//		return "Exercise " + (position+1);
+//	}
 
 }

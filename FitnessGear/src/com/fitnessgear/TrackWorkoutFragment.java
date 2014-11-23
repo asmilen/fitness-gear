@@ -2,6 +2,7 @@ package com.fitnessgear;
 
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.ListExercisesItem;
 
 import android.support.v4.app.Fragment;
 import android.database.Cursor;
@@ -22,13 +23,12 @@ public class TrackWorkoutFragment extends Fragment {
 		// TODO Auto-generated constructor stub
 	}
 
-	public static TrackWorkoutFragment newInStance(String ExerciseID,String wortkoutID, int position)
+	public static TrackWorkoutFragment newInStance(ListExercisesItem listExercisesItem, int position)
 	{
 		TrackWorkoutFragment myTrack = new TrackWorkoutFragment();
 		
 		Bundle bundle = new Bundle();
-		bundle.putString("ExerciseID", ExerciseID);
-		bundle.putString("wortkoutID", wortkoutID);
+		bundle.putSerializable("listExercisesItem", listExercisesItem);
 		bundle.putString("position", position+"");
 		myTrack.setArguments(bundle);
 		return myTrack;
@@ -52,31 +52,33 @@ public class TrackWorkoutFragment extends Fragment {
 
 		//Get arguments
 		String position = getArguments().getString("position");
-		String ExerciseID = getArguments().getString("ExerciseID");
+		ListExercisesItem item = (ListExercisesItem) getArguments().getSerializable("listExercisesItem");
 		
 		
 		textViewpostion.setText(position);
+		
+		textViewEName.setText(item.getExerciseName());
 		
 //		DataBaseHelper helper = new DataBaseHelper(getActivity());
 //		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 
 		
-		Cursor c = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ExerciseID,null);
-		while (c.moveToNext())
-		{
-			textViewEName.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.ExerciseName));
-					
-			//Set img base64
-			String strBase64 = c.getString(c.getColumnIndex("Image1"));
-			byte[] decodedString = Base64.decode(strBase64, Base64.DEFAULT);
-			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
-			img1.setImageBitmap(decodedByte);
-			
-			strBase64 = c.getString(c.getColumnIndex("Image2"));
-			decodedString = Base64.decode(strBase64, Base64.DEFAULT);
-			decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
-			img2.setImageBitmap(decodedByte);
-		}
+//		Cursor c = MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+ExerciseID,null);
+//		while (c.moveToNext())
+//		{
+//			textViewEName.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.ExerciseName));
+//					
+//			//Set img base64
+//			String strBase64 = c.getString(c.getColumnIndex("Image1"));
+//			byte[] decodedString = Base64.decode(strBase64, Base64.DEFAULT);
+//			Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
+//			img1.setImageBitmap(decodedByte);
+//			
+//			strBase64 = c.getString(c.getColumnIndex("Image2"));
+//			decodedString = Base64.decode(strBase64, Base64.DEFAULT);
+//			decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length); 
+//			img2.setImageBitmap(decodedByte);
+//		}
 		
 		
 		return rootView;
