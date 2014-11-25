@@ -66,17 +66,12 @@ public class StartWorkOut extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_start_workout,
 				container, false);
 
-		// Khoi Tao Databse
-//		MainActivity.dbHelper = new DataBaseHelper(getActivity());
-//		MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
-
 		Cursor workout = MainActivity.db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
 				null);
-
+		//Khoi tao ArrayList cac WorkoutItem
 		item = new ArrayList<WorkoutItem>();
 
 		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
-//		listWorkout = (ListView) rootView.findViewById(R.id.listWorkout);
 
 		planName = (TextView) rootView.findViewById(R.id.planName);
 		author = (TextView) rootView.findViewById(R.id.author);
