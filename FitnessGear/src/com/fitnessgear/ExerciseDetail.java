@@ -46,7 +46,8 @@ public class ExerciseDetail extends Activity {
 		img2 = (ImageView) findViewById(R.id.img2);
 		exerciseName = (TextView) findViewById(R.id.exerciseName);
 		txtRating = (TextView) findViewById(R.id.txtRating);
-		txtMuscle = (TextView) findViewById(R.id.txtEquipment);
+		txtMuscle = (TextView) findViewById(R.id.txtMuscle);
+		txtEquipment = (TextView) findViewById(R.id.txtEquipment);
 		txtExerciseType = (TextView) findViewById(R.id.txtExerciseType);
 		txtDescription = (TextView) findViewById(R.id.txtDescription);
 		getData();
@@ -91,6 +92,12 @@ public class ExerciseDetail extends Activity {
 
 				exerciseName.setText(DatabaseUltility.GetColumnValue(
 						exerciseDetail, DatabaseUltility.ExerciseName));
+				txtRating.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.Rating));
+				txtMuscle.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.MuscleName));
+				txtEquipment.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.EquipmentName));
+				txtExerciseType.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.ExerciseTypeName));
+				txtDescription.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.Description));
+				
 			}
 		} catch (SQLiteException ex) {
 			Toast.makeText(getApplicationContext(), ex.getMessage(),
