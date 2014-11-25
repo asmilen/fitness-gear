@@ -48,6 +48,16 @@ public class DatabaseUltility {
 	public static final String Rating = "Rating";
 	public static final String Image1 = "Image1";
 	public static final String Image2 = "Image2";
+	//Muscle Table
+	public static final String MuscleID = "MuscleID";
+	public static final String MuscleName = "MuscleName";
+	//Equipment Table
+	public static final String EquipmentID = "EquipmentID";
+	public static final String EquipmentName = "EquipmentName";
+	//ExerciseType Table
+	public static final String ExerciseTypeID = "ExerciseTypeID";
+	public static final String ExerciseTypeName = "ExerciseTypeName";
+	
 	// Get data from table
 
 	// Get data from column

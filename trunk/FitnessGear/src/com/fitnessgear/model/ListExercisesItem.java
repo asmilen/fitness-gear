@@ -43,6 +43,21 @@ public class ListExercisesItem  implements Serializable{
 		this.rests = rests;
 	}
 
+	public ListExercisesItem(String exerciseID, String exerciseName,
+			String exerciseType, String muscleTarget, String equipment,
+			String rating, String img1, String img2, String description) {
+		super();
+		this.exerciseID = exerciseID;
+		this.exerciseName = exerciseName;
+		this.exerciseType = exerciseType;
+		this.muscleTarget = muscleTarget;
+		this.equipment = equipment;
+		this.rating = rating;
+		this.img1 = img1;
+		this.img2 = img2;
+		this.description = description;
+	}
+
 	public String getExerciseID() {
 		return exerciseID;
 	}
