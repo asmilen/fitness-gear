@@ -10,7 +10,7 @@
     tools:context="com.fitnessgear.TrackWorkoutDialog" >
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/buttonSaveSet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
@@ -23,10 +23,10 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/button1"
-        android:layout_alignBottom="@+id/button1"
+        android:layout_alignBaseline="@+id/buttonSaveSet"
+        android:layout_alignBottom="@+id/buttonSaveSet"
         android:layout_marginLeft="48dp"
-        android:layout_toRightOf="@+id/button1"
+        android:layout_toRightOf="@+id/buttonSaveSet"
         android:onClick="OnWatch"
         android:text="On Watch" />
 
