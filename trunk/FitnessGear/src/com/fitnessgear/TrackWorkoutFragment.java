@@ -190,10 +190,10 @@ public class TrackWorkoutFragment extends Fragment {
 				String[] args = new String[] { DayID,
 						item.getExerciseID() + "", position + "", reps, kg };
 				String sql = "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?)";
-				
+								
 				DataBaseHelper helper = new DataBaseHelper(getActivity());
 				SQLiteDatabase db = helper.getWritableDatabase();
-				db.rawQuery(sql, args);
+				db.execSQL(sql, args);
 			}
 		});
 
