@@ -3,6 +3,7 @@ package com.fitnessgear.adapter;
 import com.fitnessgear.R;
 import com.fitnessgear.adapter.ListExercisesAdapter.ViewHolder;
 
+import android.R.bool;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -19,26 +20,52 @@ import android.widget.TextView;
 public class ListSetTrackWorkoutAdapter extends BaseAdapter {
 
 	private Context mContext;
-	private String nSet;
-	private String Repmax;
+	private int nSet;
 	private String Repmin;
-	
-	
-	
-	
-	public ListSetTrackWorkoutAdapter(Context mContext, String nSet,
-			String repmax, String repmin) {
+	private String Repmax;
+
+	// For update
+	private String Kgs;
+	private String Reps;
+	private boolean onUpdate = false;
+
+	public String getKgs() {
+		return Kgs;
+	}
+
+	public void setKgs(String kgs) {
+		Kgs = kgs;
+	}
+
+	public String getReps() {
+		return Reps;
+	}
+
+	public boolean isOnUpdate() {
+		return onUpdate;
+	}
+
+	public void setOnUpdate(boolean onUpdate) {
+		this.onUpdate = onUpdate;
+	}
+
+	public void setReps(String reps) {
+		Reps = reps;
+	}
+
+	public ListSetTrackWorkoutAdapter(Context mContext, int nSet,
+			String repmin, String repmax) {
 		super();
 		this.mContext = mContext;
 		this.nSet = nSet;
-		Repmax = repmax;
 		Repmin = repmin;
+		Repmax = repmax;
 	}
 
 	@Override
 	public int getCount() {
 		// TODO Auto-generated method stub
-		return Integer.valueOf(nSet);
+		return nSet;
 	}
 
 	@Override
@@ -59,26 +86,40 @@ public class ListSetTrackWorkoutAdapter extends BaseAdapter {
 		ViewHolder holder = null;
 		if (convertView == null) {
 			holder = new ViewHolder();
-            LayoutInflater mInflater = (LayoutInflater)
-                    mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
-            convertView = mInflater.inflate(R.layout.list_set_trackworkout, null);
-            holder.radio = (RadioButton) convertView.findViewById(R.id.radioButton1);
-            holder.targetSet = (TextView) convertView.findViewById(R.id.textViewSet);
-            convertView.setTag(holder);
-        }
-		else {
+			LayoutInflater mInflater = (LayoutInflater) mContext
+					.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
+			convertView = mInflater.inflate(R.layout.list_set_trackworkout,
+					null);
+			holder.img = (ImageView) convertView
+					.findViewById(R.id.imageViewTick);
+			holder.targetRep = (TextView) convertView
+					.findViewById(R.id.textViewReps);
+			holder.set = (TextView) convertView.findViewById(R.id.textViewSet);
+			convertView.setTag(holder);
+		} else {
 			holder = (ViewHolder) convertView.getTag();
 		}
-               
-              
-        //Set Text for TextView description
-        holder.targetSet.setText("Target Sets: "+Repmin + "-" + Repmax);
-        holder.radio.setText("Set " + String.valueOf(position));
+		
+		if (holder.targetRep.getText().charAt(0)!='T') onUpdate = true;
+		// Intial Text for TextView description
+		if (!onUpdate) {
+			holder.targetRep.setText("Target Reps: " + Repmin + "-" + Repmax);
+			holder.set.setText("Set " + (position + 1));
+		} else {
+			holder.targetRep.setText(Kgs + "x" + Reps);
+			SavetoDatabase();
+		}
 		return convertView;
 	}
 
+	private void SavetoDatabase() {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public static class ViewHolder {
-		public RadioButton radio;
-		public TextView targetSet;
+		public ImageView img;
+		public TextView targetRep;
+		public TextView set;
 	}
 }

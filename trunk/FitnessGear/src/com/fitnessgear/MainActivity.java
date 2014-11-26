@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
         // set up the drawer's list view with items and click listener
         adapter = new NavigationDrawerAdapter(getApplicationContext(), navDrawerItems);
         mDrawerList.setAdapter(adapter);
-        mDrawerList.setSelector(R.drawable.list_selector);
+        mDrawerList.setSelector(R.drawable.list_select);
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);

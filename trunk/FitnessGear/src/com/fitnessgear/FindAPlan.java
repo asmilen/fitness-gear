@@ -2,14 +2,17 @@ package com.fitnessgear;
 
 
 import com.fitnessgear.adapter.ListSetTrackWorkoutAdapter;
+import com.fitnessgear.database.DatabaseUltility;
 
 import android.app.Fragment;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class FindAPlan extends Fragment {
 
@@ -22,10 +25,18 @@ public class FindAPlan extends Fragment {
 		// TODO Auto-generated method stub
         View rootView = inflater.inflate(R.layout.fragment_find_a_plan, container, false);
 		
-        ListView lv = (ListView) rootView.findViewById(R.id.listSet);
-        ListSetTrackWorkoutAdapter adapter = new ListSetTrackWorkoutAdapter(
-				getActivity(),"3","4","5");
-        lv.setAdapter(adapter);
+
+        Cursor c = MainActivity.db.rawQuery("Select * from Log_Exercise", null);
+        while (c.moveToNext())
+        {
+        	String Day = DatabaseUltility.GetColumnValue(c, DatabaseUltility.Day);
+        	String E = DatabaseUltility.GetColumnValue(c, DatabaseUltility.ExerciseID);
+        	String S = DatabaseUltility.GetColumnValue(c, DatabaseUltility.Sets);
+        	String R = DatabaseUltility.GetColumnValue(c, DatabaseUltility.Reps);
+        	String K = DatabaseUltility.GetColumnValue(c, DatabaseUltility.Kg);
+        	
+        	Toast.makeText(getActivity(), Day+" " + E + S + R+ K, Toast.LENGTH_LONG).show();
+        }
 		return rootView;
 	}
 }
