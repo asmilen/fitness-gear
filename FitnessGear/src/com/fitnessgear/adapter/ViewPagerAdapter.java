@@ -14,7 +14,6 @@ import android.support.v4.view.ViewPager.PageTransformer;
 public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 
 	public ArrayList<ListExercisesItem> myListExercise;
-	private PagerTitleStrip pagerTitle;
 	public String workoutID;
 	
 	public ViewPagerAdapter(FragmentManager fm) {
@@ -33,11 +32,4 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 		// TODO Auto-generated method stub
 		return myListExercise.size();
 	}
-//	@Override
-//	public CharSequence getPageTitle(int position) {
-//		// TODO Auto-generated method stub
-//		
-//		return "Exercise " + (position+1);
-//	}
-
 }

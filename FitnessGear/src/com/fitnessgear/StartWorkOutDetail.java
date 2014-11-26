@@ -1,38 +1,25 @@
 package com.fitnessgear;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.fitnessgear.adapter.ListExercisesAdapter;
-import com.fitnessgear.database.DataBaseHelper;
-import com.fitnessgear.database.DatabaseUltility;
-import com.fitnessgear.model.ListExercisesItem;
-import com.fitnessgear.sapservices.HelloAccessoryProviderService;
-import com.fitnessgear.sapservices.HelloAccessoryProviderService.HelloAccessoryProviderConnection;
-
-import android.R.anim;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.util.Base64;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.fitnessgear.adapter.ListExercisesAdapter;
+import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.ListExercisesItem;
 
 public class StartWorkOutDetail extends Activity {
 
