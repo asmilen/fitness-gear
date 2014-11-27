@@ -28,12 +28,12 @@ public class ListSetTrackWorkoutAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private int nSet;
-	private String Repmin;
-	private String Repmax;
+	private int Repmin;
+	private int Repmax;
 	private int ExerciseID;
 
 	public ListSetTrackWorkoutAdapter(Context mContext, int nSet,
-			String repmin, String repmax, int exerciseID) {
+			int repmin, int repmax, int exerciseID) {
 		super();
 		this.mContext = mContext;
 		this.nSet = nSet;
@@ -99,7 +99,7 @@ public class ListSetTrackWorkoutAdapter extends BaseAdapter {
 		for (int i = 0; i < list.size(); i++) {
 			item = list.get(i);
 			if (item.getExerciseID() == ExerciseID
-					&& item.getSets() == (position + 1))
+					&& item.getSets() == (position+1))
 				break;
 		}
 

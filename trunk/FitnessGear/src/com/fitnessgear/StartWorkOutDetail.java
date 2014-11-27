@@ -119,20 +119,20 @@ public class StartWorkOutDetail extends Activity {
 //					Toast.LENGTH_LONG).show();
 			while (listExerciseCursor.moveToNext()) {
 				myListExercise.add(new ListExercisesItem(
-						DatabaseUltility.GetColumnValue(listExerciseCursor, "Workout_Exercise." + DatabaseUltility.ExerciseID),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, "Workout_Exercise." + DatabaseUltility.ExerciseID),
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.ExerciseName),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.ExerciseType),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.MuscleTarget),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Equipment),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Rating),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.ExerciseType),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.MuscleTarget),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.Equipment),
+						DatabaseUltility.GetFloatColumnValue(listExerciseCursor, DatabaseUltility.Rating),
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Image1),
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Image2),
 						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Description),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Sets),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.RepsMin),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.RepsMax),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Kg),
-						DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Rests)));
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.Sets),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.RepsMin),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.RepsMax),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.Kg),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.Rests)));
 //				String ExerciseID = c.getString(c.getColumnIndex("ExerciseID"))+ "";
 //				String Sets = c.getString(c.getColumnIndex("Sets")) + "";
 //				String Reps = c.getString(c.getColumnIndex("Reps")) + "";

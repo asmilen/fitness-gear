@@ -7,25 +7,25 @@ import android.widget.TextView;
 
 public class ListExercisesItem  implements Serializable{
 
-	private String exerciseID;
+	private int exerciseID;
 	private String exerciseName;
-	private String exerciseType;
-	private String muscleTarget;
-	private String equipment;
-	private String rating;
+	private int exerciseType;
+	private int muscleTarget;
+	private int equipment;
+	private float rating;
 	private String img1;
 	private String img2;
 	private String description;
-	private String sets;
-	private String repsmin;
-	private String repsmax;
-	private String kg;
-	private String rests;
+	private int sets;
+	private int repsmin;
+	private int repsmax;
+	private int kg;
+	private int rests;
 	
-	public ListExercisesItem(String exerciseID, String exerciseName,
-			String exerciseType, String muscleTarget, String equipment,
-			String rating, String img1, String img2, String description,
-			String sets, String repsmin,String repsmax, String kg, String rests) {
+	public ListExercisesItem(int exerciseID, String exerciseName,
+			int exerciseType, int muscleTarget, int equipment,
+			float rating, String img1, String img2, String description,
+			int sets, int repsmin,int repsmax, int kg, int rests) {
 		super();
 		this.exerciseID = exerciseID;
 		this.exerciseName = exerciseName;
@@ -43,9 +43,9 @@ public class ListExercisesItem  implements Serializable{
 		this.rests = rests;
 	}
 
-	public ListExercisesItem(String exerciseID, String exerciseName,
-			String exerciseType, String muscleTarget, String equipment,
-			String rating, String img1, String img2, String description) {
+	public ListExercisesItem(int exerciseID, String exerciseName,
+			int exerciseType, int muscleTarget, int equipment,
+			float rating, String img1, String img2, String description) {
 		super();
 		this.exerciseID = exerciseID;
 		this.exerciseName = exerciseName;
@@ -58,11 +58,11 @@ public class ListExercisesItem  implements Serializable{
 		this.description = description;
 	}
 
-	public String getExerciseID() {
+	public int getExerciseID() {
 		return exerciseID;
 	}
 
-	public void setExerciseID(String exerciseID) {
+	public void setExerciseID(int exerciseID) {
 		this.exerciseID = exerciseID;
 	}
 
@@ -74,35 +74,35 @@ public class ListExercisesItem  implements Serializable{
 		this.exerciseName = exerciseName;
 	}
 
-	public String getExerciseType() {
+	public int getExerciseType() {
 		return exerciseType;
 	}
 
-	public void setExerciseType(String exerciseType) {
+	public void setExerciseType(int exerciseType) {
 		this.exerciseType = exerciseType;
 	}
 
-	public String getMuscleTarget() {
+	public int getMuscleTarget() {
 		return muscleTarget;
 	}
 
-	public void setMuscleTarget(String muscleTarget) {
+	public void setMuscleTarget(int muscleTarget) {
 		this.muscleTarget = muscleTarget;
 	}
 
-	public String getEquipment() {
+	public int getEquipment() {
 		return equipment;
 	}
 
-	public void setEquipment(String equipment) {
+	public void setEquipment(int equipment) {
 		this.equipment = equipment;
 	}
 
-	public String getRating() {
+	public float getRating() {
 		return rating;
 	}
 
-	public void setRating(String rating) {
+	public void setRating(float rating) {
 		this.rating = rating;
 	}
 
@@ -130,45 +130,45 @@ public class ListExercisesItem  implements Serializable{
 		this.description = description;
 	}
 
-	public String getSets() {
+	public int getSets() {
 		return sets;
 	}
 
-	public void setSets(String sets) {
+	public void setSets(int sets) {
 		this.sets = sets;
 	}
 
 	
 
-	public String getRepsmin() {
+	public int getRepsmin() {
 		return repsmin;
 	}
 
-	public void setRepsmin(String repsmin) {
+	public void setRepsmin(int repsmin) {
 		this.repsmin = repsmin;
 	}
 
-	public String getRepsmax() {
+	public int getRepsmax() {
 		return repsmax;
 	}
 
-	public void setRepsmax(String repsmax) {
+	public void setRepsmax(int repsmax) {
 		this.repsmax = repsmax;
 	}
 
-	public String getKg() {
+	public int getKg() {
 		return kg;
 	}
 
-	public void setKg(String kg) {
+	public void setKg(int kg) {
 		this.kg = kg;
 	}
 
-	public String getRests() {
+	public int getRests() {
 		return rests;
 	}
 
-	public void setRests(String rests) {
+	public void setRests(int rests) {
 		this.rests = rests;
 	}
 

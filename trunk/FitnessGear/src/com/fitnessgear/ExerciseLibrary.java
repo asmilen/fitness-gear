@@ -48,12 +48,12 @@ public class ExerciseLibrary extends Fragment {
 //				Toast.LENGTH_LONG).show();
 		while (listExerciseCursor.moveToNext()) {
 			myListExercise.add(new ListExercisesItem(
-					DatabaseUltility.GetColumnValue(listExerciseCursor, "Workout_Exercise." + DatabaseUltility.ExerciseID),
+					DatabaseUltility.GetIntColumnValue(listExerciseCursor, "Workout_Exercise." + DatabaseUltility.ExerciseID),
 					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.ExerciseName),
-					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.ExerciseType),
-					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.MuscleTarget),
-					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Equipment),
-					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Rating),
+					DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.ExerciseType),
+					DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.MuscleTarget),
+					DatabaseUltility.GetIntColumnValue(listExerciseCursor, DatabaseUltility.Equipment),
+					DatabaseUltility.GetFloatColumnValue(listExerciseCursor, DatabaseUltility.Rating),
 					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Image1),
 					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Image2),
 					DatabaseUltility.GetColumnValue(listExerciseCursor, DatabaseUltility.Description)));
