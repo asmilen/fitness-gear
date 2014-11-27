@@ -1,12 +1,16 @@
 package com.fitnessgear;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
@@ -26,6 +30,9 @@ import android.widget.Toast;
 import com.fitnessgear.adapter.ListSetTrackWorkoutAdapter;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.LogExerciseItem;
+import com.fitnessgear.model.LogExerciseList;
+import com.google.gson.Gson;
 
 public class TrackWorkoutFragment extends Fragment {
 
@@ -131,7 +138,8 @@ public class TrackWorkoutFragment extends Fragment {
 		// Custom Listview
 		ListSetTrackWorkoutAdapter adapter = new ListSetTrackWorkoutAdapter(
 				getActivity(), Integer.parseInt(item.getSets()),
-				item.getRepsmin(), item.getRepsmax());
+				item.getRepsmin(), item.getRepsmax(), Integer.parseInt(item
+						.getExerciseID()));
 		mylistView.setAdapter(adapter);
 
 		// Button saveset
@@ -146,20 +154,14 @@ public class TrackWorkoutFragment extends Fragment {
 
 				EditText Kgs = (EditText) getView().findViewById(
 						R.id.editTextKg);
-				String KgText = Kgs.getText().toString();
 
 				if (repsText != null && repsText.trim() != "") {
 
 					// Get listview and adapter
 					ListView list = (ListView) getView().findViewById(
 							R.id.listSetTrackWorkout);
-					ListSetTrackWorkoutAdapter adapter = (ListSetTrackWorkoutAdapter) list
-							.getAdapter();
 
 					// Set Reps,Kg, and get position
-					adapter.setReps(reps.getText().toString());
-					adapter.setKgs(Kgs.getText().toString());
-					adapter.setOnUpdate(true);
 					TextView textViewSetNumber1 = (TextView) getView()
 							.findViewById(R.id.textViewSetNumber);
 
@@ -173,31 +175,62 @@ public class TrackWorkoutFragment extends Fragment {
 					View row = mylistView.getChildAt(position - 1);
 					list.getAdapter().getView(position - 1, row, list);
 
-					// Update to database
-					updateDatabase(position, reps.getText().toString(), Kgs
-							.getText().toString());
+					// Update to list
+					updatelist(position + 1, reps.getText().toString(), Kgs
+							.getText().toString(), item.getExerciseID());
 				}
 			}
 
-			private void updateDatabase(int position, String reps, String kg) {
+			private void updatelist(int Set, String reps, String kg,
+					String ExerciseID) {
 				// TODO Auto-generated method stub
-				// Get DayID
-				Calendar c = Calendar.getInstance();
-				String DayID = c.get(Calendar.DAY_OF_MONTH)
-						+ c.get(Calendar.MONTH) + c.get(Calendar.YEAR) + "";
+				int eID = Integer.parseInt(ExerciseID);
 
+				// Get sharedpreference
+				SharedPreferences settings = PreferenceManager
+						.getDefaultSharedPreferences(getActivity());
+				Gson gson = new Gson();
+				String json = settings.getString("logexerciselist", "");
+				LogExerciseList mylist = gson.fromJson(json,
+						LogExerciseList.class);
+
+				// Lay ra vi tri can update
+				ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
+				int i = 0;
+				LogExerciseItem Tempitem = new LogExerciseItem(0, 0, 0);
+				for (i = 0; i < list.size(); i++) {
+					Tempitem = list.get(i);
+					if (Tempitem.getExerciseID() == Integer
+							.parseInt(ExerciseID)
+							&& Tempitem.getSets() == (Set))
+						break;
+				}
+
+				// Update
+				LogExerciseItem updatedItem = new LogExerciseItem(Tempitem
+						.getDay(), eID, Set, Integer.parseInt(reps), Integer
+						.parseInt(kg), 0);
+				mylist.updateItem(i, updatedItem);
+
+				// Put to Shared Preference
+				Editor prefsEditor = settings.edit();
+				gson = new Gson();
+				json = gson.toJson(mylist);
+				prefsEditor.putString("logexerciselist", json);
+				prefsEditor.commit();
+				
 				// Insert
-				String[] args = new String[] { DayID,
-						item.getExerciseID() + "", position + "", reps, kg };
-				String sql = "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?)";
-								
-				DataBaseHelper helper = new DataBaseHelper(getActivity());
-				SQLiteDatabase db = helper.getWritableDatabase();
-				db.execSQL(sql, args);
+				// String[] args = new String[] { DayID,
+				// item.getExerciseID() + "", position + "", reps, kg };
+				// String sql =
+				// "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?)";
+				//
+				// DataBaseHelper helper = new DataBaseHelper(getActivity());
+				// SQLiteDatabase db = helper.getWritableDatabase();
+				// db.execSQL(sql, args);
 			}
 		});
 
 		return rootView;
 	}
-
 }

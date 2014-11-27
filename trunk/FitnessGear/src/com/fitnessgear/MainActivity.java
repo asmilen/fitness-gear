@@ -189,7 +189,7 @@ public class MainActivity extends Activity {
 			fragment = new Report();
 			break;
 		case 5:
-			fragment = new Logs();
+			startActivity(new Intent(getApplicationContext(),Logs.class));
 			break;
 		case 6:
 			fragment = new Backup();

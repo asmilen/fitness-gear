@@ -2,18 +2,18 @@ package com.fitnessgear.adapter;
 
 import java.util.ArrayList;
 
-import com.fitnessgear.TrackWorkoutFragment;
-import com.fitnessgear.model.ListExercisesItem;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-import android.support.v4.view.PagerTitleStrip;
-import android.support.v4.view.ViewPager.PageTransformer;
+
+import com.fitnessgear.TrackWorkoutFragment;
+import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.LogExerciseList;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 
 	public ArrayList<ListExercisesItem> myListExercise;
+	public LogExerciseList myLogExerciseList;
 	public String workoutID;
 	
 	public ViewPagerAdapter(FragmentManager fm) {
