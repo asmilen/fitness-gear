@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService;
 
 import android.app.Activity;
