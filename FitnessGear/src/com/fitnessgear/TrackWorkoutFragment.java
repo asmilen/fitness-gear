@@ -82,6 +82,7 @@ public class TrackWorkoutFragment extends Fragment {
 		String position = getArguments().getString("position");
 		final ListExercisesItem item = (ListExercisesItem) getArguments()
 				.getSerializable("listExercisesItem");
+		final int eID = item.getExerciseID();
 
 		// Set text and image
 		textViewpostion.setText(position);
@@ -112,7 +113,7 @@ public class TrackWorkoutFragment extends Fragment {
 		img2.setImageBitmap(decodedByte);
 
 		// Hide edittext Kg if necessary
-		if (item.getKg().equals("0")) {
+		if (item.getKg() == 0) {
 			editTextKg.setVisibility(View.GONE);
 			textViewX.setVisibility(View.GONE);
 		}
@@ -137,12 +138,14 @@ public class TrackWorkoutFragment extends Fragment {
 		}
 		// Custom Listview
 		ListSetTrackWorkoutAdapter adapter = new ListSetTrackWorkoutAdapter(
-				getActivity(), Integer.parseInt(item.getSets()),
-				item.getRepsmin(), item.getRepsmax(), Integer.parseInt(item
-						.getExerciseID()));
+				getActivity(), item.getSets(), item.getRepsmin(),
+				item.getRepsmax(), item.getExerciseID());
 		mylistView.setAdapter(adapter);
 
 		// Button saveset
+
+		final SharedPreferences settings = PreferenceManager
+				.getDefaultSharedPreferences(getActivity());
 		Button b = (Button) rootView.findViewById(R.id.buttonSaveSet);
 		b.setOnClickListener(new OnClickListener() {
 			@Override
@@ -171,54 +174,69 @@ public class TrackWorkoutFragment extends Fragment {
 					textViewSetNumber1.setText(setNumber.substring(0, 6)
 							+ (position + 1) + setNumber.substring(7));
 
+					// Update to list
+					updatelist(position, reps.getText().toString(), Kgs
+							.getText().toString(), eID);
+
 					// Update listview
 					View row = mylistView.getChildAt(position - 1);
 					list.getAdapter().getView(position - 1, row, list);
 
-					// Update to list
-					updatelist(position + 1, reps.getText().toString(), Kgs
-							.getText().toString(), item.getExerciseID());
 				}
 			}
 
 			private void updatelist(int Set, String reps, String kg,
-					String ExerciseID) {
+					int ExerciseID) {
 				// TODO Auto-generated method stub
-				int eID = Integer.parseInt(ExerciseID);
 
 				// Get sharedpreference
-				SharedPreferences settings = PreferenceManager
-						.getDefaultSharedPreferences(getActivity());
-				Gson gson = new Gson();
-				String json = settings.getString("logexerciselist", "");
-				LogExerciseList mylist = gson.fromJson(json,
-						LogExerciseList.class);
+				try {
 
-				// Lay ra vi tri can update
-				ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
-				int i = 0;
-				LogExerciseItem Tempitem = new LogExerciseItem(0, 0, 0);
-				for (i = 0; i < list.size(); i++) {
-					Tempitem = list.get(i);
-					if (Tempitem.getExerciseID() == Integer
-							.parseInt(ExerciseID)
-							&& Tempitem.getSets() == (Set))
-						break;
+					Gson gson = new Gson();
+					String json = settings.getString("logexerciselist", "");
+					LogExerciseList mylist = gson.fromJson(json,
+							LogExerciseList.class);
+
+					// Lay ra vi tri can update
+					ArrayList<LogExerciseItem> list = mylist
+							.getMyLogExerciseList();
+					int i = 0;
+					LogExerciseItem Tempitem = new LogExerciseItem(0, 0, 0);
+					for (i = 0; i < list.size(); i++) {
+						Tempitem = list.get(i);
+						if (Tempitem.getExerciseID() == ExerciseID
+								&& Tempitem.getSets() == Set)
+							break;
+					}
+
+					// Update
+					int repsValue = 0, kgsValue = 0;
+					try {
+						repsValue = Integer.parseInt(reps);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+					try {
+						kgsValue = Integer.parseInt(kg);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+
+					LogExerciseItem updatedItem = new LogExerciseItem(Tempitem
+							.getDay(), ExerciseID, Set, repsValue, kgsValue, 0);
+					mylist.updateItem(i, updatedItem);
+
+					// Put to Shared Preference
+					Editor prefsEditor = settings.edit();
+					gson = new Gson();
+					json = gson.toJson(mylist);
+					prefsEditor.putString("logexerciselist", json);
+					prefsEditor.commit();
+				} catch (Exception ex) {
+					Toast.makeText(getActivity(), ex.getMessage(),
+							Toast.LENGTH_LONG).show();
 				}
 
-				// Update
-				LogExerciseItem updatedItem = new LogExerciseItem(Tempitem
-						.getDay(), eID, Set, Integer.parseInt(reps), Integer
-						.parseInt(kg), 0);
-				mylist.updateItem(i, updatedItem);
-
-				// Put to Shared Preference
-				Editor prefsEditor = settings.edit();
-				gson = new Gson();
-				json = gson.toJson(mylist);
-				prefsEditor.putString("logexerciselist", json);
-				prefsEditor.commit();
-				
 				// Insert
 				// String[] args = new String[] { DayID,
 				// item.getExerciseID() + "", position + "", reps, kg };

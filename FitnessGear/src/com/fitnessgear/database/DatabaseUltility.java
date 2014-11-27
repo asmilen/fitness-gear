@@ -77,4 +77,19 @@ public class DatabaseUltility {
 		}
 	}
 
+	public static int GetIntColumnValue(Cursor cur, String ColumnName) {
+		try {
+			return cur.getInt((cur.getColumnIndex(ColumnName)));
+		} catch (Exception ex) {
+			return 0;
+		}
+	}
+	
+	public static float GetFloatColumnValue(Cursor cur, String ColumnName) {
+		try {
+			return cur.getFloat((cur.getColumnIndex(ColumnName)));
+		} catch (Exception ex) {
+			return 0;
+		}
+	}
 }
