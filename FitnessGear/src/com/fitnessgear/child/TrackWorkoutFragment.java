@@ -1,4 +1,4 @@
-package com.fitnessgear;
+package com.fitnessgear.child;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -27,8 +27,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fitnessgear.R;
+import com.fitnessgear.R.id;
+import com.fitnessgear.R.layout;
 import com.fitnessgear.adapter.ListSetTrackWorkoutAdapter;
 import com.fitnessgear.database.DataBaseHelper;
+import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.ListExercisesItem;
 import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.model.LogExerciseList;
@@ -158,7 +162,7 @@ public class TrackWorkoutFragment extends Fragment {
 				EditText Kgs = (EditText) getView().findViewById(
 						R.id.editTextKg);
 
-				if (repsText != null && repsText.trim() != "") {
+				if (!repsText.trim().equals("")) {
 
 					// Get listview and adapter
 					ListView list = (ListView) getView().findViewById(
@@ -232,6 +236,7 @@ public class TrackWorkoutFragment extends Fragment {
 					json = gson.toJson(mylist);
 					prefsEditor.putString("logexerciselist", json);
 					prefsEditor.commit();
+					DatabaseUltility.UpdateToLogExercise(mylist);
 				} catch (Exception ex) {
 					Toast.makeText(getActivity(), ex.getMessage(),
 							Toast.LENGTH_LONG).show();

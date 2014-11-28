@@ -1,4 +1,4 @@
-package com.fitnessgear;
+package com.fitnessgear.child;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.fitnessgear.MainActivity;
+import com.fitnessgear.R;
+import com.fitnessgear.R.id;
+import com.fitnessgear.R.layout;
+import com.fitnessgear.R.menu;
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.ListExercisesItem;

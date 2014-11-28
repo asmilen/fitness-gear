@@ -1,6 +1,14 @@
 package com.fitnessgear.database;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.fitnessgear.MainActivity;
+import com.fitnessgear.model.LogExerciseItem;
+import com.fitnessgear.model.LogExerciseList;
+
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 // class dung de define ten cac cot trong database va lay du lieu tu database
 public class DatabaseUltility {
@@ -90,6 +98,25 @@ public class DatabaseUltility {
 			return cur.getFloat((cur.getColumnIndex(ColumnName)));
 		} catch (Exception ex) {
 			return 0;
+		}
+	}
+	
+	//Update data to Log_exercise
+	public static void UpdateToLogExercise(LogExerciseList mylist)
+	{
+		ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
+		for (LogExerciseItem item:list)
+		{
+			//Delete if exist
+			
+			// Insert
+			 String[] args = new String[] { item.getDay(),
+			 item.getExerciseID() + "", item.getSets() + "", item.getReps()+"", item.getKgs()+"" };
+			 String sql =
+			 "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?)";
+			
+			 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+			 db.execSQL(sql, args);
 		}
 	}
 }

@@ -1,5 +1,10 @@
-package com.fitnessgear;
+package com.fitnessgear.child;
 
+import com.fitnessgear.MainActivity;
+import com.fitnessgear.R;
+import com.fitnessgear.R.id;
+import com.fitnessgear.R.layout;
+import com.fitnessgear.R.menu;
 import com.fitnessgear.database.DatabaseUltility;
 
 import android.app.ActionBar;
