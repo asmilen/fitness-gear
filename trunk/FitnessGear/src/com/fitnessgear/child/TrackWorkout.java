@@ -1,8 +1,11 @@
-package com.fitnessgear;
+package com.fitnessgear.child;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import com.fitnessgear.R;
+import com.fitnessgear.R.id;
+import com.fitnessgear.R.layout;
 import com.fitnessgear.adapter.ViewPagerAdapter;
 import com.fitnessgear.model.ListExercisesItem;
 import com.fitnessgear.model.LogExerciseItem;
@@ -17,6 +20,7 @@ import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -73,8 +77,29 @@ public class TrackWorkout extends ActionBarActivity {
 		prefsEditor.putString("logexerciselist", json);
 		prefsEditor.commit();
 
+		pager.setOnPageChangeListener(new OnPageChangeListener() {
+			
+			@Override
+			public void onPageSelected(int arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onPageScrolled(int arg0, float arg1, int arg2) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void onPageScrollStateChanged(int arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		// Set adapter
 		pager.setAdapter(adapter);
+		
 	}
 
 	@Override

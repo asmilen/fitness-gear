@@ -20,7 +20,7 @@ import android.widget.TextView;
 public class ListExercisesAdapter extends BaseAdapter {
 
 	private Context mContext;
-	private ArrayList<ListExercisesItem> listExercises;
+	private ArrayList<ListExercisesItem> listExercises = new ArrayList<ListExercisesItem>();
 	
 	public ListExercisesAdapter(Context mContext,ArrayList<ListExercisesItem> listExercises) {
 		// TODO Auto-generated constructor stub
