@@ -33,7 +33,7 @@ import com.fitnessgear.R.layout;
 import com.fitnessgear.adapter.ListSetTrackWorkoutAdapter;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.database.DatabaseUltility;
-import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.ExercisesItem;
 import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.model.LogExerciseList;
 import com.google.gson.Gson;
@@ -45,7 +45,7 @@ public class TrackWorkoutFragment extends Fragment {
 	}
 
 	public static TrackWorkoutFragment newInStance(
-			ListExercisesItem listExercisesItem, int position) {
+			ExercisesItem listExercisesItem, int position) {
 		TrackWorkoutFragment myTrack = new TrackWorkoutFragment();
 
 		Bundle bundle = new Bundle();
@@ -84,7 +84,7 @@ public class TrackWorkoutFragment extends Fragment {
 
 		// Get arguments
 		String position = getArguments().getString("position");
-		final ListExercisesItem item = (ListExercisesItem) getArguments()
+		final ExercisesItem item = (ExercisesItem) getArguments()
 				.getSerializable("listExercisesItem");
 		final int eID = item.getExerciseID();
 

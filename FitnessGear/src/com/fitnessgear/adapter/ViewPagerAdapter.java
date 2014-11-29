@@ -8,12 +8,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 
 import com.fitnessgear.child.TrackWorkoutFragment;
-import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.ExercisesItem;
 import com.fitnessgear.model.LogExerciseList;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter{
 
-	public ArrayList<ListExercisesItem> myListExercise;
+	public ArrayList<ExercisesItem> myListExercise;
 	public LogExerciseList myLogExerciseList;
 	public String workoutID;
 	

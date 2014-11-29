@@ -8,7 +8,7 @@ import java.util.Comparator;
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.child.ExerciseDetail;
 import com.fitnessgear.database.DatabaseUltility;
-import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.ExercisesItem;
 
 import android.app.Fragment;
 import android.content.Intent;
@@ -24,7 +24,7 @@ import android.widget.AdapterView.OnItemClickListener;
 
 public class ExerciseLibrary extends Fragment {
 
-	private ArrayList<ListExercisesItem> myListExercise;
+	private ArrayList<ExercisesItem> myListExercise;
 	private ListExercisesAdapter adapter;
 
 	private ListView listFullExercises;
@@ -43,7 +43,7 @@ public class ExerciseLibrary extends Fragment {
 
 	public void getData() {
 		try {
-			myListExercise = new ArrayList<ListExercisesItem>();
+			myListExercise = new ArrayList<ExercisesItem>();
 
 			Cursor listExerciseCursor = MainActivity.db.rawQuery(
 					"Select * FROM Exercise Order By ExerciseName", null);
@@ -51,7 +51,7 @@ public class ExerciseLibrary extends Fragment {
 			// Toast.makeText(getApplicationContext(), workoutId,
 			// Toast.LENGTH_LONG).show();
 			while (listExerciseCursor.moveToNext()) {
-				myListExercise.add(new ListExercisesItem(DatabaseUltility
+				myListExercise.add(new ExercisesItem(DatabaseUltility
 						.GetIntColumnValue(listExerciseCursor,
 								"Workout_Exercise."
 										+ DatabaseUltility.ExerciseID),
