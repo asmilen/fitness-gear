@@ -1,6 +1,14 @@
 package com.fitnessgear.database;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.fitnessgear.MainActivity;
+import com.fitnessgear.model.LogExerciseItem;
+import com.fitnessgear.model.LogExerciseList;
+
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 
 // class dung de define ten cac cot trong database va lay du lieu tu database
 public class DatabaseUltility {
@@ -39,6 +47,8 @@ public class DatabaseUltility {
 	public static final String RepsMax = "RepsMax";
 	public static final String Kg = "Kg";
 	public static final String Rests = "Rests";
+	public static final String Interval = "Interval";
+	
 
 	// Exercises Table
 	public static final String ExerciseName = "ExerciseName";
@@ -48,6 +58,13 @@ public class DatabaseUltility {
 	public static final String Rating = "Rating";
 	public static final String Image1 = "Image1";
 	public static final String Image2 = "Image2";
+
+	
+	//Log_Exercise Table
+	public static final String Reps = "Reps";
+	public static final String Day = "Day";
+	
+
 	//Muscle Table
 	public static final String MuscleID = "MuscleID";
 	public static final String MuscleName = "MuscleName";
@@ -58,6 +75,7 @@ public class DatabaseUltility {
 	public static final String ExerciseTypeID = "ExerciseTypeID";
 	public static final String ExerciseTypeName = "ExerciseTypeName";
 	
+
 	// Get data from table
 
 	// Get data from column
@@ -69,4 +87,38 @@ public class DatabaseUltility {
 		}
 	}
 
+	public static int GetIntColumnValue(Cursor cur, String ColumnName) {
+		try {
+			return cur.getInt((cur.getColumnIndex(ColumnName)));
+		} catch (Exception ex) {
+			return 0;
+		}
+	}
+	
+	public static float GetFloatColumnValue(Cursor cur, String ColumnName) {
+		try {
+			return cur.getFloat((cur.getColumnIndex(ColumnName)));
+		} catch (Exception ex) {
+			return 0;
+		}
+	}
+	
+	//Update data to Log_exercise
+	public static void UpdateToLogExercise(LogExerciseList mylist)
+	{
+		ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
+		for (LogExerciseItem item:list)
+		{
+			//Delete if exist
+			
+			// Insert
+			 String[] args = new String[] { item.getDay(),
+			 item.getExerciseID() + "", item.getSets() + "", item.getReps()+"", item.getKgs()+"" };
+			 String sql =
+			 "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?)";
+			
+			 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+			 db.execSQL(sql, args);
+		}
+	}
 }
