@@ -73,7 +73,7 @@ public class StartWorkOutDetail extends Activity {
 			txtTotalSets = (TextView) findViewById(R.id.txtTotalSets);
 			txtArverageTime = (TextView) findViewById(R.id.txtArverageTime);
 			txtTotalCardio = (TextView) findViewById(R.id.txtTotalCardio);
-
+			// Get Data from
 			Bundle bund = getIntent().getExtras();
 
 			// String workoutId = bund.getString("WorkoutID");
@@ -112,8 +112,7 @@ public class StartWorkOutDetail extends Activity {
 				Bundle extras = getIntent().getExtras();
 				workoutID = extras.getString("WorkoutID");
 
-				// Khoi tao ArrayList tu ListExercisesItem class va String
-				// message
+				// Khoi tao ArrayList tu ExercisesItem class va String message
 				myListExercise = new ArrayList<ExercisesItem>();
 				message = "";
 				Cursor listExerciseCursor = MainActivity.db
@@ -126,87 +125,21 @@ public class StartWorkOutDetail extends Activity {
 				// Toast.makeText(getApplicationContext(), workoutId,
 				// Toast.LENGTH_LONG).show();
 				while (listExerciseCursor.moveToNext()) {
-					myListExercise
-							.add(new ExercisesItem(
-									DatabaseUltility
-											.GetIntColumnValue(
-													listExerciseCursor,
-													"Workout_Exercise."
-															+ DatabaseUltility.ExerciseID),
-									DatabaseUltility.GetColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.ExerciseName),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.ExerciseType),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.MuscleTarget),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Equipment),
-									DatabaseUltility.GetFloatColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Rating),
-									DatabaseUltility.GetColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Image1),
-									DatabaseUltility.GetColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Image2),
-									DatabaseUltility.GetColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Description),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Sets),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.RepsMin),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.RepsMax),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Kg),
-									DatabaseUltility.GetIntColumnValue(
-											listExerciseCursor,
-											DatabaseUltility.Rests)));
-					// String ExerciseID =
-					// c.getString(c.getColumnIndex("ExerciseID"))+ "";
-					// String Sets = c.getString(c.getColumnIndex("Sets")) + "";
-					// String Reps = c.getString(c.getColumnIndex("Reps")) + "";
-					// String Rests = c.getString(c.getColumnIndex("Rests")) +
-					// "";
-					// String img1 = "", img2 = "";
-					// Cursor c1 =
-					// MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+
-					// ExerciseID, null);
-					// while (c1.moveToNext()) {
-					// // Set img base64
-					// img1 = c1.getString(c1.getColumnIndex("Image1"));
-					// img2 = c1.getString(c1.getColumnIndex("Image2"));
-					// }
-					// =======
-					// Toast.makeText(getApplicationContext(), workoutID,
-					// Toast.LENGTH_LONG).show();
-					// while (c.moveToNext()) {
-					// String ExerciseID =
-					// c.getString(c.getColumnIndex("ExerciseID"))+ "";
-					// String Sets = c.getString(c.getColumnIndex("Sets")) + "";
-					// String Reps = c.getString(c.getColumnIndex("Reps")) + "";
-					// String Rests = c.getString(c.getColumnIndex("Rests")) +
-					// "";
-					// String img1 = "", img2 = "";
-					// Cursor c1 =
-					// MainActivity.db.rawQuery("Select * FROM Exercise Where ExerciseID="+
-					// ExerciseID, null);
-					// while (c1.moveToNext()) {
-					// // Set img base64
-					// img1 = c1.getString(c1.getColumnIndex("Image1"));
-					// img2 = c1.getString(c1.getColumnIndex("Image2"));
-					// }
-					// >>>>>>> .r49
+					myListExercise.add(new ExercisesItem(
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,"Workout_Exercise." + DatabaseUltility.ExerciseID),
+							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.ExerciseName),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.ExerciseType),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.MuscleTarget),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Equipment),
+							DatabaseUltility.GetFloatColumnValue(listExerciseCursor,DatabaseUltility.Rating),
+							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.Image1),
+							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.Image2),
+							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.Description),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Sets),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.RepsMin),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.RepsMax),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Kg),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Rests)));
 
 					int aveReps = (Integer.valueOf(myListExercise.get(i)
 							.getRepsmin()) + Integer.valueOf(myListExercise

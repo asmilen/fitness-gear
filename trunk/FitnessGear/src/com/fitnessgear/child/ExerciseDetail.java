@@ -7,8 +7,10 @@ import com.fitnessgear.R.layout;
 import com.fitnessgear.R.menu;
 import com.fitnessgear.database.DatabaseUltility;
 
+import android.R.integer;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
@@ -24,7 +26,7 @@ import android.widget.Toast;
 
 public class ExerciseDetail extends Activity {
 
-	private String exerciseID;
+	private int exerciseID;
 	private ImageView img1;
 	private ImageView img2;
 	private TextView exerciseName;
@@ -47,8 +49,8 @@ public class ExerciseDetail extends Activity {
 		// exerciseID = bundle.getString("ExerciseID");
 		//
 
-		img1 = (ImageView) findViewById(R.id.imgExercise);
-		img2 = (ImageView) findViewById(R.id.img2);
+		img1 = (ImageView) findViewById(R.id.imgExercise1);
+		img2 = (ImageView) findViewById(R.id.imgExercise2);
 		exerciseName = (TextView) findViewById(R.id.exerciseName);
 		txtRating = (TextView) findViewById(R.id.txtRating);
 		txtMuscle = (TextView) findViewById(R.id.txtMuscle);
@@ -59,11 +61,9 @@ public class ExerciseDetail extends Activity {
 	}
 
 	public void getData() {
-		Bundle bundle = getIntent().getExtras();
-		exerciseID = bundle.getString("ExerciseID");
-		Toast.makeText(getApplicationContext(), exerciseID, Toast.LENGTH_SHORT)
-				.show();
-		// MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
+		Intent exerciseIntent = getIntent();
+		exerciseID = exerciseIntent.getIntExtra("ExerciseID",0);
+//		Toast.makeText(getApplicationContext(), exerciseID + "", Toast.LENGTH_SHORT).show();
 		try {
 			Cursor exerciseDetail = MainActivity.db
 					.rawQuery(
@@ -76,8 +76,7 @@ public class ExerciseDetail extends Activity {
 							null);
 
 			while (exerciseDetail.moveToNext()) {
-				// DatabaseUltility.GetColumnValue(exerciseDetail,
-				// DatabaseUltility.Image1);
+				//Set Value to Element of Exercise Detail layout
 				String image1 = DatabaseUltility.GetColumnValue(exerciseDetail,
 						DatabaseUltility.Image1);
 				byte[] decodedString = Base64.decode(image1, Base64.DEFAULT);
@@ -85,9 +84,7 @@ public class ExerciseDetail extends Activity {
 						decodedString, 0, decodedString.length);
 
 				img1.setImageBitmap(decodedByte);
-
-				// DatabaseUltility.GetColumnValue(exerciseDetail,
-				// DatabaseUltility.Image2);
+				
 				String image2 = DatabaseUltility.GetColumnValue(exerciseDetail,
 						DatabaseUltility.Image2);
 				decodedString = Base64.decode(image2, Base64.DEFAULT);
@@ -110,22 +107,22 @@ public class ExerciseDetail extends Activity {
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.exercise_detail, menu);
-		return true;
-	}
-
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.exercise_detail, menu);
+//		return true;
+//	}
+//
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
+//		if (id == R.id.action_settings) {
+//			return true;
+//		}
 		if (id == android.R.id.home) {
 			this.finish();
 			return true;
