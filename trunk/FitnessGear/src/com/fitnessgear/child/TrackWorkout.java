@@ -12,8 +12,11 @@ import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.model.LogExerciseList;
 import com.google.gson.Gson;
 
+import android.R.bool;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
@@ -58,7 +61,7 @@ public class TrackWorkout extends ActionBarActivity {
 		adapter.myLogExerciseList = new LogExerciseList();
 		Calendar c = Calendar.getInstance();
 		String DayID = c.get(Calendar.DAY_OF_MONTH) + ""
-				+ c.get(Calendar.MONTH) + "" + c.get(Calendar.YEAR);
+				+ (c.get(Calendar.MONTH)+1) + "" + c.get(Calendar.YEAR);
 
 		for (ListExercisesItem item : adapter.myListExercise) {
 			int nSet = Integer.valueOf(item.getSets());
@@ -102,6 +105,29 @@ public class TrackWorkout extends ActionBarActivity {
 		
 	}
 
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+
+		new AlertDialog.Builder(this)
+	    .setTitle("Go Back")
+	    .setMessage("Are you sure you want to go back? All data will be lost")
+	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) { 
+	            // continue with delete
+	        	TrackWorkout.this.finish();
+	        }
+	     })
+	    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+	        public void onClick(DialogInterface dialog, int which) { 
+	            // do nothing
+	        	dialog.cancel();
+	        }
+	     })
+	    .setIcon(android.R.drawable.ic_dialog_alert)
+	     .show();
+		
+	}
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will

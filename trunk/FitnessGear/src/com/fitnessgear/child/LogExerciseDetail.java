@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import com.fitnessgear.Logs;
 import com.fitnessgear.MainActivity;
 import com.fitnessgear.R;
+import com.fitnessgear.adapter.ListExercisesAdapter;
+import com.fitnessgear.adapter.LogExerciseAdapter;
 import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.LogExerciseItem;
 
 import android.app.Activity;
 import android.database.Cursor;
@@ -18,26 +22,63 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class LogExerciseDetail extends Activity {
-	
+
+	private ArrayList<LogExerciseItem> myListExerciseDetail;
+	private ArrayList<Integer> myListExerciseID;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//Get DayID
+
+		// Get DayID
 		setContentView(R.layout.activity_log_exercise_detail);
 		Bundle extra = getIntent().getExtras();
 		String dayID = extra.getString(Logs.DAYID);
-		Toast.makeText(getApplicationContext(), dayID, Toast.LENGTH_LONG).show();
-		//Select Database
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(getApplicationContext(), android.R.layout.simple_list_item_1);
-		Cursor c = MainActivity.db.rawQuery("Select distinct ExerciseId from Log_Exercise Where Day="+dayID, null);
-		while (c.moveToNext()) {
-			Toast.makeText(getApplicationContext(), "a", Toast.LENGTH_LONG).show();
-			adapter.add(DatabaseUltility.GetColumnValue(c, DatabaseUltility.ExerciseID));
+
+		// Select Database
+		// Load list exercise tu database
+		try {
+
+			// Khoi tao ArrayList tu LogExerciseItem class
+			myListExerciseDetail = new ArrayList<LogExerciseItem>();
+			myListExerciseID = new ArrayList<Integer>();
+
+			Cursor listExerciseCursor = MainActivity.db.rawQuery("Select * "
+					+ "FROM Log_Exercise Where Day = " + dayID, null);
+
+			while (listExerciseCursor.moveToNext()) {
+				myListExerciseDetail.add(new LogExerciseItem(dayID,
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor,
+								DatabaseUltility.ExerciseID), DatabaseUltility
+								.GetIntColumnValue(listExerciseCursor,
+										DatabaseUltility.Sets),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor,
+								DatabaseUltility.Reps), DatabaseUltility
+								.GetIntColumnValue(listExerciseCursor,
+										DatabaseUltility.Kg), DatabaseUltility
+								.GetIntColumnValue(listExerciseCursor,
+										DatabaseUltility.Interval)));
+			}
+			listExerciseCursor = MainActivity.db.rawQuery(
+					"Select Distinct ExerciseID from Log_Exercise Where Day= "
+							+ dayID, null);
+
+			while (listExerciseCursor.moveToNext()) {
+				myListExerciseID.add(DatabaseUltility.GetIntColumnValue(
+						listExerciseCursor, DatabaseUltility.ExerciseID));
+			}
+
+		} catch (Exception ex) {
+			Toast.makeText(getApplicationContext(), ex.getMessage(),
+					Toast.LENGTH_LONG).show();
 		}
-		
-		//Set adapter
-		ListView listview = (ListView) findViewById(R.id.listView1);
+
+		// adapter
+		LogExerciseAdapter adapter = new LogExerciseAdapter(
+				getApplicationContext(), myListExerciseDetail, myListExerciseID);
+
+		// Set adapter
+		ListView listview = (ListView) findViewById(R.id.listViewSet);
 		listview.setAdapter(adapter);
 	}
 

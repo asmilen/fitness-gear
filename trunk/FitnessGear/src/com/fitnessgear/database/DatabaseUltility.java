@@ -47,6 +47,8 @@ public class DatabaseUltility {
 	public static final String RepsMax = "RepsMax";
 	public static final String Kg = "Kg";
 	public static final String Rests = "Rests";
+	public static final String Interval = "Interval";
+	
 
 	// Exercises Table
 	public static final String ExerciseName = "ExerciseName";
