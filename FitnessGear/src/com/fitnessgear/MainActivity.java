@@ -120,7 +120,7 @@ public class MainActivity extends Activity {
         // set up the drawer's list view with items and click listener
         adapter = new NavigationDrawerAdapter(getApplicationContext(), navDrawerItems);
         mDrawerList.setAdapter(adapter);
-        mDrawerList.setSelector(R.drawable.list_select);
+        mDrawerList.setSelector(R.drawable.list_selector);
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);
@@ -189,7 +189,7 @@ public class MainActivity extends Activity {
 			fragment = new Report();
 			break;
 		case 5:
-			startActivity(new Intent(getApplicationContext(),Logs.class));
+			fragment = new Logs();
 			break;
 		case 6:
 			fragment = new Backup();
