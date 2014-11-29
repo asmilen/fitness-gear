@@ -55,7 +55,7 @@ public class ListExercisesAdapter extends BaseAdapter {
             LayoutInflater mInflater = (LayoutInflater)
                     mContext.getSystemService(Activity.LAYOUT_INFLATER_SERVICE);
             convertView = mInflater.inflate(R.layout.list_exercises_item, null);
-            holder.img1 = (ImageView) convertView.findViewById(R.id.imgExercise);
+            holder.img1 = (ImageView) convertView.findViewById(R.id.img1);
             holder.img2 = (ImageView) convertView.findViewById(R.id.img2);
             holder.description = (TextView) convertView.findViewById(R.id.description);
             convertView.setTag(holder);
