@@ -47,7 +47,7 @@ public class ExerciseDetail extends Activity {
 		// exerciseID = bundle.getString("ExerciseID");
 		//
 
-		img1 = (ImageView) findViewById(R.id.img1);
+		img1 = (ImageView) findViewById(R.id.imgExercise);
 		img2 = (ImageView) findViewById(R.id.img2);
 		exerciseName = (TextView) findViewById(R.id.exerciseName);
 		txtRating = (TextView) findViewById(R.id.txtRating);
