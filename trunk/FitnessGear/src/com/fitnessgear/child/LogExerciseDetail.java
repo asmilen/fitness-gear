@@ -8,7 +8,7 @@ import com.fitnessgear.R;
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.adapter.LogExerciseAdapter;
 import com.fitnessgear.database.DatabaseUltility;
-import com.fitnessgear.model.ListExercisesItem;
+
 import com.fitnessgear.model.LogExerciseItem;
 
 import android.app.Activity;

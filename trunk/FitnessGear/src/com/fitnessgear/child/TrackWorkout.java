@@ -7,7 +7,7 @@ import com.fitnessgear.R;
 import com.fitnessgear.R.id;
 import com.fitnessgear.R.layout;
 import com.fitnessgear.adapter.ViewPagerAdapter;
-import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.ExercisesItem;
 import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.model.LogExerciseList;
 import com.google.gson.Gson;
@@ -53,7 +53,7 @@ public class TrackWorkout extends ActionBarActivity {
 
 		// lay list exercise
 		Bundle extras = getIntent().getExtras();
-		adapter.myListExercise = (ArrayList<ListExercisesItem>) extras
+		adapter.myListExercise = (ArrayList<ExercisesItem>) extras
 				.getSerializable("listExercise");
 		adapter.workoutID = extras.getString("workoutID");
 
@@ -63,7 +63,7 @@ public class TrackWorkout extends ActionBarActivity {
 		String DayID = c.get(Calendar.DAY_OF_MONTH) + ""
 				+ (c.get(Calendar.MONTH)+1) + "" + c.get(Calendar.YEAR);
 
-		for (ListExercisesItem item : adapter.myListExercise) {
+		for (ExercisesItem item : adapter.myListExercise) {
 			int nSet = Integer.valueOf(item.getSets());
 			for (int i = 1; i <= nSet; i++) {
 				adapter.myLogExerciseList.add(new LogExerciseItem(DayID,

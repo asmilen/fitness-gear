@@ -7,7 +7,7 @@ import com.fitnessgear.R.id;
 import com.fitnessgear.R.layout;
 import com.fitnessgear.R.menu;
 import com.fitnessgear.adapter.ListExercisesAdapter;
-import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.ExercisesItem;
 import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService;
 
@@ -21,7 +21,7 @@ import android.widget.Toast;
 
 public class TrackWorkoutDialog extends Activity {
 
-	private ArrayList<ListExercisesItem> myListExercise;
+	private ArrayList<ExercisesItem> myListExercise;
 	private String message;
 	String workoutID;
 	
@@ -30,7 +30,7 @@ public class TrackWorkoutDialog extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_track_workout_dialog);
 		Bundle extras = getIntent().getExtras();
-		myListExercise = (ArrayList<ListExercisesItem>) extras.getSerializable("listExercise");
+		myListExercise = (ArrayList<ExercisesItem>) extras.getSerializable("listExercise");
 		workoutID = extras.getString("workoutID");
 		message = extras.getString("message");
 	}

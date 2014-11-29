@@ -24,11 +24,11 @@ import com.fitnessgear.R.layout;
 import com.fitnessgear.R.menu;
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.database.DatabaseUltility;
-import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.ExercisesItem;
 
 public class StartWorkOutDetail extends Activity {
 
-	private ArrayList<ListExercisesItem> myListExercise;
+	private ArrayList<ExercisesItem> myListExercise;
 	private ListExercisesAdapter adapter;
 	private String message;
 	String workoutID;
@@ -114,7 +114,7 @@ public class StartWorkOutDetail extends Activity {
 
 				// Khoi tao ArrayList tu ListExercisesItem class va String
 				// message
-				myListExercise = new ArrayList<ListExercisesItem>();
+				myListExercise = new ArrayList<ExercisesItem>();
 				message = "";
 				Cursor listExerciseCursor = MainActivity.db
 						.rawQuery(
@@ -127,7 +127,7 @@ public class StartWorkOutDetail extends Activity {
 				// Toast.LENGTH_LONG).show();
 				while (listExerciseCursor.moveToNext()) {
 					myListExercise
-							.add(new ListExercisesItem(
+							.add(new ExercisesItem(
 									DatabaseUltility
 											.GetIntColumnValue(
 													listExerciseCursor,

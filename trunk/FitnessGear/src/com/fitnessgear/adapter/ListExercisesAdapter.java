@@ -3,7 +3,7 @@ package com.fitnessgear.adapter;
 import java.util.ArrayList;
 
 import com.fitnessgear.R;
-import com.fitnessgear.model.ListExercisesItem;
+import com.fitnessgear.model.ExercisesItem;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,9 +20,9 @@ import android.widget.TextView;
 public class ListExercisesAdapter extends BaseAdapter {
 
 	private Context mContext;
-	private ArrayList<ListExercisesItem> listExercises = new ArrayList<ListExercisesItem>();
+	private ArrayList<ExercisesItem> listExercises = new ArrayList<ExercisesItem>();
 	
-	public ListExercisesAdapter(Context mContext,ArrayList<ListExercisesItem> listExercises) {
+	public ListExercisesAdapter(Context mContext,ArrayList<ExercisesItem> listExercises) {
 		// TODO Auto-generated constructor stub
 		this.mContext = mContext;
 		this.listExercises = listExercises;
