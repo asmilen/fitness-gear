@@ -1,6 +1,5 @@
 package com.fitnessgear;
 
-import com.fitnessgear.child.StartWorkOutDetail;
 import com.fitnessgear.database.DatabaseUltility;
 import java.lang.reflect.Array;
 import java.util.ArrayList;

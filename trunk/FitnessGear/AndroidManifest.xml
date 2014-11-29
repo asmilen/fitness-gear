@@ -30,8 +30,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".StartWorkOutDetail"
+            android:label="@string/title_activity_start_work_out_detail" >
+        </activity>
 
-        <service android:name=".sapservices.HelloAccessoryProviderService" >
+        <service android:name="com.fitnessgear.sapservices.HelloAccessoryProviderService" >
         </service>
 
         <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
@@ -53,11 +57,11 @@
             android:value="wgt" />
 
         <activity
-            android:name="com.fitnessgear.child.TrackWorkout"
+            android:name=".TrackWorkout"
             android:label="@string/title_activity_track_workout" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.ExerciseDetail"
+            android:name=".ExerciseDetail"
             android:label="@string/title_activity_exercise_detail" >
         </activity>
         <activity
@@ -65,13 +69,11 @@
             android:label="@string/title_activity_trackworkout_detail" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.TrackWorkoutDialog"
-            android:label="@string/title_activity_track_workout_dialog"
+            android:name=".TrackWorkoutDialog"
+            android:label="@string/title_activity_track_workout_dialog" 
             android:theme="@android:style/Theme.Dialog" >
+       
         </activity>
-        <activity android:name=".Logs" >
-        </activity>
-        <activity android:name=".child.StartWorkOutDetail"></activity>
     </application>
 
 </manifest>
