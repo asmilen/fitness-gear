@@ -30,10 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name="com.fitnessgear.child.StartWorkOutDetail"
-            android:label="@string/title_activity_start_work_out_detail" >
-        </activity>
 
         <service android:name=".sapservices.HelloAccessoryProviderService" >
         </service>
@@ -75,7 +71,7 @@
         </activity>
         <activity android:name=".Logs" >
         </activity>
-        <activity android:name=".child.LogExerciseDetail"></activity>
+        <activity android:name=".child.StartWorkOutDetail"></activity>
     </application>
 
 </manifest>
