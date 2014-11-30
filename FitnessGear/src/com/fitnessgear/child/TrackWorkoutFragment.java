@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.database.sqlite.SQLiteDatabase;
@@ -14,6 +16,9 @@ import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.util.Base64;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -39,7 +44,9 @@ import com.fitnessgear.model.LogExerciseList;
 import com.google.gson.Gson;
 
 public class TrackWorkoutFragment extends Fragment {
-
+	
+	
+	
 	public TrackWorkoutFragment() {
 		// TODO Auto-generated constructor stub
 	}
@@ -148,8 +155,7 @@ public class TrackWorkoutFragment extends Fragment {
 
 		// Button saveset
 
-		final SharedPreferences settings = PreferenceManager
-				.getDefaultSharedPreferences(getActivity());
+	
 		Button b = (Button) rootView.findViewById(R.id.buttonSaveSet);
 		b.setOnClickListener(new OnClickListener() {
 			@Override
@@ -163,11 +169,6 @@ public class TrackWorkoutFragment extends Fragment {
 						R.id.editTextKg);
 
 				if (!repsText.trim().equals("")) {
-
-					// Get listview and adapter
-					ListView list = (ListView) getView().findViewById(
-							R.id.listSetTrackWorkout);
-
 					// Set Reps,Kg, and get position
 					TextView textViewSetNumber1 = (TextView) getView()
 							.findViewById(R.id.textViewSetNumber);
@@ -175,17 +176,26 @@ public class TrackWorkoutFragment extends Fragment {
 					// Get * from string "SETS: * OF N"
 					String setNumber = textViewSetNumber1.getText().toString();
 					int position = Integer.parseInt(setNumber.charAt(6) + "");
-					textViewSetNumber1.setText(setNumber.substring(0, 6)
-							+ (position + 1) + setNumber.substring(7));
+					int total = Integer.parseInt(setNumber.charAt(11) + "");
+					if (position <= total) {
+						if (position < total)
+							textViewSetNumber1.setText(setNumber
+									.substring(0, 6)
+									+ (position + 1)
+									+ setNumber.substring(7));
 
-					// Update to list
-					updatelist(position, reps.getText().toString(), Kgs
-							.getText().toString(), eID);
+						// Get listview and adapter
+						ListView list = (ListView) getView().findViewById(
+								R.id.listSetTrackWorkout);
 
-					// Update listview
-					View row = mylistView.getChildAt(position - 1);
-					list.getAdapter().getView(position - 1, row, list);
+						// Update to list
+						updatelist(position, reps.getText().toString(), Kgs
+								.getText().toString(), eID);
 
+						// Update listview
+						View row = mylistView.getChildAt(position - 1);
+						list.getAdapter().getView(position - 1, row, list);
+					}
 				}
 			}
 
@@ -195,7 +205,8 @@ public class TrackWorkoutFragment extends Fragment {
 
 				// Get sharedpreference
 				try {
-
+					SharedPreferences settings = PreferenceManager
+							.getDefaultSharedPreferences(getActivity());
 					Gson gson = new Gson();
 					String json = settings.getString("logexerciselist", "");
 					LogExerciseList mylist = gson.fromJson(json,
@@ -236,24 +247,14 @@ public class TrackWorkoutFragment extends Fragment {
 					json = gson.toJson(mylist);
 					prefsEditor.putString("logexerciselist", json);
 					prefsEditor.commit();
-					DatabaseUltility.UpdateToLogExercise(mylist);
 				} catch (Exception ex) {
 					Toast.makeText(getActivity(), ex.getMessage(),
 							Toast.LENGTH_LONG).show();
 				}
-
-				// Insert
-				// String[] args = new String[] { DayID,
-				// item.getExerciseID() + "", position + "", reps, kg };
-				// String sql =
-				// "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?)";
-				//
-				// DataBaseHelper helper = new DataBaseHelper(getActivity());
-				// SQLiteDatabase db = helper.getWritableDatabase();
-				// db.execSQL(sql, args);
 			}
 		});
 
 		return rootView;
 	}
+
 }
