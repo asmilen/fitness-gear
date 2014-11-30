@@ -5,6 +5,6 @@
     <item
         android:id="@+id/trackworkoutsave"
         android:title="@string/save_database"
-        android:showAsAction="withText|ifRoom"/>
+        android:showAsAction="withText"/>
 
 </menu>

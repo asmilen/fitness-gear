@@ -7,6 +7,7 @@ import com.fitnessgear.R;
 import com.fitnessgear.R.id;
 import com.fitnessgear.R.layout;
 import com.fitnessgear.adapter.ViewPagerAdapter;
+import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.ExercisesItem;
 import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.model.LogExerciseList;
@@ -26,6 +27,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -129,18 +131,42 @@ public class TrackWorkout extends ActionBarActivity {
 		
 	}
 	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// TODO Auto-generated method stub
+		getMenuInflater().inflate(R.menu.track_workout_savetodatabase, menu);
+		return true;
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
+		// TODO Auto-generated method stub
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		// Back activity
-		if (id == android.R.id.home) {
-			this.finish();
-			return true;
+		
+		if (id == R.id.trackworkoutsave) {
+			new AlertDialog.Builder(TrackWorkout.this)
+		    .setTitle("Finish Editing")
+		    .setMessage("Are you sure you want to finish tracking workout?")
+		    .setPositiveButton(getResources().getString(R.string.fisish_editing), new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		            // continue with delete
+		        	SharedPreferences settings = PreferenceManager
+							.getDefaultSharedPreferences(getApplicationContext());
+					Gson gson = new Gson();
+					String json = settings.getString("logexerciselist", "");
+					LogExerciseList mylist = gson.fromJson(json,
+							LogExerciseList.class);
+					DatabaseUltility.UpdateToLogExercise(mylist);
+		        	TrackWorkout.this.finish();
+		        }
+		     })
+		    .setNegativeButton(getResources().getString(R.string.continue_editing), new DialogInterface.OnClickListener() {
+		        public void onClick(DialogInterface dialog, int which) { 
+		            // do nothing
+		        	dialog.cancel();
+		        }
+		     })
+		    .setIcon(android.R.drawable.ic_dialog_alert)
+		     .show();
 		}
 		return super.onOptionsItemSelected(item);
 	}
