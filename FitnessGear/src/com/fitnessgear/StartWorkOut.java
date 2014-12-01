@@ -146,7 +146,13 @@ public class StartWorkOut extends Fragment {
 
 		try {
 			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
-			Cursor c = MainActivity.db.rawQuery("Select * FROM Plan Where PlanID = 1", null);
+			Cursor c = MainActivity.db.rawQuery(
+					"Select * " +
+					"FROM Plan,Gender, FitnessLevel,Main_Goal " +
+					"WHERE MainGoal = MainGoalID " +
+					"AND Gender = GenderID " +
+					"AND FitnessLevel = FitnessLevelID " +
+					"AND PlanID = 1", null);
 
 			ArrayList<String> data = new ArrayList<String>();
 			while (c.moveToNext()) {
@@ -161,16 +167,16 @@ public class StartWorkOut extends Fragment {
 				// DatabaseUltility.PlanName)+"");
 				planName.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.PlanName));
 				author.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.CreatedBy));
-				txtGender.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.Gender));
-				txtMainGoal.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.MainGoal));
-				txtLevelTrain.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.FitnessLevel));
+				txtGender.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.GenderName));
+				txtMainGoal.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.MainGoalName));
+				txtLevelTrain.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.FitnessLevelName));
 				txtDateCreated.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.DateCreated));
 
-				txtTotalWeeks.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.TotalWeeks));
-				txtAverageDay.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.AveDay));
-				txtArverageTime.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.AveWorkoutTime));
-				txtTotalTime.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.TotalTimeAWeek));
-				txtTotalCadio.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.TotalCardioTime));
+				txtTotalWeeks.setText(""+DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalWeeks));
+				txtAverageDay.setText(""+DatabaseUltility.GetFloatColumnValue(c, DatabaseUltility.AveDay));
+				txtArverageTime.setText(""+DatabaseUltility.GetFloatColumnValue(c, DatabaseUltility.AveWorkoutTime)+"");
+				txtTotalTime.setText(""+DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalTimeAWeek));
+				txtTotalCadio.setText(""+DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalCardioTime));
 			}
 		} catch (SQLiteException ex) {
 			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
