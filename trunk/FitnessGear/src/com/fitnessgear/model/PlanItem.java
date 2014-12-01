@@ -1,28 +1,36 @@
 package com.fitnessgear.model;
+
 public class PlanItem {
-	private String PlanID;
+	private int PlanID;
 	private String PlanName;
-	private String MainGoal;
-	private String Gender;
-	private String FitnessLevel;
+	private int MainGoalID;
+	private String MainGoalName;
+	private int GenderID;
+	private String GenderName;
+	private int FitnessLevelID;
+	private String FitnessLevelName;
 	private String CreatedBy;
 	private String DateCreated;
-	private String TotalWeeks;
-	private String AveDay;
-	private String AveWorkoutTime;
-	private String TotalCardioTime;
-	private String TotalTimeAWeek;
+	private int TotalWeeks;
+	private float AveDay;
+	private float AveWorkoutTime;
+	private int TotalCardioTime;
+	private int TotalTimeAWeek;
 
-	public PlanItem(String planID, String planName, String mainGoal,
-			String gender, String fitnessLevel, String createdBy,
-			String dateCreated, String totalWeeks, String aveDay,
-			String aveWorkoutTime, String totalCardioTime, String totalTimeAWeek) {
+	public PlanItem(int planID, String planName, int mainGoalID,
+			String mainGoalName, int genderID, String genderName,
+			int fitnessLevelID, String fitnessLevelName, String createdBy,
+			String dateCreated, int totalWeeks, float aveDay,
+			float aveWorkoutTime, int totalCardioTime, int totalTimeAWeek) {
 		super();
 		PlanID = planID;
 		PlanName = planName;
-		MainGoal = mainGoal;
-		Gender = gender;
-		FitnessLevel = fitnessLevel;
+		MainGoalID = mainGoalID;
+		MainGoalName = mainGoalName;
+		GenderID = genderID;
+		GenderName = genderName;
+		FitnessLevelID = fitnessLevelID;
+		FitnessLevelName = fitnessLevelName;
 		CreatedBy = createdBy;
 		DateCreated = dateCreated;
 		TotalWeeks = totalWeeks;
@@ -32,11 +40,11 @@ public class PlanItem {
 		TotalTimeAWeek = totalTimeAWeek;
 	}
 
-	public String getPlanID() {
+	public int getPlanID() {
 		return PlanID;
 	}
 
-	public void setPlanID(String planID) {
+	public void setPlanID(int planID) {
 		PlanID = planID;
 	}
 
@@ -48,28 +56,52 @@ public class PlanItem {
 		PlanName = planName;
 	}
 
-	public String getMainGoal() {
-		return MainGoal;
+	public int getMainGoalID() {
+		return MainGoalID;
 	}
 
-	public void setMainGoal(String mainGoal) {
-		MainGoal = mainGoal;
+	public void setMainGoalID(int mainGoalID) {
+		MainGoalID = mainGoalID;
 	}
 
-	public String getGender() {
-		return Gender;
+	public String getMainGoalName() {
+		return MainGoalName;
 	}
 
-	public void setGender(String gender) {
-		Gender = gender;
+	public void setMainGoalName(String mainGoalName) {
+		MainGoalName = mainGoalName;
 	}
 
-	public String getFitnessLevel() {
-		return FitnessLevel;
+	public int getGenderID() {
+		return GenderID;
 	}
 
-	public void setFitnessLevel(String fitnessLevel) {
-		FitnessLevel = fitnessLevel;
+	public void setGenderID(int genderID) {
+		GenderID = genderID;
+	}
+
+	public String getGenderName() {
+		return GenderName;
+	}
+
+	public void setGenderName(String genderName) {
+		GenderName = genderName;
+	}
+
+	public int getFitnessLevelID() {
+		return FitnessLevelID;
+	}
+
+	public void setFitnessLevelID(int fitnessLevelID) {
+		FitnessLevelID = fitnessLevelID;
+	}
+
+	public String getFitnessLevelName() {
+		return FitnessLevelName;
+	}
+
+	public void setFitnessLevelName(String fitnessLevelName) {
+		FitnessLevelName = fitnessLevelName;
 	}
 
 	public String getCreatedBy() {
@@ -88,43 +120,43 @@ public class PlanItem {
 		DateCreated = dateCreated;
 	}
 
-	public String getTotalWeeks() {
+	public int getTotalWeeks() {
 		return TotalWeeks;
 	}
 
-	public void setTotalWeeks(String totalWeeks) {
+	public void setTotalWeeks(int totalWeeks) {
 		TotalWeeks = totalWeeks;
 	}
 
-	public String getAveDay() {
+	public float getAveDay() {
 		return AveDay;
 	}
 
-	public void setAveDay(String aveDay) {
+	public void setAveDay(float aveDay) {
 		AveDay = aveDay;
 	}
 
-	public String getAveWorkoutTime() {
+	public float getAveWorkoutTime() {
 		return AveWorkoutTime;
 	}
 
-	public void setAveWorkoutTime(String aveWorkoutTime) {
+	public void setAveWorkoutTime(float aveWorkoutTime) {
 		AveWorkoutTime = aveWorkoutTime;
 	}
 
-	public String getTotalCardioTime() {
+	public int getTotalCardioTime() {
 		return TotalCardioTime;
 	}
 
-	public void setTotalCardioTime(String totalCardioTime) {
+	public void setTotalCardioTime(int totalCardioTime) {
 		TotalCardioTime = totalCardioTime;
 	}
 
-	public String getTotalTimeAWeek() {
+	public int getTotalTimeAWeek() {
 		return TotalTimeAWeek;
 	}
 
-	public void setTotalTimeAWeek(String totalTimeAWeek) {
+	public void setTotalTimeAWeek(int totalTimeAWeek) {
 		TotalTimeAWeek = totalTimeAWeek;
 	}
 
