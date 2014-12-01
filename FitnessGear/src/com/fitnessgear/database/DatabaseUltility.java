@@ -50,7 +50,6 @@ public class DatabaseUltility {
 	public static final String Kg = "Kg";
 	public static final String Rests = "Rests";
 	public static final String Interval = "Interval";
-
 	// Exercises Table
 	public static final String ExerciseName = "ExerciseName";
 	public static final String ExerciseType = "ExerciseType";
@@ -59,11 +58,9 @@ public class DatabaseUltility {
 	public static final String Rating = "Rating";
 	public static final String Image1 = "Image1";
 	public static final String Image2 = "Image2";
-
 	// Log_Exercise Table
 	public static final String Reps = "Reps";
 	public static final String Day = "Day";
-
 	// Muscle Table
 	public static final String MuscleID = "MuscleID";
 	public static final String MuscleName = "MuscleName";
@@ -73,6 +70,15 @@ public class DatabaseUltility {
 	// ExerciseType Table
 	public static final String ExerciseTypeID = "ExerciseTypeID";
 	public static final String ExerciseTypeName = "ExerciseTypeName";
+	//Main_Goal table
+	public static final String MainGoalID = "MainGoalID";
+	public static final String MainGoalName = "MainGoalName";
+	//Gender Table
+	public static final String GenderID = "GenderID";
+	public static final String GenderName = "GenderName"; 
+	//Fitness Level Table
+	public static final String FitnessLevelID = "FitnessLevelID";
+	public static final String FitnessLevelName = "FitnessLevelName";
 
 	// Get data from table
 
