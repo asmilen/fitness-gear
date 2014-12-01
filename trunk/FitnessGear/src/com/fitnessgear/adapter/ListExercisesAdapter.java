@@ -1,6 +1,7 @@
 package com.fitnessgear.adapter;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 import com.fitnessgear.R;
 import com.fitnessgear.model.ExercisesItem;
@@ -20,12 +21,15 @@ import android.widget.TextView;
 public class ListExercisesAdapter extends BaseAdapter {
 
 	private Context mContext;
-	private ArrayList<ExercisesItem> listExercises = new ArrayList<ExercisesItem>();
+	private ArrayList<ExercisesItem> listExercises;
+	private ArrayList<ExercisesItem> filterExercise;
 	
 	public ListExercisesAdapter(Context mContext,ArrayList<ExercisesItem> listExercises) {
 		// TODO Auto-generated constructor stub
 		this.mContext = mContext;
 		this.listExercises = listExercises;
+		this.filterExercise = new ArrayList<ExercisesItem>();
+		this.filterExercise.addAll(listExercises);
 	}
 
 	@Override
@@ -83,7 +87,7 @@ public class ListExercisesAdapter extends BaseAdapter {
         holder.img2.setImageBitmap(decodedByte);
         
         //Set Text for TextView description
-        holder.description.setText(listExercises.get(position).getDescription());
+        holder.description.setText(listExercises.get(position).getExerciseName());
 		return convertView;
 	}
 	
@@ -92,5 +96,29 @@ public class ListExercisesAdapter extends BaseAdapter {
 		public ImageView img2;
 		public TextView description;
 	}
+	
+	// Filter Class
+    public void filter(String charText) {
+        charText = charText.toLowerCase(Locale.getDefault());
+        listExercises.clear();
+        if (charText.length() == 0) {
+            listExercises.addAll(filterExercise);
+        } 
+        else 
+        {
+            for (ExercisesItem exerciseItem : filterExercise) 
+            {
+                if (exerciseItem.getExerciseName().toLowerCase(Locale.getDefault()).contains(charText)) 
+                {
+                    listExercises.add(exerciseItem);
+                }
+                else if (exerciseItem.getExerciseType() == 1) 
+                {
+                    listExercises.add(exerciseItem);
+                }
+            }
+        }
+        notifyDataSetChanged();
+    }
 
 }
