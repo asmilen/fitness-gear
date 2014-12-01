@@ -21,11 +21,12 @@ public class ExercisesItem  implements Serializable{
 	private int repsmax;
 	private int kg;
 	private int rests;
+	private int interval;
 	
 	public ExercisesItem(int exerciseID, String exerciseName,
 			int exerciseType, int muscleTarget, int equipment,
 			float rating, String img1, String img2, String description,
-			int sets, int repsmin,int repsmax, int kg, int rests) {
+			int sets, int repsmin,int repsmax, int kg, int rests,int interval) {
 		super();
 		this.exerciseID = exerciseID;
 		this.exerciseName = exerciseName;
@@ -41,6 +42,7 @@ public class ExercisesItem  implements Serializable{
 		this.repsmax = repsmax;
 		this.kg = kg;
 		this.rests = rests;
+		this.interval = interval;
 	}
 
 	public ExercisesItem(int exerciseID, String exerciseName,
@@ -56,6 +58,14 @@ public class ExercisesItem  implements Serializable{
 		this.img1 = img1;
 		this.img2 = img2;
 		this.description = description;
+	}
+
+	public int getInterval() {
+		return interval;
+	}
+
+	public void setInterval(int interval) {
+		this.interval = interval;
 	}
 
 	public int getExerciseID() {
