@@ -139,7 +139,8 @@ public class StartWorkOutDetail extends Activity {
 							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.RepsMin),
 							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.RepsMax),
 							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Kg),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Rests)));
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Rests),
+							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Interval)));
 
 					int aveReps = (Integer.valueOf(myListExercise.get(i)
 							.getRepsmin()) + Integer.valueOf(myListExercise
@@ -151,7 +152,8 @@ public class StartWorkOutDetail extends Activity {
 							+ myListExercise.get(i).getSets() + "."
 							+ String.valueOf(aveReps) + "."
 							+ myListExercise.get(i).getKg() + "."
-							+ myListExercise.get(i).getRests() + ";";
+							+ myListExercise.get(i).getRests() + "."
+							+ myListExercise.get(i).getInterval()+";";
 
 					// myListExercise.add(ExerciseID);
 					i++;
