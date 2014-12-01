@@ -43,6 +43,7 @@
     <string name="title_activity_test">Test</string>
     <string name="track_workout">Track Workout</string>
     <string name="save_database">Save</string>
+    <string name="add_plan">+</string>
     <string name="title_activity_exercise_detail">ExerciseDetail</string>
     <string name="title_activity_track_workout_dialog">TrackWorkoutDialog</string>
     <string name="title_activity_log_exercise_detail">LogExerciseDetail</string>
