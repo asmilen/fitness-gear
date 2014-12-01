@@ -40,26 +40,11 @@ public class LogExerciseDetail extends Activity {
 		try {
 
 			// Khoi tao ArrayList tu LogExerciseItem class
-			myListExerciseDetail = new ArrayList<LogExerciseItem>();
+			myListExerciseDetail = DatabaseUltility.GetListFromLogExercise(dayID);
 			myListExerciseID = new ArrayList<Integer>();
 
-			Cursor listExerciseCursor = MainActivity.db.rawQuery("Select * "
-					+ "FROM Log_Exercise Where Day = " + dayID, null);
-
-			while (listExerciseCursor.moveToNext()) {
-				myListExerciseDetail.add(new LogExerciseItem(dayID,
-						DatabaseUltility.GetIntColumnValue(listExerciseCursor,
-								DatabaseUltility.ExerciseID), DatabaseUltility
-								.GetIntColumnValue(listExerciseCursor,
-										DatabaseUltility.Sets),
-						DatabaseUltility.GetIntColumnValue(listExerciseCursor,
-								DatabaseUltility.Reps), DatabaseUltility
-								.GetIntColumnValue(listExerciseCursor,
-										DatabaseUltility.Kg), DatabaseUltility
-								.GetIntColumnValue(listExerciseCursor,
-										DatabaseUltility.Interval)));
-			}
-			listExerciseCursor = MainActivity.db.rawQuery(
+			
+			Cursor listExerciseCursor = MainActivity.db.rawQuery(
 					"Select Distinct ExerciseID from Log_Exercise Where Day= "
 							+ dayID, null);
 

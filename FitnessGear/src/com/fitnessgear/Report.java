@@ -1,18 +1,26 @@
 package com.fitnessgear;
 
-
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
+import com.fitnessgear.database.DatabaseUltility;
+
 import lecho.lib.hellocharts.gesture.ZoomType;
+import lecho.lib.hellocharts.model.ArcValue;
 import lecho.lib.hellocharts.model.Axis;
+import lecho.lib.hellocharts.model.AxisValue;
 import lecho.lib.hellocharts.model.Column;
 import lecho.lib.hellocharts.model.ColumnChartData;
 import lecho.lib.hellocharts.model.ColumnValue;
+import lecho.lib.hellocharts.model.PieChartData;
 import lecho.lib.hellocharts.util.Utils;
 import lecho.lib.hellocharts.view.Chart;
 import lecho.lib.hellocharts.view.ColumnChartView;
+import lecho.lib.hellocharts.view.PieChartView;
+import lecho.lib.hellocharts.view.PieChartView.PieChartOnValueTouchListener;
 import android.app.Fragment;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -27,30 +35,107 @@ public class Report extends Fragment {
 	public Report() {
 		// TODO Auto-generated constructor stub
 	}
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.fragment_report, container, false);
-		getFragmentManager().beginTransaction().add(R.id.container, new PlaceholderFragment()).commit();
+		View rootView = inflater.inflate(R.layout.fragment_report, container,
+				false);
+		getFragmentManager().beginTransaction().add(R.id.container, new ColumnChartFragment()).commit();
+		getFragmentManager().beginTransaction().add(R.id.containerpiechart, new PlaceholderFragment()).commit();
 		return rootView;
 	}
-	
-	public static class PlaceholderFragment extends Fragment {
 
-		private static final int DEFAULT_DATA = 0;
-		private static final int SUBCOLUMNS_DATA = 1;
-		private static final int STACKED_DATA = 2;
-		private static final int NEGATIVE_SUBCOLUMNS_DATA = 3;
-		private static final int NEGATIVE_STACKED_DATA = 4;
+	public static class ColumnChartFragment extends Fragment {
 
+		final private int NUMBER_OF_COLUMN = 14; // 2 weeks
 		private ColumnChartView chart;
 		private ColumnChartData data;
-		private boolean hasAxes = true;
-		private boolean hasAxesNames = true;
-		private boolean hasLabels = false;
+		private boolean hasLabels = true;
 		private boolean hasLabelForSelected = false;
-		private int dataType = DEFAULT_DATA;
+
+		public ColumnChartFragment() {
+		}
+
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
+			setHasOptionsMenu(true);
+			View rootView = inflater.inflate(R.layout.fragment_column_chart,
+					container, false);
+
+			chart = (ColumnChartView) rootView.findViewById(R.id.chart);
+			chart.setValueSelectionEnabled(hasLabelForSelected);
+			generateDefaultData();
+
+			return rootView;
+		}
+
+		private void generateDefaultData() {
+			// Get day
+			Calendar c = Calendar.getInstance();
+
+			int numSubcolumns = 1;
+			int numColumns = NUMBER_OF_COLUMN;
+			// Column can have many subcolumns, here by default I use 1
+			// subcolumn in each of 8 columns.
+			List<Column> columns = new ArrayList<Column>();
+			List<ColumnValue> values;
+			for (int i = 0; i < numColumns; ++i) {
+
+				values = new ArrayList<ColumnValue>();
+				for (int j = 0; j < numSubcolumns; ++j) {
+					String DayID = (c.get(Calendar.DAY_OF_MONTH) - (numColumns
+							- i - 1))
+							+ ""
+							+ (c.get(Calendar.MONTH) + 1)
+							+ ""
+							+ c.get(Calendar.YEAR);
+					values.add(new ColumnValue(DatabaseUltility
+							.GetTotalKgsDay(DayID), Utils.COLOR_VIOLET));
+				}
+
+				Column column = new Column(values);
+				column.setHasLabels(hasLabels);
+				column.setHasLabelsOnlyForSelected(hasLabelForSelected);
+				columns.add(column);
+			}
+
+			// Set axis X,Y
+			data = new ColumnChartData(columns);
+
+			ArrayList<AxisValue> mylist = new ArrayList<AxisValue>();
+			for (int i = 0; i < numColumns; i++)
+				mylist.add(new AxisValue(i + 1));
+
+			Axis axisX = new Axis();
+			axisX.setName("Weight Lifted Over Time(14 Days)");
+			axisX.setValues(mylist);
+			data.setAxisXBottom(axisX);
+
+			chart.setColumnChartData(data);
+
+		}
+
+	}
+	
+	/**
+	 * A fragment containing a pie chart.
+	 */
+	public static class PlaceholderFragment extends Fragment {
+
+		private PieChartView chart;
+		private PieChartData data;
+
+		private boolean hasLabels = false;
+		private boolean hasLabelsOutside = false;
+		private boolean hasCenterCircle = false;
+		private boolean hasCenterText1 = false;
+		private boolean hasCenterText2 = false;
+		private boolean isExploaded = false;
+		private boolean hasArcSeparated = false;
+		private boolean hasLabelForSelected = false;
 
 		public PlaceholderFragment() {
 		}
@@ -58,9 +143,9 @@ public class Report extends Fragment {
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 			setHasOptionsMenu(true);
-			View rootView = inflater.inflate(R.layout.fragment_column_chart, container, false);
+			View rootView = inflater.inflate(R.layout.fragment_pie_chart, container, false);
 
-			chart = (ColumnChartView) rootView.findViewById(R.id.chart);
+			chart = (PieChartView) rootView.findViewById(R.id.pieChart);
 			chart.setOnValueTouchListener(new ValueTouchListener());
 
 			generateData();
@@ -71,7 +156,7 @@ public class Report extends Fragment {
 		// MENU
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-			inflater.inflate(R.menu.column_chart, menu);
+			inflater.inflate(R.menu.pie_chart, menu);
 		}
 
 		@Override
@@ -82,23 +167,44 @@ public class Report extends Fragment {
 				generateData();
 				return true;
 			}
-			if (id == R.id.action_subcolumns) {
-				dataType = SUBCOLUMNS_DATA;
+			if (id == R.id.action_explode) {
+				explodeChart();
+				return true;
+			}
+			if (id == R.id.action_single_arc_separation) {
+				separateSingleArc();
+				return true;
+			}
+			if (id == R.id.action_center_circle) {
+				hasCenterCircle = !hasCenterCircle;
+				if (!hasCenterCircle) {
+					hasCenterText1 = false;
+					hasCenterText2 = false;
+				}
+
 				generateData();
 				return true;
 			}
-			if (id == R.id.action_stacked) {
-				dataType = STACKED_DATA;
+			if (id == R.id.action_center_text1) {
+				hasCenterText1 = !hasCenterText1;
+
+				if (hasCenterText1) {
+					hasCenterCircle = true;
+				}
+
+				hasCenterText2 = false;
+
 				generateData();
 				return true;
 			}
-			if (id == R.id.action_negative_subcolumns) {
-				dataType = NEGATIVE_SUBCOLUMNS_DATA;
-				generateData();
-				return true;
-			}
-			if (id == R.id.action_negative_stacked) {
-				dataType = NEGATIVE_STACKED_DATA;
+			if (id == R.id.action_center_text2) {
+				hasCenterText2 = !hasCenterText2;
+
+				if (hasCenterText2) {
+					hasCenterText1 = true;// text 2 need text 1 to by also drawn.
+					hasCenterCircle = true;
+				}
+
 				generateData();
 				return true;
 			}
@@ -106,12 +212,8 @@ public class Report extends Fragment {
 				toggleLabels();
 				return true;
 			}
-			if (id == R.id.action_toggle_axes) {
-				toggleAxes();
-				return true;
-			}
-			if (id == R.id.action_toggle_axes_names) {
-				toggleAxesNames();
+			if (id == R.id.action_toggle_labels_outside) {
+				toggleLabelsOutside();
 				return true;
 			}
 			if (id == R.id.action_animate) {
@@ -121,275 +223,106 @@ public class Report extends Fragment {
 			}
 			if (id == R.id.action_toggle_selection_mode) {
 				toggleLabelForSelected();
-
 				Toast.makeText(getActivity(),
 						"Selection mode set to " + chart.isValueSelectionEnabled() + " select any point.",
 						Toast.LENGTH_SHORT).show();
-				return true;
-			}
-			if (id == R.id.action_toggle_touch_zoom) {
-				chart.setZoomEnabled(!chart.isZoomEnabled());
-				Toast.makeText(getActivity(), "IsZoomEnabled " + chart.isZoomEnabled(), Toast.LENGTH_SHORT).show();
-				return true;
-			}
-			if (id == R.id.action_zoom_both) {
-				chart.setZoomType(ZoomType.HORIZONTAL_AND_VERTICAL);
-				return true;
-			}
-			if (id == R.id.action_zoom_horizontal) {
-				chart.setZoomType(ZoomType.HORIZONTAL);
-				return true;
-			}
-			if (id == R.id.action_zoom_vertical) {
-				chart.setZoomType(ZoomType.VERTICAL);
 				return true;
 			}
 			return super.onOptionsItemSelected(item);
 		}
 
 		private void reset() {
-			hasAxes = true;
-			hasAxesNames = true;
+			chart.setCircleFillRatio(1.0f);
 			hasLabels = false;
+			hasLabelsOutside = false;
+			hasCenterCircle = false;
+			hasCenterText1 = false;
+			hasCenterText2 = false;
+			isExploaded = false;
+			hasArcSeparated = false;
 			hasLabelForSelected = false;
-			dataType = DEFAULT_DATA;
-			chart.setValueSelectionEnabled(hasLabelForSelected);
-
-		}
-
-		private void generateDefaultData() {
-			int numSubcolumns = 1;
-			int numColumns = 8;
-			// Column can have many subcolumns, here by default I use 1 subcolumn in each of 8 columns.
-			List<Column> columns = new ArrayList<Column>();
-			List<ColumnValue> values;
-			for (int i = 0; i < numColumns; ++i) {
-
-				values = new ArrayList<ColumnValue>();
-				for (int j = 0; j < numSubcolumns; ++j) {
-					values.add(new ColumnValue((float) Math.random() * 50f + 5, Utils.pickColor()));
-				}
-
-				Column column = new Column(values);
-				column.setHasLabels(hasLabels);
-				column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-				columns.add(column);
-			}
-
-			data = new ColumnChartData(columns);
-
-			if (hasAxes) {
-				Axis axisX = new Axis();
-				Axis axisY = new Axis().setHasLines(true);
-				if (hasAxesNames) {
-					axisX.setName("Axis X");
-					axisY.setName("Axis Y");
-				}
-				data.setAxisXBottom(axisX);
-				data.setAxisYLeft(axisY);
-			} else {
-				data.setAxisXBottom(null);
-				data.setAxisYLeft(null);
-			}
-
-			chart.setColumnChartData(data);
-
-		}
-
-		/**
-		 * Generates columns with subcolumns, columns have larger separation than subcolumns.
-		 */
-		private void generateSubcolumnsData() {
-			int numSubcolumns = 4;
-			int numColumns = 4;
-			// Column can have many subcolumns, here I use 4 subcolumn in each of 8 columns.
-			List<Column> columns = new ArrayList<Column>();
-			List<ColumnValue> values;
-			for (int i = 0; i < numColumns; ++i) {
-
-				values = new ArrayList<ColumnValue>();
-				for (int j = 0; j < numSubcolumns; ++j) {
-					values.add(new ColumnValue((float) Math.random() * 50f + 5, Utils.pickColor()));
-				}
-
-				Column column = new Column(values);
-				column.setHasLabels(hasLabels);
-				column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-				columns.add(column);
-			}
-
-			data = new ColumnChartData(columns);
-
-			if (hasAxes) {
-				Axis axisX = new Axis();
-				Axis axisY = new Axis().setHasLines(true);
-				if (hasAxesNames) {
-					axisX.setName("Axis X");
-					axisY.setName("Axis Y");
-				}
-				data.setAxisXBottom(axisX);
-				data.setAxisYLeft(axisY);
-			} else {
-				data.setAxisXBottom(null);
-				data.setAxisYLeft(null);
-			}
-
-			chart.setColumnChartData(data);
-
-		}
-
-		/**
-		 * Generates columns with stacked subcolumns.
-		 */
-		private void generateStackedData() {
-			int numSubcolumns = 4;
-			int numColumns = 8;
-			// Column can have many stacked subcolumns, here I use 4 stacke subcolumn in each of 4 columns.
-			List<Column> columns = new ArrayList<Column>();
-			List<ColumnValue> values;
-			for (int i = 0; i < numColumns; ++i) {
-
-				values = new ArrayList<ColumnValue>();
-				for (int j = 0; j < numSubcolumns; ++j) {
-					values.add(new ColumnValue((float) Math.random() * 20f + 5, Utils.pickColor()));
-				}
-
-				Column column = new Column(values);
-				column.setHasLabels(hasLabels);
-				column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-				columns.add(column);
-			}
-
-			data = new ColumnChartData(columns);
-
-			// Set stacked flag.
-			data.setStacked(true);
-
-			if (hasAxes) {
-				Axis axisX = new Axis();
-				Axis axisY = new Axis().setHasLines(true);
-				if (hasAxesNames) {
-					axisX.setName("Axis X");
-					axisY.setName("Axis Y");
-				}
-				data.setAxisXBottom(axisX);
-				data.setAxisYLeft(axisY);
-			} else {
-				data.setAxisXBottom(null);
-				data.setAxisYLeft(null);
-			}
-
-			chart.setColumnChartData(data);
-		}
-
-		private void generateNegativeSubcolumnsData() {
-
-			int numSubcolumns = 4;
-			int numColumns = 4;
-			List<Column> columns = new ArrayList<Column>();
-			List<ColumnValue> values;
-			for (int i = 0; i < numColumns; ++i) {
-
-				values = new ArrayList<ColumnValue>();
-				for (int j = 0; j < numSubcolumns; ++j) {
-					int sign = getSign();
-					values.add(new ColumnValue((float) Math.random() * 50f * sign + 5 * sign, Utils.pickColor()));
-				}
-
-				Column column = new Column(values);
-				column.setHasLabels(hasLabels);
-				column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-				columns.add(column);
-			}
-
-			data = new ColumnChartData(columns);
-
-			if (hasAxes) {
-				Axis axisX = new Axis();
-				Axis axisY = new Axis().setHasLines(true);
-				if (hasAxesNames) {
-					axisX.setName("Axis X");
-					axisY.setName("Axis Y");
-				}
-				data.setAxisXBottom(axisX);
-				data.setAxisYLeft(axisY);
-			} else {
-				data.setAxisXBottom(null);
-				data.setAxisYLeft(null);
-			}
-
-			chart.setColumnChartData(data);
-		}
-
-		private void generateNegativeStackedData() {
-
-			int numSubcolumns = 4;
-			int numColumns = 8;
-			// Column can have many stacked subcolumns, here I use 4 stacke subcolumn in each of 4 columns.
-			List<Column> columns = new ArrayList<Column>();
-			List<ColumnValue> values;
-			for (int i = 0; i < numColumns; ++i) {
-
-				values = new ArrayList<ColumnValue>();
-				for (int j = 0; j < numSubcolumns; ++j) {
-					int sign = getSign();
-					values.add(new ColumnValue((float) Math.random() * 20f * sign + 5 * sign, Utils.pickColor()));
-				}
-
-				Column column = new Column(values);
-				column.setHasLabels(hasLabels);
-				column.setHasLabelsOnlyForSelected(hasLabelForSelected);
-				columns.add(column);
-			}
-
-			data = new ColumnChartData(columns);
-
-			// Set stacked flag.
-			data.setStacked(true);
-
-			if (hasAxes) {
-				Axis axisX = new Axis();
-				Axis axisY = new Axis().setHasLines(true);
-				if (hasAxesNames) {
-					axisX.setName("Axis X");
-					axisY.setName("Axis Y");
-				}
-				data.setAxisXBottom(axisX);
-				data.setAxisYLeft(axisY);
-			} else {
-				data.setAxisXBottom(null);
-				data.setAxisYLeft(null);
-			}
-
-			chart.setColumnChartData(data);
-		}
-
-		private int getSign() {
-			int[] sign = new int[] { -1, 1 };
-			return sign[Math.round((float) Math.random())];
 		}
 
 		private void generateData() {
-			switch (dataType) {
-			case DEFAULT_DATA:
-				generateDefaultData();
-				break;
-			case SUBCOLUMNS_DATA:
-				generateSubcolumnsData();
-				break;
-			case STACKED_DATA:
-				generateStackedData();
-				break;
-			case NEGATIVE_SUBCOLUMNS_DATA:
-				generateNegativeSubcolumnsData();
-				break;
-			case NEGATIVE_STACKED_DATA:
-				generateNegativeStackedData();
-				break;
-			default:
-				generateDefaultData();
-				break;
+			int numValues = 6;
+
+			List<ArcValue> values = new ArrayList<ArcValue>();
+			for (int i = 0; i < numValues; ++i) {
+				ArcValue arcValue = new ArcValue((float) Math.random() * 30 + 15, Utils.pickColor());
+
+				if (isExploaded) {
+					arcValue.setArcSpacing(24);
+				}
+
+				if (hasArcSeparated && i == 0) {
+					arcValue.setArcSpacing(32);
+				}
+
+				values.add(arcValue);
 			}
+
+			data = new PieChartData(values);
+			data.setHasLabels(hasLabels);
+			data.setHasLabelsOnlyForSelected(hasLabelForSelected);
+			data.setHasLabelsOutside(hasLabelsOutside);
+			data.setHasCenterCircle(hasCenterCircle);
+
+			if (hasCenterText1) {
+				data.setCenterText1("Hello!");
+
+				// Get roboto-italic font.
+				Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Italic.ttf");
+				data.setCenterText1Typeface(tf);
+
+				// Get font size from dimens.xml and convert it to sp(library uses sp values).
+				data.setCenterText1FontSize(Utils.px2sp(getResources().getDisplayMetrics().scaledDensity,
+						(int) getResources().getDimension(R.dimen.pie_chart_text1_size)));
+			}
+
+			if (hasCenterText2) {
+				data.setCenterText2("Charts (Roboto Italic)");
+
+				Typeface tf = Typeface.createFromAsset(getActivity().getAssets(), "Roboto-Italic.ttf");
+
+				data.setCenterText2Typeface(tf);
+				data.setCenterText2FontSize(Utils.px2sp(getResources().getDisplayMetrics().scaledDensity,
+						(int) getResources().getDimension(R.dimen.pie_chart_text2_size)));
+			}
+
+			chart.setPieChartData(data);
+		}
+
+		private void explodeChart() {
+			isExploaded = !isExploaded;
+			generateData();
+
+		}
+
+		private void separateSingleArc() {
+			hasArcSeparated = !hasArcSeparated;
+			if (hasArcSeparated) {
+				isExploaded = false;
+			}
+			generateData();
+		}
+
+		private void toggleLabelsOutside() {
+			// has labels have to be true:P
+			hasLabelsOutside = !hasLabelsOutside;
+			if (hasLabelsOutside) {
+				hasLabels = true;
+				hasLabelForSelected = false;
+				chart.setValueSelectionEnabled(hasLabelForSelected);
+			}
+
+			if (hasLabelsOutside) {
+				chart.setCircleFillRatio(0.7f);
+			} else {
+				chart.setCircleFillRatio(1.0f);
+			}
+
+			generateData();
+
 		}
 
 		private void toggleLabels() {
@@ -398,6 +331,12 @@ public class Report extends Fragment {
 			if (hasLabels) {
 				hasLabelForSelected = false;
 				chart.setValueSelectionEnabled(hasLabelForSelected);
+
+				if (hasLabelsOutside) {
+					chart.setCircleFillRatio(0.7f);
+				} else {
+					chart.setCircleFillRatio(1.0f);
+				}
 			}
 
 			generateData();
@@ -405,23 +344,19 @@ public class Report extends Fragment {
 
 		private void toggleLabelForSelected() {
 			hasLabelForSelected = !hasLabelForSelected;
+
 			chart.setValueSelectionEnabled(hasLabelForSelected);
 
 			if (hasLabelForSelected) {
 				hasLabels = false;
+				hasLabelsOutside = false;
+
+				if (hasLabelsOutside) {
+					chart.setCircleFillRatio(0.7f);
+				} else {
+					chart.setCircleFillRatio(1.0f);
+				}
 			}
-
-			generateData();
-		}
-
-		private void toggleAxes() {
-			hasAxes = !hasAxes;
-
-			generateData();
-		}
-
-		private void toggleAxesNames() {
-			hasAxesNames = !hasAxesNames;
 
 			generateData();
 		}
@@ -431,17 +366,15 @@ public class Report extends Fragment {
 		 * method(don't confuse with View.animate()).
 		 */
 		private void prepareDataAnimation() {
-			for (Column column : data.getColumns()) {
-				for (ColumnValue value : column.getValues()) {
-					value.setTarget((float) Math.random() * 100);
-				}
+			for (ArcValue value : data.getValues()) {
+				value.setTarget((float) Math.random() * 30 + 15);
 			}
 		}
 
-		private class ValueTouchListener implements ColumnChartView.ColumnChartOnValueTouchListener {
+		private class ValueTouchListener implements PieChartOnValueTouchListener {
 
 			@Override
-			public void onValueTouched(int selectedLine, int selectedValue, ColumnValue value) {
+			public void onValueTouched(int selectedArc, ArcValue value) {
 				Toast.makeText(getActivity(), "Selected: " + value, Toast.LENGTH_SHORT).show();
 
 			}
@@ -453,9 +386,7 @@ public class Report extends Fragment {
 			}
 
 		}
-
 	}
 }
-
 
 

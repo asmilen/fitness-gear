@@ -69,6 +69,10 @@
             android:label="@string/title_activity_track_workout_dialog"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
+        <activity
+            android:name="com.fitnessgear.child.LogExerciseDetail"
+            android:label="@string/title_activity_log_exercise_detail" >
+        </activity>
         <activity android:name=".Logs" >
         </activity>
         <activity android:name=".child.StartWorkOutDetail"></activity>
