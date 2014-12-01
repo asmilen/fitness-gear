@@ -9,6 +9,8 @@ import com.fitnessgear.model.LogExerciseList;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
+import android.widget.Toast;
 
 // class dung de define ten cac cot trong database va lay du lieu tu database
 public class DatabaseUltility {
@@ -30,7 +32,7 @@ public class DatabaseUltility {
 	public static final String AveWorkoutTime = "AveWorkoutTime";
 	public static final String TotalTimeAWeek = "TotalTimeAWeek";
 	public static final String TotalCardioTime = "TotalCardioTime";
-	
+
 	// Workout Table
 	public static final String WorkoutID = "WorkoutID";
 	public static final String WorkoutName = "WorkoutName";
@@ -48,7 +50,6 @@ public class DatabaseUltility {
 	public static final String Kg = "Kg";
 	public static final String Rests = "Rests";
 	public static final String Interval = "Interval";
-	
 
 	// Exercises Table
 	public static final String ExerciseName = "ExerciseName";
@@ -59,22 +60,19 @@ public class DatabaseUltility {
 	public static final String Image1 = "Image1";
 	public static final String Image2 = "Image2";
 
-	
-	//Log_Exercise Table
+	// Log_Exercise Table
 	public static final String Reps = "Reps";
 	public static final String Day = "Day";
-	
 
-	//Muscle Table
+	// Muscle Table
 	public static final String MuscleID = "MuscleID";
 	public static final String MuscleName = "MuscleName";
-	//Equipment Table
+	// Equipment Table
 	public static final String EquipmentID = "EquipmentID";
 	public static final String EquipmentName = "EquipmentName";
-	//ExerciseType Table
+	// ExerciseType Table
 	public static final String ExerciseTypeID = "ExerciseTypeID";
 	public static final String ExerciseTypeName = "ExerciseTypeName";
-	
 
 	// Get data from table
 
@@ -94,7 +92,7 @@ public class DatabaseUltility {
 			return 0;
 		}
 	}
-	
+
 	public static float GetFloatColumnValue(Cursor cur, String ColumnName) {
 		try {
 			return cur.getFloat((cur.getColumnIndex(ColumnName)));
@@ -102,23 +100,58 @@ public class DatabaseUltility {
 			return 0;
 		}
 	}
-	
-	//Update data to Log_exercise
-	public static void UpdateToLogExercise(LogExerciseList mylist)
-	{
-		ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
-		for (LogExerciseItem item:list)
-		{
-			//Delete if exist
-			
-			// Insert
-			 String[] args = new String[] { item.getDay(),
-			 item.getExerciseID() + "", item.getSets() + "", item.getReps()+"", item.getKgs()+"" };
-			 String sql =
-			 "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?)";
-			
-			 SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
-			 db.execSQL(sql, args);
+
+	// Update data to Log_exercise
+	public static void UpdateToLogExercise(LogExerciseList mylist) {
+		try {
+			ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
+			for (LogExerciseItem item : list) {
+				// Delete if exist
+
+				// Insert
+				String[] args = new String[] { item.getDay(),
+						item.getExerciseID() + "", item.getSets() + "",
+						item.getReps() + "", item.getKgs() + "",
+						item.getInterval() + "" };
+				String sql = "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?,?)";
+
+				SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+				db.execSQL(sql, args);
+			}
+		} catch (Exception ex) {
+			Log.e("error", ex.getMessage());
 		}
+	}
+
+	// Get List From Log_exercise
+	public static ArrayList<LogExerciseItem> GetListFromLogExercise(String DayID) {
+		ArrayList<LogExerciseItem> myListExerciseDetail = new ArrayList<LogExerciseItem>();
+		Cursor listExerciseCursor = MainActivity.db.rawQuery("Select * "
+				+ "FROM Log_Exercise Where Day = " + DayID, null);
+
+		while (listExerciseCursor.moveToNext()) {
+			myListExerciseDetail.add(new LogExerciseItem(DayID,
+					DatabaseUltility.GetIntColumnValue(listExerciseCursor,
+							DatabaseUltility.ExerciseID), DatabaseUltility
+							.GetIntColumnValue(listExerciseCursor,
+									DatabaseUltility.Sets), DatabaseUltility
+							.GetIntColumnValue(listExerciseCursor,
+									DatabaseUltility.Reps), DatabaseUltility
+							.GetIntColumnValue(listExerciseCursor,
+									DatabaseUltility.Kg), DatabaseUltility
+							.GetIntColumnValue(listExerciseCursor,
+									DatabaseUltility.Interval)));
+		}
+		return myListExerciseDetail;
+
+	}
+
+	// Get total kg a day
+	public static float GetTotalKgsDay(String DayID) {
+		int total = 0;
+		ArrayList<LogExerciseItem> mylist = GetListFromLogExercise(DayID);
+		for (LogExerciseItem item : mylist)
+			total += item.getKgs();
+		return total;
 	}
 }

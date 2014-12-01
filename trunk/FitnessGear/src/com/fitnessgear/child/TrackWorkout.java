@@ -63,7 +63,7 @@ public class TrackWorkout extends ActionBarActivity {
 		adapter.myLogExerciseList = new LogExerciseList();
 		Calendar c = Calendar.getInstance();
 		String DayID = c.get(Calendar.DAY_OF_MONTH) + ""
-				+ (c.get(Calendar.MONTH)+1) + "" + c.get(Calendar.YEAR);
+				+ (c.get(Calendar.MONTH) + 1) + "" + c.get(Calendar.YEAR);
 
 		for (ExercisesItem item : adapter.myListExercise) {
 			int nSet = Integer.valueOf(item.getSets());
@@ -83,28 +83,28 @@ public class TrackWorkout extends ActionBarActivity {
 		prefsEditor.commit();
 
 		pager.setOnPageChangeListener(new OnPageChangeListener() {
-			
+
 			@Override
 			public void onPageSelected(int arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onPageScrolled(int arg0, float arg1, int arg2) {
 				// TODO Auto-generated method stub
-				
+
 			}
-			
+
 			@Override
 			public void onPageScrollStateChanged(int arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 		// Set adapter
 		pager.setAdapter(adapter);
-		
+
 	}
 
 	@Override
@@ -112,61 +112,73 @@ public class TrackWorkout extends ActionBarActivity {
 		// TODO Auto-generated method stub
 
 		new AlertDialog.Builder(this)
-	    .setTitle("Go Back")
-	    .setMessage("Are you sure you want to go back? All data will be lost")
-	    .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            // continue with delete
-	        	TrackWorkout.this.finish();
-	        }
-	     })
-	    .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
-	        public void onClick(DialogInterface dialog, int which) { 
-	            // do nothing
-	        	dialog.cancel();
-	        }
-	     })
-	    .setIcon(android.R.drawable.ic_dialog_alert)
-	     .show();
-		
+				.setTitle("Go Back")
+				.setMessage(
+						"Are you sure you want to go back? All data will be lost")
+				.setPositiveButton(android.R.string.yes,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// continue with delete
+								TrackWorkout.this.finish();
+							}
+						})
+				.setNegativeButton(android.R.string.no,
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// do nothing
+								dialog.cancel();
+							}
+						}).setIcon(android.R.drawable.ic_dialog_alert).show();
+
 	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.track_workout_savetodatabase, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		int id = item.getItemId();
-		
+
 		if (id == R.id.trackworkoutsave) {
 			new AlertDialog.Builder(TrackWorkout.this)
-		    .setTitle("Finish Editing")
-		    .setMessage("Are you sure you want to finish tracking workout?")
-		    .setPositiveButton(getResources().getString(R.string.fisish_editing), new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) { 
-		            // continue with delete
-		        	SharedPreferences settings = PreferenceManager
-							.getDefaultSharedPreferences(getApplicationContext());
-					Gson gson = new Gson();
-					String json = settings.getString("logexerciselist", "");
-					LogExerciseList mylist = gson.fromJson(json,
-							LogExerciseList.class);
-					DatabaseUltility.UpdateToLogExercise(mylist);
-		        	TrackWorkout.this.finish();
-		        }
-		     })
-		    .setNegativeButton(getResources().getString(R.string.continue_editing), new DialogInterface.OnClickListener() {
-		        public void onClick(DialogInterface dialog, int which) { 
-		            // do nothing
-		        	dialog.cancel();
-		        }
-		     })
-		    .setIcon(android.R.drawable.ic_dialog_alert)
-		     .show();
+					.setTitle("Finish Editing")
+					.setMessage(
+							"Are you sure you want to finish tracking workout?")
+					.setPositiveButton(
+							getResources().getString(R.string.fisish_editing),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// continue with delete
+									SharedPreferences settings = PreferenceManager
+											.getDefaultSharedPreferences(getApplicationContext());
+									Gson gson = new Gson();
+									String json = settings.getString(
+											"logexerciselist", "");
+									LogExerciseList mylist = gson.fromJson(
+											json, LogExerciseList.class);
+									DatabaseUltility
+											.UpdateToLogExercise(mylist);
+									TrackWorkout.this.finish();
+								}
+							})
+					.setNegativeButton(
+							getResources().getString(R.string.continue_editing),
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// do nothing
+									dialog.cancel();
+								}
+							}).setIcon(android.R.drawable.ic_dialog_alert)
+					.show();
 		}
 		return super.onOptionsItemSelected(item);
 	}

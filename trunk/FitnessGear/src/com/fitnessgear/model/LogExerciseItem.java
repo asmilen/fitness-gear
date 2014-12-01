@@ -3,6 +3,14 @@ package com.fitnessgear.model;
 import java.io.Serializable;
 
 public class LogExerciseItem implements Serializable{
+	public int getInterval() {
+		return Interval;
+	}
+
+	public void setInterval(int interval) {
+		Interval = interval;
+	}
+
 	private String Day;
 	private int ExerciseID;
 	private int Sets;
