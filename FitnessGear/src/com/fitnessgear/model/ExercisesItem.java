@@ -5,7 +5,7 @@ import java.io.Serializable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-public class ExercisesItem  implements Serializable{
+public class ExercisesItem implements Serializable {
 
 	private int exerciseID;
 	private String exerciseName;
@@ -45,9 +45,9 @@ public class ExercisesItem  implements Serializable{
 		this.interval = interval;
 	}
 
-	public ExercisesItem(int exerciseID, String exerciseName,
-			int exerciseType, int muscleTarget, int equipment,
-			float rating, String img1, String img2, String description) {
+	public ExercisesItem(int exerciseID, String exerciseName, int exerciseType,
+			int muscleTarget, int equipment, float rating, String img1,
+			String img2, String description) {
 		super();
 		this.exerciseID = exerciseID;
 		this.exerciseName = exerciseName;
@@ -147,8 +147,6 @@ public class ExercisesItem  implements Serializable{
 	public void setSets(int sets) {
 		this.sets = sets;
 	}
-
-	
 
 	public int getRepsmin() {
 		return repsmin;
