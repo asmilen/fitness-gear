@@ -3,6 +3,7 @@ package com.fitnessgear.adapter;
 import java.util.ArrayList;
 
 import com.fitnessgear.R;
+import com.fitnessgear.model.FilterItem;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,9 +16,9 @@ import android.widget.TextView;
 public class ListFilterAdapter extends BaseAdapter {
 
 	private Context mContext;
-	private ArrayList<String> mData;
+	private ArrayList<FilterItem> mData;
 	
-	public ListFilterAdapter(Context mContext, ArrayList<String> mData) {
+	public ListFilterAdapter(Context mContext, ArrayList<FilterItem> mData) {
 		super();
 		this.mContext = mContext;
 		this.mData = mData;
@@ -51,9 +52,11 @@ public class ListFilterAdapter extends BaseAdapter {
             convertView = mInflater.inflate(R.layout.list_filter_item, null);
 		}
 		
-		TextView filterTitle = (TextView) convertView.findViewById(R.id.titleFilter);
+		TextView titleFilter = (TextView) convertView.findViewById(R.id.titleFilter);
+		TextView valueFilter = (TextView) convertView.findViewById(R.id.valueFilter);
 		
-		filterTitle.setText(mData.get(position).toString());
+		titleFilter.setText(mData.get(position).getTitleFilter().toString());
+		valueFilter.setText(mData.get(position).getValueFilter().toString());
 		return convertView;
 	}
 
