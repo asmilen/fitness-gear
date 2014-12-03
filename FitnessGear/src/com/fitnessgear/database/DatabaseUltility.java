@@ -112,8 +112,10 @@ public class DatabaseUltility {
 		try {
 			ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
 			for (LogExerciseItem item : list) {
+				SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
 				// Delete if exist
-
+				db.execSQL("Delete from Log_Exercise Where ExerciseID = " + item.getExerciseID() + " And Day =" + item.getDay() +" And Sets = "+ item.getSets());
+				
 				// Insert
 				String[] args = new String[] { item.getDay(),
 						item.getExerciseID() + "", item.getSets() + "",
@@ -121,7 +123,7 @@ public class DatabaseUltility {
 						item.getInterval() + "" };
 				String sql = "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?,?)";
 
-				SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+			
 				db.execSQL(sql, args);
 			}
 		} catch (Exception ex) {
