@@ -9,7 +9,11 @@
         android:id="@+id/searchPlan"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:drawablePadding="5dp" >
+        android:drawablePadding="5dp"
+        android:background="@drawable/border_edittext"
+        android:padding="1dp"
+        android:layout_margin="3dp"
+         >
     </EditText>
 
     <ListView
