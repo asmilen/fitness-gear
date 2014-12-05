@@ -181,7 +181,7 @@ public class ExerciseLibrary extends Fragment {
 		//Create List Exercises
 		myListExercise = new ArrayList<ExercisesItem>();
 		Cursor listExerciseCursor = MainActivity.db.rawQuery(
-				"Select * FROM Exercise Order By ExerciseName", null);
+				"Select * FROM Exercise", null);
 
 		while (listExerciseCursor.moveToNext()) {
 			myListExercise.add(new ExercisesItem(DatabaseUltility
@@ -246,7 +246,7 @@ public class ExerciseLibrary extends Fragment {
 				exerciseDetailIntent.putExtra("ExerciseID",
 						myListExercise.get(position).getExerciseID());
 				// exerciseDetailIntent.putExtra("workoutID", workoutID);
-				searchExercise.clearFocus();
+//				searchExercise.clearFocus();
 				startActivity(exerciseDetailIntent);
 			}
 		});
