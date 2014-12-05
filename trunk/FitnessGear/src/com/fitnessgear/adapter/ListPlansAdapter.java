@@ -131,6 +131,9 @@ public class ListPlansAdapter extends BaseAdapter {
 			sql += "Gender = " + genderID + " AND ";
 		if (fitnessLevelID != 1)
 			sql += "FitnessLevel = " + fitnessLevelID + " AND ";
+		if(textFilter != ""){
+			sql += "PlanName LIKE '%" + textFilter + "%' AND";
+		}
 
 		// Delete last AND
 		String[] sql1 = sql.split(" ");

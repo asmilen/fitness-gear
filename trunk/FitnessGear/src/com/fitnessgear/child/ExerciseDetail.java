@@ -62,8 +62,9 @@ public class ExerciseDetail extends Activity {
 
 	public void getData() {
 		Intent exerciseIntent = getIntent();
-		exerciseID = exerciseIntent.getIntExtra("ExerciseID",0);
-//		Toast.makeText(getApplicationContext(), exerciseID + "", Toast.LENGTH_SHORT).show();
+		exerciseID = exerciseIntent.getIntExtra("ExerciseID", 0);
+		// Toast.makeText(getApplicationContext(), exerciseID + "",
+		// Toast.LENGTH_SHORT).show();
 		try {
 			Cursor exerciseDetail = MainActivity.db
 					.rawQuery(
@@ -76,15 +77,15 @@ public class ExerciseDetail extends Activity {
 							null);
 
 			while (exerciseDetail.moveToNext()) {
-				//Set Value to Element of Exercise Detail layout
+				// Set Value to Element of Exercise Detail layout
+				// Set Image exercise 1
 				String image1 = DatabaseUltility.GetColumnValue(exerciseDetail,
 						DatabaseUltility.Image1);
 				byte[] decodedString = Base64.decode(image1, Base64.DEFAULT);
 				Bitmap decodedByte = BitmapFactory.decodeByteArray(
 						decodedString, 0, decodedString.length);
-
 				img1.setImageBitmap(decodedByte);
-				
+				// Set Image exercise 2
 				String image2 = DatabaseUltility.GetColumnValue(exerciseDetail,
 						DatabaseUltility.Image2);
 				decodedString = Base64.decode(image2, Base64.DEFAULT);
@@ -94,12 +95,17 @@ public class ExerciseDetail extends Activity {
 
 				exerciseName.setText(DatabaseUltility.GetColumnValue(
 						exerciseDetail, DatabaseUltility.ExerciseName));
-				txtRating.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.Rating));
-				txtMuscle.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.MuscleName));
-				txtEquipment.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.EquipmentName));
-				txtExerciseType.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.ExerciseTypeName));
-				txtDescription.setText(DatabaseUltility.GetColumnValue(exerciseDetail, DatabaseUltility.Description));
-				
+				txtRating.setText(DatabaseUltility.GetColumnValue(
+						exerciseDetail, DatabaseUltility.Rating));
+				txtMuscle.setText(DatabaseUltility.GetColumnValue(
+						exerciseDetail, DatabaseUltility.MuscleName));
+				txtEquipment.setText(DatabaseUltility.GetColumnValue(
+						exerciseDetail, DatabaseUltility.EquipmentName));
+				txtExerciseType.setText(DatabaseUltility.GetColumnValue(
+						exerciseDetail, DatabaseUltility.ExerciseTypeName));
+				txtDescription.setText(DatabaseUltility.GetColumnValue(
+						exerciseDetail, DatabaseUltility.Description));
+
 			}
 		} catch (SQLiteException ex) {
 			Toast.makeText(getApplicationContext(), ex.getMessage(),
@@ -107,22 +113,12 @@ public class ExerciseDetail extends Activity {
 		}
 	}
 
-//	@Override
-//	public boolean onCreateOptionsMenu(Menu menu) {
-//		// Inflate the menu; this adds items to the action bar if it is present.
-//		getMenuInflater().inflate(R.menu.exercise_detail, menu);
-//		return true;
-//	}
-//
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-//		if (id == R.id.action_settings) {
-//			return true;
-//		}
 		if (id == android.R.id.home) {
 			this.finish();
 			return true;

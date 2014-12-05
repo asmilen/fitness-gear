@@ -85,6 +85,10 @@ public class DatabaseUltility {
 	// Get data from column
 	public static String GetColumnValue(Cursor cur, String ColumnName) {
 		try {
+			String temple = cur.getString(cur.getColumnIndex(ColumnName));
+			if(temple == null){
+				return "";
+			}
 			return cur.getString(cur.getColumnIndex(ColumnName));
 		} catch (Exception ex) {
 			return "";

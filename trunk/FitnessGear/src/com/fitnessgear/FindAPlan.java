@@ -33,6 +33,8 @@ import android.widget.Toast;
 
 import com.fitnessgear.adapter.ListFilterAdapter;
 import com.fitnessgear.adapter.ListPlansAdapter;
+import com.fitnessgear.child.AddPlan;
+import com.fitnessgear.child.PlanDetail;
 import com.fitnessgear.child.TrackWorkout;
 import com.fitnessgear.child.TrackWorkoutDialog;
 import com.fitnessgear.database.DatabaseUltility;
@@ -282,13 +284,13 @@ public class FindAPlan extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				// Intent exerciseDetailIntent = new Intent(getActivity(),
-				// ExerciseDetail.class);
-				// exerciseDetailIntent.putExtra("PlanID",
-				// myListPlan.get(position).getPlanID());
-				// // exerciseDetailIntent.putExtra("workoutID", workoutID);
-				// searchPlan.clearFocus();
-				// startActivity(exerciseDetailIntent);
+				 Intent planDetailIntent = new Intent(getActivity(),
+						 PlanDetail.class);
+				 planDetailIntent.putExtra("PlanID",
+				 myListPlan.get(position).getPlanID());
+				 // exerciseDetailIntent.putExtra("workoutID", workoutID);
+				 searchPlan.clearFocus();
+				 startActivity(planDetailIntent);
 			}
 		});
 	}
@@ -326,7 +328,8 @@ public class FindAPlan extends Fragment {
 		// TODO Auto-generated method stub
 		int id = item.getItemId();
 		if (id == R.id.add_Plan) {
-
+			Intent intent = new Intent(getActivity(),AddPlan.class);
+			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);
 	}
