@@ -34,6 +34,7 @@
     <string name="title_activity_start_work_out_detail">StartWorkOutDetail</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string name="add_to_workout">Add To Workout</string>
     <string name="title_activity_create_database">CreateDatabase</string>
     <string name="title_activity_track_workout">TrackWorkout</string>
     <string name="title_section1">Section 1</string>
@@ -49,5 +50,7 @@
     <string name="title_activity_log_exercise_detail">LogExerciseDetail</string>
     <string name="fisish_editing">Finish</string>
     <string name="continue_editing">Continue Editing</string>
+    <string name="title_activity_plan_detail">PlanDetail</string>
+    <string name="title_activity_add_plan">AddPlan</string>
 
 </resources>
