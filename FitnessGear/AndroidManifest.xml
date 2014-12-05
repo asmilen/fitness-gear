@@ -53,11 +53,11 @@
             android:value="wgt" />
 
         <activity
-            android:name="com.fitnessgear.child.TrackWorkout"
+            android:name=".child.TrackWorkout"
             android:label="@string/title_activity_track_workout" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.ExerciseDetail"
+            android:name=".child.ExerciseDetail"
             android:label="@string/title_activity_exercise_detail" >
         </activity>
         <activity
@@ -65,17 +65,26 @@
             android:label="@string/title_activity_trackworkout_detail" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.TrackWorkoutDialog"
+            android:name=".child.TrackWorkoutDialog"
             android:label="@string/title_activity_track_workout_dialog"
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.LogExerciseDetail"
+            android:name=".child.LogExerciseDetail"
             android:label="@string/title_activity_log_exercise_detail" >
         </activity>
         <activity android:name=".Logs" >
         </activity>
-        <activity android:name=".child.StartWorkOutDetail"></activity>
+        <activity android:name=".child.StartWorkOutDetail" >
+        </activity>
+        <activity
+            android:name=".child.PlanDetail"
+            android:label="@string/title_activity_plan_detail" >
+        </activity>
+        <activity
+            android:name="com.fitnessgear.child.AddPlan"
+            android:label="@string/title_activity_add_plan" >
+        </activity>
     </application>
 
 </manifest>
