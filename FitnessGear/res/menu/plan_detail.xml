@@ -1,0 +1,10 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.fitnessgear.PlanDetail" >
+
+    <item
+        android:id="@+id/add_to_workout"
+        android:showAsAction="withText|ifRoom"
+        android:title="@string/add_to_workout"/>
+
+</menu>
