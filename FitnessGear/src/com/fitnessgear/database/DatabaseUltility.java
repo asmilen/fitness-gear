@@ -62,13 +62,13 @@ public class DatabaseUltility {
 	public static final String Reps = "Reps";
 	public static final String Day = "Day";
 	// Muscle Table
-	public static final String MuscleID = "MuscleID";
+	public static final String MuscleID = "MuscleId";
 	public static final String MuscleName = "MuscleName";
 	// Equipment Table
-	public static final String EquipmentID = "EquipmentID";
+	public static final String EquipmentID = "EquipmentId";
 	public static final String EquipmentName = "EquipmentName";
 	// ExerciseType Table
-	public static final String ExerciseTypeID = "ExerciseTypeID";
+	public static final String ExerciseTypeID = "ExerciseTypeId";
 	public static final String ExerciseTypeName = "ExerciseTypeName";
 	//Main_Goal table
 	public static final String MainGoalID = "MainGoalID";

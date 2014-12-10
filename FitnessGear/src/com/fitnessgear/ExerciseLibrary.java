@@ -24,22 +24,30 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.adapter.ListFilterAdapter;
 import com.fitnessgear.child.ExerciseDetail;
 import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.EquipmentItem;
+import com.fitnessgear.model.ExerciseTypeItem;
 import com.fitnessgear.model.ExercisesItem;
 import com.fitnessgear.model.FilterItem;
+import com.fitnessgear.model.MuscleTargetItem;
 
 public class ExerciseLibrary extends Fragment {
+
+	private int exerciseTypeID = 1;
+	private int muscleID = 1;
+	private int equipmentID = 1;
 
 	private ArrayList<ExercisesItem> myListExercise;
 	private ListExercisesAdapter adapter;
 	private ArrayList<FilterItem> listFilterData;
-	private ArrayList<String> listTypes;
-	private ArrayList<String> listMuscles;
-	private ArrayList<String> listEquipments;
+	private ArrayList<ExerciseTypeItem> listTypes;
+	private ArrayList<MuscleTargetItem> listMuscles;
+	private ArrayList<EquipmentItem> listEquipments;
 
 	private EditText searchExercise;
 	private ListView listFullExercises;
@@ -55,9 +63,10 @@ public class ExerciseLibrary extends Fragment {
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.fragment_exercise_library,
 				container, false);
-		
-		listFilterExercises = (ListView) rootView.findViewById(R.id.listFilterExercises);
-		
+
+		listFilterExercises = (ListView) rootView
+				.findViewById(R.id.listFilterExercises);
+
 		listFullExercises = (ListView) rootView
 				.findViewById(R.id.listFullExercises);
 		searchExercise = (EditText) rootView.findViewById(R.id.searchExercise);
@@ -71,7 +80,6 @@ public class ExerciseLibrary extends Fragment {
 			public boolean onTouch(View view, MotionEvent event) {
 				// TODO Auto-generated method stub
 				searchExercise.clearFocus();
-				handleClearButton();
 				hideKeyboard(view);
 				return false;
 			}
@@ -84,101 +92,171 @@ public class ExerciseLibrary extends Fragment {
 	}
 
 	public void getData() {
-		//Create List Filter
-				listFilterData = new ArrayList<FilterItem>();
-				listFilterData.add(new FilterItem("Exercise Type","All Types"));
-				listFilterData.add(new FilterItem("Muscle Group","All Muscles"));
-				listFilterData.add(new FilterItem("Equipment","All Equipments"));
+		// Create List Filter
+		listFilterData = new ArrayList<FilterItem>();
+		listFilterData.add(new FilterItem("Exercise Type", "All Types"));
+		listFilterData.add(new FilterItem("Muscle Group", "All Muscles"));
+		listFilterData.add(new FilterItem("Equipment", "All Equipments"));
 
-				final ListFilterAdapter filterAdapter = new ListFilterAdapter(getActivity(),
-						listFilterData);
-				listFilterExercises.setAdapter(filterAdapter);
-				
-				final Cursor exerciseType = MainActivity.db.rawQuery("Select * FROM ExerciseType", null);
-				final Cursor exerciseMuscle = MainActivity.db.rawQuery("Select * FROM Muscles", null);
-				final Cursor exerciseEquipment = MainActivity.db.rawQuery("Select * FROM Equipment", null);
-				listTypes = new ArrayList<String>();
-				listMuscles = new ArrayList<String>();
-				listEquipments = new ArrayList<String>();
-				while(exerciseType.moveToNext()){
-					listTypes.add(DatabaseUltility.GetColumnValue(exerciseType, DatabaseUltility.ExerciseTypeName));
-				}
-				while(exerciseMuscle.moveToNext()){
-					listMuscles.add(DatabaseUltility.GetColumnValue(exerciseMuscle, DatabaseUltility.MuscleName));
-				}
-				while(exerciseEquipment.moveToNext()){
-					listEquipments.add(DatabaseUltility.GetColumnValue(exerciseEquipment, DatabaseUltility.EquipmentName));
-				}
-				
-				final ArrayAdapter<String> levelAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listTypes);
-				final ArrayAdapter<String> genderAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listMuscles);
-				final ArrayAdapter<String> mainGoalAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listEquipments);
-				listFilterExercises.setOnItemClickListener(new OnItemClickListener() {
+		final ListFilterAdapter filterAdapter = new ListFilterAdapter(
+				getActivity(), listFilterData);
+		listFilterExercises.setAdapter(filterAdapter);
 
-					@Override
-					public void onItemClick(AdapterView<?> parent, View view,
-							int position, long id) {
-						// TODO Auto-generated method stub
-						switch (position) {
-						case 0:
-							new AlertDialog.Builder(getActivity())
-						    .setTitle("Exercise Type")
-						    .setSingleChoiceItems(levelAdapter, 0, new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									dialog.dismiss();
-									listFilterData.get(0).setValueFilter(listTypes.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).toString());
-									filterAdapter.notifyDataSetChanged();
-									if(listFilterData.get(0).getValueFilter().toString().toLowerCase(Locale.getDefault()).equalsIgnoreCase("All Types")){
-//										adapter = new List
-									}
-									else{
-										adapter.filter(listFilterData.get(0).getValueFilter().toString().toLowerCase(Locale.getDefault()));
-									}
-								}
-							})
-						     .show();
-							break;
-						case 1:
-							new AlertDialog.Builder(getActivity())
-						    .setTitle("Gender")
-						    .setSingleChoiceItems(genderAdapter, 0, new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									dialog.dismiss();
-									listFilterData.get(1).setValueFilter(listMuscles.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).toString());
-									filterAdapter.notifyDataSetChanged();
-								}
-							})
-						     .show();
-							break;
-						case 2:
-							new AlertDialog.Builder(getActivity())
-						    .setTitle("Main Goal")
-						    .setSingleChoiceItems(mainGoalAdapter, 0, new DialogInterface.OnClickListener() {
-								
-								@Override
-								public void onClick(DialogInterface dialog, int which) {
-									// TODO Auto-generated method stub
-									dialog.dismiss();
-									listFilterData.get(2).setValueFilter(listEquipments.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).toString());
-									filterAdapter.notifyDataSetChanged();
-								}
-							})
-						     .show();
-							break;
+		final Cursor exerciseType = MainActivity.db.rawQuery(
+				"Select * FROM ExerciseType", null);
+		final Cursor exerciseMuscle = MainActivity.db.rawQuery(
+				"Select * FROM Muscles", null);
+		final Cursor exerciseEquipment = MainActivity.db.rawQuery(
+				"Select * FROM Equipment", null);
+		listTypes = new ArrayList<ExerciseTypeItem>();
+		listMuscles = new ArrayList<MuscleTargetItem>();
+		listEquipments = new ArrayList<EquipmentItem>();
+		while (exerciseType.moveToNext()) {
+			listTypes.add(new ExerciseTypeItem(DatabaseUltility
+					.GetIntColumnValue(exerciseType,
+							DatabaseUltility.ExerciseTypeID), DatabaseUltility
+					.GetColumnValue(exerciseType,
+							DatabaseUltility.ExerciseTypeName)));
+		}
+		while (exerciseMuscle.moveToNext()) {
+			listMuscles.add(new MuscleTargetItem(DatabaseUltility
+					.GetIntColumnValue(exerciseMuscle,
+							DatabaseUltility.MuscleID),
+					DatabaseUltility.GetColumnValue(exerciseMuscle,
+							DatabaseUltility.MuscleName)));
+		}
+		while (exerciseEquipment.moveToNext()) {
+			listEquipments.add(new EquipmentItem(DatabaseUltility
+					.GetIntColumnValue(exerciseEquipment,
+							DatabaseUltility.EquipmentID), DatabaseUltility
+					.GetColumnValue(exerciseEquipment,
+							DatabaseUltility.EquipmentName)));
+		}
 
-						default:
-							break;
-						}				
-					}
-				});
-		
-		//Create List Exercises
+		final ArrayAdapter<ExerciseTypeItem> levelAdapter = new ArrayAdapter<ExerciseTypeItem>(
+				getActivity(), android.R.layout.simple_list_item_1, listTypes);
+		final ArrayAdapter<MuscleTargetItem> genderAdapter = new ArrayAdapter<MuscleTargetItem>(
+				getActivity(), android.R.layout.simple_list_item_1, listMuscles);
+		final ArrayAdapter<EquipmentItem> mainGoalAdapter = new ArrayAdapter<EquipmentItem>(
+				getActivity(), android.R.layout.simple_list_item_1,
+				listEquipments);
+		listFilterExercises.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				switch (position) {
+				case 0:
+					new AlertDialog.Builder(getActivity())
+							.setTitle("Exercise Type")
+							.setSingleChoiceItems(levelAdapter, 0,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											exerciseTypeID = listTypes
+													.get(((AlertDialog) dialog)
+															.getListView()
+															.getCheckedItemPosition())
+													.getExerciseTypeID();
+											listFilterData
+													.get(0)
+													.setValueFilter(
+															listTypes
+																	.get(((AlertDialog) dialog)
+																			.getListView()
+																			.getCheckedItemPosition())
+																	.toString());
+											filterAdapter
+													.notifyDataSetChanged();
+											adapter.filter(searchExercise
+													.getText().toString(),
+													exerciseTypeID, muscleID,
+													equipmentID);
+										}
+									}).show();
+					break;
+				case 1:
+					new AlertDialog.Builder(getActivity())
+							.setTitle("Muscle Target")
+							.setSingleChoiceItems(genderAdapter, 0,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											muscleID = listMuscles
+													.get(((AlertDialog) dialog)
+															.getListView()
+															.getCheckedItemPosition())
+													.getMuscleID();
+											listFilterData
+													.get(1)
+													.setValueFilter(
+															listMuscles
+																	.get(((AlertDialog) dialog)
+																			.getListView()
+																			.getCheckedItemPosition())
+																	.toString());
+											filterAdapter
+													.notifyDataSetChanged();
+											adapter.filter(searchExercise
+													.getText().toString(),
+													exerciseTypeID, muscleID,
+													equipmentID);
+										}
+									}).show();
+					break;
+				case 2:
+					new AlertDialog.Builder(getActivity())
+							.setTitle("Equipment")
+							.setSingleChoiceItems(mainGoalAdapter, 0,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											equipmentID = listEquipments
+													.get(((AlertDialog) dialog)
+															.getListView()
+															.getCheckedItemPosition())
+													.getEquipmentID();
+											listFilterData
+													.get(2)
+													.setValueFilter(
+															listEquipments
+																	.get(((AlertDialog) dialog)
+																			.getListView()
+																			.getCheckedItemPosition())
+																	.toString());
+											filterAdapter
+													.notifyDataSetChanged();
+											adapter.filter(searchExercise
+													.getText().toString(),
+													exerciseTypeID, muscleID,
+													equipmentID);
+										}
+									}).show();
+					break;
+
+				default:
+					break;
+				}
+			}
+		});
+
+		// Create List Exercises
 		myListExercise = new ArrayList<ExercisesItem>();
 		Cursor listExerciseCursor = MainActivity.db.rawQuery(
 				"Select * FROM Exercise", null);
@@ -218,7 +296,7 @@ public class ExerciseLibrary extends Fragment {
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				// TODO Auto-generated method stub
-//				handleClearButton();
+				// handleClearButton();
 			}
 
 			@Override
@@ -230,8 +308,8 @@ public class ExerciseLibrary extends Fragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-				adapter.filter(searchExercise.getText().toString()
-						.toLowerCase(Locale.getDefault()));
+				adapter.filter(searchExercise.getText().toString(),
+						exerciseTypeID, muscleID, equipmentID);
 			}
 		});
 
@@ -246,7 +324,7 @@ public class ExerciseLibrary extends Fragment {
 				exerciseDetailIntent.putExtra("ExerciseID",
 						myListExercise.get(position).getExerciseID());
 				// exerciseDetailIntent.putExtra("workoutID", workoutID);
-//				searchExercise.clearFocus();
+				// searchExercise.clearFocus();
 				startActivity(exerciseDetailIntent);
 			}
 		});
