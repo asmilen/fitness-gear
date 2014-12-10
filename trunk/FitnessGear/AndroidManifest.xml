@@ -83,8 +83,19 @@
             android:label="@string/title_activity_plan_detail" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.AddPlan"
-            android:label="@string/title_activity_add_plan" >
+            android:name=".child.AddPlan"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_add_plan"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".child.CreateWorkout"
+            android:label="@string/title_activity_create_workout" >
+        </activity>
+        <activity
+            android:name=".DialogUpdateWorkout"
+            android:label="@string/title_activity_dialog_update_workout"
+            android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
     </application>
 
