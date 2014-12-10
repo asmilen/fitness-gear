@@ -6,22 +6,24 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="125dp"
-         >
+        android:layout_height="130dp" >
 
         <LinearLayout
-            android:layout_width="30dp"
-            android:layout_height="fill_parent" >
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:gravity="center"
+            android:background="@drawable/background_exercise_id"
+            android:layout_marginTop="5dp" >
 
             <TextView
                 android:id="@+id/textViewPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ID" />
+                android:text="99" />
         </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="142dp"
+        <AbsoluteLayout
+            android:layout_width="145dp"
             android:layout_height="fill_parent"
             android:orientation="vertical" >
 
@@ -29,39 +31,48 @@
                 android:id="@+id/textViewEName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
                 android:text="Exercise Name"
-                android:textSize="30sp" />
+                android:textStyle="bold"
+                android:layout_x="5dp"
+                android:layout_y="5dp"
+                android:textAllCaps="true"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/textViewTargetSets"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.09"
+                android:layout_x="5dp"
+                android:layout_y="90dp"
                 android:text="Target Sets" />
 
             <TextView
                 android:id="@+id/textViewTotalReps"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_x="5dp"
+                android:layout_y="110dp"
                 android:text="Total Reps" />
-        </LinearLayout>
+        </AbsoluteLayout>
 
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="0.5" >
+            android:layout_weight="0.5"
+            android:layout_marginTop="5dp" >
 
             <ImageView
                 android:id="@+id/imageViewTick"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="5dp"
                 android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
 
             <ImageView
                 android:id="@+id/imageView2"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_marginLeft="5dp"
                 android:src="@drawable/abc_ab_bottom_solid_dark_holo" />
         </LinearLayout>
     </LinearLayout>
@@ -70,6 +81,7 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:background="@color/list_background_pressed_end"
+        android:gravity="center_vertical"
         android:orientation="vertical" >
 
         <TextView
@@ -77,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/list_background_pressed_start"
+            android:gravity="center_vertical"
             android:text="Set * of *" />
     </LinearLayout>
 
@@ -129,9 +142,7 @@
                     android:inputType="number"
                     android:maxLength="2"
                     android:textSize="22dp" />
-
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout

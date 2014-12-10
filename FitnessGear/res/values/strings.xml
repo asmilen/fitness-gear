@@ -52,5 +52,7 @@
     <string name="continue_editing">Continue Editing</string>
     <string name="title_activity_plan_detail">PlanDetail</string>
     <string name="title_activity_add_plan">AddPlan</string>
+    <string name="title_activity_create_workout">CreateWorkout</string>
+    <string name="title_activity_dialog_update_workout">DialogUpdateWorkout</string>
 
 </resources>
