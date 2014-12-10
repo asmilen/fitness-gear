@@ -7,6 +7,7 @@ import com.fitnessgear.MainActivity;
 import com.fitnessgear.R;
 import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.ExercisesItem;
+import com.fitnessgear.model.PlanItem;
 
 import android.app.Activity;
 import android.content.Context;
@@ -141,22 +142,68 @@ public class ListExercisesAdapter extends BaseAdapter {
 	}
 
 	// Filter Class
-	public void filter(String charText) {
-		charText = charText.toLowerCase(Locale.getDefault());
-		listExercises.clear();
-		if (charText.length() == 0) {
-			listExercises.addAll(filterExercise);
-		} else {
-			for (ExercisesItem exerciseItem : filterExercise) {
-				if (exerciseItem.getExerciseName()
-						.toLowerCase(Locale.getDefault()).contains(charText)) {
-					listExercises.add(exerciseItem);
-				} else if (exerciseItem.getExerciseType() == 1) {
-					listExercises.add(exerciseItem);
-				}
-			}
-		}
-		notifyDataSetChanged();
-	}
+		public void filter(String textFilter, int exerciseTypeID, int muscleID,
+				int equipmentID) {
 
+			// VIet Ham Filter vao day
+			// Khi Select tu bang Plan phai select tu bang
+			// Gender,FitnessLevel,Main_Goal de lay ra Name cua cac bang
+			// Giong voi String sql o duoi
+			// Can add vao bien listPlan sau do goi ham notifyDataSetChanged()
+
+			textFilter = textFilter.toLowerCase(Locale.getDefault());
+
+			// BUILD QUERY WITH FILTER
+			String sql = "Select * from Exercise Where ";
+			if (exerciseTypeID != 1)
+				sql += "ExerciseType = " + exerciseTypeID + " AND ";
+			if (muscleID != 1)
+				sql += "MuscleTarget = " + muscleID + " AND ";
+			if (equipmentID != 1)
+				sql += "Equipment = " + equipmentID + " AND ";
+			if(textFilter != ""){
+				sql += "ExerciseName LIKE '%" + textFilter + "%' AND";
+			}
+
+			// Delete last AND
+			String[] sql1 = sql.split(" ");
+			StringBuilder builder = new StringBuilder();
+			String delimiter = " ";
+			for (int i = 0; i < sql1.length - 1; i++) {
+				builder.append(sql1[i]);
+				builder.append(delimiter);
+			}
+			sql = builder.toString();
+
+			listExercises.clear();
+
+			// Exec query and add to listPlan
+			Cursor c = MainActivity.db.rawQuery(sql, null);
+			while (c.moveToNext()) {
+//				String mainGoalName = getGoalName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.MainGoal));
+//				String genderName = getGenderName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.Gender));
+//				String fitnessLevelName = getFitnessLevelName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.FitnessLevel));
+				listExercises.add(new ExercisesItem(DatabaseUltility
+						.GetIntColumnValue(c, "Workout_Exercise."
+								+ DatabaseUltility.ExerciseID), DatabaseUltility
+						.GetColumnValue(c,
+								DatabaseUltility.ExerciseName), DatabaseUltility
+						.GetIntColumnValue(c,
+								DatabaseUltility.ExerciseType), DatabaseUltility
+						.GetIntColumnValue(c,
+								DatabaseUltility.MuscleTarget), DatabaseUltility
+						.GetIntColumnValue(c,
+								DatabaseUltility.Equipment), DatabaseUltility
+						.GetFloatColumnValue(c,
+								DatabaseUltility.Rating),
+						DatabaseUltility.GetColumnValue(c,
+								DatabaseUltility.Image1), DatabaseUltility
+								.GetColumnValue(c,
+										DatabaseUltility.Image2), DatabaseUltility
+								.GetColumnValue(c,
+										DatabaseUltility.Description)));
+
+			}
+			notifyDataSetChanged();
+		}
 }

@@ -52,11 +52,11 @@ public class FindAPlan extends Fragment {
 	private ArrayList<FitnessLevelItem> listLevel;
 	private ArrayList<GenderItem> listGender;
 	private ArrayList<MainGoalItem> listMainGoal;
-	
+
 	private EditText searchPlan;
 	private ListView listFilter;
 	private ListView listFullPlan;
-	
+
 	private int fitnessLevelID = 1;
 	private int genderID = 1;
 	private int mainGoalID = 1;
@@ -82,8 +82,6 @@ public class FindAPlan extends Fragment {
 		listFullPlan = (ListView) rootView.findViewById(R.id.listFullPlan);
 		listFilter = (ListView) rootView.findViewById(R.id.listFilterPlan);
 
-		
-
 		clearbutton = getResources().getDrawable(
 				R.drawable.text_field_clear_btn);
 		searchbutton = getResources().getDrawable(R.drawable.search);
@@ -107,36 +105,52 @@ public class FindAPlan extends Fragment {
 	}
 
 	public void getData() {
-		//Create List Filter
+		// Create List Filter
 		listFilterData = new ArrayList<FilterItem>();
-		listFilterData.add(new FilterItem("Level","All Levels"));
-		listFilterData.add(new FilterItem("Gender","All Genders"));
-		listFilterData.add(new FilterItem("Main Goal","All Goals"));
+		listFilterData.add(new FilterItem("Level", "All Levels"));
+		listFilterData.add(new FilterItem("Gender", "All Genders"));
+		listFilterData.add(new FilterItem("Main Goal", "All Goals"));
 
-		final ListFilterAdapter filterAdapter = new ListFilterAdapter(getActivity(),
-				listFilterData);
+		final ListFilterAdapter filterAdapter = new ListFilterAdapter(
+				getActivity(), listFilterData);
 		listFilter.setAdapter(filterAdapter);
-		
-		final Cursor fitnessLevel = MainActivity.db.rawQuery("Select * FROM FitnessLevel", null);
-		final Cursor gender = MainActivity.db.rawQuery("Select * FROM Gender", null);
-		final Cursor mainGoal = MainActivity.db.rawQuery("Select * FROM Main_Goal", null);
+
+		final Cursor fitnessLevel = MainActivity.db.rawQuery(
+				"Select * FROM FitnessLevel", null);
+		final Cursor gender = MainActivity.db.rawQuery("Select * FROM Gender",
+				null);
+		final Cursor mainGoal = MainActivity.db.rawQuery(
+				"Select * FROM Main_Goal", null);
 		listLevel = new ArrayList<FitnessLevelItem>();
 		listGender = new ArrayList<GenderItem>();
 		listMainGoal = new ArrayList<MainGoalItem>();
-		while(fitnessLevel.moveToNext()){
-			listLevel.add(new FitnessLevelItem(DatabaseUltility.GetIntColumnValue(fitnessLevel, DatabaseUltility.FitnessLevelID), DatabaseUltility.GetColumnValue(fitnessLevel, DatabaseUltility.FitnessLevelName)));
+		while (fitnessLevel.moveToNext()) {
+			listLevel.add(new FitnessLevelItem(DatabaseUltility
+					.GetIntColumnValue(fitnessLevel,
+							DatabaseUltility.FitnessLevelID), DatabaseUltility
+					.GetColumnValue(fitnessLevel,
+							DatabaseUltility.FitnessLevelName)));
 		}
-		while(gender.moveToNext()){
-			listGender.add(new GenderItem(DatabaseUltility.GetIntColumnValue(gender, DatabaseUltility.GenderID), DatabaseUltility.GetColumnValue(gender, DatabaseUltility.GenderName)));
+		while (gender.moveToNext()) {
+			listGender.add(new GenderItem(DatabaseUltility.GetIntColumnValue(
+					gender, DatabaseUltility.GenderID), DatabaseUltility
+					.GetColumnValue(gender, DatabaseUltility.GenderName)));
 		}
-		while(mainGoal.moveToNext()){
-			listMainGoal.add(new MainGoalItem(DatabaseUltility.GetIntColumnValue(mainGoal, DatabaseUltility.MainGoalID), DatabaseUltility.GetColumnValue(mainGoal, DatabaseUltility.MainGoalName)));
+		while (mainGoal.moveToNext()) {
+			listMainGoal.add(new MainGoalItem(DatabaseUltility
+					.GetIntColumnValue(mainGoal, DatabaseUltility.MainGoalID),
+					DatabaseUltility.GetColumnValue(mainGoal,
+							DatabaseUltility.MainGoalName)));
 		}
-		
-		final ArrayAdapter<FitnessLevelItem> levelAdapter = new ArrayAdapter<FitnessLevelItem>(getActivity(), android.R.layout.simple_list_item_1,listLevel);
-		final ArrayAdapter<GenderItem> genderAdapter = new ArrayAdapter<GenderItem>(getActivity(), android.R.layout.simple_list_item_1, listGender);
-		final ArrayAdapter<MainGoalItem> mainGoalAdapter = new ArrayAdapter<MainGoalItem>(getActivity(), android.R.layout.simple_list_item_1, listMainGoal);
-		
+
+		final ArrayAdapter<FitnessLevelItem> levelAdapter = new ArrayAdapter<FitnessLevelItem>(
+				getActivity(), android.R.layout.simple_list_item_1, listLevel);
+		final ArrayAdapter<GenderItem> genderAdapter = new ArrayAdapter<GenderItem>(
+				getActivity(), android.R.layout.simple_list_item_1, listGender);
+		final ArrayAdapter<MainGoalItem> mainGoalAdapter = new ArrayAdapter<MainGoalItem>(
+				getActivity(), android.R.layout.simple_list_item_1,
+				listMainGoal);
+
 		listFilter.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -146,102 +160,158 @@ public class FindAPlan extends Fragment {
 				switch (position) {
 				case 0:
 					new AlertDialog.Builder(getActivity())
-				    .setTitle("Level")
-				    .setSingleChoiceItems(levelAdapter, 0, new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							dialog.dismiss();
-							fitnessLevelID = listLevel.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).getFitnessLevelID();
-							listFilterData.get(0).setValueFilter(listLevel.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).getFitnessLevelName());
-							filterAdapter.notifyDataSetChanged();
-							adapter.filter(
-									searchPlan.getText().toString(),
-									fitnessLevelID,
-									genderID,
-									mainGoalID);
-						}
-					})
-				     .show();
+							.setTitle("Level")
+							.setSingleChoiceItems(levelAdapter, 0,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											fitnessLevelID = listLevel.get(((AlertDialog) dialog).getListView().getCheckedItemPosition()).getFitnessLevelID();
+											listFilterData.get(0).setValueFilter(listLevel.get(((AlertDialog) dialog).getListView().getCheckedItemPosition()).getFitnessLevelName());
+											filterAdapter.notifyDataSetChanged();
+											adapter.filter(searchPlan.getText()
+													.toString(),
+													fitnessLevelID, genderID,
+													mainGoalID);
+										}
+									}).show();
 					break;
 				case 1:
 					new AlertDialog.Builder(getActivity())
-				    .setTitle("Gender")
-				    .setSingleChoiceItems(genderAdapter, 0, new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							dialog.dismiss();
-							genderID = listGender.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).getGenderID();
-							listFilterData.get(1).setValueFilter(listGender.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).toString());
-							filterAdapter.notifyDataSetChanged();
-							adapter.filter(
-									searchPlan.getText().toString(),
-									fitnessLevelID,
-									genderID,
-									mainGoalID);
-							Toast.makeText(getActivity(), listFilterData.get(1).getValueFilter().toString().toLowerCase(Locale.getDefault()), 0).show();
-						}
-					})
-				     .show();
+							.setTitle("Gender")
+							.setSingleChoiceItems(genderAdapter, 0,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											genderID = listGender
+													.get(((AlertDialog) dialog)
+															.getListView()
+															.getCheckedItemPosition())
+													.getGenderID();
+											listFilterData
+													.get(1)
+													.setValueFilter(
+															listGender
+																	.get(((AlertDialog) dialog)
+																			.getListView()
+																			.getCheckedItemPosition())
+																	.toString());
+											filterAdapter
+													.notifyDataSetChanged();
+											adapter.filter(searchPlan.getText()
+													.toString(),
+													fitnessLevelID, genderID,
+													mainGoalID);
+											Toast.makeText(
+													getActivity(),
+													listFilterData
+															.get(1)
+															.getValueFilter()
+															.toString()
+															.toLowerCase(
+																	Locale.getDefault()),
+													0).show();
+										}
+									}).show();
 					break;
 				case 2:
 					new AlertDialog.Builder(getActivity())
-				    .setTitle("Main Goal")
-				    .setSingleChoiceItems(mainGoalAdapter, 0, new DialogInterface.OnClickListener() {
-						
-						@Override
-						public void onClick(DialogInterface dialog, int which) {
-							// TODO Auto-generated method stub
-							dialog.dismiss();
-							mainGoalID = listMainGoal.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).getMainGoalID();
-							listFilterData.get(2).setValueFilter(listMainGoal.get(((AlertDialog)dialog).getListView().getCheckedItemPosition()).toString());
-							filterAdapter.notifyDataSetChanged();
-							adapter.filter(
-									searchPlan.getText().toString(),
-									fitnessLevelID,
-									genderID,
-									mainGoalID);
-							Toast.makeText(getActivity(), listFilterData.get(2).getValueFilter().toString().toLowerCase(Locale.getDefault()), 0).show();
-						}
-					})
-				     .show();
+							.setTitle("Main Goal")
+							.setSingleChoiceItems(mainGoalAdapter, 0,
+									new DialogInterface.OnClickListener() {
+
+										@Override
+										public void onClick(
+												DialogInterface dialog,
+												int which) {
+											// TODO Auto-generated method stub
+											dialog.dismiss();
+											mainGoalID = listMainGoal
+													.get(((AlertDialog) dialog)
+															.getListView()
+															.getCheckedItemPosition())
+													.getMainGoalID();
+											listFilterData
+													.get(2)
+													.setValueFilter(
+															listMainGoal
+																	.get(((AlertDialog) dialog)
+																			.getListView()
+																			.getCheckedItemPosition())
+																	.toString());
+											filterAdapter
+													.notifyDataSetChanged();
+											adapter.filter(searchPlan.getText()
+													.toString(),
+													fitnessLevelID, genderID,
+													mainGoalID);
+											Toast.makeText(
+													getActivity(),
+													listFilterData
+															.get(2)
+															.getValueFilter()
+															.toString()
+															.toLowerCase(
+																	Locale.getDefault()),
+													0).show();
+										}
+									}).show();
 					break;
 
 				default:
 					break;
-				}				
+				}
 			}
 		});
-		//Create List Plan
+		// Create List Plan
 		myListPlan = new ArrayList<PlanItem>();
-		Cursor listPlanCursor = MainActivity.db.rawQuery(
-				"Select * " +
-				"FROM Plan,Gender,FitnessLevel,Main_Goal " +
-				"Where MainGoal = MainGoalID " +
-				"AND Gender = GenderID " +
-				"AND FitnessLevel = FitnessLevelID " +
-				"AND PlanID > 1",null);
+		Cursor listPlanCursor = MainActivity.db
+				.rawQuery("Select * "
+						+ "FROM Plan,Gender,FitnessLevel,Main_Goal "
+						+ "Where MainGoal = MainGoalID "
+						+ "AND Gender = GenderID "
+						+ "AND FitnessLevel = FitnessLevelID "
+						+ "AND PlanID > 1", null);
 
 		while (listPlanCursor.moveToNext()) {
-			myListPlan.add(new PlanItem(
-					DatabaseUltility.GetIntColumnValue(listPlanCursor,DatabaseUltility.PlanID),
-					DatabaseUltility.GetColumnValue(listPlanCursor,DatabaseUltility.PlanName),
-					DatabaseUltility.GetIntColumnValue(listPlanCursor,DatabaseUltility.MainGoalID),
-					DatabaseUltility.GetColumnValue(listPlanCursor,DatabaseUltility.MainGoalName),
-					DatabaseUltility.GetIntColumnValue(listPlanCursor,DatabaseUltility.GenderID),
-					DatabaseUltility.GetColumnValue(listPlanCursor,DatabaseUltility.GenderName),
-					DatabaseUltility.GetIntColumnValue(listPlanCursor,DatabaseUltility.FitnessLevelID),
-					DatabaseUltility.GetColumnValue(listPlanCursor,DatabaseUltility.FitnessLevelName),
-					DatabaseUltility.GetColumnValue(listPlanCursor,DatabaseUltility.CreatedBy),
-					DatabaseUltility.GetColumnValue(listPlanCursor,DatabaseUltility.DateCreated),
-					DatabaseUltility.GetIntColumnValue(listPlanCursor,DatabaseUltility.TotalWeeks),
-					DatabaseUltility.GetFloatColumnValue(listPlanCursor,DatabaseUltility.AveDay),
-					DatabaseUltility.GetFloatColumnValue(listPlanCursor,DatabaseUltility.AveWorkoutTime),
-					DatabaseUltility.GetIntColumnValue(listPlanCursor,DatabaseUltility.TotalCardioTime),
-					DatabaseUltility.GetIntColumnValue(listPlanCursor,DatabaseUltility.TotalTimeAWeek)));
+			myListPlan.add(new PlanItem(DatabaseUltility.GetIntColumnValue(
+					listPlanCursor, DatabaseUltility.PlanID), DatabaseUltility
+					.GetColumnValue(listPlanCursor, DatabaseUltility.PlanName),
+					DatabaseUltility.GetIntColumnValue(listPlanCursor,
+							DatabaseUltility.MainGoalID), DatabaseUltility
+							.GetColumnValue(listPlanCursor,
+									DatabaseUltility.MainGoalName),
+					DatabaseUltility.GetIntColumnValue(listPlanCursor,
+							DatabaseUltility.GenderID), DatabaseUltility
+							.GetColumnValue(listPlanCursor,
+									DatabaseUltility.GenderName),
+					DatabaseUltility.GetIntColumnValue(listPlanCursor,
+							DatabaseUltility.FitnessLevelID), DatabaseUltility
+							.GetColumnValue(listPlanCursor,
+									DatabaseUltility.FitnessLevelName),
+					DatabaseUltility.GetColumnValue(listPlanCursor,
+							DatabaseUltility.CreatedBy), DatabaseUltility
+							.GetColumnValue(listPlanCursor,
+									DatabaseUltility.DateCreated),
+					DatabaseUltility.GetIntColumnValue(listPlanCursor,
+							DatabaseUltility.TotalWeeks), DatabaseUltility
+							.GetFloatColumnValue(listPlanCursor,
+									DatabaseUltility.AveDay), DatabaseUltility
+							.GetFloatColumnValue(listPlanCursor,
+									DatabaseUltility.AveWorkoutTime),
+					DatabaseUltility.GetIntColumnValue(listPlanCursor,
+							DatabaseUltility.TotalCardioTime), DatabaseUltility
+							.GetIntColumnValue(listPlanCursor,
+									DatabaseUltility.TotalTimeAWeek)));
 		}
 
 		adapter = new ListPlansAdapter(getActivity(), myListPlan);
@@ -257,7 +327,7 @@ public class FindAPlan extends Fragment {
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				// TODO Auto-generated method stub
-				 handleClearButton();
+				handleClearButton();
 			}
 
 			@Override
@@ -270,11 +340,8 @@ public class FindAPlan extends Fragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-				adapter.filter(
-						searchPlan.getText().toString(),
-						fitnessLevelID,
-						genderID,
-						mainGoalID);
+				adapter.filter(searchPlan.getText().toString(), fitnessLevelID,
+						genderID, mainGoalID);
 			}
 		});
 
@@ -284,13 +351,13 @@ public class FindAPlan extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
-				 Intent planDetailIntent = new Intent(getActivity(),
-						 PlanDetail.class);
-				 planDetailIntent.putExtra("PlanID",
-				 myListPlan.get(position).getPlanID());
-				 // exerciseDetailIntent.putExtra("workoutID", workoutID);
-				 searchPlan.clearFocus();
-				 startActivity(planDetailIntent);
+				Intent planDetailIntent = new Intent(getActivity(),
+						PlanDetail.class);
+				planDetailIntent.putExtra("PlanID", myListPlan.get(position)
+						.getPlanID());
+				// exerciseDetailIntent.putExtra("workoutID", workoutID);
+				searchPlan.clearFocus();
+				startActivity(planDetailIntent);
 			}
 		});
 	}
@@ -308,12 +375,19 @@ public class FindAPlan extends Fragment {
 		}
 	}
 
-	// An ban phim khi bam ra ban ngoai
+	// An ban phim khi bam ra ben ngoai
 	protected void hideKeyboard(View view) {
 		InputMethodManager in = (InputMethodManager) getActivity()
 				.getSystemService(getActivity().INPUT_METHOD_SERVICE);
 		in.hideSoftInputFromWindow(view.getWindowToken(),
 				InputMethodManager.HIDE_NOT_ALWAYS);
+	}
+
+	@Override
+	public void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		getData();
 	}
 
 	@Override
@@ -328,7 +402,7 @@ public class FindAPlan extends Fragment {
 		// TODO Auto-generated method stub
 		int id = item.getItemId();
 		if (id == R.id.add_Plan) {
-			Intent intent = new Intent(getActivity(),AddPlan.class);
+			Intent intent = new Intent(getActivity(), AddPlan.class);
 			startActivity(intent);
 		}
 		return super.onOptionsItemSelected(item);

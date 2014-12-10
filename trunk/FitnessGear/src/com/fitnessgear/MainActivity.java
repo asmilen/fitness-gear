@@ -64,6 +64,7 @@ public class MainActivity extends Activity {
 	//database
 	public static DataBaseHelper dbHelper;
 	public static SQLiteDatabase db = null;
+//	public static int PlanID = 1000;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
