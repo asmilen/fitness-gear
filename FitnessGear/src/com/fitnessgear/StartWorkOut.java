@@ -1,5 +1,6 @@
 package com.fitnessgear;
 
+import com.fitnessgear.child.PlanDetail;
 import com.fitnessgear.child.StartWorkOutDetail;
 import com.fitnessgear.database.DatabaseUltility;
 import java.lang.reflect.Array;
@@ -11,8 +12,11 @@ import com.fitnessgear.adapter.GridAdapter;
 import com.fitnessgear.database.DataBaseHelper;
 import com.fitnessgear.model.WorkoutItem;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,11 +32,13 @@ import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 public class StartWorkOut extends Fragment {
 
@@ -51,6 +57,12 @@ public class StartWorkOut extends Fragment {
 	private TextView txtArverageTime;
 	private TextView txtTotalTime;
 	private TextView txtTotalCadio;
+	
+	private EditText txtWorkoutTime;
+	private EditText txtTotalCardioTime;
+	private EditText txtTotalExercise;
+	private EditText txtTotalSets;
+	private EditText txtDescription;
 
 	private ArrayList<WorkoutItem> item;
 
@@ -67,10 +79,7 @@ public class StartWorkOut extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_start_workout,
 				container, false);
 
-		Cursor workout = MainActivity.db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
-				null);
-		//Khoi tao ArrayList cac WorkoutItem
-		item = new ArrayList<WorkoutItem>();
+		
 
 		grid = (GridView) rootView.findViewById(R.id.listExerciseOnPlan);
 
@@ -90,54 +99,7 @@ public class StartWorkOut extends Fragment {
 
 		// Call method
 		getData();
-		//Add value to ArrayList
-//		for (int i = 1; i <= Integer.parseInt(txtTotalWeeks.getText()
-//				.toString()); i++) {
-//			item.add(new WorkoutItem("Week " + i));
-			while (workout.moveToNext()) {
-				item.add(new WorkoutItem(
-						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.WorkoutID),
-						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.WorkoutName),
-						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.Description),
-						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalWorkoutTime),
-						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalCardioTime),
-						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalExercises),
-						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalSets)));
-//						workout.getString(workout.getColumnIndex("WorkoutID")),
-//						workout.getString(workout.getColumnIndex("WorkoutName")),
-//						workout.getString(workout.getColumnIndex("Description")),
-//						workout.getString(workout.getColumnIndex("TotalWorkoutTime")),
-//						workout.getString(workout.getColumnIndex("TotalCardioTime")),
-//						workout.getString(workout.getColumnIndex("TotalExercises")),
-//						workout.getString(workout.getColumnIndex("TotalSets"))));
-			}
-//		}
-
-		GridAdapter adapter = new GridAdapter(getActivity(), item);
-
-		grid.setAdapter(adapter);
-		//Set click for Grid View Start Workout
-		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				int pos = position;
-				Intent intent = new Intent(getActivity(),
-						StartWorkOutDetail.class);
-				// item.get(position).getWorkoutID();
-				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
-				intent.putExtra("TotalWorkoutTime", item.get(position).getTotalWorkoutTime());
-				intent.putExtra("TotalCardioTime", item.get(position).getTotalCardioTime());
-				intent.putExtra("TotalExercises", item.get(position).getTotalExercises());
-				intent.putExtra("TotalSets", item.get(position).getTotalSets());
-				intent.putExtra("Day", (position+1)+"");
-				intent.putExtra("CreatedBy", author.getText().toString());
-				intent.putExtra("ProgramFor", txtGender.getText().toString());
-				intent.putExtra("MainGoal", txtMainGoal.getText().toString());
-				intent.putExtra("Level", txtLevelTrain.getText().toString());
-				startActivity(intent);
-			}
-		});
+		
 
 		return rootView;
 	}
@@ -178,6 +140,112 @@ public class StartWorkOut extends Fragment {
 				txtTotalTime.setText(""+DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalTimeAWeek));
 				txtTotalCadio.setText(""+DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalCardioTime));
 			}
+			Cursor workout = MainActivity.db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
+					null);
+			//Khoi tao ArrayList cac WorkoutItem
+			item = new ArrayList<WorkoutItem>();
+			//Add value to ArrayList
+			while (workout.moveToNext()) {
+				item.add(new WorkoutItem(
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.WorkoutID),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.WorkoutName),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.Description),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalWorkoutTime),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalCardioTime),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalExercises),
+						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalSets)));
+			}
+
+
+		GridAdapter adapter = new GridAdapter(getActivity(), item);
+
+		grid.setAdapter(adapter);
+		//Set click for Grid View Start Workout
+		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				int pos = position;
+				Intent intent = new Intent(getActivity(),
+						StartWorkOutDetail.class);
+				// item.get(position).getWorkoutID();
+				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
+				intent.putExtra("TotalWorkoutTime", item.get(position).getTotalWorkoutTime());
+				intent.putExtra("TotalCardioTime", item.get(position).getTotalCardioTime());
+				intent.putExtra("TotalExercises", item.get(position).getTotalExercises());
+				intent.putExtra("TotalSets", item.get(position).getTotalSets());
+				intent.putExtra("Day", (position+1)+"");
+				intent.putExtra("CreatedBy", author.getText().toString());
+				intent.putExtra("ProgramFor", txtGender.getText().toString());
+				intent.putExtra("MainGoal", txtMainGoal.getText().toString());
+				intent.putExtra("Level", txtLevelTrain.getText().toString());
+				startActivity(intent);
+			}
+		});
+		grid.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+			@Override
+			public boolean onItemLongClick(AdapterView<?> parent, View view,
+					int position, long id) {
+				// TODO Auto-generated method stub
+				final String workoutID = item.get(position).getWorkoutID();
+				// Get the layout inflater
+				LayoutInflater inflater = getActivity().getLayoutInflater();
+				//Get View from inflater
+				View updateWorkoutView = inflater.inflate(R.layout.activity_dialog_update_workout, null);
+				
+				txtWorkoutTime = (EditText) updateWorkoutView.findViewById(R.id.txtWorkoutTime);
+				txtTotalCardioTime = (EditText) updateWorkoutView.findViewById(R.id.txtTotalCardioTime);
+				txtTotalExercise = (EditText) updateWorkoutView.findViewById(R.id.txtTotalExercise);
+				txtTotalSets = (EditText) updateWorkoutView.findViewById(R.id.txtTotalSets);
+				txtDescription = (EditText) updateWorkoutView.findViewById(R.id.txtDescription);
+				Cursor updateWorkoutCursor = MainActivity.db.rawQuery("Select * From Workout Where WorkoutID = " + workoutID, null);
+				while(updateWorkoutCursor.moveToNext()){
+					txtWorkoutTime.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalWorkoutTime));
+					txtTotalCardioTime.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalCardioTime));
+					txtTotalExercise.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalExercises));
+					txtTotalSets.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalSets));
+					txtDescription.setText(""+DatabaseUltility.GetColumnValue(updateWorkoutCursor, DatabaseUltility.Description));
+				}
+				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+				
+				// Inflate and set the layout for the dialog
+				// Pass null as the parent view because its going in the dialog
+				// layout
+				builder.setView(updateWorkoutView)
+								.setTitle("Update Workout")
+						// Add action buttons
+						.setPositiveButton("Update",
+								new DialogInterface.OnClickListener() {
+									@Override
+									public void onClick(DialogInterface dialog,
+											int id) {
+										int workoutTime = Integer.parseInt(txtWorkoutTime.getText().toString());
+										int totalCardioTime = Integer.parseInt(txtTotalCardioTime.getText().toString());
+										int totalExercise = Integer.parseInt(txtTotalExercise.getText().toString());
+										int totalSets = Integer.parseInt(txtTotalSets.getText().toString());
+										String description = txtDescription.getText().toString();
+										MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
+										ContentValues contentWorkout = new ContentValues();
+										contentWorkout.put("TotalWorkoutTime", workoutTime);
+										contentWorkout.put("TotalCardioTime", totalCardioTime);
+										contentWorkout.put("TotalExercises", totalExercise);
+										contentWorkout.put("TotalSets", totalSets);
+										contentWorkout.put("Description",description);
+										MainActivity.db.update("Workout", contentWorkout, "WorkoutID = ?", new String[] {workoutID});
+										getData();
+									}
+								})
+						.setNegativeButton("Cancel",
+								new DialogInterface.OnClickListener() {
+									public void onClick(DialogInterface dialog,
+											int id) {
+									}
+								});
+				builder.show();
+				return true;
+			}
+		});
 		} catch (SQLiteException ex) {
 			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
 					.show();
