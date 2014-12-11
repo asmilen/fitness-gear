@@ -5,7 +5,12 @@
 
     <item
         android:id="@+id/track_workout"
-        android:title="@string/track_workout"
-        android:showAsAction="withText|ifRoom"/>
+        android:showAsAction="withText|ifRoom"
+        android:title="@string/track_workout"/>
+    <item
+        android:id="@+id/add_exercise"
+        android:icon="@drawable/ic_launcher"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_exercise"/>
 
 </menu>

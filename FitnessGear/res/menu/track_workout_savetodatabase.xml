@@ -8,3 +8,18 @@
         android:showAsAction="withText|ifRoom"/>
 
 </menu>
+<!-- <menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools" >
+
+    <item
+        android:id="@+id/track_workout"
+        android:showAsAction="withText|ifRoom"
+        android:title="@string/track_workout"/>
+    <item
+        android:id="@+id/add_exercise"
+        android:icon="@drawable/ic_launcher"
+        android:showAsAction="ifRoom"
+        android:title="@string/add_exercise"/>
+
+</menu> -->
