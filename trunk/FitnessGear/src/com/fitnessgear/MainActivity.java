@@ -175,7 +175,8 @@ public class MainActivity extends Activity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-			fragment = new Home();
+			startActivity(new Intent(getApplicationContext(),Home.class));
+//			fragment = new Home();
 			break;
 		case 1:
 			fragment = new StartWorkOut();
