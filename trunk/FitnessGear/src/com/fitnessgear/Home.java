@@ -1,67 +1,52 @@
 package com.fitnessgear;
 
+import com.fitnessgear.adapter.HomeViewPagerAdapter;
+import com.fitnessgear.adapter.ViewPagerAdapter;
+
 import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentTabHost;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.PagerTabStrip;
+import android.support.v4.view.ViewPager;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TabHost;
+import android.widget.Toast;
 import android.widget.TabHost.TabSpec;
 
-public class Home extends FragmentActivity {
+public class Home extends Fragment {
 	
-	private Button btn;
-	private TabHost tabHost;
-	private FragmentTabHost mTabHost;
+	ViewPager pager;
+	HomeViewPagerAdapter adapter;
+	PagerTabStrip pagerTab;
 	
 	@Override
-	protected void onCreate(Bundle arg0) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup container,
+			Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		setContentView(R.layout.fragment_home);
-//		tabHost = (TabHost) findViewById(android.R.id.tabhost);
-//		tabHost.setup();
-//		TabSpec userInformation = tabHost.newTabSpec("tab1");
-//		userInformation.setIndicator("User Information");
-//		userInformation.setContent(new Intent(this,UserInformation.class));
-//		
-//		tabHost.addTab(userInformation);
+		View rootView = inflater.inflate(R.layout.fragment_home, container,
+				false);
+		try{
+			pager = (ViewPager) rootView.findViewById(R.id.viewPager);
+			pagerTab = (PagerTabStrip) rootView.findViewById(R.id.pagerTabStrip);
+			adapter = new HomeViewPagerAdapter(getActivity().getSupportFragmentManager());
+			pagerTab.setTabIndicatorColor(Color.DKGRAY);
+			pagerTab.setBackgroundColor(Color.GRAY);
+			pagerTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+			pager.setAdapter(adapter);
+		}
+		catch(Exception ex){
+			Toast.makeText(getActivity(), "" + ex, Toast.LENGTH_LONG).show();
+		}
+		return rootView;
 	}
-	
-//	@Override
-//	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//			Bundle savedInstanceState) {
-//		// TODO Auto-generated method stub
-//		View rootView = inflater.inflate(R.layout.fragment_home, container,
-//				false);
-//		mTabHost = (FragmentTabHost) rootView.findViewById(android.R.id.tabhost);
-//		mTabHost.setup(getActivity().getApplicationContext(), getChildFragmentManager(), android.R.id.tabcontent);
-//		
-//		
-//		btn = (Button) rootView.findViewById(R.id.button1);
-//		btn.setOnClickListener(new OnClickListener() {
-//			
-//			@Override
-//			public void onClick(View v) {
-//				// TODO Auto-generated method stub
-//				Intent intent = new Intent(getActivity(),UserInformation.class);
-//				startActivity(intent);
-//			}
-//		});
-//		
-////		tabHost = (TabHost) rootView.findViewById(R.id.tabhost);
-//		tabHost.setup();
-//		TabSpec userInformation = tabHost.newTabSpec("tab1");
-//		userInformation.setIndicator("User Information");
-//		userInformation.setContent(new Intent(getActivity(),UserInformation.class));
-//		
-//		tabHost.addTab(userInformation);
-//		
-//		return rootView;
-//	}
 }

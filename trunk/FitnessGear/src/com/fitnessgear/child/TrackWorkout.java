@@ -138,7 +138,7 @@ public class TrackWorkout extends ActionBarActivity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// TODO Auto-generated method stub
 		getMenuInflater().inflate(R.menu.track_workout_savetodatabase, menu);
-		return super.onCreateOptionsMenu(menu);
+		return true;
 	}
 
 	@Override
@@ -179,6 +179,29 @@ public class TrackWorkout extends ActionBarActivity {
 								}
 							}).setIcon(android.R.drawable.ic_dialog_alert)
 					.show();
+		}
+		if(id == android.R.id.home){
+			new AlertDialog.Builder(this)
+			.setTitle("Go Back")
+			.setMessage(
+					"Are you sure you want to go back? All data will be lost")
+			.setPositiveButton(android.R.string.yes,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// continue with delete
+							TrackWorkout.this.finish();
+						}
+					})
+			.setNegativeButton(android.R.string.no,
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// do nothing
+							dialog.cancel();
+						}
+					}).setIcon(android.R.drawable.ic_dialog_alert).show();
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
