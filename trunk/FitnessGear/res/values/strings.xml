@@ -55,5 +55,8 @@
     <string name="title_activity_add_plan">AddPlan</string>
     <string name="title_activity_create_workout">CreateWorkout</string>
     <string name="title_activity_dialog_update_workout">DialogUpdateWorkout</string>
+    <string name="title_activity_user_information">UserInformation</string>
+    <string name="title_activity_update_body_stats">UpdateBodyStats</string>
+    <string name="title_activity_set_goals">SetGoals</string>
 
 </resources>
