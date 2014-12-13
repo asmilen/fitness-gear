@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
@@ -25,6 +27,7 @@ import com.fitnessgear.R.menu;
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.ExercisesItem;
+import com.fitnessgear.sapservices.HelloAccessoryProviderService;
 
 public class StartWorkOutDetail extends Activity {
 
@@ -212,13 +215,32 @@ public class StartWorkOutDetail extends Activity {
 		}
 		// Set action for Track Workout
 		if (id == R.id.track_workout) {
-			Intent track_intent = new Intent(getApplicationContext(),
-					TrackWorkoutDialog.class);
-			track_intent.putExtra("listExercise", myListExercise);
-			track_intent.putExtra("workoutID", workoutID);
-			track_intent.putExtra("message", message);
-			startActivity(track_intent);
+			new AlertDialog.Builder(this)
+			.setTitle("Track workout")
+			.setMessage(
+					"Do you want to track workout on Phone or on Watch?")
+			.setPositiveButton("On Phone",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// continue with delete
+							Intent intent = new Intent(getApplicationContext(), TrackWorkout.class);
+							intent.putExtra("listExercise", myListExercise);
+							intent.putExtra("workoutID", workoutID);
+							startActivity(intent);
+						}
+					})
+			.setNegativeButton("On Watch",
+					new DialogInterface.OnClickListener() {
+						public void onClick(DialogInterface dialog,
+								int which) {
+							// do nothing
+							HelloAccessoryProviderService.setMessage(message);
+						}
+					}).setIcon(android.R.drawable.ic_dialog_alert).show();
+			
 			return true;
+
 		}
 		return super.onOptionsItemSelected(item);
 	}
