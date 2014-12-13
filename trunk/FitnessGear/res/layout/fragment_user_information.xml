@@ -1,237 +1,367 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-     xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:layout_height="wrap_content" >
 
-    <LinearLayout 
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:gravity="center">
-    <TextView
-        android:id="@+id/titles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="Body Progress (Current/Goals)" />
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:gravity="center" >
+
+            <TextView
+                android:id="@+id/titles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Body Progress (Current/Goals)"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <AbsoluteLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="20dp"
+                android:text="Weight" />
+
+            <ProgressBar
+                android:id="@+id/progressWeigh"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="10dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="15dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="60dp"
+                android:text="Height" />
+
+            <ProgressBar
+                android:id="@+id/progressHeight"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="50dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvHeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="55dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="100dp"
+                android:text="Body Fat" />
+
+            <ProgressBar
+                android:id="@+id/progressBodyFat"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="90dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvBodyFat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="95dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="140dp"
+                android:text="Waist" />
+
+            <ProgressBar
+                android:id="@+id/progressWaist"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="130dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvWaist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="135dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="180dp"
+                android:text="Chest" />
+
+            <ProgressBar
+                android:id="@+id/progressChest"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="170dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvChest"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="175dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="220dp"
+                android:text="Arms" />
+
+            <ProgressBar
+                android:id="@+id/progressArms"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="210dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvArms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="215dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView8"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="260dp"
+                android:text="Forearms" />
+
+            <ProgressBar
+                android:id="@+id/progressForearms"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="250dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvForearms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="255dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="300dp"
+                android:text="Shoulders" />
+
+            <ProgressBar
+                android:id="@+id/progressShoulders"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="290dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvShoulders"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="295dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="340dp"
+                android:text="Hips" />
+
+            <ProgressBar
+                android:id="@+id/progressHips"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="330dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvHips"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="335dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="380dp"
+                android:text="Thighs" />
+
+            <ProgressBar
+                android:id="@+id/progressThighs"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="370dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvThighs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="375dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="420dp"
+                android:text="Calves" />
+
+            <ProgressBar
+                android:id="@+id/progressCalves"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="410dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvCalves"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="415dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+
+            <TextView
+                android:id="@+id/textView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="10dp"
+                android:layout_y="460dp"
+                android:text="Neck" />
+
+            <ProgressBar
+                android:id="@+id/progressNeck"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="220dp"
+                android:layout_height="30dp"
+                android:layout_x="90dp"
+                android:layout_y="450dp"
+                android:max="100"
+                android:progress="1"
+                android:progressDrawable="@drawable/custome_progress_bar" />
+
+            <TextView
+                android:id="@+id/tvNeck"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_x="170dp"
+                android:layout_y="455dp"
+                android:text="95.0/ 95.0"
+                android:textColor="#fff" />
+        </AbsoluteLayout>
     </LinearLayout>
-    
-    <AbsoluteLayout 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="20dp"
-            android:text="Weight" />
-        <ProgressBar
-            android:id="@+id/progressBar1"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="10dp" />
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="60dp"
-            android:text="Height" />
-        <ProgressBar
-            android:id="@+id/progressBar2"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="50dp" />
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="100dp"
-            android:text="Body Fat" />
-        <ProgressBar
-            android:id="@+id/progressBar3"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="90dp" />
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="140dp"
-            android:text="Waist" />
-        <ProgressBar
-            android:id="@+id/progressBar4"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="130dp" />
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="180dp"
-            android:text="Chest" />
-        <ProgressBar
-            android:id="@+id/progressBar5"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="170dp" />
-        <TextView
-            android:id="@+id/textView7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="220dp"
-            android:text="Arms" />
-        <ProgressBar
-            android:id="@+id/progressBar6"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="210dp" />
-        <TextView
-            android:id="@+id/textView8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="260dp"
-            android:text="Forearms" />
-        <ProgressBar
-            android:id="@+id/progressBar7"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="250dp" />
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="300dp"
-            android:text="Shoulders" />
-        <ProgressBar
-            android:id="@+id/progressBar8"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="30dp"
-            android:layout_x="90dp"
-            android:layout_y="290dp" />
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="340dp"
-            android:text="Hips" />
-        <ProgressBar
-            android:id="@+id/progressBar9"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_x="90dp"
-            android:layout_y="330dp" />
-        <TextView
-            android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="380dp"
-            android:text="Thighs" />
-        <ProgressBar
-            android:id="@+id/progressBar10"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_x="90dp"
-            android:layout_y="370dp" />
-        <TextView
-            android:id="@+id/textView12"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="420dp"
-            android:text="Calves" />
-        <ProgressBar
-            android:id="@+id/progressBar11"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_x="90dp"
-            android:layout_y="410dp" />
-        <TextView
-            android:id="@+id/textView13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_x="10dp"
-            android:layout_y="460dp"
-            android:text="Neck" />
-        <ProgressBar
-            android:id="@+id/progressBar12"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:progressDrawable="@drawable/custome_progress_bar"
-            android:max="100"
-            android:progress="5"
-            android:layout_width="220dp"
-            android:layout_height="wrap_content"
-            android:layout_x="90dp"
-            android:layout_y="450dp" />
-
-        
-        
-    </AbsoluteLayout>
-
-</LinearLayout>
 </ScrollView>
