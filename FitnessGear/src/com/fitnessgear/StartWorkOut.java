@@ -1,44 +1,29 @@
 package com.fitnessgear;
 
-import com.fitnessgear.child.PlanDetail;
-import com.fitnessgear.child.StartWorkOutDetail;
-import com.fitnessgear.database.DatabaseUltility;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-
-import com.fitnessgear.adapter.GridAdapter;
-import com.fitnessgear.database.DataBaseHelper;
-import com.fitnessgear.model.WorkoutItem;
 
 import android.app.AlertDialog;
-import android.app.Fragment;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
-import android.provider.ContactsContract.Contacts.Data;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView.FindListener;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.AdapterView.OnItemLongClickListener;
+
+import com.fitnessgear.adapter.GridAdapter;
+import com.fitnessgear.child.StartWorkOutDetail;
+import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.WorkoutItem;
 
 public class StartWorkOut extends Fragment {
 
