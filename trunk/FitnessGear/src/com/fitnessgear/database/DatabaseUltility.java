@@ -1,16 +1,15 @@
 package com.fitnessgear.database;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-
-import com.fitnessgear.MainActivity;
-import com.fitnessgear.model.LogExerciseItem;
-import com.fitnessgear.model.LogExerciseList;
+import java.util.Calendar;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-import android.widget.Toast;
+
+import com.fitnessgear.MainActivity;
+import com.fitnessgear.model.LogExerciseItem;
+import com.fitnessgear.model.LogExerciseList;
 
 // class dung de define ten cac cot trong database va lay du lieu tu database
 public class DatabaseUltility {
@@ -182,5 +181,11 @@ public class DatabaseUltility {
 		for (LogExerciseItem item : mylist)
 			total += item.getKgs();
 		return total;
+	}
+	
+	public static String getDayID(){
+		Calendar c = Calendar.getInstance();
+		return c.get(Calendar.DAY_OF_MONTH) + ""
+				+ (c.get(Calendar.MONTH) + 1) + "" + c.get(Calendar.YEAR);
 	}
 }

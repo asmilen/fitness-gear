@@ -1,6 +1,7 @@
 package com.fitnessgear;
 
 import java.text.DecimalFormat;
+import java.util.Calendar;
 
 import com.fitnessgear.adapter.HomeViewPagerAdapter;
 import com.fitnessgear.adapter.ViewPagerAdapter;
@@ -42,7 +43,7 @@ public class Home extends Fragment {
 
 	private ImageView avaImage;
 	private static TextView tvUserName;
-	private TextView tvAge;
+	private static TextView tvAge;
 	private static TextView tvGender;
 	private static TextView tvWeight;
 	private static TextView tvHeight;
@@ -106,7 +107,9 @@ public class Home extends Fragment {
 		Cursor user = MainActivity.db.rawQuery("SELECT * FROM User Where UserID = 1", null);
 		while(user.moveToNext()){
 			tvUserName.setText(DatabaseUltility.GetColumnValue(user, DatabaseUltility.UserName));
-//			tvAge.setText("Age: " + DatabaseUltility.GetColumnValue(user, DatabaseUltility.DateOfBirth));
+			String Year = DatabaseUltility.GetColumnValue(user, DatabaseUltility.DateOfBirth).substring(6);
+			int age = Calendar.getInstance().get(Calendar.YEAR) - Integer.valueOf(Year);
+			tvAge.setText("Age: " + age);
 			tvGender.setText("Gender: " + DatabaseUltility.GetColumnValue(user, DatabaseUltility.Gender));
 			tvWeight.setText("Weight: " + DatabaseUltility.GetFloatColumnValue(user, DatabaseUltility.Weight));
 			tvHeight.setText("Height: " + DatabaseUltility.GetFloatColumnValue(user, DatabaseUltility.Height));
@@ -121,7 +124,6 @@ public class Home extends Fragment {
 			tvBMI.setText("BMI: " + form.format(BMI));
 		}
 	}
-	
 
 	// An ban phim khi bam ra ben ngoai
 	protected void hideKeyboard(View view) {
