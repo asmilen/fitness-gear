@@ -467,20 +467,20 @@ public class AddPlan extends Activity {
 				int numTotalWeek = Integer.parseInt(totalWeek.getText().toString());
 				float numAveDay = Float.parseFloat(aveDay.getText().toString());
 				float numAveWorkoutTime = Float.parseFloat(aveWorkoutTime.getText().toString());
-				int numTotalTimeAWeek = Integer.parseInt(totalTimeAWeek.getText().toString());
+				int numTotalTimeAWeek = Integer.parseInt(totalTimeAWeek.getText().toString	());
 				int numTotalCardioTime = Integer.parseInt(totalCardioTime.getText().toString());
 				if(textPlanName.length()>4
 						&& textPlanName.length()<50
 						&& numTotalWeek < 99
-						&& numTotalWeek > 1
+						&& numTotalWeek >= 1
 						&& numAveDay <= 7
 						&& numAveDay > 0.1
 						&& numAveWorkoutTime < 180
 						&& numAveWorkoutTime > 5
 						&& numTotalTimeAWeek < 1260
-						&& numTotalTimeAWeek > 1
+						&& numTotalTimeAWeek > 5
 						&& numTotalCardioTime < 999
-						&& numTotalCardioTime > 1){
+						&& numTotalCardioTime >= 0){
 					final EditText numberWorkout = new EditText(AddPlan.this);
 					numberWorkout.setInputType(InputType.TYPE_CLASS_NUMBER);
 					InputFilter[] fArray = new InputFilter[1];
@@ -528,7 +528,7 @@ public class AddPlan extends Activity {
 									intent.putExtra("NumOfWorkout", numOfWorkout);
 									startActivity(intent);
 //									Toast.makeText(AddPlan.this, "Plan " + planID, Toast.LENGTH_LONG).show();
-									planID++;
+//									planID++;
 								}
 							}
 						}
@@ -554,6 +554,41 @@ public class AddPlan extends Activity {
 		in.hideSoftInputFromWindow(view.getWindowToken(),
 				InputMethodManager.HIDE_NOT_ALWAYS);
 	}
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		showWarning();
+//		super.onBackPressed();
+	}
+	
+	public void showWarning(){
+		new AlertDialog.Builder(AddPlan.this)
+		.setTitle("Warning")
+		.setMessage("Create plan not complete\n" +
+				"If you back to list plan, data will be gone\n" +
+				"Are you sure?")
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+//				MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
+//				MainActivity.db.execSQL("DELTE FROM Plan WHERE PlanID = " + --planID);
+//				Toast.makeText(AddPlan.this, "DELETE SUCCESSFULL", Toast.LENGTH_SHORT).show();
+				AddPlan.this.finish();
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		})
+		.show();
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -562,7 +597,7 @@ public class AddPlan extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			this.finish();
+			showWarning();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

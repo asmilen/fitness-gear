@@ -63,6 +63,7 @@ public class Home extends Fragment {
 			public boolean onTouch(View view, MotionEvent event) {
 				// TODO Auto-generated method stub
 				hideKeyboard(view);
+				UserInformation.getData();
 				return false;
 			}
 		});
@@ -70,12 +71,20 @@ public class Home extends Fragment {
 			pager = (ViewPager) rootView.findViewById(R.id.viewPager);
 			pagerTab = (PagerTabStrip) rootView
 					.findViewById(R.id.pagerTabStrip);
-			adapter = new HomeViewPagerAdapter(getActivity()
-					.getSupportFragmentManager());
+			adapter = new HomeViewPagerAdapter(getChildFragmentManager());
 			pagerTab.setTabIndicatorColor(Color.BLUE);
 			pagerTab.setBackgroundColor(Color.CYAN);
 			pagerTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			pager.setAdapter(adapter);
+			pagerTab.setOnTouchListener(new OnTouchListener() {
+				
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					// TODO Auto-generated method stub
+					UserInformation.getData();
+					return false;
+				}
+			});
 		} catch (Exception ex) {
 			Toast.makeText(getActivity(), "" + ex, Toast.LENGTH_LONG).show();
 		}
@@ -113,12 +122,6 @@ public class Home extends Fragment {
 		}
 	}
 	
-	@Override
-	public void onResume() {
-		// TODO Auto-generated method stub
-		Toast.makeText(getActivity(), "Resume", Toast.LENGTH_LONG).show();
-		super.onResume();
-	}
 
 	// An ban phim khi bam ra ben ngoai
 	protected void hideKeyboard(View view) {

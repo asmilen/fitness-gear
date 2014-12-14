@@ -45,8 +45,8 @@ public class StartWorkOut extends Fragment {
 	
 	private EditText txtWorkoutTime;
 	private EditText txtTotalCardioTime;
-	private EditText txtTotalExercise;
-	private EditText txtTotalSets;
+//	private EditText txtTotalExercise;
+//	private EditText txtTotalSets;
 	private EditText txtDescription;
 
 	private ArrayList<WorkoutItem> item;
@@ -181,15 +181,15 @@ public class StartWorkOut extends Fragment {
 				
 				txtWorkoutTime = (EditText) updateWorkoutView.findViewById(R.id.txtWorkoutTime);
 				txtTotalCardioTime = (EditText) updateWorkoutView.findViewById(R.id.txtTotalCardioTime);
-				txtTotalExercise = (EditText) updateWorkoutView.findViewById(R.id.txtTotalExercise);
-				txtTotalSets = (EditText) updateWorkoutView.findViewById(R.id.txtTotalSets);
+//				txtTotalExercise = (EditText) updateWorkoutView.findViewById(R.id.txtTotalExercise);
+//				txtTotalSets = (EditText) updateWorkoutView.findViewById(R.id.txtTotalSets);
 				txtDescription = (EditText) updateWorkoutView.findViewById(R.id.txtDescription);
 				Cursor updateWorkoutCursor = MainActivity.db.rawQuery("Select * From Workout Where WorkoutID = " + workoutID, null);
 				while(updateWorkoutCursor.moveToNext()){
 					txtWorkoutTime.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalWorkoutTime));
 					txtTotalCardioTime.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalCardioTime));
-					txtTotalExercise.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalExercises));
-					txtTotalSets.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalSets));
+//					txtTotalExercise.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalExercises));
+//					txtTotalSets.setText(""+DatabaseUltility.GetIntColumnValue(updateWorkoutCursor, DatabaseUltility.TotalSets));
 					txtDescription.setText(""+DatabaseUltility.GetColumnValue(updateWorkoutCursor, DatabaseUltility.Description));
 				}
 				AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
@@ -207,15 +207,15 @@ public class StartWorkOut extends Fragment {
 											int id) {
 										int workoutTime = Integer.parseInt(txtWorkoutTime.getText().toString());
 										int totalCardioTime = Integer.parseInt(txtTotalCardioTime.getText().toString());
-										int totalExercise = Integer.parseInt(txtTotalExercise.getText().toString());
-										int totalSets = Integer.parseInt(txtTotalSets.getText().toString());
+//										int totalExercise = Integer.parseInt(txtTotalExercise.getText().toString());
+//										int totalSets = Integer.parseInt(txtTotalSets.getText().toString());
 										String description = txtDescription.getText().toString();
 										MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
 										ContentValues contentWorkout = new ContentValues();
 										contentWorkout.put("TotalWorkoutTime", workoutTime);
 										contentWorkout.put("TotalCardioTime", totalCardioTime);
-										contentWorkout.put("TotalExercises", totalExercise);
-										contentWorkout.put("TotalSets", totalSets);
+//										contentWorkout.put("TotalExercises", totalExercise);
+//										contentWorkout.put("TotalSets", totalSets);
 										contentWorkout.put("Description",description);
 										MainActivity.db.update("Workout", contentWorkout, "WorkoutID = ?", new String[] {workoutID});
 										getData();
