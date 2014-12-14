@@ -79,7 +79,24 @@ public class DatabaseUltility {
 	//Fitness Level Table
 	public static final String FitnessLevelID = "FitnessLevelID";
 	public static final String FitnessLevelName = "FitnessLevelName";
-
+	
+	//User Table
+	public static final String UserID = "UserID";
+	public static final String UserName = "UserName";
+	public static final String DateOfBirth = "DateOfBirth";
+	public static final String Weight = "Weight";
+	public static final String BodyFat = "BodyFat";
+	public static final String BMI = "BMI";
+	public static final String Height = "Height";
+	public static final String Waist = "Waist";
+	public static final String Chest = "Chest";
+	public static final String Arms = "Arms";
+	public static final String Forearms = "Forearms";
+	public static final String Shoulders = "Shoulders";
+	public static final String Hips = "Hips";
+	public static final String Thighs = "Thighs";
+	public static final String Calves = "Calves";
+	public static final String Neck = "Neck";
 	// Get data from table
 
 	// Get data from column
