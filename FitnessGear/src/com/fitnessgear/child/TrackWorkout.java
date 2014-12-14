@@ -1,21 +1,7 @@
 package com.fitnessgear.child;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-
-import com.fitnessgear.R;
-import com.fitnessgear.R.id;
-import com.fitnessgear.R.layout;
-import com.fitnessgear.adapter.ViewPagerAdapter;
-import com.fitnessgear.database.DatabaseUltility;
-import com.fitnessgear.model.ExercisesItem;
-import com.fitnessgear.model.LogExerciseItem;
-import com.fitnessgear.model.LogExerciseList;
-import com.google.gson.Gson;
-
-import android.R.bool;
 import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
@@ -27,9 +13,15 @@ import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.Toast;
+
+import com.fitnessgear.R;
+import com.fitnessgear.adapter.ViewPagerAdapter;
+import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.ExercisesItem;
+import com.fitnessgear.model.LogExerciseItem;
+import com.fitnessgear.model.LogExerciseList;
+import com.google.gson.Gson;
 
 public class TrackWorkout extends ActionBarActivity {
 
@@ -61,10 +53,7 @@ public class TrackWorkout extends ActionBarActivity {
 
 		// Tao list Log_exercise
 		adapter.myLogExerciseList = new LogExerciseList();
-		Calendar c = Calendar.getInstance();
-		String DayID = c.get(Calendar.DAY_OF_MONTH) + ""
-				+ (c.get(Calendar.MONTH) + 1) + "" + c.get(Calendar.YEAR);
-
+		String DayID = DatabaseUltility.getDayID();
 		for (ExercisesItem item : adapter.myListExercise) {
 			int nSet = Integer.valueOf(item.getSets());
 			for (int i = 1; i <= nSet; i++) {
