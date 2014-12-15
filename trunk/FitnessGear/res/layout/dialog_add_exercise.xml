@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="20dp"
+        android:text="Sets" />
+
+    <EditText
+        android:id="@+id/txtSets"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="10dp"
+        android:ems="10"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="70dp"
+        android:text="Rests" />
+
+    <EditText
+        android:id="@+id/txtRest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="60dp"
+        android:ems="10"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/tvRepsMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="120dp"
+        android:text="RepsMin" />
+
+    <EditText
+        android:id="@+id/txtRepsMin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="110dp"
+        android:ems="10"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/tvRepsMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="170dp"
+        android:text="RepsMax" />
+
+    <EditText
+        android:id="@+id/txtRepsMax"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="160dp"
+        android:ems="10"
+        android:singleLine="true" />
+
+    <TextView
+        android:id="@+id/tvKg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="220dp"
+        android:text="Kg" />
+
+    <EditText
+        android:id="@+id/txtKg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="210dp"
+        android:ems="10"
+        android:singleLine="true" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/tvInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="5dp"
+        android:layout_y="120dp"
+        android:text="Interval" />
+
+    <EditText
+        android:id="@+id/txtInterval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="110dp"
+        android:ems="10"
+        android:singleLine="true" >
+    </EditText>
+
+</AbsoluteLayout>

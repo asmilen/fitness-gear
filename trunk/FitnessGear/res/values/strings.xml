@@ -58,5 +58,10 @@
     <string name="title_activity_user_information">UserInformation</string>
     <string name="title_activity_update_body_stats">UpdateBodyStats</string>
     <string name="title_activity_set_goals">SetGoals</string>
+    <string name="title_activity_workout_detail">WorkoutDetail</string>
+    <string name="title_activity_add_exercise">AddExercise</string>
+    <string name="title_activity_log_detail">LogDetail</string>
+    <string name="title_activity_log_note">LogNote</string>
+    <string name="title_activity_log_body_stats">LogBodyStats</string>
 
 </resources>
