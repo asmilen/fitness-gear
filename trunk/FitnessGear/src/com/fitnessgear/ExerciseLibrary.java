@@ -12,6 +12,8 @@ import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnTouchListener;
@@ -82,8 +84,6 @@ public class ExerciseLibrary extends Fragment {
 				return false;
 			}
 		});
-		// imgCloseButton.setBounds(0, 0,
-		// imgCloseButton.getIntrinsicWidth(),imgCloseButton.getIntrinsicHeight());
 
 		getData();
 		return rootView;
