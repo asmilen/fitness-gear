@@ -12,6 +12,7 @@ import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.PlanItem;
 import com.fitnessgear.model.WorkoutItem;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -35,13 +36,13 @@ import android.widget.AdapterView.OnItemLongClickListener;
 public class CreateWorkout extends Activity {
 
 	View updateWorkoutView;
-	
+
 	private GridView grid;
 	private int WorkoutID;
 	private int numOfWorkout;
 	private int planID;
 	private ArrayList<PlanItem> myListPlan;
-	
+
 	private TextView planName;
 	private TextView author;
 	private TextView txtGender;
@@ -54,36 +55,45 @@ public class CreateWorkout extends Activity {
 	private TextView txtArverageTime;
 	private TextView txtTotalTime;
 	private TextView txtTotalCadio;
-	
+
 	private EditText txtWorkoutTime;
 	private EditText txtTotalCardioTime;
-//	private EditText txtTotalExercise;
-//	private EditText txtTotalSets;
+	// private EditText txtTotalExercise;
+	// private EditText txtTotalSets;
 	private EditText txtDescription;
 
 	private ArrayList<WorkoutItem> item;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_start_workout);
-		
-		Toast.makeText(CreateWorkout.this, "Click Long Workout Item To Update Information", Toast.LENGTH_LONG).show();
-		
+		// Set Back button
+		ActionBar actionBar = getActionBar();
+		if (actionBar != null) {
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
+		Toast.makeText(CreateWorkout.this,
+				"Click Long Workout Item To Update Information",
+				Toast.LENGTH_LONG).show();
+
 		// Get the layout inflater
 		LayoutInflater inflater = CreateWorkout.this.getLayoutInflater();
-		//Get View from inflater
-		updateWorkoutView = inflater.inflate(R.layout.activity_dialog_update_workout, null);
-		
-		txtWorkoutTime = (EditText) updateWorkoutView.findViewById(R.id.txtWorkoutTime);
-		txtTotalCardioTime = (EditText) updateWorkoutView.findViewById(R.id.txtTotalCardioTime);
-//		txtTotalExercise = (EditText) updateWorkoutView.findViewById(R.id.txtTotalExercise);
-//		txtTotalSets = (EditText) updateWorkoutView.findViewById(R.id.txtTotalSets);
-		txtDescription = (EditText) updateWorkoutView.findViewById(R.id.txtDescription);
-		//Get PlanID and number of workout to create from previous activity
+		// Get View from inflater
+		updateWorkoutView = inflater.inflate(
+				R.layout.activity_dialog_update_workout, null);
+
+		txtWorkoutTime = (EditText) updateWorkoutView
+				.findViewById(R.id.txtWorkoutTime);
+		txtTotalCardioTime = (EditText) updateWorkoutView
+				.findViewById(R.id.txtTotalCardioTime);
+		txtDescription = (EditText) updateWorkoutView
+				.findViewById(R.id.txtDescription);
+		// Get PlanID and number of workout to create from previous activity
 		planID = getIntent().getIntExtra("PlanID", 0);
 		numOfWorkout = getIntent().getIntExtra("NumOfWorkout", 0);
-		//Get last WorkoutID from workout table
+		// Get last WorkoutID from workout table
 		Cursor workoutIDCursor = MainActivity.db.rawQuery(
 				"Select * from workout", null);
 
@@ -92,12 +102,19 @@ public class CreateWorkout extends Activity {
 					DatabaseUltility.WorkoutID);
 		}
 		WorkoutID++;
-		
-		for(int i = 1; i <= numOfWorkout;i++){
-			MainActivity.db.execSQL("Insert Into Workout (WorkoutID,PlanID,WorkoutName,TotalWorkoutTime,TotalCardioTime,TotalExercises,TotalSets,Description) Values (" + WorkoutID + "," + planID + ",'Day " + i + " Of Plan'"  + ",0,0,0,0,'Rest')");
+
+		for (int i = 1; i <= numOfWorkout; i++) {
+			MainActivity.db
+					.execSQL("Insert Into Workout (WorkoutID,PlanID,WorkoutName,TotalWorkoutTime,TotalCardioTime,TotalExercises,TotalSets,Description) Values ("
+							+ WorkoutID
+							+ ","
+							+ planID
+							+ ",'Day "
+							+ i
+							+ " Of Plan'" + ",0,0,0,0,'Rest')");
 			WorkoutID++;
-		}		
-		
+		}
+
 		grid = (GridView) findViewById(R.id.listExerciseOnPlan);
 
 		planName = (TextView) findViewById(R.id.planName);
@@ -146,21 +163,22 @@ public class CreateWorkout extends Activity {
 					int position, long id) {
 				int pos = position;
 				Intent intent = new Intent(getApplicationContext(),
-						StartWorkOutDetail.class);
+						WorkoutDetail.class);
 				// item.get(position).getWorkoutID();
 				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
-				intent.putExtra("TotalWorkoutTime", item.get(position)
-						.getTotalWorkoutTime());
-				intent.putExtra("TotalCardioTime", item.get(position)
-						.getTotalCardioTime());
-				intent.putExtra("TotalExercises", item.get(position)
-						.getTotalExercises());
-				intent.putExtra("TotalSets", item.get(position).getTotalSets());
+//				intent.putExtra("TotalWorkoutTime", item.get(position)
+//						.getTotalWorkoutTime());
+//				intent.putExtra("TotalCardioTime", item.get(position)
+//						.getTotalCardioTime());
+//				intent.putExtra("TotalExercises", item.get(position)
+//						.getTotalExercises());
+//				intent.putExtra("TotalSets", item.get(position).getTotalSets());
 				intent.putExtra("Day", (position + 1) + "");
 				intent.putExtra("CreatedBy", author.getText().toString());
 				intent.putExtra("ProgramFor", txtGender.getText().toString());
 				intent.putExtra("MainGoal", txtMainGoal.getText().toString());
 				intent.putExtra("Level", txtLevelTrain.getText().toString());
+				intent.putExtra("PlanID", planID);
 				startActivity(intent);
 			}
 		});
@@ -172,7 +190,8 @@ public class CreateWorkout extends Activity {
 				// TODO Auto-generated method stub
 				final String workoutID = item.get(position).getWorkoutID();
 				// Get the layout inflater
-				LayoutInflater inflater = CreateWorkout.this.getLayoutInflater();
+				LayoutInflater inflater = CreateWorkout.this
+						.getLayoutInflater();
 				// Get View from inflater
 				View updateWorkoutView = inflater.inflate(
 						R.layout.activity_dialog_update_workout, null);
@@ -181,10 +200,6 @@ public class CreateWorkout extends Activity {
 						.findViewById(R.id.txtWorkoutTime);
 				txtTotalCardioTime = (EditText) updateWorkoutView
 						.findViewById(R.id.txtTotalCardioTime);
-//				txtTotalExercise = (EditText) updateWorkoutView
-//						.findViewById(R.id.txtTotalExercise);
-//				txtTotalSets = (EditText) updateWorkoutView
-//						.findViewById(R.id.txtTotalSets);
 				txtDescription = (EditText) updateWorkoutView
 						.findViewById(R.id.txtDescription);
 				Cursor updateWorkoutCursor = MainActivity.db.rawQuery(
@@ -199,14 +214,6 @@ public class CreateWorkout extends Activity {
 							+ DatabaseUltility.GetIntColumnValue(
 									updateWorkoutCursor,
 									DatabaseUltility.TotalCardioTime));
-//					txtTotalExercise.setText(""
-//							+ DatabaseUltility.GetIntColumnValue(
-//									updateWorkoutCursor,
-//									DatabaseUltility.TotalExercises));
-//					txtTotalSets.setText(""
-//							+ DatabaseUltility.GetIntColumnValue(
-//									updateWorkoutCursor,
-//									DatabaseUltility.TotalSets));
 					txtDescription.setText(""
 							+ DatabaseUltility.GetColumnValue(
 									updateWorkoutCursor,
@@ -232,12 +239,6 @@ public class CreateWorkout extends Activity {
 										int totalCardioTime = Integer
 												.parseInt(txtTotalCardioTime
 														.getText().toString());
-//										int totalExercise = Integer
-//												.parseInt(txtTotalExercise
-//														.getText().toString());
-//										int totalSets = Integer
-//												.parseInt(txtTotalSets
-//														.getText().toString());
 										String description = txtDescription
 												.getText().toString();
 										MainActivity.db = MainActivity.dbHelper
@@ -247,10 +248,6 @@ public class CreateWorkout extends Activity {
 												workoutTime);
 										contentWorkout.put("TotalCardioTime",
 												totalCardioTime);
-//										contentWorkout.put("TotalExercises",
-//												totalExercise);
-//										contentWorkout.put("TotalSets",
-//												totalSets);
 										contentWorkout.put("Description",
 												description);
 										MainActivity.db.update("Workout",
@@ -271,7 +268,7 @@ public class CreateWorkout extends Activity {
 			}
 		});
 	}
-	
+
 	public void getData() {
 		try {
 			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
@@ -327,12 +324,12 @@ public class CreateWorkout extends Activity {
 		}
 	}
 
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.create_workout, menu);
-		return true;
-	}
+	// @Override
+	// public boolean onCreateOptionsMenu(Menu menu) {
+	// // Inflate the menu; this adds items to the action bar if it is present.
+	// getMenuInflater().inflate(R.menu.create_workout, menu);
+	// return true;
+	// }
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -340,7 +337,8 @@ public class CreateWorkout extends Activity {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == android.R.id.home) {
+			this.finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.fitnessgear.adapter.CalendarAdapter;
+import com.fitnessgear.child.LogDetail;
 import com.fitnessgear.child.LogExerciseDetail;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidGridAdapter;
@@ -79,7 +80,7 @@ public class Logs extends FragmentActivity {
 			public void onSelectDate(Date date, View view) {
 				try {
 					Intent intent = new Intent(getApplicationContext(),
-							LogExerciseDetail.class);
+							LogDetail.class);
 					String dayID = date.getDate() + "" + (date.getMonth()+1) + ""
 							+ (date.getYear()+1900);
 					intent.putExtra(DAYID, dayID);
