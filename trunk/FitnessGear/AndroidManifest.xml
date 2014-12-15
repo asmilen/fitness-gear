@@ -97,6 +97,38 @@
             android:label="@string/title_activity_dialog_update_workout"
             android:theme="@android:style/Theme.Holo.Dialog" >
         </activity>
+        <activity
+            android:name=".UserInformation"
+            android:label="@string/title_activity_user_information" >
+        </activity>
+        <activity
+            android:name=".UpdateBodyStats"
+            android:label="@string/title_activity_update_body_stats" >
+        </activity>
+        <activity
+            android:name=".SetGoals"
+            android:label="@string/title_activity_set_goals" >
+        </activity>
+        <activity
+            android:name=".child.WorkoutDetail"
+            android:label="@string/title_activity_workout_detail" >
+        </activity>
+        <activity
+            android:name=".child.AddExercise"
+            android:label="@string/title_activity_add_exercise" >
+        </activity>
+        <activity
+            android:name=".child.LogDetail"
+            android:label="@string/title_activity_log_detail" >
+        </activity>
+        <activity
+            android:name=".LogNote"
+            android:label="@string/title_activity_log_note" >
+        </activity>
+        <activity
+            android:name=".LogBodyStats"
+            android:label="@string/title_activity_log_body_stats" >
+        </activity>
     </application>
 
 </manifest>
