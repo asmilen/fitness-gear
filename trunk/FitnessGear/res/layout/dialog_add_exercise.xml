@@ -9,16 +9,18 @@
         android:layout_height="wrap_content"
         android:layout_x="5dp"
         android:layout_y="20dp"
-        android:text="Sets" />
+        android:text="Sets (set)" />
 
     <EditText
         android:id="@+id/txtSets"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="100dp"
+        android:layout_x="120dp"
         android:layout_y="10dp"
-        android:ems="10"
-        android:singleLine="true" />
+        android:ems="5"
+        android:singleLine="true"
+        android:maxLength="2"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/textView2"
@@ -26,16 +28,18 @@
         android:layout_height="wrap_content"
         android:layout_x="5dp"
         android:layout_y="70dp"
-        android:text="Rests" />
+        android:text="Rests (second)" />
 
     <EditText
         android:id="@+id/txtRest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="100dp"
+        android:layout_x="120dp"
         android:layout_y="60dp"
-        android:ems="10"
-        android:singleLine="true" />
+        android:ems="5"
+        android:singleLine="true" 
+        android:maxLength="3"
+        android:inputType="number" />
 
     <TextView
         android:id="@+id/tvRepsMin"
@@ -43,16 +47,18 @@
         android:layout_height="wrap_content"
         android:layout_x="5dp"
         android:layout_y="120dp"
-        android:text="RepsMin" />
+        android:text="Repetions Min ()" />
 
     <EditText
         android:id="@+id/txtRepsMin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="100dp"
+        android:layout_x="120dp"
         android:layout_y="110dp"
-        android:ems="10"
-        android:singleLine="true" />
+        android:ems="5"
+        android:singleLine="true"
+        android:maxLength="3"
+        android:inputType="number"  />
 
     <TextView
         android:id="@+id/tvRepsMax"
@@ -60,16 +66,18 @@
         android:layout_height="wrap_content"
         android:layout_x="5dp"
         android:layout_y="170dp"
-        android:text="RepsMax" />
+        android:text="Repetions Max ()" />
 
     <EditText
         android:id="@+id/txtRepsMax"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="100dp"
+        android:layout_x="120dp"
         android:layout_y="160dp"
-        android:ems="10"
-        android:singleLine="true" />
+        android:ems="5"
+        android:singleLine="true"
+        android:maxLength="3"
+        android:inputType="number"  />
 
     <TextView
         android:id="@+id/tvKg"
@@ -77,16 +85,18 @@
         android:layout_height="wrap_content"
         android:layout_x="5dp"
         android:layout_y="220dp"
-        android:text="Kg" />
+        android:text="Weight (kg)" />
 
     <EditText
         android:id="@+id/txtKg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="100dp"
+        android:layout_x="120dp"
         android:layout_y="210dp"
-        android:ems="10"
-        android:singleLine="true" >
+        android:ems="5"
+        android:singleLine="true"
+        android:maxLength="3"
+        android:inputType="number"  >
     </EditText>
 
     <TextView
@@ -95,16 +105,18 @@
         android:layout_height="wrap_content"
         android:layout_x="5dp"
         android:layout_y="120dp"
-        android:text="Interval" />
+        android:text="Interval (second)" />
 
     <EditText
         android:id="@+id/txtInterval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_x="100dp"
+        android:layout_x="120dp"
         android:layout_y="110dp"
-        android:ems="10"
-        android:singleLine="true" >
+        android:ems="5"
+        android:singleLine="true"
+        android:maxLength="4"
+        android:inputType="number"  >
     </EditText>
 
 </AbsoluteLayout>
