@@ -78,7 +78,6 @@ public class MainActivity extends FragmentActivity {
 		display.getSize(size);
 		int width = size.x;
 		int height = size.y;
-		Toast.makeText(getApplicationContext(), "Width: " + width + "/Height: " + height, Toast.LENGTH_LONG).show();
 		
 		//Khoi tao database
 		dbHelper = new DataBaseHelper(this);
@@ -233,7 +232,15 @@ public class MainActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.main, menu);
+        restoreActionBar();
         return super.onCreateOptionsMenu(menu);
+    }
+	
+	public void restoreActionBar() {
+        ActionBar actionBar = getActionBar();
+        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        actionBar.setDisplayShowTitleEnabled(true);
+        actionBar.setTitle(mTitle);
     }
 	
 	@Override
