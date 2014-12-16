@@ -47,7 +47,7 @@ import android.widget.Toast;
 
 public class AddExercise extends Activity {
 
-	private String workoutID;
+	private static String workoutID;
 	private int exerciseTypeID = 1;
 	private int muscleID = 1;
 	private int equipmentID = 1;
@@ -440,15 +440,6 @@ public class AddExercise extends Activity {
 												// TODO Auto-generated method
 												// stub
 												try {
-													ContentValues contentWorkoutExercise = new ContentValues();
-													contentWorkoutExercise.put(
-															"WorkoutID",
-															workoutID);
-													contentWorkoutExercise
-															.put("ExerciseID",
-																	myListExercise
-																			.get(pos)
-																			.getExerciseID());
 													if (txtSets.getText()
 															.toString()
 															.equals("")
@@ -497,48 +488,89 @@ public class AddExercise extends Activity {
 														txtInterval
 																.setText("0");
 													}
-													contentWorkoutExercise
-															.put("Sets",
-																	txtSets.getText()
-																			.toString());
-													contentWorkoutExercise
-															.put("Rests",
-																	txtRest.getText()
-																			.toString());
-													contentWorkoutExercise
-															.put("RepsMin",
-																	txtRepsMin
-																			.getText()
-																			.toString());
-													contentWorkoutExercise
-															.put("RepsMax",
-																	txtRepsMax
-																			.getText()
-																			.toString());
-													contentWorkoutExercise
-															.put("Kg", txtKg
+													int sets = Integer
+															.parseInt(txtSets
 																	.getText()
 																	.toString());
-													contentWorkoutExercise
-															.put("Interval",
-																	txtInterval
-																			.getText()
-																			.toString());
-													int addExercise = (int) MainActivity.db
-															.insert("Workout_Exercise",
-																	null,
-																	contentWorkoutExercise);
-													if (addExercise > 0) {
-														Toast.makeText(
-																AddExercise.this,
-																"Add Successfull with WorkoutID "
-																		+ workoutID
-																		+ " and exerciseID "
-																		+ myListExercise
+													int rests = Integer
+															.parseInt(txtRest
+																	.getText()
+																	.toString());
+													int repsMin = Integer
+															.parseInt(txtRepsMin
+																	.getText()
+																	.toString());
+													int repsMax = Integer
+															.parseInt(txtRepsMax
+																	.getText()
+																	.toString());
+													int kg = Integer
+															.parseInt(txtKg
+																	.getText()
+																	.toString());
+													int interval = Integer
+															.parseInt(txtInterval
+																	.getText()
+																	.toString());
+													if (sets > 0 && sets <= 10
+															&& rests > 0 && rests <=300
+															&& repsMin >= 0 && repsMin <= 100
+															&& repsMax >= repsMin && repsMax <= 100
+															&& kg >= 0 && kg < 200
+															&& interval >= 0 && interval <= 3600) {
+														ContentValues contentWorkoutExercise = new ContentValues();
+														contentWorkoutExercise
+																.put("WorkoutID",
+																		workoutID);
+														contentWorkoutExercise
+																.put("ExerciseID",
+																		myListExercise
 																				.get(pos)
-																				.getExerciseID(),
-																Toast.LENGTH_LONG)
-																.show();
+																				.getExerciseID());
+
+														contentWorkoutExercise
+																.put("Sets",
+																		txtSets.getText()
+																				.toString());
+														contentWorkoutExercise
+																.put("Rests",
+																		txtRest.getText()
+																				.toString());
+														contentWorkoutExercise
+																.put("RepsMin",
+																		txtRepsMin
+																				.getText()
+																				.toString());
+														contentWorkoutExercise
+																.put("RepsMax",
+																		txtRepsMax
+																				.getText()
+																				.toString());
+														contentWorkoutExercise
+																.put("Kg",
+																		txtKg.getText()
+																				.toString());
+														contentWorkoutExercise
+																.put("Interval",
+																		txtInterval
+																				.getText()
+																				.toString());
+														int addExercise = (int) MainActivity.db
+																.insert("Workout_Exercise",
+																		null,
+																		contentWorkoutExercise);
+														if (addExercise > 0) {
+															Toast.makeText(
+																	AddExercise.this,
+																	"Add Successfull with WorkoutID "
+																			+ workoutID
+																			+ " and exerciseID "
+																			+ myListExercise
+																					.get(pos)
+																					.getExerciseID(),
+																	Toast.LENGTH_LONG)
+																	.show();
+														}
 													}
 												} catch (Exception ex) {
 													Toast.makeText(
@@ -569,7 +601,7 @@ public class AddExercise extends Activity {
 	}
 
 	// Calculate Total Exercise and Total Sets in the workout
-	public void insertWorkoutAfterCalculate() {
+	public static void updateWorkoutAfterCalculate() {
 		Cursor totalExerciseCursor = MainActivity.db
 				.rawQuery(
 						"SELECT count(WorkoutID) as TotalExercises FROM Workout_Exercise WHERE WorkoutID = "
@@ -593,8 +625,8 @@ public class AddExercise extends Activity {
 		int updateWorkout = MainActivity.db.update("Workout", contentWorkout,
 				"WorkoutID = ?", new String[] { workoutID });
 		if (updateWorkout > 0) {
-			Toast.makeText(AddExercise.this, "Update Successfull",
-					Toast.LENGTH_LONG).show();
+			// Toast.makeText(), "Update Successfull",
+			// Toast.LENGTH_LONG).show();
 		}
 	}
 
@@ -605,11 +637,12 @@ public class AddExercise extends Activity {
 		in.hideSoftInputFromWindow(view.getWindowToken(),
 				InputMethodManager.HIDE_NOT_ALWAYS);
 	}
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
-		insertWorkoutAfterCalculate();
+		updateWorkoutAfterCalculate();
 	}
 
 	@Override
@@ -617,7 +650,7 @@ public class AddExercise extends Activity {
 		// TODO Auto-generated method stub
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			insertWorkoutAfterCalculate();
+			updateWorkoutAfterCalculate();
 			this.finish();
 			return true;
 		}
