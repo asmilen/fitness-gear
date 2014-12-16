@@ -50,6 +50,8 @@ public class StartWorkOut extends Fragment {
 	private EditText txtDescription;
 
 	private ArrayList<WorkoutItem> item;
+	
+	private int planID = 1;
 
 //	private SQLiteDatabase db = null;
 
@@ -155,15 +157,12 @@ public class StartWorkOut extends Fragment {
 						StartWorkOutDetail.class);
 				// item.get(position).getWorkoutID();
 				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
-				intent.putExtra("TotalWorkoutTime", item.get(position).getTotalWorkoutTime());
-				intent.putExtra("TotalCardioTime", item.get(position).getTotalCardioTime());
-				intent.putExtra("TotalExercises", item.get(position).getTotalExercises());
-				intent.putExtra("TotalSets", item.get(position).getTotalSets());
-				intent.putExtra("Day", (position+1)+"");
+				intent.putExtra("Day", (position + 1) + "");
 				intent.putExtra("CreatedBy", author.getText().toString());
 				intent.putExtra("ProgramFor", txtGender.getText().toString());
 				intent.putExtra("MainGoal", txtMainGoal.getText().toString());
 				intent.putExtra("Level", txtLevelTrain.getText().toString());
+				intent.putExtra("PlanID", planID);
 				startActivity(intent);
 			}
 		});
@@ -211,14 +210,18 @@ public class StartWorkOut extends Fragment {
 //										int totalSets = Integer.parseInt(txtTotalSets.getText().toString());
 										String description = txtDescription.getText().toString();
 										MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
-										ContentValues contentWorkout = new ContentValues();
-										contentWorkout.put("TotalWorkoutTime", workoutTime);
-										contentWorkout.put("TotalCardioTime", totalCardioTime);
-//										contentWorkout.put("TotalExercises", totalExercise);
-//										contentWorkout.put("TotalSets", totalSets);
-										contentWorkout.put("Description",description);
-										MainActivity.db.update("Workout", contentWorkout, "WorkoutID = ?", new String[] {workoutID});
-										getData();
+										if(workoutTime > 5 && workoutTime <= 180 
+												&& totalCardioTime >=0 && totalCardioTime <= 300
+												&& !description.equals("")){
+											ContentValues contentWorkout = new ContentValues();
+											contentWorkout.put("TotalWorkoutTime", workoutTime);
+											contentWorkout.put("TotalCardioTime", totalCardioTime);
+	//										contentWorkout.put("TotalExercises", totalExercise);
+	//										contentWorkout.put("TotalSets", totalSets);
+											contentWorkout.put("Description",description);
+											MainActivity.db.update("Workout", contentWorkout, "WorkoutID = ?", new String[] {workoutID});
+											getData();
+										}
 									}
 								})
 						.setNegativeButton("Cancel",
