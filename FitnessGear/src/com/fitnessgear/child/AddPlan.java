@@ -4,12 +4,10 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
-import android.R.integer;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
-import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -19,13 +17,11 @@ import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
-import android.view.View.OnKeyListener;
 import android.view.View.OnTouchListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -50,9 +46,6 @@ public class AddPlan extends Activity {
 	private ScrollView createPlanLayout;
 
 	private DatePickerDialog datePicker;
-	private DatePicker datePickerDia;
-
-	private Calendar myCalendar;
 	private EditText planName;
 	private Spinner mainGoal;
 	private Spinner gender;

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,6 +28,7 @@ import com.fitnessgear.R.menu;
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.ExercisesItem;
+import com.fitnessgear.model.WorkoutItem;
 import com.fitnessgear.sapservices.HelloAccessoryProviderService;
 
 public class StartWorkOutDetail extends Activity {
@@ -49,33 +51,43 @@ public class StartWorkOutDetail extends Activity {
 	private TextView txtTotalSets;
 	private TextView txtArverageTime;
 	private TextView txtTotalCardio;
+	
+	private int planID;
+	private ArrayList<WorkoutItem> item;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+		// Load giao diện
+		setContentView(R.layout.activity_start_work_out_detail);
+		// Set Back button
+		ActionBar actionBar = getActionBar();
+		if (actionBar != null) {
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
+
+		listExercise = (ListView) findViewById(R.id.listExercises);
+
+		txtNumOfDay = (TextView) findViewById(R.id.txtNumOfDay);
+		txtNumOfWeek = (TextView) findViewById(R.id.txtNumOfWeek);
+		txtCreatedBy = (TextView) findViewById(R.id.txtCreatedBy);
+		txtProgramFor = (TextView) findViewById(R.id.txtProgramFor);
+		txtMainGoal = (TextView) findViewById(R.id.txtMainGoal);
+		txtLevelTrain = (TextView) findViewById(R.id.txtLevelTrain);
+
+		txtTotalExercises = (TextView) findViewById(R.id.txtTotalExercises);
+		txtTotalSets = (TextView) findViewById(R.id.txtTotalSets);
+		txtArverageTime = (TextView) findViewById(R.id.txtArverageTime);
+		txtTotalCardio = (TextView) findViewById(R.id.txtTotalCardio);
+		
+		getData();
+
+	}
+
+	public void getData() {
 		try {
-			// Load giao diện
-			setContentView(R.layout.activity_start_work_out_detail);
-			// Set Back button
-			ActionBar actionBar = getActionBar();
-			if (actionBar != null) {
-				actionBar.setHomeButtonEnabled(true);
-				actionBar.setDisplayHomeAsUpEnabled(true);
-			}
-
-			listExercise = (ListView) findViewById(R.id.listExercises);
-
-			txtNumOfDay = (TextView) findViewById(R.id.txtNumOfDay);
-			txtNumOfWeek = (TextView) findViewById(R.id.txtNumOfWeek);
-			txtCreatedBy = (TextView) findViewById(R.id.txtCreatedBy);
-			txtProgramFor = (TextView) findViewById(R.id.txtProgramFor);
-			txtMainGoal = (TextView) findViewById(R.id.txtMainGoal);
-			txtLevelTrain = (TextView) findViewById(R.id.txtLevelTrain);
-
-			txtTotalExercises = (TextView) findViewById(R.id.txtTotalExercises);
-			txtTotalSets = (TextView) findViewById(R.id.txtTotalSets);
-			txtArverageTime = (TextView) findViewById(R.id.txtArverageTime);
-			txtTotalCardio = (TextView) findViewById(R.id.txtTotalCardio);
 			// Get Data from
 			Bundle bund = getIntent().getExtras();
 
@@ -106,15 +118,45 @@ public class StartWorkOutDetail extends Activity {
 			txtArverageTime.setText(totalWorkoutTime);
 			txtTotalCardio.setText(totalCardio);
 
-			// Cursor listExercises = db.rawQuery(
-			// "Select * FROM Workout_Exercise Where WorkoutID = " + workoutId,
-			// null);
-
 			// Load list exercise tu database
 			try {
 				Bundle extras = getIntent().getExtras();
 				workoutID = extras.getString("WorkoutID");
 
+				planID = getIntent().getIntExtra("PlanID", 0);
+				Cursor workout = MainActivity.db.rawQuery(
+						"SELECT * FROM Workout WHERE PlanID = " + planID + " AND WorkoutID = " + workoutID, null);
+				// Create ArrayList WorkoutItem
+				item = new ArrayList<WorkoutItem>();
+				// Add value to ArrayList
+				while (workout.moveToNext()) {
+					item.add(new WorkoutItem(DatabaseUltility.GetColumnValue(workout,
+							DatabaseUltility.WorkoutID), DatabaseUltility
+							.GetColumnValue(workout, DatabaseUltility.WorkoutName),
+							DatabaseUltility.GetColumnValue(workout,
+									DatabaseUltility.Description), DatabaseUltility
+									.GetColumnValue(workout,
+											DatabaseUltility.TotalWorkoutTime),
+							DatabaseUltility.GetColumnValue(workout,
+									DatabaseUltility.TotalCardioTime), DatabaseUltility
+									.GetColumnValue(workout,
+											DatabaseUltility.TotalExercises),
+							DatabaseUltility.GetColumnValue(workout,
+									DatabaseUltility.TotalSets)));
+					
+
+					txtTotalExercises.setText(DatabaseUltility
+							.GetColumnValue(workout,
+									DatabaseUltility.TotalExercises));
+					txtTotalSets.setText(DatabaseUltility.GetColumnValue(workout,
+							DatabaseUltility.TotalSets));
+					txtArverageTime.setText(DatabaseUltility
+							.GetColumnValue(workout,
+									DatabaseUltility.TotalWorkoutTime));
+					txtTotalCardio.setText(DatabaseUltility.GetColumnValue(workout,
+							DatabaseUltility.TotalCardioTime));
+				}
+				
 				// Khoi tao ArrayList tu ExercisesItem class va String message
 				myListExercise = new ArrayList<ExercisesItem>();
 				message = "";
@@ -128,22 +170,55 @@ public class StartWorkOutDetail extends Activity {
 				// Toast.makeText(getApplicationContext(), workoutId,
 				// Toast.LENGTH_LONG).show();
 				while (listExerciseCursor.moveToNext()) {
-					myListExercise.add(new ExercisesItem(
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,"Workout_Exercise." + DatabaseUltility.ExerciseID),
-							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.ExerciseName),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.ExerciseType),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.MuscleTarget),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Equipment),
-							DatabaseUltility.GetFloatColumnValue(listExerciseCursor,DatabaseUltility.Rating),
-							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.Image1),
-							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.Image2),
-							DatabaseUltility.GetColumnValue(listExerciseCursor,DatabaseUltility.Description),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Sets),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.RepsMin),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.RepsMax),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Kg),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Rests),
-							DatabaseUltility.GetIntColumnValue(listExerciseCursor,DatabaseUltility.Interval)));
+					myListExercise
+							.add(new ExercisesItem(
+									DatabaseUltility
+											.GetIntColumnValue(
+													listExerciseCursor,
+													"Workout_Exercise."
+															+ DatabaseUltility.ExerciseID),
+									DatabaseUltility.GetColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.ExerciseName),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.ExerciseType),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.MuscleTarget),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Equipment),
+									DatabaseUltility.GetFloatColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Rating),
+									DatabaseUltility.GetColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Image1),
+									DatabaseUltility.GetColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Image2),
+									DatabaseUltility.GetColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Description),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Sets),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.RepsMin),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.RepsMax),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Kg),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Rests),
+									DatabaseUltility.GetIntColumnValue(
+											listExerciseCursor,
+											DatabaseUltility.Interval)));
 
 					int aveReps = (Integer.valueOf(myListExercise.get(i)
 							.getRepsmin()) + Integer.valueOf(myListExercise
@@ -156,7 +231,7 @@ public class StartWorkOutDetail extends Activity {
 							+ String.valueOf(aveReps) + "."
 							+ myListExercise.get(i).getKg() + "."
 							+ myListExercise.get(i).getRests() + "."
-							+ myListExercise.get(i).getInterval()+";";
+							+ myListExercise.get(i).getInterval() + ";";
 
 					// myListExercise.add(ExerciseID);
 					i++;
@@ -182,6 +257,70 @@ public class StartWorkOutDetail extends Activity {
 						startActivity(exerciseDetailIntent);
 					}
 				});
+				listExercise
+						.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+							@Override
+							public boolean onItemLongClick(
+									AdapterView<?> parent, View view,
+									int position, long id) {
+								// TODO Auto-generated method stub
+								final int ExerciseID = myListExercise.get(
+										position).getExerciseID();
+								AlertDialog.Builder builder = new AlertDialog.Builder(
+										StartWorkOutDetail.this);
+								builder.setMessage("Are you want to delete")
+										.setIcon(
+												android.R.drawable.ic_dialog_alert)
+										.setTitle("Warning")
+										.setPositiveButton(
+												"Delete",
+												new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(
+															DialogInterface dialog,
+															int which) {
+														// TODO Auto-generated
+														// method stub
+														MainActivity.db = MainActivity.dbHelper
+																.getWritableDatabase();
+														int deleteExercise = MainActivity.db
+																.delete("Workout_Exercise",
+																		"ExerciseID = "
+																				+ ExerciseID,
+																		null);
+														if (deleteExercise > 0) {
+															Toast.makeText(
+																	StartWorkOutDetail.this,
+																	"Delete Exercise "
+																			+ ExerciseID,
+																	Toast.LENGTH_LONG)
+																	.show();
+															AddExercise
+																	.updateWorkoutAfterCalculate();
+															getData();
+														}
+													}
+												})
+										.setNegativeButton(
+												"Cancel",
+												new DialogInterface.OnClickListener() {
+
+													@Override
+													public void onClick(
+															DialogInterface dialog,
+															int which) {
+														// TODO Auto-generated
+														// method stub
+
+													}
+												});
+								builder.show();
+
+								return true;
+							}
+						});
 
 			} catch (SQLiteException ex) {
 				Toast.makeText(getApplicationContext(), ex.getMessage(),
@@ -191,7 +330,6 @@ public class StartWorkOutDetail extends Activity {
 			Toast.makeText(getApplicationContext(), ex.getMessage(),
 					Toast.LENGTH_LONG).show();
 		}
-
 	}
 
 	// Create Menu
@@ -216,33 +354,51 @@ public class StartWorkOutDetail extends Activity {
 		// Set action for Track Workout
 		if (id == R.id.track_workout) {
 			new AlertDialog.Builder(this)
-			.setTitle("Track workout")
-			.setMessage(
-					"Do you want to track workout on Phone or on Watch?")
-			.setPositiveButton("On Phone",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// continue with delete
-							Intent intent = new Intent(getApplicationContext(), TrackWorkout.class);
-							intent.putExtra("listExercise", myListExercise);
-							intent.putExtra("workoutID", workoutID);
-							startActivity(intent);
-						}
-					})
-			.setNegativeButton("On Watch",
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// do nothing
-							HelloAccessoryProviderService.setMessage(message);
-						}
-					}).setIcon(android.R.drawable.ic_dialog_alert).show();
-			
+					.setTitle("Track workout")
+					.setMessage(
+							"Do you want to track workout on Phone or on Watch?")
+					.setPositiveButton("On Phone",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// continue with delete
+									Intent intent = new Intent(
+											getApplicationContext(),
+											TrackWorkout.class);
+									intent.putExtra("listExercise",
+											myListExercise);
+									intent.putExtra("workoutID", workoutID);
+									startActivity(intent);
+								}
+							})
+					.setNegativeButton("On Watch",
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// do nothing
+									HelloAccessoryProviderService
+											.setMessage(message);
+								}
+							}).setIcon(android.R.drawable.ic_dialog_alert)
+					.show();
+
 			return true;
 
 		}
+		if (id == R.id.add_exercise) {
+			Intent intent = new Intent(getApplicationContext(),AddExercise.class);
+			Toast.makeText(getApplicationContext(), "Workout ID " + workoutID, Toast.LENGTH_LONG).show();
+			intent.putExtra("WorkoutID", workoutID);
+			startActivity(intent);
+		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	protected void onResume() {
+		// TODO Auto-generated method stub
+		super.onResume();
+		getData();
 	}
 
 }

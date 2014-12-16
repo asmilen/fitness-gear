@@ -21,6 +21,7 @@ import com.fitnessgear.model.WorkoutItem;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,6 +36,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -63,26 +65,8 @@ public class WorkoutDetail extends Activity {
 	private TextView txtTotalSets;
 	private TextView txtArverageTime;
 	private TextView txtTotalCardio;
-
 	
 	private ArrayList<WorkoutItem> item;
-	// private int exerciseTypeID = 1;
-	// private int muscleID = 1;
-	// private int equipmentID = 1;
-	//
-	// private ArrayList<ExercisesItem> myListFullExercise;
-	// private ArrayList<FilterItem> listFilterData;
-	// private ArrayList<ExerciseTypeItem> listTypes;
-	// private ArrayList<MuscleTargetItem> listMuscles;
-	// private ArrayList<EquipmentItem> listEquipments;
-	//
-	// private EditText searchExercise;
-	// private ListView listFullExercises;
-	// private ListView listFilterExercises;
-	//
-	// // The image we are going to use for the Clear button
-	// private Drawable clearbutton;
-	// private Drawable searchbutton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -232,6 +216,43 @@ public class WorkoutDetail extends Activity {
 					exerciseDetailIntent.putExtra("ExerciseID", myListExercise
 							.get(position).getExerciseID());
 					startActivity(exerciseDetailIntent);
+				}
+			});
+			listExercise.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent,
+						View view, int position, long id) {
+					// TODO Auto-generated method stub
+					final int ExerciseID = myListExercise.get(position).getExerciseID();
+					AlertDialog.Builder builder = new AlertDialog.Builder(WorkoutDetail.this);
+					builder.setMessage("Are you want to delete")
+					.setIcon(android.R.drawable.ic_dialog_alert)
+					.setTitle("Warning")
+					.setPositiveButton("Delete", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							int deleteExercise = MainActivity.db.delete("Workout_Exercise", "ExerciseID = " + ExerciseID, null);
+							if(deleteExercise > 0){
+								Toast.makeText(WorkoutDetail.this, "Delete Exercise " + ExerciseID, Toast.LENGTH_LONG).show();
+								AddExercise.updateWorkoutAfterCalculate();
+								getData();
+							}
+						}
+					})
+					.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+						
+						@Override
+						public void onClick(DialogInterface dialog, int which) {
+							// TODO Auto-generated method stub
+							
+						}
+					});
+					builder.show();
+					
+					return true;
 				}
 			});
 
