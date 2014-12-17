@@ -156,7 +156,7 @@ public class Report extends Fragment {
 		// MENU
 		@Override
 		public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-			inflater.inflate(R.menu.pie_chart, menu);
+//			inflater.inflate(R.menu.pie_chart, menu);
 		}
 
 		@Override
