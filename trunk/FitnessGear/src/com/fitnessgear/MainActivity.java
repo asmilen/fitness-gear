@@ -22,6 +22,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -50,6 +51,8 @@ import android.widget.Toast;
 
 public class MainActivity extends FragmentActivity {
 
+	private boolean doubleBackToExitPressOnce = false;
+	
 	private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -66,7 +69,7 @@ public class MainActivity extends FragmentActivity {
 	//database
 	public static DataBaseHelper dbHelper;
 	public static SQLiteDatabase db = null;
-//	public static int PlanID = 1000;
+	public static int positionDisplay = 0;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -158,7 +161,7 @@ public class MainActivity extends FragmentActivity {
         mDrawerLayout.setDrawerListener(mDrawerToggle);
         
         if (savedInstanceState == null) {
-        	displayView(0);
+        	displayView(positionDisplay);
         }
 	}
 	
@@ -266,5 +269,24 @@ public class MainActivity extends FragmentActivity {
         super.onConfigurationChanged(newConfig);
         // Pass any configuration change to the drawer toggls
         mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+    @Override
+    public void onBackPressed() {
+    	// TODO Auto-generated method stub
+    	 if (doubleBackToExitPressOnce) {
+    	        super.onBackPressed();
+    	        return;
+    	    }
+
+    	    this.doubleBackToExitPressOnce = true;
+    	    Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+
+    	    new Handler().postDelayed(new Runnable() {
+
+    	        @Override
+    	        public void run() {
+    	        	doubleBackToExitPressOnce=false;                       
+    	        }
+    	    }, 2000);
     }
 }
