@@ -298,7 +298,7 @@ public class StartWorkOutDetail extends Activity {
 																	Toast.LENGTH_LONG)
 																	.show();
 															AddExercise
-																	.updateWorkoutAfterCalculate();
+																	.updateWorkoutAfterCalculate(workoutID);
 															getData();
 														}
 													}
