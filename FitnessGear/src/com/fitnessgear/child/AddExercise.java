@@ -601,7 +601,7 @@ public class AddExercise extends Activity {
 	}
 
 	// Calculate Total Exercise and Total Sets in the workout
-	public static void updateWorkoutAfterCalculate() {
+	public static void updateWorkoutAfterCalculate(String workoutID) {
 		Cursor totalExerciseCursor = MainActivity.db
 				.rawQuery(
 						"SELECT count(WorkoutID) as TotalExercises FROM Workout_Exercise WHERE WorkoutID = "
@@ -642,7 +642,7 @@ public class AddExercise extends Activity {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
-		updateWorkoutAfterCalculate();
+		updateWorkoutAfterCalculate(workoutID);
 	}
 
 	@Override
@@ -650,7 +650,7 @@ public class AddExercise extends Activity {
 		// TODO Auto-generated method stub
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			updateWorkoutAfterCalculate();
+			updateWorkoutAfterCalculate(workoutID);
 			this.finish();
 			return true;
 		}

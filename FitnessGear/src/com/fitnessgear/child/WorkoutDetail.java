@@ -237,7 +237,7 @@ public class WorkoutDetail extends Activity {
 							int deleteExercise = MainActivity.db.delete("Workout_Exercise", "ExerciseID = " + ExerciseID, null);
 							if(deleteExercise > 0){
 								Toast.makeText(WorkoutDetail.this, "Delete Exercise " + ExerciseID, Toast.LENGTH_LONG).show();
-								AddExercise.updateWorkoutAfterCalculate();
+								AddExercise.updateWorkoutAfterCalculate(workoutID);
 								getData();
 							}
 						}
