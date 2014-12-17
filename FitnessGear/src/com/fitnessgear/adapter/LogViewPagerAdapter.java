@@ -4,12 +4,13 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.fitnessgear.LogBodyStats;
-import com.fitnessgear.LogNote;
+import com.fitnessgear.child.LogBodyStats;
 import com.fitnessgear.child.LogExerciseDetail;
+import com.fitnessgear.child.LogNote;
 
 public class LogViewPagerAdapter extends FragmentStatePagerAdapter {
 
+	public static String dayID;
 	public LogViewPagerAdapter(FragmentManager fm) {
 		super(fm);
 		// TODO Auto-generated constructor stub
@@ -20,10 +21,10 @@ public class LogViewPagerAdapter extends FragmentStatePagerAdapter {
 		// TODO Auto-generated method stub
 		switch(arg0) {
 
-        case 0: return LogExerciseDetail.newInstance("User Information");
-        case 1: return LogNote.newInstance("Update Stats");
-        case 2: return LogBodyStats.newInstance("Set Goals");
-        default: return LogExerciseDetail.newInstance("User Information");
+        case 0: return LogNote.newInstance(dayID);
+        case 1: return LogExerciseDetail.newInstance(dayID);
+        case 2: return LogBodyStats.newInstance(dayID);
+        default: return LogExerciseDetail.newInstance(dayID);
         }
 	}
 
@@ -32,7 +33,7 @@ public class LogViewPagerAdapter extends FragmentStatePagerAdapter {
 		// TODO Auto-generated method stub
 		return 3;
 	}
-	private static final String[] titles = { "User Information", "Update Stats", "Set Goals" };
+	private static final String[] titles = { "Note", "Exercise", "Body Stats" };
 	 
 	//...
 	 
