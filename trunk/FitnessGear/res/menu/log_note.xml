@@ -3,9 +3,8 @@
     tools:context="com.fitnessgear.LogNote" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/saveNote"
+        android:showAsAction="ifRoom"
+        android:title="@string/save_note"/>
 
 </menu>
