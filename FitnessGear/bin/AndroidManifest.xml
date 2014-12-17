@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.fitnessgear"
+    android:versionCode="1"
+    android:versionName="1.0" >
+
+    <uses-permission android:name="android.permission.BLUETOOTH" />
+    <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="com.samsung.accessory.permission.ACCESSORY_FRAMEWORK" />
+    <uses-permission android:name="com.samsung.wmanager.APP" />
+    <uses-permission android:name="com.samsung.wmanager.ENABLE_NOTIFICATION" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY" />
+    <uses-permission android:name="com.samsung.WATCH_APP_TYPE.Integrated" />
+
+    <uses-sdk
+        android:minSdkVersion="17"
+        android:targetSdkVersion="21" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <service android:name=".sapservices.HelloAccessoryProviderService" >
+        </service>
+
+        <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
+            <intent-filter>
+                <action android:name="android.accessory.service.action.ACCESSORY_SERVICE_CONNECTION_IND" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name="com.samsung.android.sdk.accessory.RegisterUponInstallReceiver" >
+            <intent-filter>
+                <action android:name="android.accessory.device.action.REGISTER_AFTER_INSTALL" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data
+            android:name="AccessoryServicesLocation"
+            android:value="/res/xml/accessoryservices.xml" />
+        <meta-data
+            android:name="GearAppType"
+            android:value="wgt" />
+
+        <activity
+            android:name=".child.TrackWorkout"
+            android:label="@string/title_activity_track_workout" >
+        </activity>
+        <activity
+            android:name=".child.ExerciseDetail"
+            android:label="@string/title_activity_exercise_detail" >
+        </activity>
+        <activity
+            android:name=".model.TrackworkoutDetail"
+            android:label="@string/title_activity_trackworkout_detail" >
+        </activity>
+        <activity
+            android:name=".child.TrackWorkoutDialog"
+            android:label="@string/title_activity_track_workout_dialog"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
+        <activity
+            android:name=".child.LogExerciseDetail"
+            android:label="@string/title_activity_log_exercise_detail" >
+        </activity>
+        <activity android:name=".Logs" >
+        </activity>
+        <activity android:name=".child.StartWorkOutDetail" >
+        </activity>
+        <activity
+            android:name=".child.PlanDetail"
+            android:label="@string/title_activity_plan_detail" >
+        </activity>
+        <activity
+            android:name=".child.AddPlan"
+            android:configChanges="keyboardHidden|orientation"
+            android:label="@string/title_activity_add_plan"
+            android:windowSoftInputMode="stateHidden" >
+        </activity>
+        <activity
+            android:name=".child.CreateWorkout"
+            android:label="@string/title_activity_create_workout" >
+        </activity>
+        <activity
+            android:name=".DialogUpdateWorkout"
+            android:label="@string/title_activity_dialog_update_workout"
+            android:theme="@android:style/Theme.Holo.Dialog" >
+        </activity>
+        <activity
+            android:name=".UserInformation"
+            android:label="@string/title_activity_user_information" >
+        </activity>
+        <activity
+            android:name=".UpdateBodyStats"
+            android:label="@string/title_activity_update_body_stats" >
+        </activity>
+        <activity
+            android:name=".SetGoals"
+            android:label="@string/title_activity_set_goals" >
+        </activity>
+        <activity
+            android:name=".child.WorkoutDetail"
+            android:label="@string/title_activity_workout_detail" >
+        </activity>
+        <activity
+            android:name=".child.AddExercise"
+            android:label="@string/title_activity_add_exercise" >
+        </activity>
+        <activity
+            android:name=".child.LogDetail"
+            android:label="@string/title_activity_log_detail" >
+        </activity>
+        <activity
+            android:name=".LogNote"
+            android:label="@string/title_activity_log_note" >
+        </activity>
+        <activity
+            android:name=".LogBodyStats"
+            android:label="@string/title_activity_log_body_stats" >
+        </activity>
+    </application>
+
+</manifest>
