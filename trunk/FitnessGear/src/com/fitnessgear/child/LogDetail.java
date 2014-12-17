@@ -1,5 +1,6 @@
 package com.fitnessgear.child;
 
+import com.fitnessgear.Logs;
 import com.fitnessgear.R;
 import com.fitnessgear.R.id;
 import com.fitnessgear.R.layout;
@@ -7,6 +8,7 @@ import com.fitnessgear.R.menu;
 import com.fitnessgear.adapter.HomeViewPagerAdapter;
 import com.fitnessgear.adapter.LogViewPagerAdapter;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -27,31 +29,41 @@ public class LogDetail extends FragmentActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_log_detail);
+		ActionBar actionBar = getActionBar();
+		// Set back button on action Bar
+		if (actionBar != null) {
+			actionBar.setHomeButtonEnabled(true);
+			actionBar.setDisplayHomeAsUpEnabled(true);
+		}
+		Bundle bund = getIntent().getExtras();
 		
 		pager = (ViewPager) findViewById(R.id.logPager);
 		pagerTab = (PagerTabStrip) 
 				findViewById(R.id.logPagerTabStrip);
 		adapter = new LogViewPagerAdapter(getSupportFragmentManager());
+		adapter.dayID = bund.getString(Logs.DAYID);
 		pagerTab.setTabIndicatorColor(Color.BLUE);
 		pagerTab.setBackgroundColor(Color.CYAN);
 		pagerTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		pager.setAdapter(adapter);
+		pager.setCurrentItem(1);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.log_detail, menu);
-		return true;
-	}
-
+//
+//	@Override
+//	public boolean onCreateOptionsMenu(Menu menu) {
+//		// Inflate the menu; this adds items to the action bar if it is present.
+//		getMenuInflater().inflate(R.menu.log_detail, menu);
+//		return true;
+//	}
+//
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
+		if (id == android.R.id.home) {
+			this.finish();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
