@@ -112,17 +112,17 @@ public class MainActivity extends FragmentActivity {
  		// Start Work Out
  		navDrawerItems.add(new NavDrawerItem(mMenuTitle[1], navMenuIcons.getResourceId(1, -1)));
  		// Find A Plan
- 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[2], navMenuIcons.getResourceId(2, -1), true, "22"));
+ 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[2], navMenuIcons.getResourceId(2, -1)));
  		// Execise Library
  		navDrawerItems.add(new NavDrawerItem(mMenuTitle[3], navMenuIcons.getResourceId(3, -1)));
  		// Report
  		navDrawerItems.add(new NavDrawerItem(mMenuTitle[4], navMenuIcons.getResourceId(4, -1)));
  		// Logs
- 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[5], navMenuIcons.getResourceId(5, -1), true, "50+"));
- 		// Backup
- 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[6], navMenuIcons.getResourceId(6, -1)));
- 		//Setting
- 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[7], navMenuIcons.getResourceId(7, -1)));
+ 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[5], navMenuIcons.getResourceId(5, -1)));
+// 		// Backup
+// 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[6], navMenuIcons.getResourceId(6, -1)));
+// 		//Setting
+// 		navDrawerItems.add(new NavDrawerItem(mMenuTitle[7], navMenuIcons.getResourceId(7, -1)));
         
 		// Recycle the typed array
 		navMenuIcons.recycle();
@@ -202,7 +202,8 @@ public class MainActivity extends FragmentActivity {
 			fragment = new Report();
 			break;
 		case 5:
-			startActivity(new Intent(getApplicationContext(),Logs.class));
+//			startActivity(new Intent(getApplicationContext(),Logs.class));
+			fragment = new Logs();
 			break;
 		case 6:
 			fragment = new Backup();
