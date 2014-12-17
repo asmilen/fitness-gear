@@ -585,14 +585,14 @@ public class UpdateBodyStats extends Fragment {
 							.toString());
 					float calves = Float.parseFloat(etCalves.getText()
 							.toString());
-					if (weight > 0 && weight < 200 && bodyFat > 0
-							&& bodyFat < 100 && height > 0 && height < 300
-							&& chest > 0 && chest < 200 && waist > 0
-							&& waist < 200 && arms > 0 && arms < 200
-							&& shoulders > 0 && shoulders < 200 && forearms > 0
-							&& forearms < 200 && neck > 0 && neck < 200
-							&& hips > 0 && hips < 200 && thighs > 0
-							&& thighs < 200 && calves > 0 && calves < 200) {
+					if (weight >= 0 && weight <= 200 && bodyFat >= 0
+							&& bodyFat <= 100 && height >= 0 && height <= 300
+							&& chest >= 0 && chest <= 200 && waist >= 0
+							&& waist <= 200 && arms >= 0 && arms <= 200
+							&& shoulders >= 0 && shoulders <= 200 && forearms >= 0
+							&& forearms <= 200 && neck >= 0 && neck <= 200
+							&& hips >= 0 && hips <= 200 && thighs >= 0
+							&& thighs <= 200 && calves >= 0 && calves <= 200) {
 
 						MainActivity.db = MainActivity.dbHelper
 								.getWritableDatabase();
