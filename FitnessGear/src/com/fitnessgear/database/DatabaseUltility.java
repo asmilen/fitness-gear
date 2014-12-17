@@ -185,7 +185,7 @@ public class DatabaseUltility {
 	
 	public static String getDayID(){
 		Calendar c = Calendar.getInstance();
-		return c.get(Calendar.DAY_OF_MONTH) + ""
-				+ (c.get(Calendar.MONTH) + 1) + "" + c.get(Calendar.YEAR);
+		return c.get(Calendar.DAY_OF_MONTH) + "/"
+				+ (c.get(Calendar.MONTH) + 1) + "/" + c.get(Calendar.YEAR);
 	}
 }

@@ -81,7 +81,7 @@ public class Logs extends FragmentActivity {
 				try {
 					Intent intent = new Intent(getApplicationContext(),
 							LogDetail.class);
-					String dayID = date.getDate() + "" + (date.getMonth()+1) + ""
+					String dayID = date.getDate() + "/" + (date.getMonth()+1) + "/"
 							+ (date.getYear()+1900);
 					intent.putExtra(DAYID, dayID);
 					startActivity(intent);
