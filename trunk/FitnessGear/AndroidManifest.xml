@@ -122,11 +122,11 @@
             android:label="@string/title_activity_log_detail" >
         </activity>
         <activity
-            android:name=".LogNote"
+            android:name="com.fitnessgear.child.LogNote"
             android:label="@string/title_activity_log_note" >
         </activity>
         <activity
-            android:name=".LogBodyStats"
+            android:name="com.fitnessgear.child.LogBodyStats"
             android:label="@string/title_activity_log_body_stats" >
         </activity>
     </application>
