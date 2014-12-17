@@ -96,6 +96,12 @@ public class DatabaseUltility {
 	public static final String Thighs = "Thighs";
 	public static final String Calves = "Calves";
 	public static final String Neck = "Neck";
+	//Log_Note Table
+	public static final String dayID = "Day";
+	public static final String NoteID = "NoteID"; 
+	public static final String NoteName = "NoteName";
+	public static final String NoteDetail = "NoteDetail";
+	
 	// Get data from table
 
 	// Get data from column
