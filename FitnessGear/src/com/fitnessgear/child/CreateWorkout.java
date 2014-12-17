@@ -338,9 +338,22 @@ public class CreateWorkout extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			this.finish();
+			Intent i=new Intent(this, MainActivity.class);
+	        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	        MainActivity.positionDisplay = 2;
+	        startActivity(i);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+	@Override
+	public void onBackPressed() {
+		// TODO Auto-generated method stub
+		super.onBackPressed();
+		Intent i=new Intent(this, MainActivity.class);
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        MainActivity.positionDisplay = 2;
+        startActivity(i);
 	}
 }
