@@ -70,9 +70,7 @@ public class ExerciseLibrary extends Fragment {
 		listFullExercises = (ListView) rootView
 				.findViewById(R.id.listFullExercises);
 		searchExercise = (EditText) rootView.findViewById(R.id.searchExercise);
-		clearbutton = getResources().getDrawable(
-				R.drawable.text_field_clear_btn);
-		searchbutton = getResources().getDrawable(R.drawable.search);
+		searchbutton = getResources().getDrawable(R.drawable.ic_action_search);
 		LinearLayout layout = (LinearLayout) rootView.findViewById(R.id.layout);
 		layout.setOnTouchListener(new OnTouchListener() {
 
@@ -286,8 +284,8 @@ public class ExerciseLibrary extends Fragment {
 		listFullExercises.setAdapter(adapter);
 
 		searchExercise.setHint("Type Exercise Name");
-		searchExercise.setCompoundDrawablesWithIntrinsicBounds(searchbutton,
-				null, null, null);
+//		searchExercise.setCompoundDrawablesWithIntrinsicBounds(searchbutton,
+//				null, null, null);
 		searchExercise.addTextChangedListener(new TextWatcher() {
 
 			@Override

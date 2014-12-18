@@ -111,7 +111,7 @@ public class CreateWorkout extends Activity {
 							+ planID
 							+ ",'Day "
 							+ i
-							+ " Of Plan'" + ",0,0,0,0,'Rest')");
+							+ "'" + ",0,0,0,0,'Rest')");
 			WorkoutID++;
 		}
 

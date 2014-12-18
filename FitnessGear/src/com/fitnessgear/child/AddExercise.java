@@ -97,9 +97,7 @@ public class AddExercise extends Activity {
 
 		listFullExercises = (ListView) findViewById(R.id.listFullExercises);
 		searchExercise = (EditText) findViewById(R.id.searchExercise);
-		// clearbutton = getResources().getDrawable(
-		// R.drawable.text_field_clear_btn);
-		searchbutton = getResources().getDrawable(R.drawable.search);
+		searchbutton = getResources().getDrawable(R.drawable.ic_action_search);
 		LinearLayout layout = (LinearLayout) findViewById(R.id.layout);
 		layout.setOnTouchListener(new OnTouchListener() {
 
@@ -312,10 +310,10 @@ public class AddExercise extends Activity {
 		adapter = new ListExercisesAdapter(AddExercise.this, myListExercise);
 
 		listFullExercises.setAdapter(adapter);
-
-		searchExercise.setHint("Type Exercise Name");
 		searchExercise.setCompoundDrawablesWithIntrinsicBounds(searchbutton,
 				null, null, null);
+		searchExercise.setHint("Type Exercise Name");
+		
 		searchExercise.addTextChangedListener(new TextWatcher() {
 
 			@Override
