@@ -25,6 +25,7 @@
         android:id="@+id/listFullPlan"
         android:layout_width="match_parent"
         android:layout_marginTop="2dp"
+        android:divider="@color/divider_color"
         android:layout_height="wrap_content" >
     </ListView>
 
