@@ -132,7 +132,7 @@ public class MainActivity extends FragmentActivity {
         // set up the drawer's list view with items and click listener
         adapter = new NavigationDrawerAdapter(getApplicationContext(), navDrawerItems);
         mDrawerList.setAdapter(adapter);
-        mDrawerList.setSelector(R.drawable.list_select);
+        mDrawerList.setSelector(R.drawable.list_selector);
         
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setHomeButtonEnabled(true);

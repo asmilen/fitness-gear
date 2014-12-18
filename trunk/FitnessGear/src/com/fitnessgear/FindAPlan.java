@@ -82,9 +82,7 @@ public class FindAPlan extends Fragment {
 		listFullPlan = (ListView) rootView.findViewById(R.id.listFullPlan);
 		listFilter = (ListView) rootView.findViewById(R.id.listFilterPlan);
 
-		clearbutton = getResources().getDrawable(
-				R.drawable.text_field_clear_btn);
-		searchbutton = getResources().getDrawable(R.drawable.search);
+		searchbutton = getResources().getDrawable(R.drawable.ic_action_search);
 
 		LinearLayout layout = (LinearLayout) rootView
 				.findViewById(R.id.layoutFindAPlan);
@@ -318,8 +316,8 @@ public class FindAPlan extends Fragment {
 
 		listFullPlan.setAdapter(adapter);
 
-		searchPlan.setCompoundDrawablesWithIntrinsicBounds(searchbutton, null,
-				null, null);
+//		searchPlan.setCompoundDrawablesWithIntrinsicBounds(searchbutton, null,
+//				null, null);
 		searchPlan.setHint("Type Plan Name");
 		searchPlan.addTextChangedListener(new TextWatcher() {
 
@@ -327,7 +325,6 @@ public class FindAPlan extends Fragment {
 			public void onTextChanged(CharSequence s, int start, int before,
 					int count) {
 				// TODO Auto-generated method stub
-				handleClearButton();
 			}
 
 			@Override

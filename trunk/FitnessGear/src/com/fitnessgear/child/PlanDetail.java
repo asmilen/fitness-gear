@@ -104,13 +104,6 @@ public class PlanDetail extends Activity {
 		getData();
 		
 	}
-	@Override
-	protected void onResume() {
-		// TODO Auto-generated method stub
-		super.onResume();
-		Toast.makeText(getApplicationContext(), "Resume", Toast.LENGTH_LONG).show();
-		
-	}
 
 	public void getData() {
 		try {
