@@ -43,7 +43,7 @@ public class Report extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_report, container,
 				false);
 		getFragmentManager().beginTransaction().add(R.id.container, new ColumnChartFragment()).commit();
-		getFragmentManager().beginTransaction().add(R.id.containerpiechart, new PlaceholderFragment()).commit();
+		getFragmentManager().beginTransaction().add(R.id.containerpiechart, new PieChartFragment()).commit();
 		return rootView;
 	}
 
@@ -88,9 +88,9 @@ public class Report extends Fragment {
 				for (int j = 0; j < numSubcolumns; ++j) {
 					String DayID = (c.get(Calendar.DAY_OF_MONTH) - (numColumns
 							- i - 1))
-							+ ""
+							+ "/"
 							+ (c.get(Calendar.MONTH) + 1)
-							+ ""
+							+ "/"
 							+ c.get(Calendar.YEAR);
 					values.add(new ColumnValue(DatabaseUltility
 							.GetTotalKgsDay(DayID), Utils.COLOR_VIOLET));
@@ -123,7 +123,7 @@ public class Report extends Fragment {
 	/**
 	 * A fragment containing a pie chart.
 	 */
-	public static class PlaceholderFragment extends Fragment {
+	public static class PieChartFragment extends Fragment {
 
 		private PieChartView chart;
 		private PieChartData data;
@@ -137,7 +137,7 @@ public class Report extends Fragment {
 		private boolean hasArcSeparated = false;
 		private boolean hasLabelForSelected = false;
 
-		public PlaceholderFragment() {
+		public PieChartFragment() {
 		}
 
 		@Override
@@ -159,77 +159,77 @@ public class Report extends Fragment {
 //			inflater.inflate(R.menu.pie_chart, menu);
 		}
 
-		@Override
-		public boolean onOptionsItemSelected(MenuItem item) {
-			int id = item.getItemId();
-			if (id == R.id.action_reset) {
-				reset();
-				generateData();
-				return true;
-			}
-			if (id == R.id.action_explode) {
-				explodeChart();
-				return true;
-			}
-			if (id == R.id.action_single_arc_separation) {
-				separateSingleArc();
-				return true;
-			}
-			if (id == R.id.action_center_circle) {
-				hasCenterCircle = !hasCenterCircle;
-				if (!hasCenterCircle) {
-					hasCenterText1 = false;
-					hasCenterText2 = false;
-				}
-
-				generateData();
-				return true;
-			}
-			if (id == R.id.action_center_text1) {
-				hasCenterText1 = !hasCenterText1;
-
-				if (hasCenterText1) {
-					hasCenterCircle = true;
-				}
-
-				hasCenterText2 = false;
-
-				generateData();
-				return true;
-			}
-			if (id == R.id.action_center_text2) {
-				hasCenterText2 = !hasCenterText2;
-
-				if (hasCenterText2) {
-					hasCenterText1 = true;// text 2 need text 1 to by also drawn.
-					hasCenterCircle = true;
-				}
-
-				generateData();
-				return true;
-			}
-			if (id == R.id.action_toggle_labels) {
-				toggleLabels();
-				return true;
-			}
-			if (id == R.id.action_toggle_labels_outside) {
-				toggleLabelsOutside();
-				return true;
-			}
-			if (id == R.id.action_animate) {
-				prepareDataAnimation();
-				chart.startDataAnimation();
-				return true;
-			}
-			if (id == R.id.action_toggle_selection_mode) {
-				toggleLabelForSelected();
-				Toast.makeText(getActivity(),
-						"Selection mode set to " + chart.isValueSelectionEnabled() + " select any point.",
-						Toast.LENGTH_SHORT).show();
-				return true;
-			}
-			return super.onOptionsItemSelected(item);
-		}
+//		@Override
+//		public boolean onOptionsItemSelected(MenuItem item) {
+//			int id = item.getItemId();
+//			if (id == R.id.action_reset) {
+//				reset();
+//				generateData();
+//				return true;
+//			}
+//			if (id == R.id.action_explode) {
+//				explodeChart();
+//				return true;
+//			}
+//			if (id == R.id.action_single_arc_separation) {
+//				separateSingleArc();
+//				return true;
+//			}
+//			if (id == R.id.action_center_circle) {
+//				hasCenterCircle = !hasCenterCircle;
+//				if (!hasCenterCircle) {
+//					hasCenterText1 = false;
+//					hasCenterText2 = false;
+//				}
+//
+//				generateData();
+//				return true;
+//			}
+//			if (id == R.id.action_center_text1) {
+//				hasCenterText1 = !hasCenterText1;
+//
+//				if (hasCenterText1) {
+//					hasCenterCircle = true;
+//				}
+//
+//				hasCenterText2 = false;
+//
+//				generateData();
+//				return true;
+//			}
+//			if (id == R.id.action_center_text2) {
+//				hasCenterText2 = !hasCenterText2;
+//
+//				if (hasCenterText2) {
+//					hasCenterText1 = true;// text 2 need text 1 to by also drawn.
+//					hasCenterCircle = true;
+//				}
+//
+//				generateData();
+//				return true;
+//			}
+//			if (id == R.id.action_toggle_labels) {
+//				toggleLabels();
+//				return true;
+//			}
+//			if (id == R.id.action_toggle_labels_outside) {
+//				toggleLabelsOutside();
+//				return true;
+//			}
+//			if (id == R.id.action_animate) {
+//				prepareDataAnimation();
+//				chart.startDataAnimation();
+//				return true;
+//			}
+//			if (id == R.id.action_toggle_selection_mode) {
+//				toggleLabelForSelected();
+//				Toast.makeText(getActivity(),
+//						"Selection mode set to " + chart.isValueSelectionEnabled() + " select any point.",
+//						Toast.LENGTH_SHORT).show();
+//				return true;
+//			}
+//			return super.onOptionsItemSelected(item);
+//		}
 
 		private void reset() {
 			chart.setCircleFillRatio(1.0f);
