@@ -75,7 +75,7 @@ public class CreateWorkout extends Activity {
 			actionBar.setDisplayHomeAsUpEnabled(true);
 		}
 		Toast.makeText(CreateWorkout.this,
-				"Click Long Workout Item To Update Information",
+				"Long Click Workout Item To Update Information",
 				Toast.LENGTH_LONG).show();
 
 		// Get the layout inflater
