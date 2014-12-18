@@ -124,7 +124,7 @@ public class ListPlansAdapter extends BaseAdapter {
 		textFilter = textFilter.toLowerCase(Locale.getDefault());
 
 		// BUILD QUERY WITH FILTER
-		String sql = "Select * from Plan Where PlanID>1 AND ";
+		String sql = "Select * from Plan Where PlanID > 1 AND ";
 		if (mainGoalID != 1)
 			sql += "Maingoal = " + mainGoalID + " AND ";
 		if (genderID != 1)
@@ -132,7 +132,7 @@ public class ListPlansAdapter extends BaseAdapter {
 		if (fitnessLevelID != 1)
 			sql += "FitnessLevel = " + fitnessLevelID + " AND ";
 		if(textFilter != ""){
-			sql += "PlanName LIKE '%" + textFilter + "%' AND";
+			sql += "PlanName LIKE '%" + textFilter + "%' AND ";
 		}
 
 		// Delete last AND
