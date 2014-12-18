@@ -11,9 +11,10 @@
         android:layout_height="wrap_content"
         android:text="Duong"
         android:textAlignment="center"
-        android:textColor="#00AEEF"
+        android:textColor="@color/text_title_color"
         android:textSize="10sp"
         android:textAllCaps="true"
+        android:background="@color/background_title_color"
         android:gravity="center" />
 
     <TextView
@@ -22,7 +23,7 @@
         android:layout_height="50dp"
         android:padding="5dp"
         android:text="Hoang"
-        android:textColor="#FFE1A4"
+        android:textColor="@color/text_description_color"
         android:textSize="7sp"
         android:gravity="center"
         android:textAlignment="center" />
