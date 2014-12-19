@@ -354,13 +354,19 @@ public class StartWorkOutDetail extends Activity {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									// continue with delete
-									Intent intent = new Intent(
-											getApplicationContext(),
-											TrackWorkout.class);
-									intent.putExtra("listExercise",
-											myListExercise);
-									intent.putExtra("workoutID", workoutID);
-									startActivity(intent);
+									if(myListExercise.size() <= 0){
+										
+									}
+									else{
+										Intent intent = new Intent(
+												getApplicationContext(),
+												TrackWorkout.class);
+										intent.putExtra("listExercise",
+												myListExercise);
+										intent.putExtra("workoutID", workoutID);
+										startActivity(intent);
+									}
+									
 								}
 							})
 					.setNegativeButton("On Watch",
