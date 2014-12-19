@@ -162,7 +162,7 @@ public class ListExercisesAdapter extends BaseAdapter {
 			if (equipmentID != 1)
 				sql += "Equipment = " + equipmentID + " AND ";
 			if(textFilter != ""){
-				sql += "ExerciseName LIKE '%" + textFilter + "%' AND";
+				sql += "ExerciseName LIKE '%" + textFilter + "%' AND ";
 			}
 
 			// Delete last AND

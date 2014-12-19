@@ -167,8 +167,6 @@ public class StartWorkOutDetail extends Activity {
 										+ "Where Workout_exercise.ExerciseID = Exercise.ExerciseID "
 										+ "AND WorkoutID = " + workoutID, null);
 				int i = 0;
-				// Toast.makeText(getApplicationContext(), workoutId,
-				// Toast.LENGTH_LONG).show();
 				while (listExerciseCursor.moveToNext()) {
 					myListExercise
 							.add(new ExercisesItem(
@@ -291,12 +289,6 @@ public class StartWorkOutDetail extends Activity {
 																				+ ExerciseID,
 																		null);
 														if (deleteExercise > 0) {
-															Toast.makeText(
-																	StartWorkOutDetail.this,
-																	"Delete Exercise "
-																			+ ExerciseID,
-																	Toast.LENGTH_LONG)
-																	.show();
 															AddExercise
 																	.updateWorkoutAfterCalculate(workoutID);
 															getData();
@@ -387,7 +379,6 @@ public class StartWorkOutDetail extends Activity {
 		}
 		if (id == R.id.add_exercise) {
 			Intent intent = new Intent(getApplicationContext(),AddExercise.class);
-			Toast.makeText(getApplicationContext(), "Workout ID " + workoutID, Toast.LENGTH_LONG).show();
 			intent.putExtra("WorkoutID", workoutID);
 			startActivity(intent);
 		}

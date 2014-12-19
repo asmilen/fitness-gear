@@ -163,7 +163,7 @@ public class CreateWorkout extends Activity {
 					int position, long id) {
 				int pos = position;
 				Intent intent = new Intent(getApplicationContext(),
-						WorkoutDetail.class);
+						CreateWorkoutDetail.class);
 				// item.get(position).getWorkoutID();
 				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
 //				intent.putExtra("TotalWorkoutTime", item.get(position)

@@ -4,11 +4,8 @@ public class PlanItem {
 	private int PlanID;
 	private String PlanName;
 	private int MainGoalID;
-	private String MainGoalName;
 	private int GenderID;
-	private String GenderName;
 	private int FitnessLevelID;
-	private String FitnessLevelName;
 	private String CreatedBy;
 	private String DateCreated;
 	private int TotalWeeks;
@@ -17,20 +14,16 @@ public class PlanItem {
 	private int TotalCardioTime;
 	private int TotalTimeAWeek;
 
-	public PlanItem(int planID, String planName, int mainGoalID,
-			String mainGoalName, int genderID, String genderName,
-			int fitnessLevelID, String fitnessLevelName, String createdBy,
+	public PlanItem(int planID, String planName, int mainGoalID, int genderID,
+			int fitnessLevelID, String createdBy,
 			String dateCreated, int totalWeeks, float aveDay,
 			float aveWorkoutTime, int totalCardioTime, int totalTimeAWeek) {
 		super();
 		PlanID = planID;
 		PlanName = planName;
 		MainGoalID = mainGoalID;
-		MainGoalName = mainGoalName;
 		GenderID = genderID;
-		GenderName = genderName;
 		FitnessLevelID = fitnessLevelID;
-		FitnessLevelName = fitnessLevelName;
 		CreatedBy = createdBy;
 		DateCreated = dateCreated;
 		TotalWeeks = totalWeeks;
@@ -64,13 +57,6 @@ public class PlanItem {
 		MainGoalID = mainGoalID;
 	}
 
-	public String getMainGoalName() {
-		return MainGoalName;
-	}
-
-	public void setMainGoalName(String mainGoalName) {
-		MainGoalName = mainGoalName;
-	}
 
 	public int getGenderID() {
 		return GenderID;
@@ -80,28 +66,12 @@ public class PlanItem {
 		GenderID = genderID;
 	}
 
-	public String getGenderName() {
-		return GenderName;
-	}
-
-	public void setGenderName(String genderName) {
-		GenderName = genderName;
-	}
-
 	public int getFitnessLevelID() {
 		return FitnessLevelID;
 	}
 
 	public void setFitnessLevelID(int fitnessLevelID) {
 		FitnessLevelID = fitnessLevelID;
-	}
-
-	public String getFitnessLevelName() {
-		return FitnessLevelName;
-	}
-
-	public void setFitnessLevelName(String fitnessLevelName) {
-		FitnessLevelName = fitnessLevelName;
 	}
 
 	public String getCreatedBy() {

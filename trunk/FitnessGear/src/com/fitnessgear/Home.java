@@ -274,9 +274,6 @@ public class Home extends Fragment {
 												.update("User", contentUser,
 														"UserID = 1", null);
 										if (updateUser > 0) {
-											Toast.makeText(getActivity(),
-													"Update Successfull",
-													Toast.LENGTH_LONG).show();
 											getData();
 										}
 									}

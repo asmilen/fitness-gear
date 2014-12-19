@@ -155,9 +155,6 @@ public class LogNote extends Fragment {
 										"Log_Note", contentValueNote,
 										"NoteID = ? AND day = ?" , new String[]{""+noteID,dayID});
 								if (updateNote > 0) {
-									Toast.makeText(getActivity(),
-											"Update Note Successfull",
-											Toast.LENGTH_LONG).show();
 									getData();
 								}
 							}

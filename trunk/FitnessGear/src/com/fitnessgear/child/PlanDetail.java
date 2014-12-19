@@ -198,7 +198,7 @@ public class PlanDetail extends Activity {
 						int position, long id) {
 					int pos = position;
 					Intent intent = new Intent(getApplicationContext(),
-							StartWorkOutDetail.class);
+							WorkoutDetail.class);
 					// item.get(position).getWorkoutID();
 					intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
 					intent.putExtra("TotalWorkoutTime", item.get(position)
@@ -291,9 +291,6 @@ public class PlanDetail extends Activity {
 	}
 
 	public void addToWorkout() {
-
-		Toast.makeText(getApplicationContext(), "Workout ID " + WorkoutID,
-				Toast.LENGTH_LONG).show();
 
 		MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
 		Cursor planInformationCursor = MainActivity.db.rawQuery("Select * "

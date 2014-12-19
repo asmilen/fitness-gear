@@ -63,8 +63,6 @@ public class ExerciseDetail extends Activity {
 	public void getData() {
 		Intent exerciseIntent = getIntent();
 		exerciseID = exerciseIntent.getIntExtra("ExerciseID", 0);
-		// Toast.makeText(getApplicationContext(), exerciseID + "",
-		// Toast.LENGTH_SHORT).show();
 		try {
 			Cursor exerciseDetail = MainActivity.db
 					.rawQuery(

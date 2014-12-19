@@ -586,9 +586,6 @@ public class SetGoals extends Fragment {
 									userContent, "UserID=?",
 									new String[] { UserID });
 							if (setGoalStats > 0) {
-								Toast.makeText(getActivity(),
-										"Update Successfull", Toast.LENGTH_LONG)
-										.show();
 								Home.getData();
 								UserInformation.getData();
 								hideKeyboard(rootView);

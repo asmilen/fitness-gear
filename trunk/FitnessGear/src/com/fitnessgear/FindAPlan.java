@@ -168,9 +168,21 @@ public class FindAPlan extends Fragment {
 												int which) {
 											// TODO Auto-generated method stub
 											dialog.dismiss();
-											fitnessLevelID = listLevel.get(((AlertDialog) dialog).getListView().getCheckedItemPosition()).getFitnessLevelID();
-											listFilterData.get(0).setValueFilter(listLevel.get(((AlertDialog) dialog).getListView().getCheckedItemPosition()).getFitnessLevelName());
-											filterAdapter.notifyDataSetChanged();
+											fitnessLevelID = listLevel
+													.get(((AlertDialog) dialog)
+															.getListView()
+															.getCheckedItemPosition())
+													.getFitnessLevelID();
+											listFilterData
+													.get(0)
+													.setValueFilter(
+															listLevel
+																	.get(((AlertDialog) dialog)
+																			.getListView()
+																			.getCheckedItemPosition())
+																	.getFitnessLevelName());
+											filterAdapter
+													.notifyDataSetChanged();
 											adapter.filter(searchPlan.getText()
 													.toString(),
 													fitnessLevelID, genderID,
@@ -209,15 +221,6 @@ public class FindAPlan extends Fragment {
 													.toString(),
 													fitnessLevelID, genderID,
 													mainGoalID);
-											Toast.makeText(
-													getActivity(),
-													listFilterData
-															.get(1)
-															.getValueFilter()
-															.toString()
-															.toLowerCase(
-																	Locale.getDefault()),
-													0).show();
 										}
 									}).show();
 					break;
@@ -252,15 +255,6 @@ public class FindAPlan extends Fragment {
 													.toString(),
 													fitnessLevelID, genderID,
 													mainGoalID);
-											Toast.makeText(
-													getActivity(),
-													listFilterData
-															.get(2)
-															.getValueFilter()
-															.toString()
-															.toLowerCase(
-																	Locale.getDefault()),
-													0).show();
 										}
 									}).show();
 					break;
@@ -274,28 +268,19 @@ public class FindAPlan extends Fragment {
 		myListPlan = new ArrayList<PlanItem>();
 		Cursor listPlanCursor = MainActivity.db
 				.rawQuery("Select * "
-						+ "FROM Plan,Gender,FitnessLevel,Main_Goal "
-						+ "Where MainGoal = MainGoalID "
-						+ "AND Gender = GenderID "
-						+ "AND FitnessLevel = FitnessLevelID "
-						+ "AND PlanID > 1", null);
+						+ "FROM Plan "
+						+ "Where PlanID > 1", null);
 
 		while (listPlanCursor.moveToNext()) {
 			myListPlan.add(new PlanItem(DatabaseUltility.GetIntColumnValue(
 					listPlanCursor, DatabaseUltility.PlanID), DatabaseUltility
 					.GetColumnValue(listPlanCursor, DatabaseUltility.PlanName),
 					DatabaseUltility.GetIntColumnValue(listPlanCursor,
-							DatabaseUltility.MainGoalID), DatabaseUltility
-							.GetColumnValue(listPlanCursor,
-									DatabaseUltility.MainGoalName),
+							DatabaseUltility.MainGoal),
 					DatabaseUltility.GetIntColumnValue(listPlanCursor,
-							DatabaseUltility.GenderID), DatabaseUltility
-							.GetColumnValue(listPlanCursor,
-									DatabaseUltility.GenderName),
+							DatabaseUltility.Gender),
 					DatabaseUltility.GetIntColumnValue(listPlanCursor,
-							DatabaseUltility.FitnessLevelID), DatabaseUltility
-							.GetColumnValue(listPlanCursor,
-									DatabaseUltility.FitnessLevelName),
+							DatabaseUltility.FitnessLevel),
 					DatabaseUltility.GetColumnValue(listPlanCursor,
 							DatabaseUltility.CreatedBy), DatabaseUltility
 							.GetColumnValue(listPlanCursor,
@@ -316,8 +301,9 @@ public class FindAPlan extends Fragment {
 
 		listFullPlan.setAdapter(adapter);
 
-//		searchPlan.setCompoundDrawablesWithIntrinsicBounds(searchbutton, null,
-//				null, null);
+		// searchPlan.setCompoundDrawablesWithIntrinsicBounds(searchbutton,
+		// null,
+		// null, null);
 		searchPlan.setHint("Type Plan Name");
 		searchPlan.addTextChangedListener(new TextWatcher() {
 
@@ -337,8 +323,13 @@ public class FindAPlan extends Fragment {
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
-				adapter.filter(searchPlan.getText().toString(), fitnessLevelID,
-						genderID, mainGoalID);
+				try {
+					adapter.filter(searchPlan.getText().toString(),
+							fitnessLevelID, genderID, mainGoalID);
+				} catch (Exception ex) {
+					Toast.makeText(getActivity(), "" + ex, Toast.LENGTH_LONG).show();
+				}
+
 			}
 		});
 
