@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    android:background="#3F3F3F"
     android:orientation="horizontal"
-    android:gravity="center" >
+    android:gravity="center"
+    android:background="#fff" >
 
     <TextView
         android:id="@+id/titleFilter"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
         android:text="Main Goal"
-        android:textColor="#FFFFFF"
+        android:textColor="#606060"
         android:textAllCaps="true"
         android:gravity="center_vertical" />
 
@@ -21,7 +21,7 @@
         android:layout_height="50dp"
         android:text="All Goals"
         android:gravity="right|center_vertical"
-        android:textColor="#FFFFFF"
+        android:textColor="#606060"
         android:drawableRight="@drawable/next"/>
 
 </LinearLayout>
