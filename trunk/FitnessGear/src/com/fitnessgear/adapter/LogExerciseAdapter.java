@@ -118,7 +118,7 @@ public class LogExerciseAdapter extends BaseAdapter {
 		// Create the array adapter to bind the array to the listView
 		ArrayAdapter<String> aa;
 		aa = new ArrayAdapter<String>(mContext,
-				R.layout.mini_log_exercise_list, listSet);
+				android.R.layout.simple_list_item_1, listSet);
 
 		holder.listSet.setAdapter(aa);
 		return convertView;
