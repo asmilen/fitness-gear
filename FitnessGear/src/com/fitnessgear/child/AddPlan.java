@@ -596,10 +596,6 @@ public class AddPlan extends Activity {
 															"NumOfWorkout",
 															numOfWorkout);
 													startActivity(intent);
-													// Toast.makeText(AddPlan.this,
-													// "Plan " + planID,
-													// Toast.LENGTH_LONG).show();
-													// planID++;
 												}
 											}
 										}

@@ -558,16 +558,6 @@ public class AddExercise extends Activity {
 																		null,
 																		contentWorkoutExercise);
 														if (addExercise > 0) {
-															Toast.makeText(
-																	AddExercise.this,
-																	"Add Successfull with WorkoutID "
-																			+ workoutID
-																			+ " and exerciseID "
-																			+ myListExercise
-																					.get(pos)
-																					.getExerciseID(),
-																	Toast.LENGTH_LONG)
-																	.show();
 														}
 													}
 												} catch (Exception ex) {
@@ -623,7 +613,6 @@ public class AddExercise extends Activity {
 		int updateWorkout = MainActivity.db.update("Workout", contentWorkout,
 				"WorkoutID = ?", new String[] { workoutID });
 		if (updateWorkout > 0) {
-			// Toast.makeText(), "Update Successfull",
 			// Toast.LENGTH_LONG).show();
 		}
 	}

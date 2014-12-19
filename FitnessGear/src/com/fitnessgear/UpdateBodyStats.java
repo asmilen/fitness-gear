@@ -613,8 +613,6 @@ public class UpdateBodyStats extends Fragment {
 								userContent, "UserID=?",
 								new String[] { UserID });
 						if (updateStats > 0) {
-							Toast.makeText(getActivity(), "Update Successfull",
-									Toast.LENGTH_LONG).show();
 							Home.getData();
 							UserInformation.getData();
 							hideKeyboard(rootView);

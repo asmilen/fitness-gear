@@ -84,9 +84,33 @@ public class ListPlansAdapter extends BaseAdapter {
 		}
 
 		holder.planName.setText("" + listPlan.get(position).getPlanName());
-		holder.gender.setText("" + listPlan.get(position).getGenderName());
-		holder.mainGoal.setText("" + listPlan.get(position).getMainGoalName());
-		holder.level.setText("" + listPlan.get(position).getFitnessLevelName());
+		
+		Cursor mainGoalCursor = MainActivity.db.rawQuery(
+				"SELECT * FROM Main_Goal WHERE MainGoalID = "
+						+ listPlan.get(position).getMainGoalID(), null);
+		while (mainGoalCursor.moveToNext()) {
+			holder.mainGoal.setText(DatabaseUltility.GetColumnValue(mainGoalCursor,
+					DatabaseUltility.MainGoalName));
+		}
+		Cursor genderCursor = MainActivity.db.rawQuery(
+				"SELECT * FROM Gender WHERE GenderID = "
+						+ listPlan.get(position).getGenderID(), null);
+		while (genderCursor.moveToNext()) {
+			holder.gender.setText(DatabaseUltility.GetColumnValue(genderCursor,
+					DatabaseUltility.GenderName));
+		}
+		Cursor fitnessLevelCursor = MainActivity.db.rawQuery(
+				"SELECT * FROM FitnessLevel WHERE FitnessLevelID = "
+						+ listPlan.get(position).getFitnessLevelID(), null);
+		while (fitnessLevelCursor.moveToNext()) {
+			holder.level.setText(DatabaseUltility.GetColumnValue(
+					fitnessLevelCursor, DatabaseUltility.FitnessLevelName));
+		}
+		
+//		holder.gender.setText("" + listPlan.get(position).getGenderName());
+//		holder.mainGoal.setText("" + listPlan.get(position).getMainGoalName());
+//		holder.level.setText("" + listPlan.get(position).getFitnessLevelName());
+		
 		holder.totalWeek.setText("" + listPlan.get(position).getTotalWeeks());
 		holder.aveDay.setText("" + listPlan.get(position).getAveDay());
 		holder.aveWorkoutTime.setText(""
@@ -150,64 +174,60 @@ public class ListPlansAdapter extends BaseAdapter {
 		// Exec query and add to listPlan
 		Cursor c = MainActivity.db.rawQuery(sql, null);
 		while (c.moveToNext()) {
-			String mainGoalName = getGoalName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.MainGoal));
-			String genderName = getGenderName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.Gender));
-			String fitnessLevelName = getFitnessLevelName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.FitnessLevel));
-			listPlan.add(new PlanItem(DatabaseUltility.GetIntColumnValue(c,
-					DatabaseUltility.PlanID), DatabaseUltility.GetColumnValue(
-					c, DatabaseUltility.PlanName), mainGoalID, mainGoalName,
-					genderID, genderName, fitnessLevelID, fitnessLevelName,
-					DatabaseUltility.GetColumnValue(c,
-							DatabaseUltility.CreatedBy), DatabaseUltility
-							.GetColumnValue(c, DatabaseUltility.DateCreated),
-					DatabaseUltility.GetIntColumnValue(c,
-							DatabaseUltility.TotalWeeks), DatabaseUltility
-							.GetFloatColumnValue(c, DatabaseUltility.AveDay),
-					DatabaseUltility.GetFloatColumnValue(c,
-							DatabaseUltility.AveWorkoutTime), DatabaseUltility
-							.GetIntColumnValue(c,
-									DatabaseUltility.TotalCardioTime),
-					DatabaseUltility.GetIntColumnValue(c,
-							DatabaseUltility.TotalTimeAWeek)));
+//			String mainGoalName = getGoalName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.MainGoal));
+//			String genderName = getGenderName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.Gender));
+//			String fitnessLevelName = getFitnessLevelName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.FitnessLevel));
+			listPlan.add(new PlanItem(DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.PlanID),
+					DatabaseUltility.GetColumnValue(c, DatabaseUltility.PlanName),
+					DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.MainGoal),
+					DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.Gender),
+					DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.FitnessLevel),
+					DatabaseUltility.GetColumnValue(c, DatabaseUltility.CreatedBy),
+					DatabaseUltility.GetColumnValue(c, DatabaseUltility.DateCreated),
+					DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalWeeks),
+					DatabaseUltility.GetFloatColumnValue(c, DatabaseUltility.AveDay),
+					DatabaseUltility.GetFloatColumnValue(c, DatabaseUltility.AveWorkoutTime),
+					DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalCardioTime),
+					DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalTimeAWeek)));
 
 		}
 		notifyDataSetChanged();
 	}
 
-	private String getGoalName(String goalID) {
-		// TODO Auto-generated method stub
-		Cursor c1 = MainActivity.db.rawQuery(
-				"Select * from Main_Goal Where MainGoalID=" + goalID, null);
-		String goalName = "";
-		while (c1.moveToNext()) {
-			goalName = DatabaseUltility.GetColumnValue(c1,
-					DatabaseUltility.MainGoalName);
-		}
-		return goalName;
-	}
-
-	private String getGenderName(String genderID) {
-		// TODO Auto-generated method stub
-		Cursor c1 = MainActivity.db.rawQuery(
-				"Select * from Gender Where GenderID=" + genderID, null);
-		String genderName = "";
-		while (c1.moveToNext()) {
-			genderName = DatabaseUltility.GetColumnValue(c1,
-					DatabaseUltility.GenderName);
-		}
-		return genderName;
-	}
-
-	private String getFitnessLevelName(String FitnessLevelID) {
-		// TODO Auto-generated method stub
-		Cursor c1 = MainActivity.db.rawQuery(
-				"Select * from FitnessLevel Where FitnessLevelID ="
-						+ FitnessLevelID, null);
-		String Name = "";
-		while (c1.moveToNext()) {
-			Name = DatabaseUltility.GetColumnValue(c1,
-					DatabaseUltility.FitnessLevelName);
-		}
-		return Name;
-	}
+//	private String getGoalName(String goalID) {
+//		// TODO Auto-generated method stub
+//		Cursor c1 = MainActivity.db.rawQuery(
+//				"Select * from Main_Goal Where MainGoalID=" + goalID, null);
+//		String goalName = "";
+//		while (c1.moveToNext()) {
+//			goalName = DatabaseUltility.GetColumnValue(c1,
+//					DatabaseUltility.MainGoalName);
+//		}
+//		return goalName;
+//	}
+//
+//	private String getGenderName(String genderID) {
+//		// TODO Auto-generated method stub
+//		Cursor c1 = MainActivity.db.rawQuery(
+//				"Select * from Gender Where GenderID = " + genderID, null);
+//		String genderName = "";
+//		while (c1.moveToNext()) {
+//			genderName = DatabaseUltility.GetColumnValue(c1,
+//					DatabaseUltility.GenderName);
+//		}
+//		return genderName;
+//	}
+//
+//	private String getFitnessLevelName(String FitnessLevelID) {
+//		// TODO Auto-generated method stub
+//		Cursor c1 = MainActivity.db.rawQuery(
+//				"Select * from FitnessLevel Where FitnessLevelID = "
+//						+ FitnessLevelID, null);
+//		String Name = "";
+//		while (c1.moveToNext()) {
+//			Name = DatabaseUltility.GetColumnValue(c1,
+//					DatabaseUltility.FitnessLevelName);
+//		}
+//		return Name;
+//	}
 }
