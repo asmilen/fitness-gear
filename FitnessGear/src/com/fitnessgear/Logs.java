@@ -47,7 +47,8 @@ public class Logs extends Fragment {
 		// TODO Auto-generated method stub
 		
 		View rootView = inflater.inflate(R.layout.fragment_logs, container,false);
-		
+		try
+		{
 		// Setup caldroid fragment
 		// **** If you want normal CaldroidFragment, use below line ****
 		caldroidFragment = new CalendarCustomFragment();
@@ -114,7 +115,11 @@ public class Logs extends Fragment {
 
 		// Setup Caldroid
 		caldroidFragment.setCaldroidListener(listener);
-		
+		}
+		catch (Exception ex)
+		{
+			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
+		}
 		return rootView;
 	}
 }
