@@ -8,12 +8,14 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.PagerTitleStrip;
 import android.support.v4.view.ViewPager;
 import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.fitnessgear.R;
 import com.fitnessgear.adapter.ViewPagerAdapter;
@@ -23,7 +25,7 @@ import com.fitnessgear.model.LogExerciseItem;
 import com.fitnessgear.model.LogExerciseList;
 import com.google.gson.Gson;
 
-public class TrackWorkout extends ActionBarActivity {
+public class TrackWorkout extends FragmentActivity {
 
 	ViewPager pager;
 	ViewPagerAdapter adapter;
@@ -93,6 +95,11 @@ public class TrackWorkout extends ActionBarActivity {
 
 	}
 
+	private void setHasOptionsMenu(boolean b) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	@Override
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
@@ -143,16 +150,21 @@ public class TrackWorkout extends ActionBarActivity {
 								public void onClick(DialogInterface dialog,
 										int which) {
 									// continue with delete
-									SharedPreferences settings = PreferenceManager
-											.getDefaultSharedPreferences(getApplicationContext());
-									Gson gson = new Gson();
-									String json = settings.getString(
-											"logexerciselist", "");
-									LogExerciseList mylist = gson.fromJson(
-											json, LogExerciseList.class);
-									DatabaseUltility
-											.UpdateToLogExercise(mylist);
-									TrackWorkout.this.finish();
+									try {
+										SharedPreferences settings = PreferenceManager
+												.getDefaultSharedPreferences(getApplicationContext());
+										Gson gson = new Gson();
+										String json = settings.getString(
+												"logexerciselist", "");
+										LogExerciseList mylist = gson.fromJson(
+												json, LogExerciseList.class);
+										DatabaseUltility
+												.UpdateToLogExercise(mylist);
+										TrackWorkout.this.finish();
+									} catch (Exception ex) {
+										// TODO: handle exception
+										Toast.makeText(getApplicationContext(), ex.getMessage()	, Toast.LENGTH_LONG).show();
+									}
 								}
 							})
 					.setNegativeButton(
@@ -166,27 +178,28 @@ public class TrackWorkout extends ActionBarActivity {
 							}).setIcon(android.R.drawable.ic_dialog_alert)
 					.show();
 		}
-		if(id == android.R.id.home){
+		if (id == android.R.id.home) {
 			new AlertDialog.Builder(this)
-			.setTitle("Go Back")
-			.setMessage(
-					"Are you sure you want to go back? All data will be lost")
-			.setPositiveButton(android.R.string.yes,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// continue with delete
-							TrackWorkout.this.finish();
-						}
-					})
-			.setNegativeButton(android.R.string.no,
-					new DialogInterface.OnClickListener() {
-						public void onClick(DialogInterface dialog,
-								int which) {
-							// do nothing
-							dialog.cancel();
-						}
-					}).setIcon(android.R.drawable.ic_dialog_alert).show();
+					.setTitle("Go Back")
+					.setMessage(
+							"Are you sure you want to go back? All data will be lost")
+					.setPositiveButton(android.R.string.yes,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// continue with delete
+									TrackWorkout.this.finish();
+								}
+							})
+					.setNegativeButton(android.R.string.no,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// do nothing
+									dialog.cancel();
+								}
+							}).setIcon(android.R.drawable.ic_dialog_alert)
+					.show();
 			return true;
 		}
 		return super.onOptionsItemSelected(item);

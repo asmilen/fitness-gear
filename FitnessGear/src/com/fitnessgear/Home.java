@@ -55,6 +55,10 @@ public class Home extends Fragment {
 	private EditText etDoB;
 	private DatePickerDialog datePicker;
 
+	public Home() {
+		// TODO Auto-generated constructor stub
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {

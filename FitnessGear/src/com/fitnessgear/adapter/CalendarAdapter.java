@@ -102,15 +102,15 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 			// Customize for today
 			if (dateTime.equals(getToday())) {
 				cellView.setBackgroundResource(com.caldroid.R.drawable.red_border);
-			} else {
+			} else { 
 				cellView.setBackgroundResource(com.caldroid.R.drawable.cell_bg);
 			}
 		}
 
 		tv1.setText("" + dateTime.getDay());
 		
-		String dayID = dateTime.getDay()+""+dateTime.getMonth()+""+dateTime.getYear();
-		Cursor c = MainActivity.db.rawQuery("Select * from Log_Exercise where Day = " + dayID, null);
+		String dayID = dateTime.getDay()+"/"+dateTime.getMonth()+"/"+dateTime.getYear();
+		Cursor c = MainActivity.db.rawQuery("Select * from Log_Exercise where Day = '" + dayID+"'", null);
 		if (c.moveToNext())
 		{
 			img.setVisibility(View.VISIBLE);
