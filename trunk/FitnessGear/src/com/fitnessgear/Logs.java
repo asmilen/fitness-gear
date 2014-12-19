@@ -48,8 +48,6 @@ public class Logs extends Fragment {
 		
 		View rootView = inflater.inflate(R.layout.fragment_logs, container,false);
 		
-		final SimpleDateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
-
 		// Setup caldroid fragment
 		// **** If you want normal CaldroidFragment, use below line ****
 		caldroidFragment = new CalendarCustomFragment();

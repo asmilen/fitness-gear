@@ -3,6 +3,7 @@ package com.fitnessgear.database;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
@@ -134,8 +135,8 @@ public class DatabaseUltility {
 	}
 
 	// Update data to Log_exercise
-	public static void UpdateToLogExercise(LogExerciseList mylist) {
-		try {
+	public static void UpdateToLogExercise(LogExerciseList mylist) throws Exception  {
+	
 			ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
 			for (LogExerciseItem item : list) {
 				SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
@@ -143,25 +144,24 @@ public class DatabaseUltility {
 				db.execSQL("Delete from Log_Exercise Where ExerciseID = " + item.getExerciseID() + " And Day =" + item.getDay() +" And Sets = "+ item.getSets());
 				
 				// Insert
-				String[] args = new String[] { item.getDay(),
-						item.getExerciseID() + "", item.getSets() + "",
-						item.getReps() + "", item.getKgs() + "",
-						item.getInterval() + "" };
-				String sql = "INSERT INTO Log_Exercise VALUES ( ?, ?, ?, ?, ?,?)";
-
-			
-				db.execSQL(sql, args);
+				ContentValues values = new ContentValues();
+				values.put(DatabaseUltility.Day	, item.getDay());
+				values.put(DatabaseUltility.ExerciseID	, item.getExerciseID());
+				values.put(DatabaseUltility.Sets	, item.getSets());
+				values.put(DatabaseUltility.Reps	, item.getReps());
+				values.put(DatabaseUltility.Kg	, item.getKgs());
+				values.put(DatabaseUltility.Interval, item.getInterval());
+				db.insert("Log_Exercise", null, values);
 			}
-		} catch (Exception ex) {
-			Log.e("error", ex.getMessage());
-		}
+
 	}
 
 	// Get List From Log_exercise
 	public static ArrayList<LogExerciseItem> GetListFromLogExercise(String DayID) {
 		ArrayList<LogExerciseItem> myListExerciseDetail = new ArrayList<LogExerciseItem>();
-		Cursor listExerciseCursor = MainActivity.db.rawQuery("Select * "
-				+ "FROM Log_Exercise Where Day = " + DayID, null);
+		String sql = "Select * "
+				+ "FROM Log_Exercise Where Day = '" + DayID + "'";
+		Cursor listExerciseCursor = MainActivity.db.rawQuery(sql, null);
 
 		while (listExerciseCursor.moveToNext()) {
 			myListExerciseDetail.add(new LogExerciseItem(DayID,

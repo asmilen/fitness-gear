@@ -2,81 +2,68 @@ package com.fitnessgear.child;
 
 import java.util.ArrayList;
 
-import com.fitnessgear.Logs;
-import com.fitnessgear.MainActivity;
-import com.fitnessgear.R;
-import com.fitnessgear.UserInformation;
-import com.fitnessgear.adapter.ListExercisesAdapter;
-import com.fitnessgear.adapter.LogExerciseAdapter;
-import com.fitnessgear.database.DatabaseUltility;
-
-import com.fitnessgear.model.LogExerciseItem;
-
-import android.app.Activity;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Adapter;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.fitnessgear.MainActivity;
+import com.fitnessgear.R;
+import com.fitnessgear.adapter.LogExerciseAdapter;
+import com.fitnessgear.database.DatabaseUltility;
+import com.fitnessgear.model.LogExerciseItem;
+
 public class LogExerciseDetail extends Fragment {
 
-//	private ArrayList<LogExerciseItem> myListExerciseDetail;
-//	private ArrayList<Integer> myListExerciseID;
-//
-//	@Override
-//	public View onCreateView(LayoutInflater inflater,
-//			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-//		// TODO Auto-generated method stub
-//		View rootView = inflater.inflate(R.layout.activity_log_exercise_detail,
-//				container, false);
-//		String dayID = getArguments().getString("dayID");
-//		try {
-//
-//			// Khoi tao ArrayList tu LogExerciseItem class
-//			myListExerciseDetail = DatabaseUltility
-//					.GetListFromLogExercise(dayID);
-//			myListExerciseID = new ArrayList<Integer>();
-//
-//			Cursor listExerciseCursor = MainActivity.db.rawQuery(
-//					"Select Distinct ExerciseID from Log_Exercise Where Day= "
-//							+ dayID, null);
-//
-//			while (listExerciseCursor.moveToNext()) {
-//				myListExerciseID.add(DatabaseUltility.GetIntColumnValue(
-//						listExerciseCursor, DatabaseUltility.ExerciseID));
-//			}
-//
-//		} catch (Exception ex) {
-//			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
-//					.show();
-//		}
-//
-//		// adapter
-//		LogExerciseAdapter adapter = new LogExerciseAdapter(getActivity(),
-//				myListExerciseDetail, myListExerciseID);
-//
-//		// Set adapter
-//		ListView listview = (ListView) rootView.findViewById(R.id.listViewSet);
-//		listview.setAdapter(adapter);
-//		return rootView;
-//	}
-	
+	private ArrayList<LogExerciseItem> myListExerciseDetail;
+	private ArrayList<Integer> myListExerciseID;
+
 	@Override
 	public View onCreateView(LayoutInflater inflater,
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
-		View rootView = inflater.inflate(R.layout.activity_log_exercise_detail, container,false );
+		View rootView = inflater.inflate(R.layout.activity_log_exercise_detail,
+				container, false);
+		String dayID = getArguments().getString("dayID");
+		try {
+
+			// Khoi tao ArrayList tu LogExerciseItem class
+			myListExerciseDetail = DatabaseUltility
+					.GetListFromLogExercise(dayID);
+			myListExerciseID = new ArrayList<Integer>();
+
+			Cursor listExerciseCursor = MainActivity.db.rawQuery(
+					"Select Distinct ExerciseID from Log_Exercise Where Day= '"
+							+ dayID+"'", null);
+
+			while (listExerciseCursor.moveToNext()) {
+				myListExerciseID.add(DatabaseUltility.GetIntColumnValue(
+						listExerciseCursor, DatabaseUltility.ExerciseID));
+			}
+
+		} catch (Exception ex) {
+			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
+					.show();
+		}
+
+		// adapter
+		LogExerciseAdapter adapter = new LogExerciseAdapter(getActivity(),
+				myListExerciseDetail, myListExerciseID);
+
+		// Set adapter
+		ListView listview = (ListView) rootView.findViewById(R.id.listViewSet);
+		listview.setAdapter(adapter);
 		return rootView;
 	}
+	
+
 
 	// @Override
 	// protected void onCreate(Bundle savedInstanceState) {
@@ -142,7 +129,7 @@ public class LogExerciseDetail extends Fragment {
 		// TODO Auto-generated method stub
 		LogExerciseDetail f = new LogExerciseDetail();
 		Bundle b = new Bundle();
-		b.putString("msg", string);
+		b.putString("dayID", string);
 		f.setArguments(b);
 
 		return f;
