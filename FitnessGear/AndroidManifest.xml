@@ -129,6 +129,10 @@
             android:name="com.fitnessgear.child.LogBodyStats"
             android:label="@string/title_activity_log_body_stats" >
         </activity>
+        <activity
+            android:name=".child.CreateWorkoutDetail"
+            android:label="@string/title_activity_create_workout_detail" >
+        </activity>
     </application>
 
 </manifest>
