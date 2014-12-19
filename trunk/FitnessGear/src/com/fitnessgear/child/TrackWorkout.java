@@ -27,7 +27,6 @@ public class TrackWorkout extends ActionBarActivity {
 
 	ViewPager pager;
 	ViewPagerAdapter adapter;
-	PagerTitleStrip pagerTitle;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +40,6 @@ public class TrackWorkout extends ActionBarActivity {
 		}
 
 		pager = (ViewPager) findViewById(R.id.pager);
-		pagerTitle = (PagerTitleStrip) findViewById(R.id.pagerTitle);
-		pagerTitle.setTextSize(1, 31);
 		adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
 		// lay list exercise
