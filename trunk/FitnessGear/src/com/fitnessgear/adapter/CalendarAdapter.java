@@ -43,9 +43,11 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 		int bottomPadding = cellView.getPaddingBottom();
 		int rightPadding = cellView.getPaddingRight();
 
-		TextView tv1 = (TextView) cellView.findViewById(R.id.textViewCustomCell1);
-		
-		ImageView img = (ImageView) cellView.findViewById(R.id.imageViewCustomCell);
+		TextView tv1 = (TextView) cellView
+				.findViewById(R.id.textViewCustomCell1);
+
+		ImageView img = (ImageView) cellView
+				.findViewById(R.id.imageViewCustomCell);
 		img.setVisibility(View.GONE);
 
 		tv1.setTextColor(Color.BLACK);
@@ -102,29 +104,32 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 			// Customize for today
 			if (dateTime.equals(getToday())) {
 				cellView.setBackgroundResource(com.caldroid.R.drawable.red_border);
-			} else { 
+			} else {
 				cellView.setBackgroundResource(com.caldroid.R.drawable.cell_bg);
 			}
 		}
 
 		tv1.setText("" + dateTime.getDay());
-		
-		String dayID = dateTime.getDay()+"/"+dateTime.getMonth()+"/"+dateTime.getYear();
-		Cursor c = MainActivity.db.rawQuery("Select * from Log_Exercise where Day = '" + dayID+"'", null);
-		if (c.moveToNext())
-		{
-			img.setVisibility(View.VISIBLE);
-		}
-		
 
-		// Somehow after setBackgroundResource, the padding collapse.
-		// This is to recover the padding
-		cellView.setPadding(leftPadding, topPadding, rightPadding,
-				bottomPadding);
+		String dayID = dateTime.getDay() + "/" + dateTime.getMonth() + "/"
+				+ dateTime.getYear();
+		Cursor c = MainActivity.db.rawQuery(
+				"Select * from Log_Exercise where Day = '" + dayID + "'", null);
+		if (c.moveToNext()) {
+			img.setVisibility(View.VISIBLE);
+			cellView.setPadding(leftPadding, topPadding, rightPadding,
+					bottomPadding);
+		} else {
+
+			// Somehow after setBackgroundResource, the padding collapse.
+			// This is to recover the padding
+			cellView.setPadding(leftPadding, topPadding, rightPadding,
+					bottomPadding);
+		}
 
 		// Set custom color if required
 		setCustomResources(dateTime, cellView, tv1);
-		
+
 		return cellView;
 	}
 
