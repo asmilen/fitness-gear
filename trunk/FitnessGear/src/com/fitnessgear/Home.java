@@ -58,7 +58,7 @@ public class Home extends Fragment {
 	public Home() {
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -113,41 +113,54 @@ public class Home extends Fragment {
 
 		return rootView;
 	}
-//<<<<<<< .mine
-//
-//	public static void getData() {
-//		Cursor user = MainActivity.db.rawQuery(
-//				"SELECT * FROM User Where UserID = 1", null);
-//		while (user.moveToNext()) {
-//			tvUserName.setText(DatabaseUltility.GetColumnValue(user,
-//					DatabaseUltility.UserName));
-//			// tvAge.setText("Age: " + DatabaseUltility.GetColumnValue(user,
-//			// DatabaseUltility.DateOfBirth));
-//			tvGender.setText("Gender: "
-//					+ DatabaseUltility.GetColumnValue(user,
-//							DatabaseUltility.Gender));
-//			tvWeight.setText("Weight: "
-//					+ DatabaseUltility.GetFloatColumnValue(user,
-//							DatabaseUltility.Weight));
-//			tvHeight.setText("Height: "
-//					+ DatabaseUltility.GetFloatColumnValue(user,
-//							DatabaseUltility.Height));
-//			tvBodyFat.setText("Body Fat: "
-//					+ DatabaseUltility.GetFloatColumnValue(user,
-//							DatabaseUltility.BodyFat));
-//=======
-	
-	public static void getData(){
-		Cursor user = MainActivity.db.rawQuery("SELECT * FROM User Where UserID = 1", null);
-		while(user.moveToNext()){
-			tvUserName.setText(DatabaseUltility.GetColumnValue(user, DatabaseUltility.UserName));
-			String Year = DatabaseUltility.GetColumnValue(user, DatabaseUltility.DateOfBirth).substring(6);
-			int age = Calendar.getInstance().get(Calendar.YEAR) - Integer.valueOf(Year);
+
+	// <<<<<<< .mine
+	//
+	// public static void getData() {
+	// Cursor user = MainActivity.db.rawQuery(
+	// "SELECT * FROM User Where UserID = 1", null);
+	// while (user.moveToNext()) {
+	// tvUserName.setText(DatabaseUltility.GetColumnValue(user,
+	// DatabaseUltility.UserName));
+	// // tvAge.setText("Age: " + DatabaseUltility.GetColumnValue(user,
+	// // DatabaseUltility.DateOfBirth));
+	// tvGender.setText("Gender: "
+	// + DatabaseUltility.GetColumnValue(user,
+	// DatabaseUltility.Gender));
+	// tvWeight.setText("Weight: "
+	// + DatabaseUltility.GetFloatColumnValue(user,
+	// DatabaseUltility.Weight));
+	// tvHeight.setText("Height: "
+	// + DatabaseUltility.GetFloatColumnValue(user,
+	// DatabaseUltility.Height));
+	// tvBodyFat.setText("Body Fat: "
+	// + DatabaseUltility.GetFloatColumnValue(user,
+	// DatabaseUltility.BodyFat));
+	// =======
+
+	public static void getData() {
+		Cursor user = MainActivity.db.rawQuery(
+				"SELECT * FROM User Where UserID = 1", null);
+		while (user.moveToNext()) {
+			tvUserName.setText(DatabaseUltility.GetColumnValue(user,
+					DatabaseUltility.UserName));
+			String Year = DatabaseUltility.GetColumnValue(user,
+					DatabaseUltility.DateOfBirth).substring(6);
+			int age = Calendar.getInstance().get(Calendar.YEAR)
+					- Integer.valueOf(Year);
 			tvAge.setText("Age: " + age);
-			tvGender.setText("Gender: " + DatabaseUltility.GetColumnValue(user, DatabaseUltility.Gender));
-			tvWeight.setText("Weight: " + DatabaseUltility.GetFloatColumnValue(user, DatabaseUltility.Weight));
-			tvHeight.setText("Height: " + DatabaseUltility.GetFloatColumnValue(user, DatabaseUltility.Height));
-			tvBodyFat.setText("Body Fat: " + DatabaseUltility.GetFloatColumnValue(user, DatabaseUltility.BodyFat));
+			tvGender.setText("Gender: "
+					+ DatabaseUltility.GetColumnValue(user,
+							DatabaseUltility.Gender));
+			tvWeight.setText("Weight: "
+					+ DatabaseUltility.GetFloatColumnValue(user,
+							DatabaseUltility.Weight));
+			tvHeight.setText("Height: "
+					+ DatabaseUltility.GetFloatColumnValue(user,
+							DatabaseUltility.Height));
+			tvBodyFat.setText("Body Fat: "
+					+ DatabaseUltility.GetFloatColumnValue(user,
+							DatabaseUltility.BodyFat));
 			float BMI = 0;
 			if (DatabaseUltility.GetFloatColumnValue(user,
 					DatabaseUltility.Weight) != 0
@@ -195,14 +208,26 @@ public class Home extends Fragment {
 
 			try {
 				// Set text to Edit text after select Date
+				Cursor userCursor = MainActivity.db.rawQuery(
+						"Select * From User Where UserID = 1", null);
+
+				while (userCursor.moveToNext()) {
+					etUserName.setText(DatabaseUltility.GetColumnValue(
+							userCursor, DatabaseUltility.UserName));
+					etDoB.setText(DatabaseUltility.GetColumnValue(userCursor,
+							DatabaseUltility.DateOfBirth));
+				}
 				DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 
 					// when dialog box is closed, below method will be called.
 					public void onDateSet(DatePicker view, int selectedYear,
 							int selectedMonth, int selectedDay) {
-						int year = Integer.valueOf(selectedYear);
-						int month = Integer.valueOf(selectedMonth + 1);
-						int day = Integer.valueOf(selectedDay);
+						int year;
+						int month;
+						int day;
+						year = Integer.valueOf(selectedYear);
+						month = Integer.valueOf(selectedMonth + 1);
+						day = Integer.valueOf(selectedDay);
 						if (day < 10) {
 							etDoB.setText("0" + day + "/" + month + "/" + year);
 						}
@@ -223,10 +248,24 @@ public class Home extends Fragment {
 				};
 				// Get current Date
 				Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+
+				// Delete last AND
+
 				// Create Date Picker Dialog
-				datePicker = new DatePickerDialog(getActivity(),
-						datePickerListener, cal.get(Calendar.YEAR),
-						cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+
+				if (etDoB.getText().toString() != "") {
+					String[] dob = etDoB.getText().toString().split("/");
+					datePicker = new DatePickerDialog(getActivity(),
+							datePickerListener, Integer.valueOf(dob[2]),
+							Integer.valueOf(dob[1]) - 1,
+							Integer.valueOf(dob[0]));
+				} else {
+					datePicker = new DatePickerDialog(getActivity(),
+							datePickerListener, cal.get(Calendar.YEAR),
+							cal.get(Calendar.MONTH),
+							cal.get(Calendar.DAY_OF_MONTH));
+				}
+
 				datePicker.setTitle("Select The Date");
 				// Show Date Picker Dialog When edit text Focus
 				etDoB.setOnFocusChangeListener(new OnFocusChangeListener() {
@@ -239,64 +278,60 @@ public class Home extends Fragment {
 					}
 				});
 
-			} catch (Exception e) {
-				Toast.makeText(getActivity(), "Error", Toast.LENGTH_LONG);
-			}
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						getActivity());
+				builder.setTitle("Edit User")
+						.setView(editUserView)
+						.setPositiveButton("Update User",
+								new DialogInterface.OnClickListener() {
 
-			Cursor userCursor = MainActivity.db.rawQuery(
-					"Select * From User Where UserID = 1", null);
-
-			while (userCursor.moveToNext()) {
-				etUserName.setText(DatabaseUltility.GetColumnValue(userCursor,
-						DatabaseUltility.UserName));
-				etDoB.setText(DatabaseUltility.GetColumnValue(userCursor,
-						DatabaseUltility.DateOfBirth));
-			}
-
-			AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-			builder.setTitle("Edit User")
-					.setView(editUserView)
-					.setPositiveButton("Update User",
-							new DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									// TODO Auto-generated method stub
-									MainActivity.db = MainActivity.dbHelper
-											.getWritableDatabase();
-									if (!etUserName.getText().toString()
-											.equals("")
-											&& !etDoB.getText().toString()
-													.equals("")) {
-										ContentValues contentUser = new ContentValues();
-										contentUser.put("UserName", etUserName
-												.getText().toString());
-										contentUser.put("DateOfBirth", etDoB
-												.getText().toString());
-										int updateUser = MainActivity.db
-												.update("User", contentUser,
-														"UserID = 1", null);
-										if (updateUser > 0) {
-											getData();
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
+										MainActivity.db = MainActivity.dbHelper
+												.getWritableDatabase();
+										String year = etDoB.getText()
+												.toString().substring(6);
+										int age = Calendar.getInstance().get(
+												Calendar.YEAR)
+												- Integer.valueOf(year);
+										if (!etUserName.getText().toString()
+												.equals("")
+												&& !etDoB.getText().toString()
+														.equals("") && age > 0) {
+											ContentValues contentUser = new ContentValues();
+											contentUser.put("UserName",
+													etUserName.getText()
+															.toString());
+											contentUser.put("DateOfBirth",
+													etDoB.getText().toString());
+											int updateUser = MainActivity.db
+													.update("User",
+															contentUser,
+															"UserID = 1", null);
+											if (updateUser > 0) {
+												getData();
+											}
 										}
 									}
-								}
-							})
-					.setNegativeButton("Cancel",
-							new DialogInterface.OnClickListener() {
+								})
+						.setNegativeButton("Cancel",
+								new DialogInterface.OnClickListener() {
 
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									// TODO Auto-generated method stub
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
 
-								}
-							});
-			builder.show();
+									}
+								});
+				builder.show();
+			} catch (Exception e) {
+				Toast.makeText(getActivity(), e + "", Toast.LENGTH_LONG).show();
+			}
 		}
-	
-		
+
 		return super.onOptionsItemSelected(item);
 	}
 }

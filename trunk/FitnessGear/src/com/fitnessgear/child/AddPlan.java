@@ -636,7 +636,7 @@ public class AddPlan extends Activity {
 				.setTitle("Warning")
 				.setMessage(
 						"Create plan not complete\n"
-								+ "If you back to list plan, data will be gone\n"
+								+ "If you back to list plan, data will be lost\n"
 								+ "Are you sure?")
 				.setIcon(android.R.drawable.ic_dialog_alert)
 				.setPositiveButton("OK", new DialogInterface.OnClickListener() {

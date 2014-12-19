@@ -42,6 +42,7 @@ public class CreateWorkout extends Activity {
 	private int numOfWorkout;
 	private int planID;
 	private ArrayList<PlanItem> myListPlan;
+	private ArrayList<Integer> listWorkoutID;
 
 	private TextView planName;
 	private TextView author;
@@ -103,6 +104,7 @@ public class CreateWorkout extends Activity {
 		}
 		WorkoutID++;
 
+		listWorkoutID = new ArrayList<Integer>();
 		for (int i = 1; i <= numOfWorkout; i++) {
 			MainActivity.db
 					.execSQL("Insert Into Workout (WorkoutID,PlanID,WorkoutName,TotalWorkoutTime,TotalCardioTime,TotalExercises,TotalSets,Description) Values ("
@@ -112,6 +114,7 @@ public class CreateWorkout extends Activity {
 							+ ",'Day "
 							+ i
 							+ "'" + ",0,0,0,0,'Rest')");
+			listWorkoutID.add(WorkoutID);
 			WorkoutID++;
 		}
 
@@ -132,145 +135,12 @@ public class CreateWorkout extends Activity {
 
 		// Call method
 		getData();
-		Cursor workout = MainActivity.db.rawQuery(
-				"SELECT * FROM Workout WHERE PlanID = " + planID, null);
-		// Create ArrayList WorkoutItem
-		item = new ArrayList<WorkoutItem>();
-		// Add value to ArrayList
-		while (workout.moveToNext()) {
-			item.add(new WorkoutItem(DatabaseUltility.GetColumnValue(workout,
-					DatabaseUltility.WorkoutID), DatabaseUltility
-					.GetColumnValue(workout, DatabaseUltility.WorkoutName),
-					DatabaseUltility.GetColumnValue(workout,
-							DatabaseUltility.Description), DatabaseUltility
-							.GetColumnValue(workout,
-									DatabaseUltility.TotalWorkoutTime),
-					DatabaseUltility.GetColumnValue(workout,
-							DatabaseUltility.TotalCardioTime), DatabaseUltility
-							.GetColumnValue(workout,
-									DatabaseUltility.TotalExercises),
-					DatabaseUltility.GetColumnValue(workout,
-							DatabaseUltility.TotalSets)));
-		}
-
-		GridAdapter adapter = new GridAdapter(getApplicationContext(), item);
-
-		grid.setAdapter(adapter);
-		// Set click for Grid View Start Workout
-		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				int pos = position;
-				Intent intent = new Intent(getApplicationContext(),
-						CreateWorkoutDetail.class);
-				// item.get(position).getWorkoutID();
-				intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
-//				intent.putExtra("TotalWorkoutTime", item.get(position)
-//						.getTotalWorkoutTime());
-//				intent.putExtra("TotalCardioTime", item.get(position)
-//						.getTotalCardioTime());
-//				intent.putExtra("TotalExercises", item.get(position)
-//						.getTotalExercises());
-//				intent.putExtra("TotalSets", item.get(position).getTotalSets());
-				intent.putExtra("Day", (position + 1) + "");
-				intent.putExtra("CreatedBy", author.getText().toString());
-				intent.putExtra("ProgramFor", txtGender.getText().toString());
-				intent.putExtra("MainGoal", txtMainGoal.getText().toString());
-				intent.putExtra("Level", txtLevelTrain.getText().toString());
-				intent.putExtra("PlanID", planID);
-				startActivity(intent);
-			}
-		});
-		grid.setOnItemLongClickListener(new OnItemLongClickListener() {
-
-			@Override
-			public boolean onItemLongClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				final String workoutID = item.get(position).getWorkoutID();
-				// Get the layout inflater
-				LayoutInflater inflater = CreateWorkout.this
-						.getLayoutInflater();
-				// Get View from inflater
-				View updateWorkoutView = inflater.inflate(
-						R.layout.activity_dialog_update_workout, null);
-
-				txtWorkoutTime = (EditText) updateWorkoutView
-						.findViewById(R.id.txtWorkoutTime);
-				txtTotalCardioTime = (EditText) updateWorkoutView
-						.findViewById(R.id.txtTotalCardioTime);
-				txtDescription = (EditText) updateWorkoutView
-						.findViewById(R.id.txtDescription);
-				Cursor updateWorkoutCursor = MainActivity.db.rawQuery(
-						"Select * From Workout Where PlanID = " + planID
-								+ " AND WorkoutID = " + workoutID, null);
-				while (updateWorkoutCursor.moveToNext()) {
-					txtWorkoutTime.setText(""
-							+ DatabaseUltility.GetIntColumnValue(
-									updateWorkoutCursor,
-									DatabaseUltility.TotalWorkoutTime));
-					txtTotalCardioTime.setText(""
-							+ DatabaseUltility.GetIntColumnValue(
-									updateWorkoutCursor,
-									DatabaseUltility.TotalCardioTime));
-					txtDescription.setText(""
-							+ DatabaseUltility.GetColumnValue(
-									updateWorkoutCursor,
-									DatabaseUltility.Description));
-				}
-				AlertDialog.Builder builder = new AlertDialog.Builder(
-						CreateWorkout.this);
-
-				// Inflate and set the layout for the dialog
-				// Pass null as the parent view because its going in the dialog
-				// layout
-				builder.setView(updateWorkoutView)
-						.setTitle("Update Workout")
-						// Add action buttons
-						.setPositiveButton("Update",
-								new DialogInterface.OnClickListener() {
-									@Override
-									public void onClick(DialogInterface dialog,
-											int id) {
-										int workoutTime = Integer
-												.parseInt(txtWorkoutTime
-														.getText().toString());
-										int totalCardioTime = Integer
-												.parseInt(txtTotalCardioTime
-														.getText().toString());
-										String description = txtDescription
-												.getText().toString();
-										MainActivity.db = MainActivity.dbHelper
-												.getWritableDatabase();
-										ContentValues contentWorkout = new ContentValues();
-										contentWorkout.put("TotalWorkoutTime",
-												workoutTime);
-										contentWorkout.put("TotalCardioTime",
-												totalCardioTime);
-										contentWorkout.put("Description",
-												description);
-										MainActivity.db.update("Workout",
-												contentWorkout,
-												"WorkoutID = ?",
-												new String[] { workoutID });
-										getData();
-									}
-								})
-						.setNegativeButton("Cancel",
-								new DialogInterface.OnClickListener() {
-									public void onClick(DialogInterface dialog,
-											int id) {
-									}
-								});
-				builder.show();
-				return true;
-			}
-		});
+		
 	}
 
 	public void getData() {
 		try {
+			
 			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 			Cursor planInformationCursor = MainActivity.db.rawQuery("Select * "
 					+ "FROM Plan,Gender, FitnessLevel,Main_Goal "
@@ -278,7 +148,6 @@ public class CreateWorkout extends Activity {
 					+ "AND FitnessLevel = FitnessLevelID " + "AND PlanID = "
 					+ planID, null);
 
-			ArrayList<String> data = new ArrayList<String>();
 			while (planInformationCursor.moveToNext()) {
 				planName.setText(DatabaseUltility.GetColumnValue(
 						planInformationCursor, DatabaseUltility.PlanName));
@@ -315,6 +184,134 @@ public class CreateWorkout extends Activity {
 								planInformationCursor,
 								DatabaseUltility.TotalCardioTime));
 			}
+			Cursor workout = MainActivity.db.rawQuery(
+					"SELECT * FROM Workout WHERE PlanID = " + planID, null);
+			// Create ArrayList WorkoutItem
+			item = new ArrayList<WorkoutItem>();
+			// Add value to ArrayList
+			while (workout.moveToNext()) {
+				item.add(new WorkoutItem(DatabaseUltility.GetColumnValue(workout,
+						DatabaseUltility.WorkoutID), DatabaseUltility
+						.GetColumnValue(workout, DatabaseUltility.WorkoutName),
+						DatabaseUltility.GetColumnValue(workout,
+								DatabaseUltility.Description), DatabaseUltility
+								.GetColumnValue(workout,
+										DatabaseUltility.TotalWorkoutTime),
+						DatabaseUltility.GetColumnValue(workout,
+								DatabaseUltility.TotalCardioTime), DatabaseUltility
+								.GetColumnValue(workout,
+										DatabaseUltility.TotalExercises),
+						DatabaseUltility.GetColumnValue(workout,
+								DatabaseUltility.TotalSets)));
+			}
+
+			GridAdapter adapter = new GridAdapter(getApplicationContext(), item);
+
+			grid.setAdapter(adapter);
+			// Set click for Grid View Start Workout
+			grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					int pos = position;
+					Intent intent = new Intent(getApplicationContext(),
+							CreateWorkoutDetail.class);
+					// item.get(position).getWorkoutID();
+					intent.putExtra("WorkoutID", item.get(position).getWorkoutID());
+					intent.putExtra("Day", (position + 1) + "");
+					intent.putExtra("CreatedBy", author.getText().toString());
+					intent.putExtra("ProgramFor", txtGender.getText().toString());
+					intent.putExtra("MainGoal", txtMainGoal.getText().toString());
+					intent.putExtra("Level", txtLevelTrain.getText().toString());
+					intent.putExtra("PlanID", planID);
+					startActivity(intent);
+				}
+			});
+			grid.setOnItemLongClickListener(new OnItemLongClickListener() {
+
+				@Override
+				public boolean onItemLongClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					final String workoutID = item.get(position).getWorkoutID();
+					// Get the layout inflater
+					LayoutInflater inflater = CreateWorkout.this
+							.getLayoutInflater();
+					// Get View from inflater
+					View updateWorkoutView = inflater.inflate(
+							R.layout.activity_dialog_update_workout, null);
+
+					txtWorkoutTime = (EditText) updateWorkoutView
+							.findViewById(R.id.txtWorkoutTime);
+					txtTotalCardioTime = (EditText) updateWorkoutView
+							.findViewById(R.id.txtTotalCardioTime);
+					txtDescription = (EditText) updateWorkoutView
+							.findViewById(R.id.txtDescription);
+					Cursor updateWorkoutCursor = MainActivity.db.rawQuery(
+							"Select * From Workout Where PlanID = " + planID
+									+ " AND WorkoutID = " + workoutID, null);
+					while (updateWorkoutCursor.moveToNext()) {
+						txtWorkoutTime.setText(""
+								+ DatabaseUltility.GetIntColumnValue(
+										updateWorkoutCursor,
+										DatabaseUltility.TotalWorkoutTime));
+						txtTotalCardioTime.setText(""
+								+ DatabaseUltility.GetIntColumnValue(
+										updateWorkoutCursor,
+										DatabaseUltility.TotalCardioTime));
+						txtDescription.setText(""
+								+ DatabaseUltility.GetColumnValue(
+										updateWorkoutCursor,
+										DatabaseUltility.Description));
+					}
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							CreateWorkout.this);
+
+					// Inflate and set the layout for the dialog
+					// Pass null as the parent view because its going in the dialog
+					// layout
+					builder.setView(updateWorkoutView)
+							.setTitle("Update Workout")
+							// Add action buttons
+							.setPositiveButton("Update",
+									new DialogInterface.OnClickListener() {
+										@Override
+										public void onClick(DialogInterface dialog,
+												int id) {
+											int workoutTime = Integer
+													.parseInt(txtWorkoutTime
+															.getText().toString());
+											int totalCardioTime = Integer
+													.parseInt(txtTotalCardioTime
+															.getText().toString());
+											String description = txtDescription
+													.getText().toString();
+											MainActivity.db = MainActivity.dbHelper
+													.getWritableDatabase();
+											ContentValues contentWorkout = new ContentValues();
+											contentWorkout.put("TotalWorkoutTime",
+													workoutTime);
+											contentWorkout.put("TotalCardioTime",
+													totalCardioTime);
+											contentWorkout.put("Description",
+													description);
+											MainActivity.db.update("Workout",
+													contentWorkout,
+													"WorkoutID = ?",
+													new String[] { workoutID });
+											getData();
+										}
+									})
+							.setNegativeButton("Cancel",
+									new DialogInterface.OnClickListener() {
+										public void onClick(DialogInterface dialog,
+												int id) {
+										}
+									});
+					builder.show();
+					return true;
+				}
+			});
 		} catch (SQLiteException ex) {
 			Toast.makeText(getApplicationContext(), ex.getMessage(),
 					Toast.LENGTH_LONG).show();
@@ -324,12 +321,49 @@ public class CreateWorkout extends Activity {
 		}
 	}
 
-	// @Override
-	// public boolean onCreateOptionsMenu(Menu menu) {
-	// // Inflate the menu; this adds items to the action bar if it is present.
-	// getMenuInflater().inflate(R.menu.create_workout, menu);
-	// return true;
-	// }
+	 @Override
+	 public boolean onCreateOptionsMenu(Menu menu) {
+	 // Inflate the menu; this adds items to the action bar if it is present.
+	 getMenuInflater().inflate(R.menu.create_workout, menu);
+	 return true;
+	 }
+	
+	public void backToFindAPlan(){
+		AlertDialog.Builder builder = new AlertDialog.Builder(CreateWorkout.this);
+		builder.setTitle("Warning")
+		.setIcon(android.R.drawable.ic_dialog_alert)
+		.setMessage("Do you want to back Find A Plan?\n" +
+				"You not yet complete create plan. " +
+				"Data will be lost.\n" +
+				"Are You Sure?")
+		.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
+				MainActivity.db.delete("Plan", "PlanID = " + planID, null);
+				MainActivity.db.delete("Workout", "PlanID = " + planID, null);
+				for(int i = 0;i<listWorkoutID.size();i++){
+					MainActivity.db.delete("Workout_Exercise", "WorkoutID = " + listWorkoutID.get(i), null);
+				}
+				Intent i= new Intent(CreateWorkout.this, MainActivity.class);
+		        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		        MainActivity.positionDisplay = 2;
+		        startActivity(i);
+			}
+		})
+		.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+			
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+		builder.show();
+		
+	}
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
@@ -338,11 +372,14 @@ public class CreateWorkout extends Activity {
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
 		if (id == android.R.id.home) {
-			Intent i=new Intent(this, MainActivity.class);
+			backToFindAPlan();
+			return true;
+		}
+		if(id == R.id.finish_create_plan){
+			Intent i= new Intent(CreateWorkout.this, MainActivity.class);
 	        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 	        MainActivity.positionDisplay = 2;
 	        startActivity(i);
-			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
@@ -351,9 +388,6 @@ public class CreateWorkout extends Activity {
 	public void onBackPressed() {
 		// TODO Auto-generated method stub
 		super.onBackPressed();
-		Intent i=new Intent(this, MainActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        MainActivity.positionDisplay = 2;
-        startActivity(i);
+		backToFindAPlan();
 	}
 }
