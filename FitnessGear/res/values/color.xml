@@ -16,7 +16,8 @@
     <color name="text_description_color">#606060</color>
     <color name="text_title_color">#ffffff</color>
     <color name="background_title_color">#024f91</color>
-    <color name="background_drawer_list_color">#333232</color>
+    <color name="background_drawer_list_color">#ffffff</color>
+    <color name="text_drawer_list_color">#606060</color>
     <color name="action_bar_color">#024f91</color>
     <color name="background_grid_color">#e2e2e2</color>
     <color name="background_grid_pressed_color">#0593D1</color>
