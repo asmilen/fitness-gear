@@ -3,388 +3,451 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <AbsoluteLayout
         android:layout_width="match_parent"
-        android:layout_height="100dp" >
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/child_background" >
 
         <TextView
             android:id="@+id/author"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="175dp"
-            android:layout_y="68dp"
+            android:layout_x="170dp"
+            android:layout_y="75dp"
             android:text="BodySpace"
-            android:textColor="#000000"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textColor="@color/text_description" />
 
         <ImageView
             android:id="@+id/exerciseImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="18dp"
-            android:layout_y="25dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_x="10dp"
+            android:layout_y="20dp"
             android:src="@drawable/ic_home" />
 
         <TextView
             android:id="@+id/planName"
-            android:layout_width="260dp"
-            android:layout_height="50dp"
-            android:layout_x="95dp"
-            android:layout_y="15dp"
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:layout_x="90dp"
+            android:layout_y="5dp"
             android:text="JAMIE EASON&apos;S LIVEFIT TRAINER"
+            android:textColor="@color/text_description"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/createdBy"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_x="95dp"
-            android:layout_y="68dp"
+            android:layout_x="90dp"
+            android:textColor="#606060"
+            android:layout_y="75dp"
             android:text="Created By:" />
+
+        <LinearLayout
+            android:layout_width="330dp"
+            android:layout_height="2px"
+            android:background="@color/background"
+            android:layout_y="98dp"
+            android:layout_x="10dp" >
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_y="100dp"
+            android:background="#fff" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/programFor"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="Program For"
+                    android:textColor="@color/text_title"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/txtGender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Everyone"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_description" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="2px"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/background" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2px"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/mainGoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="Main Goal"
+                    android:textColor="@color/text_title"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/txtMainGoal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Build Muscle"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_description" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="2px"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:background="@color/background" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2px"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/level"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="Level"
+                    android:textColor="@color/text_title"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/txtLevelTrain"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="ALL LEVELS"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_description" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="2px"
+                android:layout_height="25dp"
+                android:layout_gravity="center_vertical"
+                android:background="#e2e2e2" >
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="2px"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/dateCreated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:text="Date Created"
+                    android:textColor="@color/text_title"
+                    android:textSize="8sp" />
+
+                <TextView
+                    android:id="@+id/txtDateCreated"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="22 - 12 - 2012"
+                    android:textSize="11sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_description" />
+            </LinearLayout>
+        </LinearLayout>
     </AbsoluteLayout>
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:background="@color/child_background" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp" >
+
+                <TextView
+                    android:id="@+id/totalWeeks"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="TOTAL WEEKS"
+                    android:textColor="@color/text_title"
+                    android:textSize="7sp" />
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background_title_color"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/txtTotalWeeks"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:text="12"
+                        android:textColor="@color/text_title_color"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/time_per_plan"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="Weeks"
+                        android:textColor="@color/text_title_color"
+                        android:textSize="7sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"  >
+
+                <TextView
+                    android:id="@+id/averageDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="AVERAGE DAYS/WEEK"
+                    android:textColor="@color/text_title"
+                    android:textSize="7sp" />
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background_title_color"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/txtAverageDay"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:text="12"
+                        android:textColor="@color/text_title_color"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/day_per_start_plan"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="Days"
+                        android:textColor="@color/text_title_color"
+                        android:textSize="7sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"  >
+
+                <TextView
+                    android:id="@+id/averageTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="AVERAGE WORKOUT TIME"
+                    android:textColor="@color/text_title"
+                    android:textSize="7sp" />
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background_title_color"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/txtArverageTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:text="12"
+                        android:textColor="@color/text_title_color"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/time_per_start"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="Mins"
+                        android:textColor="@color/text_title_color"
+                        android:textSize="7sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"  >
+
+                <TextView
+                    android:id="@+id/totalTime"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="TOTAL TIME/WEEK"
+                    android:textColor="@color/text_title"
+                    android:textSize="7sp" />
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background_title_color"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/txtTotalTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:text="12"
+                        android:textColor="@color/text_title_color"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/time_per_week"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="Mins"
+                        android:textColor="@color/text_title_color"
+                        android:textSize="7sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_weight="0.4"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginBottom="10dp"  >
+
+                <TextView
+                    android:id="@+id/totalCardio"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center_horizontal"
+                    android:text="TOTAL CADIO"
+                    android:textColor="@color/text_title"
+                    android:textSize="7sp" />
+
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
+                    android:background="@color/background_title_color"
+                    android:orientation="vertical" >
+
+                    <TextView
+                        android:id="@+id/txtTotalCardio"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="bottom|center_horizontal"
+                        android:text="12"
+                        android:textColor="@color/text_title_color"
+                        android:textStyle="bold"
+                        android:textSize="12sp" />
+
+                    <TextView
+                        android:id="@+id/cardio_per_plan"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp"
+                        android:gravity="center"
+                        android:text="Mins"
+                        android:textColor="@color/text_title_color"
+                        android:textSize="7sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:background="@drawable/custom_bg" >
-
-        <LinearLayout
-            android:layout_width="268px"
-            android:layout_height="match_parent"
-            android:background="#fff"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/programFor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:text="Program For"
-                android:textSize="8sp" />
-
-            <TextView
-                android:id="@+id/txtGender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Everyone"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="268px"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2px"
-            android:background="#fff"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/mainGoal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:text="Main Goal"
-                android:textSize="8sp" />
-
-            <TextView
-                android:id="@+id/txtMainGoal"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="Build Muscle"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="268px"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2px"
-            android:background="#fff"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/level"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:text="Level"
-                android:textSize="8sp" />
-
-            <TextView
-                android:id="@+id/txtLevelTrain"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="ALL LEVELS"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="270px"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="2px"
-            android:background="#fff"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/dateCreated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:paddingTop="5dp"
-                android:text="Date Created"
-                android:textSize="8sp" />
-
-            <TextView
-                android:id="@+id/txtDateCreated"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="22 - 12 - 2012"
-                android:textSize="11sp"
-                android:textStyle="bold" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:background="#3F4145" >
-
-        <LinearLayout
-            android:layout_width="216px"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/totalWeeks"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:text="TOTAL WEEKS"
-                android:textColor="#FEFEFE"
-                android:textSize="8sp" />
-
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/txtTotalWeeks"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="bottom|center_horizontal"
-                    android:text="12"
-                    android:textColor="#D3D3D0"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/time_per_plan"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:gravity="center"
-                    android:text="Weeks"
-                    android:textColor="#D3D3D0"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="216px"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/averageDays"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:text="AVERAGE DAYS/WEEK"
-                android:textColor="#FEFEFE"
-                android:textSize="8sp" />
-
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/txtAverageDay"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="bottom|center_horizontal"
-                    android:text="5.5"
-                    android:textColor="#D3D3D0"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/day_per_start_plan"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:gravity="center"
-                    android:text="Days"
-                    android:textColor="#D3D3D0"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="216px"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/averageTime"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:text="AVERAGE WORKOUT TIME"
-                android:textColor="#FEFEFE"
-                android:textSize="8sp" />
-
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/txtArverageTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="bottom|center_horizontal"
-                    android:text="00:48"
-                    android:textColor="#D3D3D0"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/time_per_start"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:gravity="center"
-                    android:text="Mins"
-                    android:textColor="#D3D3D0"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="216px"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/totalTime"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:text="TOTAL TIME/WEEK"
-                android:textColor="#FEFEFE"
-                android:textSize="8sp" />
-
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/txtTotalTime"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="bottom|center_horizontal"
-                    android:text="04:27"
-                    android:textColor="#D3D3D0"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/time_per_week"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:gravity="center"
-                    android:text="Mins"
-                    android:textColor="#D3D3D0"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="216px"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
-
-            <TextView
-                android:id="@+id/totalCardio"
-                android:layout_width="match_parent"
-                android:layout_height="20dp"
-                android:gravity="center"
-                android:text="TOTAL CADIO"
-                android:textColor="#FEFEFE"
-                android:textSize="8sp" />
-
-            <LinearLayout
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
-
-                <TextView
-                    android:id="@+id/txtTotalCardio"
-                    android:layout_width="match_parent"
-                    android:layout_height="30dp"
-                    android:gravity="bottom|center_horizontal"
-                    android:text="01:34"
-                    android:textColor="#D3D3D0"
-                    android:textSize="15sp" />
-
-                <TextView
-                    android:id="@+id/cardio_per_plan"
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:gravity="center"
-                    android:text="Mins"
-                    android:textColor="#D3D3D0"
-                    android:textSize="10sp" />
-            </LinearLayout>
-        </LinearLayout>
-    </LinearLayout>
-
-   <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+         >
 
         <GridView
             android:id="@+id/listExerciseOnPlan"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:columnWidth="100dp"
-            android:divider="@color/divider_color"
             android:gravity="center"
             android:horizontalSpacing="1dp"
-            android:numColumns="7"
             android:verticalSpacing="1dp"
-            android:background="@drawable/grid_selector" >
+            android:numColumns="7">
         </GridView>
     </LinearLayout>
 

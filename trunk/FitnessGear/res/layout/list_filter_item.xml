@@ -4,7 +4,7 @@
     android:layout_height="50dp"
     android:orientation="horizontal"
     android:gravity="center"
-    android:background="#fff" >
+    android:background="@drawable/grid_selector" >
 
     <TextView
         android:id="@+id/titleFilter"
@@ -13,6 +13,7 @@
         android:text="Main Goal"
         android:textColor="#606060"
         android:textAllCaps="true"
+        android:layout_marginLeft="5dp"
         android:gravity="center_vertical" />
 
     <TextView

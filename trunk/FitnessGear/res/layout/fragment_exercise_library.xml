@@ -16,22 +16,36 @@
         android:ems="10" >
     </EditText>
 
-    <ListView
-        android:id="@+id/listFilterExercises"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/divider_color"
-        android:dividerHeight="1dp"
-        android:layout_margin="5dp"  >
-    </ListView>
+        android:layout_margin="5dp"
+        android:background="@color/child_background"
+        android:orientation="vertical" >
 
-    <ListView
-        android:id="@+id/listFullExercises"
+        <ListView
+            android:id="@+id/listFilterExercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:divider="@color/divider_color"
-        android:dividerHeight="1dp"
-        android:layout_margin="5dp"  >
-    </ListView>
+        android:layout_margin="5dp"
+        android:background="@color/child_background"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/listFullExercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider"
+            android:dividerHeight="1dp" >
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>

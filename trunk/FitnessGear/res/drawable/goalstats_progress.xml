@@ -10,6 +10,6 @@
         android:endColor="#ff009900"
         android:startColor="#ff000099" />
     -->
-    <solid android:color="#ff7c09" />
+    <solid android:color="@color/progress_1" />
 
 </shape>
