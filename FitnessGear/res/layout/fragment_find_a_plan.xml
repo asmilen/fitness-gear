@@ -3,8 +3,8 @@
     android:id="@+id/layoutFindAPlan"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#e2e2e2" >
+    android:background="#e2e2e2"
+    android:orientation="vertical" >
 
     <EditText
         android:id="@+id/searchPlan"
@@ -15,25 +15,39 @@
         android:drawableLeft="@drawable/ic_action_search"
         android:drawablePadding="5dp"
         android:padding="1dp" >
-
     </EditText>
 
-    <ListView
-        android:id="@+id/listFilterPlan"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:divider="@color/divider_color"
-        android:dividerHeight="1dp"
-        android:layout_margin="5dp" >
-    </ListView>
-
-    <ListView
-        android:id="@+id/listFullPlan"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:divider="@color/divider_color"
-        android:dividerHeight="1dp" >
-    </ListView>
+        android:background="@color/child_background"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/listFilterPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/child_background"
+            android:divider="@drawable/divider"
+            android:dividerHeight="2px" >
+        </ListView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/child_background"
+        android:orientation="vertical" >
+
+        <ListView
+            android:id="@+id/listFullPlan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/divider"
+            android:dividerHeight="2px" >
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>

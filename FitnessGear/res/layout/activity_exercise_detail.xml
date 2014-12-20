@@ -1,35 +1,41 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="130dp"
+        android:layout_margin="5dp"
         android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp" >
+        android:layout_marginRight="5dp"
+        android:background="@color/child_background" >
 
         <ImageView
             android:id="@+id/imgExercise1"
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:src="@drawable/ic_people"
-            android:layout_gravity="center_vertical" />
+            android:layout_gravity="center"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:src="@drawable/ic_people" />
 
         <ImageView
             android:id="@+id/imgExercise2"
             android:layout_width="110dp"
             android:layout_height="110dp"
+            android:layout_gravity="center"
             android:layout_marginLeft="5dp"
-            android:src="@drawable/ic_photos"
-            android:layout_gravity="center_vertical"  />
+            android:layout_weight="1"
+            android:src="@drawable/ic_photos" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="130dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_margin="5dp"
+        android:background="@color/child_background"
         android:orientation="vertical" >
 
         <LinearLayout
@@ -40,9 +46,11 @@
                 android:id="@+id/exerciseName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:text="Barbell bench press - Medium grip"
                 android:textAllCaps="true"
-                android:textSize="20sp"
+                android:textColor="@color/text_description"
+                android:textSize="16sp"
                 android:textStyle="bold" />
         </LinearLayout>
 
@@ -58,15 +66,16 @@
                 android:layout_x="5dp"
                 android:text="Rating:"
                 android:textAllCaps="true"
+                android:textColor="@color/text_description"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtRating"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_x="120dp"
+                android:layout_x="130dp"
                 android:text="9.0"
-                android:textColor="#1AA2DB"
+                android:textColor="@color/text_description_workout_detail"
                 android:textStyle="bold" />
 
             <TextView
@@ -77,16 +86,17 @@
                 android:layout_y="20dp"
                 android:text="Muscle:"
                 android:textAllCaps="true"
+                android:textColor="@color/text_description"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtMuscle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_x="120dp"
+                android:layout_x="130dp"
                 android:layout_y="20dp"
                 android:text="Muscle:"
-                android:textColor="#1AA2DB"
+                android:textColor="@color/text_description_workout_detail"
                 android:textStyle="bold" />
 
             <TextView
@@ -97,16 +107,17 @@
                 android:layout_y="40dp"
                 android:text="Equipment:"
                 android:textAllCaps="true"
+                android:textColor="@color/text_description"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtEquipment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_x="120dp"
+                android:layout_x="130dp"
                 android:layout_y="40dp"
                 android:text="Equipment:"
-                android:textColor="#1AA2DB"
+                android:textColor="@color/text_description_workout_detail"
                 android:textStyle="bold" />
 
             <TextView
@@ -117,16 +128,17 @@
                 android:layout_y="60dp"
                 android:text="Exercise Type:"
                 android:textAllCaps="true"
+                android:textColor="@color/text_description"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/txtExerciseType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_x="120dp"
+                android:layout_x="130dp"
                 android:layout_y="60dp"
                 android:text="Exercise Type:"
-                android:textColor="#1AA2DB"
+                android:textColor="@color/text_description_workout_detail"
                 android:textStyle="bold" />
         </AbsoluteLayout>
     </LinearLayout>
@@ -134,15 +146,19 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
         android:background="@drawable/custom_text_exercise_guide" >
 
         <TextView
             android:id="@+id/guide"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center_vertical"
+            android:gravity="center"
             android:text="Step-by-step instruction:"
             android:textAllCaps="true"
+            android:textColor="@color/text_description"
             android:textSize="20sp" />
     </LinearLayout>
 
@@ -150,7 +166,10 @@
         android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="left|top" >
+        android:layout_gravity="left|top"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:background="@color/child_background" >
 
         <TextView
             android:id="@+id/txtDescription"
@@ -159,6 +178,7 @@
             android:layout_marginLeft="5dp"
             android:layout_marginRight="5dp"
             android:gravity="left|top"
+            android:paddingBottom="10dp"
             android:text="djfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdgdjfnsdlfkjahsdfliahsdfliuahsdlfiuahdliufhdsfaousdhvgfhsdjifshudfbjdsfhadsfjahsdg" />
     </ScrollView>
 

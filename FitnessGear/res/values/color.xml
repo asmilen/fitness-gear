@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <color name="list_item_title">#fff</color>
+	<color name="background">#e2e2e2</color>
+	
+	<color name="child_background">#ffffff</color>
+	
+	<color name="text_title">#606060</color>
+	<color name="text_description">#4f4f4f</color>
+	
+	<color name="text_description_workout_detail">#00A1DE</color>
+	
+	<color name="user_name">#0099CE</color>
+	
+	<color name="action_bar">#024f91</color>
+    
+    <color name="list_item_title">#ffffff</color>
     <color name="list_background_normal_start">#00008B</color>
     <color name="list_background_normal_center">#2787AC</color>
     <color name="list_background_normal_end">#0687B9</color>
     <color name="list_background_pressed_start">#0593D1</color>
-    <color name="list_background_pressed_center">#fff</color>
+    <color name="list_background_pressed_center">#ffffff</color>
     <color name="list_background_pressed_end">#0593D1</color>
     <color name="list_background_select">#ffffff</color>
-    <color name="list_divider">#272727</color>
+    
+    <color name="progress_1">#00AAD8</color>
+    <color name="progress_2">#FFD400</color>
+
+    <color name="list_divider_color">#9f9f9f</color>
+    
     <color name="counter_text_bg">#626262</color>
     <color name="counter_text_color">#c5c4c4</color>
-    <color name="divider_color">#9f9f9f</color>
-    <color name="text_description_color">#606060</color>
-    <color name="text_title_color">#ffffff</color>
-    <color name="background_title_color">#024f91</color>
-    <color name="background_drawer_list_color">#ffffff</color>
+    
+    <color name="background_drawer_list_color">#e5e5e5</color>
     <color name="text_drawer_list_color">#606060</color>
-    <color name="action_bar_color">#024f91</color>
-    <color name="background_grid_color">#e2e2e2</color>
+    
+    <color name="background_grid_color">#fff</color>
     <color name="background_grid_pressed_color">#0593D1</color>
+    
+    <color name="background_title_color">#024f91</color>
+    <color name="text_title_color">#ffffff</color>
+    
+    <color name="background_exercise_name_color">#024f91</color>
+    <color name="text_exercise_name_color">#ffffff</color>
+    
+    
+    
 
 </resources>

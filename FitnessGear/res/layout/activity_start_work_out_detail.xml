@@ -3,17 +3,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <AbsoluteLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp" >
+        android:layout_height="150dp"
+        android:layout_margin="5dp"
+        android:background="@color/child_background" >
 
         <ImageView
             android:id="@+id/exerciseImage"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_x="15dp"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_x="10dp"
             android:layout_y="20dp"
             android:src="@drawable/ic_home" />
 
@@ -24,8 +27,9 @@
             android:layout_x="95dp"
             android:layout_y="20dp"
             android:text="Day:"
-            android:textStyle="bold"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/text_description"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtNumOfDay"
@@ -34,7 +38,7 @@
             android:layout_x="210dp"
             android:layout_y="20dp"
             android:text="1"
-            android:textColor="#00A1DE"
+            android:textColor="@color/text_description_workout_detail"
             android:textStyle="bold" />
 
         <TextView
@@ -43,9 +47,10 @@
             android:layout_height="wrap_content"
             android:layout_x="95dp"
             android:layout_y="40dp"
-            android:textStyle="bold"
             android:text="Week:"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/text_description"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtNumOfWeek"
@@ -54,7 +59,7 @@
             android:layout_x="210dp"
             android:layout_y="40dp"
             android:text="1"
-            android:textColor="#00A1DE"
+            android:textColor="@color/text_description_workout_detail"
             android:textStyle="bold" />
 
         <TextView
@@ -63,9 +68,10 @@
             android:layout_height="wrap_content"
             android:layout_x="95dp"
             android:layout_y="60dp"
-            android:textStyle="bold"
             android:text="Created By:"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/text_description"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtCreatedBy"
@@ -74,7 +80,7 @@
             android:layout_x="210dp"
             android:layout_y="60dp"
             android:text="BodySpace"
-            android:textColor="#00A1DE"
+            android:textColor="@color/text_description_workout_detail"
             android:textStyle="bold" />
 
         <TextView
@@ -82,10 +88,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_x="95dp"
-            android:textStyle="bold"
             android:layout_y="80dp"
             android:text="Program For:"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/text_description"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtProgramFor"
@@ -94,7 +101,7 @@
             android:layout_x="210dp"
             android:layout_y="80dp"
             android:text="Everyone"
-            android:textColor="#00A1DE"
+            android:textColor="@color/text_description_workout_detail"
             android:textStyle="bold" />
 
         <TextView
@@ -103,9 +110,10 @@
             android:layout_height="wrap_content"
             android:layout_x="95dp"
             android:layout_y="100dp"
-            android:textStyle="bold"
             android:text="Main Goal:"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/text_description"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtMainGoal"
@@ -114,7 +122,7 @@
             android:layout_x="210dp"
             android:layout_y="100dp"
             android:text="Build Muscle"
-            android:textColor="#00A1DE"
+            android:textColor="@color/text_description_workout_detail"
             android:textStyle="bold" />
 
         <TextView
@@ -123,9 +131,10 @@
             android:layout_height="wrap_content"
             android:layout_x="95dp"
             android:layout_y="120dp"
-            android:textStyle="bold"
             android:text="Level:"
-            android:textAllCaps="true" />
+            android:textAllCaps="true"
+            android:textColor="@color/text_description"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txtLevelTrain"
@@ -134,37 +143,41 @@
             android:layout_x="210dp"
             android:layout_y="120dp"
             android:text="ALL LEVELS"
-            android:textColor="#00A1DE"
+            android:textColor="@color/text_description_workout_detail"
             android:textStyle="bold" />
     </AbsoluteLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        android:background="#3F4145" >
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/child_background" >
 
         <LinearLayout
-            android:layout_width="270px"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.5"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/totalExercise"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
                 android:text="Total Execises"
                 android:textAllCaps="true"
-                android:textColor="#FEFEFE"
+                android:textColor="@color/text_title"
                 android:textSize="8sp" />
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
+                android:layout_gravity="center"
+                android:background="@color/background_title_color"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp" >
 
                 <TextView
                     android:id="@+id/txtTotalExercises"
@@ -172,7 +185,7 @@
                     android:layout_height="30dp"
                     android:gravity="bottom|center_horizontal"
                     android:text="12"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="15sp" />
 
                 <TextView
@@ -181,33 +194,36 @@
                     android:layout_height="20dp"
                     android:gravity="center"
                     android:text="Exercises"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="270px"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.5"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/totalSet"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
                 android:text="Total Sets"
                 android:textAllCaps="true"
-                android:textColor="#FEFEFE"
+                android:textColor="@color/text_title"
                 android:textSize="8sp" />
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
+                android:layout_gravity="center"
+                android:background="@color/background_title_color"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp" >
 
                 <TextView
                     android:id="@+id/txtTotalSets"
@@ -215,7 +231,7 @@
                     android:layout_height="30dp"
                     android:gravity="bottom|center_horizontal"
                     android:text="5.5"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="15sp" />
 
                 <TextView
@@ -224,33 +240,36 @@
                     android:layout_height="20dp"
                     android:gravity="center"
                     android:text="Sets"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="270px"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.5"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/averageTime"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
                 android:text="Average Workout Time"
                 android:textAllCaps="true"
-                android:textColor="#FEFEFE"
+                android:textColor="@color/text_title"
                 android:textSize="8sp" />
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
+                android:layout_gravity="center"
+                android:background="@color/background_title_color"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp" >
 
                 <TextView
                     android:id="@+id/txtArverageTime"
@@ -258,7 +277,7 @@
                     android:layout_height="30dp"
                     android:gravity="bottom|center_horizontal"
                     android:text="00:48"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="15sp" />
 
                 <TextView
@@ -267,33 +286,36 @@
                     android:layout_height="20dp"
                     android:gravity="center"
                     android:text="Mins"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="270px"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_weight="0.5"
             android:orientation="vertical" >
 
             <TextView
                 android:id="@+id/totalCardio"
                 android:layout_width="match_parent"
                 android:layout_height="20dp"
-                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
                 android:text="Total Cardio"
                 android:textAllCaps="true"
-                android:textColor="#FEFEFE"
+                android:textColor="@color/text_title"
                 android:textSize="8sp" />
 
             <LinearLayout
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:layout_marginLeft="20dp"
-                android:layout_marginTop="5dp"
-                android:background="#333232"
-                android:orientation="vertical" >
+                android:layout_gravity="center"
+                android:background="@color/background_title_color"
+                android:orientation="vertical"
+                android:layout_marginTop="5dp" >
 
                 <TextView
                     android:id="@+id/txtTotalCardio"
@@ -301,7 +323,7 @@
                     android:layout_height="30dp"
                     android:gravity="bottom|center_horizontal"
                     android:text="04:27"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="15sp" />
 
                 <TextView
@@ -310,7 +332,7 @@
                     android:layout_height="20dp"
                     android:gravity="center"
                     android:text="Mins"
-                    android:textColor="#D3D3D0"
+                    android:textColor="@color/text_title_color"
                     android:textSize="10sp" />
             </LinearLayout>
         </LinearLayout>
@@ -318,14 +340,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/child_background" >
 
         <ListView
             android:id="@+id/listExercises"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:divider="@color/divider_color"
-            android:dividerHeight="1dp" >
+            android:divider="@drawable/divider"
+            android:dividerHeight="2px" >
         </ListView>
     </LinearLayout>
 

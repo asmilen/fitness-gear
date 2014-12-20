@@ -8,6 +8,6 @@
         android:centerX="0.9"
         android:endColor="#0687B9"
         android:startColor="#99CCFF" /> -->
-    <solid android:color="#024f91"/>
+    <solid android:color="@color/action_bar"/>
 
 </shape>
