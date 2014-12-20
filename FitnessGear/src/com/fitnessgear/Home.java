@@ -84,8 +84,9 @@ public class Home extends Fragment {
 			pagerTab = (PagerTabStrip) rootView
 					.findViewById(R.id.pagerTabStrip);
 			adapter = new HomeViewPagerAdapter(getChildFragmentManager());
-			pagerTab.setTabIndicatorColor(Color.BLUE);
-			pagerTab.setBackgroundColor(Color.CYAN);
+			pagerTab.setTabIndicatorColor(getResources().getColor(R.color.user_name));
+			pagerTab.setBackgroundColor(getResources().getColor(R.color.child_background));
+			pagerTab.setTextColor(getResources().getColor(R.color.user_name));
 			pagerTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			pager.setAdapter(adapter);
 			pagerTab.setOnTouchListener(new OnTouchListener() {
