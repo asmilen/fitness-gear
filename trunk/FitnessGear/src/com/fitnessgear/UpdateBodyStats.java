@@ -5,6 +5,7 @@ import com.fitnessgear.database.DatabaseUltility;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -617,8 +618,11 @@ public class UpdateBodyStats extends Fragment {
 							UserInformation.getData();
 							hideKeyboard(rootView);
 						}
+						
+						DatabaseUltility.UpdateToLogUser(userContent);
+						
 					}
-				} catch (Exception ex) {
+				} catch (Exception ex) {	
 					Toast.makeText(getActivity(), "" + ex, Toast.LENGTH_LONG)
 							.show();
 				}

@@ -185,7 +185,6 @@ public class MainActivity extends FragmentActivity {
 		Fragment fragment = null;
 		switch (position) {
 		case 0:
-//			startActivity(new Intent(getApplicationContext(),Home.class));
 			fragment = new Home();
 			break;
 		case 1:
@@ -201,7 +200,7 @@ public class MainActivity extends FragmentActivity {
 			fragment = new Report();
 			break;
 		case 5:
-//			startActivity(new Intent(getApplicationContext(),Logs.class));
+			//startActivity(new Intent(getApplicationContext(),Test.class));
 			fragment = new Logs();
 			break;
 		case 6:

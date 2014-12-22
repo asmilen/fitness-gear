@@ -13,11 +13,13 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class CalendarAdapter extends CaldroidGridAdapter {
 
@@ -28,11 +30,13 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 	}
 
 	@Override
-	public View getView(int position, View convertView, ViewGroup parent) {
+	public View getView(int position, View convertView, ViewGroup parent){
 		LayoutInflater inflater = (LayoutInflater) context
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View cellView = convertView;
 
+		try
+		{
 		// For reuse
 		if (convertView == null) {
 			cellView = inflater.inflate(R.layout.custom_cell_calendar, null);
@@ -48,7 +52,10 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 
 		ImageView img = (ImageView) cellView
 				.findViewById(R.id.imageViewCustomCell);
-		img.setVisibility(View.GONE);
+		ImageView imgNote = (ImageView) cellView
+				.findViewById(R.id.imageViewCustomCellNote);
+		ImageView imgBody = (ImageView) cellView
+				.findViewById(R.id.imageViewCustomCellBody);
 
 		tv1.setTextColor(Color.BLACK);
 
@@ -117,19 +124,23 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 				"Select * from Log_Exercise where Day = '" + dayID + "'", null);
 		if (c.moveToNext()) {
 			img.setVisibility(View.VISIBLE);
-			cellView.setPadding(leftPadding, topPadding, rightPadding,
-					bottomPadding);
-		} else {
+		}
 
-			// Somehow after setBackgroundResource, the padding collapse.
-			// This is to recover the padding
-			cellView.setPadding(leftPadding, topPadding, rightPadding,
-					bottomPadding);
+		Cursor c1 = MainActivity.db.rawQuery("Select * from Log_Note where Day = '"
+				+ dayID + "'", null);
+		if (c1.moveToNext()) {
+			imgNote.setVisibility(View.VISIBLE);
 		}
 
 		// Set custom color if required
 		setCustomResources(dateTime, cellView, tv1);
-
+		cellView.setPadding(leftPadding, topPadding, rightPadding,
+				bottomPadding);
+		}
+		catch (Exception ex)
+		{
+			Log.e("", ex.getMessage());
+		}
 		return cellView;
 	}
 
