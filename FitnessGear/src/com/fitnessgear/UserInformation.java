@@ -173,16 +173,18 @@ public class UserInformation extends Fragment {
 		if (goalWeight == 0) {
 			tvWeight.setText(bodyWeight + " kg");
 		} else {
-			progressWeight.setProgress(0);
-			progressWeight.setSecondaryProgress(0);
+//			progressWeight.setProgress(0);
+//			progressWeight.setSecondaryProgress(0);
 			tvWeight.setText(bodyWeight + "/" + goalWeight + " kg");
-			float progress = goalWeight / (bodyWeight / 100);
-			if (progress >= 0 && progress <= 100) {
+			if(bodyWeight >= goalWeight){
+				float progress = (goalWeight / bodyWeight) * 100;
+				progressWeight.setSecondaryProgress(100);
 				progressWeight.setProgress((int) progress);
 			}
-			if (progress > 100) {
+			if(bodyWeight < goalWeight){
+				float progress = (goalWeight / bodyWeight) * 100;
 				progressWeight.setProgress(100);
-				progressWeight.setSecondaryProgress((int) progress - 100);
+				progressWeight.setSecondaryProgress((int) progress);
 			}
 		}
 		if (goalBodyFat == 0) {

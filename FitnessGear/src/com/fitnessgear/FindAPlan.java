@@ -155,6 +155,7 @@ public class FindAPlan extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				hideKeyboard(view);
 				switch (position) {
 				case 0:
 					new AlertDialog.Builder(getActivity())

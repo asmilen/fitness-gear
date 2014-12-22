@@ -142,6 +142,7 @@ public class ExerciseLibrary extends Fragment {
 			public void onItemClick(AdapterView<?> parent, View view,
 					int position, long id) {
 				// TODO Auto-generated method stub
+				hideKeyboard(view);
 				switch (position) {
 				case 0:
 					new AlertDialog.Builder(getActivity())
@@ -284,8 +285,8 @@ public class ExerciseLibrary extends Fragment {
 		listFullExercises.setAdapter(adapter);
 
 		searchExercise.setHint("Type Exercise Name");
-//		searchExercise.setCompoundDrawablesWithIntrinsicBounds(searchbutton,
-//				null, null, null);
+		// searchExercise.setCompoundDrawablesWithIntrinsicBounds(searchbutton,
+		// null, null, null);
 		searchExercise.addTextChangedListener(new TextWatcher() {
 
 			@Override
