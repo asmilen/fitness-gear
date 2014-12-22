@@ -16,7 +16,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="Weight lift over days(14days)"
-            android:textSize="22dp" />
+            android:textSize="16dp" />
 
         <LinearLayout
             android:id="@+id/container"
@@ -31,8 +31,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical" 
+        android:background="@drawable/report_border">
 
+	<TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:text="Bodyparts breakdown (14 days)"
+            android:textSize="16dp" />
+        
         <LinearLayout
             android:id="@+id/containerpiechart	"
             android:layout_width="wrap_content"
