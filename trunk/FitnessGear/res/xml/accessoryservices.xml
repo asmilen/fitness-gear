@@ -29,8 +29,8 @@
 
     <application name="FitnessGear" >
         <serviceProfile
-            id="/system/fitnessgearx"
-            name="fitnessgearx"
+            id="/system/fitnessgearproject"
+            name="fitnessgearproject"
             role="provider"
             serviceImpl="com.fitnessgear.sapservices.HelloAccessoryProviderService"
             version="1.0"
@@ -41,7 +41,7 @@
             </supportedTransports>
 
             <serviceChannel
-                id="109"
+                id="110"
                 dataRate="low"
                 priority="low"
                 reliability= "enable"/>   
