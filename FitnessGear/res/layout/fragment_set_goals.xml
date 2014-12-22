@@ -235,7 +235,10 @@
                 android:id="@+id/btnSaveGoalStats"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Save" />
+                android:layout_margin="5dp"
+                android:background="@drawable/button_selector"
+                android:text="Save"
+                android:textColor="@color/text_title_color" />
         </LinearLayout>
     </ScrollView>
 

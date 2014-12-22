@@ -1,32 +1,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/logNoteLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginTop="5dp"
+    android:background="@color/background"
     android:orientation="vertical"
-    android:id="@+id/logNoteLayout"
     tools:context="com.fitnessgear.child.LogNote" >
 
-    <EditText
-        android:id="@+id/contentNote"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        android:ems="15"
-        android:maxLength="150"
-        android:hint="Enter your note here" />
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        android:background="@color/child_background"
+        android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/timeNote"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Note for "
-        android:layout_gravity="center_horizontal" />
+        <EditText
+            android:id="@+id/contentNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:ems="15"
+            android:hint="Enter your note here"
+            android:maxLength="150" />
 
-    <ListView
-        android:id="@+id/listNote"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
-    </ListView>
+        <TextView
+            android:id="@+id/timeNote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Note for " />
+
+        <ListView
+            android:id="@+id/listNote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" >
+        </ListView>
+    </LinearLayout>
 
 </LinearLayout>
