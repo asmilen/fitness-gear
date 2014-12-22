@@ -42,8 +42,9 @@ public class LogDetail extends FragmentActivity {
 				findViewById(R.id.logPagerTabStrip);
 		adapter = new LogViewPagerAdapter(getSupportFragmentManager());
 		adapter.dayID = bund.getString(Logs.DAYID);
-		pagerTab.setTabIndicatorColor(Color.BLUE);
-		pagerTab.setBackgroundColor(Color.CYAN);
+		pagerTab.setTabIndicatorColor(getResources().getColor(R.color.user_name));
+		pagerTab.setBackgroundColor(getResources().getColor(R.color.child_background));
+		pagerTab.setTextColor(getResources().getColor(R.color.user_name));
 		pagerTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 		pager.setAdapter(adapter);
 		pager.setCurrentItem(1);

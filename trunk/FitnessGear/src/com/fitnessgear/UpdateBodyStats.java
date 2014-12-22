@@ -119,6 +119,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etWeight.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -156,6 +157,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etBodyFat.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -193,6 +195,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etHeight.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -230,6 +233,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etChest.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -267,6 +271,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etWaist.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -304,6 +309,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etArms.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -341,6 +347,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etShoulders.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -378,6 +385,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etForearms.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -415,6 +423,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etNeck.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -452,6 +461,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etHips.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -489,6 +499,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etThighs.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
@@ -526,6 +537,7 @@ public class UpdateBodyStats extends Fragment {
 				// TODO Auto-generated method stub
 				if (etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
 
