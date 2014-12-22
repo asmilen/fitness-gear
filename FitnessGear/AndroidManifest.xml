@@ -31,10 +31,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <service android:name=".sapservices.HelloAccessoryProviderService" >
+		          <service android:name="com.fitnessgear.sapservices.HelloAccessoryProviderService" >
         </service>
-
         <receiver android:name="com.samsung.android.sdk.accessory.ServiceConnectionIndicationBroadcastReceiver" >
             <intent-filter>
                 <action android:name="android.accessory.service.action.ACCESSORY_SERVICE_CONNECTION_IND" />
@@ -45,13 +43,13 @@
                 <action android:name="android.accessory.device.action.REGISTER_AFTER_INSTALL" />
             </intent-filter>
         </receiver>
-
         <meta-data
             android:name="AccessoryServicesLocation"
             android:value="/res/xml/accessoryservices.xml" />
         <meta-data
             android:name="GearAppType"
             android:value="wgt" />
+        
 
         <activity
             android:name=".child.TrackWorkout"
@@ -122,17 +120,23 @@
             android:label="@string/title_activity_log_detail" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.LogNote"
+            android:name=".child.LogNote"
             android:label="@string/title_activity_log_note" >
         </activity>
         <activity
-            android:name="com.fitnessgear.child.LogBodyStats"
+            android:name=".child.LogBodyStats"
             android:label="@string/title_activity_log_body_stats" >
         </activity>
         <activity
             android:name=".child.CreateWorkoutDetail"
             android:label="@string/title_activity_create_workout_detail" >
         </activity>
+        <activity
+            android:name=".Test"
+            android:label="@string/title_activity_test" >
+        </activity>
+        
+
     </application>
 
 </manifest>
