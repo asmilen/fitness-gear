@@ -42,6 +42,11 @@
     <color name="background_exercise_name_color">#024f91</color>
     <color name="text_exercise_name_color">#ffffff</color>
     
+    <color name="button_bg_normal">#024f91</color>
+    <color name="button_bg_pressed">#33999999</color>
+    <color name="button_bg_disabled">#EFEFEF</color>
+    <color name="button_text">#B2B2B2</color>
+    
     
     
 
