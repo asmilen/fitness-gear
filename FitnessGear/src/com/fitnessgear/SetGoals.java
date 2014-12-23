@@ -92,27 +92,25 @@ public class SetGoals extends Fragment {
 			etCalves.setText(DatabaseUltility.GetColumnValue(bodyStats,
 					DatabaseUltility.Calves));
 		}
-
+		
 		etWeight.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etWeight.getText().toString().equals("")) {
+				if(etWeight.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -129,31 +127,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etBodyFat.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etBodyFat.getText().toString().equals("")) {
+				if(etBodyFat.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -170,31 +164,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etHeight.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etHeight.getText().toString().equals("")) {
+				if(etHeight.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -211,31 +201,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etChest.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etChest.getText().toString().equals("")) {
+				if(etChest.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -252,31 +238,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etWaist.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etWaist.getText().toString().equals("")) {
+				if(etWaist.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -293,31 +275,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etArms.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etArms.getText().toString().equals("")) {
+				if(etArms.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -334,31 +312,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etShoulders.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etShoulders.getText().toString().equals("")) {
+				if(etShoulders.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -375,31 +349,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etForearms.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etForearms.getText().toString().equals("")) {
+				if(etForearms.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -416,31 +386,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etNeck.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etNeck.getText().toString().equals("")) {
+				if(etNeck.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -457,31 +423,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etHips.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etHips.getText().toString().equals("")) {
+				if(etHips.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -498,31 +460,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etThighs.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etThighs.getText().toString().equals("")) {
+				if(etThighs.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -539,31 +497,27 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
 		etCalves.addTextChangedListener(new TextWatcher() {
-
+			
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
+			public void onTextChanged(CharSequence s, int start, int before, int count) {
 				// TODO Auto-generated method stub
-				if (etCalves.getText().toString().equals("")) {
+				if(etCalves.getText().toString().equals("")){
 					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.button_text));
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
 				}
 			}
-
+			
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count,
 					int after) {
 				// TODO Auto-generated method stub
-
+				
 			}
-
+			
 			@Override
 			public void afterTextChanged(Editable s) {
 				// TODO Auto-generated method stub
@@ -580,8 +534,6 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(
-							R.color.text_title_color));
 				}
 			}
 		});
@@ -592,68 +544,77 @@ public class SetGoals extends Fragment {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 
-				try {
-					float weight = Float.parseFloat(etWeight.getText()
-							.toString());
-					float bodyFat = Float.parseFloat(etBodyFat.getText()
-							.toString());
-					float height = Float.parseFloat(etHeight.getText()
-							.toString());
-					float chest = Float
-							.parseFloat(etChest.getText().toString());
-					float waist = Float
-							.parseFloat(etWaist.getText().toString());
-					float arms = Float.parseFloat(etArms.getText().toString());
-					float shoulders = Float.parseFloat(etShoulders.getText()
-							.toString());
-					float forearms = Float.parseFloat(etForearms.getText()
-							.toString());
-					float neck = Float.parseFloat(etNeck.getText().toString());
-					float hips = Float.parseFloat(etHips.getText().toString());
-					float thighs = Float.parseFloat(etThighs.getText()
-							.toString());
-					float calves = Float.parseFloat(etCalves.getText()
-							.toString());
-					if (weight >= 0 && weight < 200 && bodyFat >= 0
-							&& bodyFat < 100 && height >= 0 && height < 300
-							&& chest >= 0 && chest < 200 && waist >= 0
-							&& waist < 200 && arms >= 0 && arms < 200
-							&& shoulders >= 0 && shoulders < 200
-							&& forearms >= 0 && forearms < 200 && neck >= 0
-							&& neck < 200 && hips >= 0 && hips < 200
-							&& thighs >= 0 && thighs < 200 && calves >= 0
-							&& calves < 200) {
+					try {
+						float weight = Float.parseFloat(etWeight.getText()
+								.toString());
+						float bodyFat = Float.parseFloat(etBodyFat.getText()
+								.toString());
+						float height = Float.parseFloat(etHeight.getText()
+								.toString());
+						float chest = Float.parseFloat(etChest.getText()
+								.toString());
+						float waist = Float.parseFloat(etWaist.getText()
+								.toString());
+						float arms = Float.parseFloat(etArms.getText()
+								.toString());
+						float shoulders = Float.parseFloat(etShoulders
+								.getText().toString());
+						float forearms = Float.parseFloat(etForearms.getText()
+								.toString());
+						float neck = Float.parseFloat(etNeck.getText()
+								.toString());
+						float hips = Float.parseFloat(etHips.getText()
+								.toString());
+						float thighs = Float.parseFloat(etThighs.getText()
+								.toString());
+						float calves = Float.parseFloat(etCalves.getText()
+								.toString());
+						if (weight >= 0 && weight < 200 && bodyFat >= 0
+								&& bodyFat < 100 && height >= 0 && height < 300
+								&& chest >= 0 && chest < 200 && waist >= 0
+								&& waist < 200 && arms >= 0 && arms < 200
+								&& shoulders >= 0 && shoulders < 200
+								&& forearms >= 0 && forearms < 200 && neck >= 0
+								&& neck < 200 && hips >= 0 && hips < 200
+								&& thighs >= 0 && thighs < 200 && calves >= 0
+								&& calves < 200) {
 
-						MainActivity.db = MainActivity.dbHelper
-								.getWritableDatabase();
-						ContentValues userContent = new ContentValues();
-						userContent.put("Weight", weight);
-						userContent.put("BodyFat", bodyFat);
-						userContent.put("Height", height);
-						userContent.put("Waist", waist);
-						userContent.put("Chest", chest);
-						userContent.put("Arms", arms);
-						userContent.put("Forearms", forearms);
-						userContent.put("Shoulders", shoulders);
-						userContent.put("Hips", hips);
-						userContent.put("Thighs", thighs);
-						userContent.put("Calves", calves);
-						userContent.put("Neck", neck);
-						int setGoalStats = MainActivity.db.update("User",
-								userContent, "UserID=?",
-								new String[] { UserID });
-						if (setGoalStats > 0) {
-							Home.getData();
-							UserInformation.getData();
-							hideKeyboard(rootView);
+							MainActivity.db = MainActivity.dbHelper
+									.getWritableDatabase();
+							ContentValues userContent = new ContentValues();
+							userContent.put("Weight", weight);
+							userContent.put("BodyFat", bodyFat);
+							userContent.put("Height", height);
+							userContent.put("Waist", waist);
+							userContent.put("Chest", chest);
+							userContent.put("Arms", arms);
+							userContent.put("Forearms", forearms);
+							userContent.put("Shoulders", shoulders);
+							userContent.put("Hips", hips);
+							userContent.put("Thighs", thighs);
+							userContent.put("Calves", calves);
+							userContent.put("Neck", neck);
+							int setGoalStats = MainActivity.db.update("User",
+									userContent, "UserID=?",
+									new String[] { UserID });
+							if (setGoalStats > 0) {
+								Home.getData();
+								UserInformation.getData();
+								hideKeyboard(rootView);
+							}
 						}
+						else {
+							Toast.makeText(
+									getActivity(),
+									"Body stats value (chest, waist ,arms ,shoulder ,forearms ,neck ,hips , thighs ,calves) must be positive integer and less than 200",
+									Toast.LENGTH_LONG).show();
+						}
+					} catch (Exception ex) {
+						Toast.makeText(getActivity(), "" + ex,
+								Toast.LENGTH_LONG).show();
 					}
-				} catch (Exception ex) {
-					Toast.makeText(getActivity(), "" + ex, Toast.LENGTH_LONG)
-							.show();
 				}
-			}
-
+			
 		});
 
 		return rootView;

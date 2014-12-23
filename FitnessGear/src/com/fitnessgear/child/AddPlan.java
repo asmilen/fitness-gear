@@ -233,9 +233,7 @@ public class AddPlan extends Activity {
 				if (!planName.getText().toString().equals("")
 						&& !totalWeek.getText().toString().equals("")
 						&& !aveDay.getText().toString().equals("")
-						&& !aveWorkoutTime.getText().toString().equals("")
-						&& !totalTimeAWeek.getText().toString().equals("")
-						&& !totalCardioTime.getText().toString().equals("")) {
+						) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -261,10 +259,7 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
 						&& !totalWeek.getText().toString().equals("")
-						&& !aveDay.getText().toString().equals("")
-						&& !aveWorkoutTime.getText().toString().equals("")
-						&& !totalTimeAWeek.getText().toString().equals("")
-						&& !totalCardioTime.getText().toString().equals("")) {
+						) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -298,10 +293,7 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
 						&& !totalWeek.getText().toString().equals("")
-						&& !aveDay.getText().toString().equals("")
-						&& !aveWorkoutTime.getText().toString().equals("")
-						&& !totalTimeAWeek.getText().toString().equals("")
-						&& !totalCardioTime.getText().toString().equals("")) {
+						) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -335,10 +327,7 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
 						&& !totalWeek.getText().toString().equals("")
-						&& !aveDay.getText().toString().equals("")
-						&& !aveWorkoutTime.getText().toString().equals("")
-						&& !totalTimeAWeek.getText().toString().equals("")
-						&& !totalCardioTime.getText().toString().equals("")) {
+						) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -372,10 +361,7 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
 						&& !totalWeek.getText().toString().equals("")
-						&& !aveDay.getText().toString().equals("")
-						&& !aveWorkoutTime.getText().toString().equals("")
-						&& !totalTimeAWeek.getText().toString().equals("")
-						&& !totalCardioTime.getText().toString().equals("")) {
+						) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -409,10 +395,7 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
 						&& !totalWeek.getText().toString().equals("")
-						&& !aveDay.getText().toString().equals("")
-						&& !aveWorkoutTime.getText().toString().equals("")
-						&& !totalTimeAWeek.getText().toString().equals("")
-						&& !totalCardioTime.getText().toString().equals("")) {
+						) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -500,25 +483,39 @@ public class AddPlan extends Activity {
 		// Set Insert Plan to Sqlite when click
 		btnCreatePlan.setOnClickListener(new OnClickListener() {
 
+			private String ErrorMessage;
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				String textPlanName = planName.getText().toString();
 				int numTotalWeek = Integer.parseInt(totalWeek.getText()
 						.toString());
-				float numAveDay = Float.parseFloat(aveDay.getText().toString());
-				float numAveWorkoutTime = Float.parseFloat(aveWorkoutTime
-						.getText().toString());
-				int numTotalTimeAWeek = Integer.parseInt(totalTimeAWeek
-						.getText().toString());
-				int numTotalCardioTime = Integer.parseInt(totalCardioTime
-						.getText().toString());
-				if (textPlanName.length() > 4 && textPlanName.length() < 50
-						&& numTotalWeek < 99 && numTotalWeek >= 1
-						&& numAveDay <= 7 && numAveDay > 0.1
-						&& numAveWorkoutTime < 180 && numAveWorkoutTime > 5
-						&& numTotalTimeAWeek < 1260 && numTotalTimeAWeek > 5
-						&& numTotalCardioTime < 999 && numTotalCardioTime >= 0) {
+				float numAveDay = 0 , numAveWorkoutTime = 0;
+				int numTotalTimeAWeek = 0 , numTotalCardioTime = 0;
+				try{
+				 numAveDay = Float.parseFloat(aveDay.getText().toString());
+				}
+				catch (Exception ex) {}
+				try{
+					numAveWorkoutTime = Float.parseFloat(aveWorkoutTime
+							.getText().toString());
+					}
+					catch (Exception ex) {}
+				try{
+					numTotalTimeAWeek = Integer.parseInt(totalTimeAWeek
+							.getText().toString());
+					}
+					catch (Exception ex) {}
+				try{
+					numTotalCardioTime = Integer.parseInt(totalCardioTime
+							.getText().toString());
+					}
+					catch (Exception ex) {}
+				 
+				 
+				 
+				if (DataValidated(textPlanName.length(),numTotalWeek,numAveDay,numAveWorkoutTime,numTotalTimeAWeek,numTotalCardioTime)) {
 					final EditText numberWorkout = new EditText(AddPlan.this);
 					numberWorkout.setInputType(InputType.TYPE_CLASS_NUMBER);
 					InputFilter[] fArray = new InputFilter[1];
@@ -638,6 +635,41 @@ public class AddPlan extends Activity {
 										}
 									}).show();
 				}
+				else
+				{
+					Toast.makeText(getApplicationContext(), ErrorMessage, Toast.LENGTH_LONG).show();
+				}
+			}
+
+			private boolean DataValidated(int length, int numTotalWeek,
+					float numAveDay, float numAveWorkoutTime,
+					int numTotalTimeAWeek, int numTotalCardioTime) {
+				// TODO Auto-generated method stub
+				ErrorMessage ="";
+				
+				if (!(length > 4 && length < 50))
+					ErrorMessage += "Plan name must be greater than 4 and less than 50 characters \n";
+				
+				if (!( numTotalWeek < 99 && numTotalWeek >= 1))
+					ErrorMessage += "Total week must be greater than 1 week and less than 99 weeks \n";
+				
+				if (numAveDay != 0)
+				if (!(numAveDay < 100 && numAveDay >= 1))
+					ErrorMessage += "Average day must be greater or equal 1 day and less than 99.9 days \n";
+				if (numAveWorkoutTime != 0)
+				if (!( numAveWorkoutTime < 99 && numAveWorkoutTime >1))
+					ErrorMessage += "Average workout time must be greater than 1 minute and less than 99.9 minutes \n";
+				
+				if (numTotalTimeAWeek != 0)
+				if (!( numTotalTimeAWeek < 999 && numTotalTimeAWeek > 1))
+					ErrorMessage += "Total time train per week must be greater than 1 minute and less than 999 minutes \n";
+				
+				if (numTotalCardioTime != 0)
+				if (!( numTotalCardioTime < 99 && numTotalCardioTime > 1))
+					ErrorMessage += "Total cardio time must be greater than 1 minute and less than 999 minutes \n";
+				
+				if (ErrorMessage.equals("")) return true;
+				return false;
 			}
 		});
 	}

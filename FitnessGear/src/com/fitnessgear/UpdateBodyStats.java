@@ -580,7 +580,6 @@ public class UpdateBodyStats extends Fragment {
 			}
 		});
 
-		
 		btnSaveUpdateStats.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -614,10 +613,11 @@ public class UpdateBodyStats extends Fragment {
 							&& bodyFat <= 100 && height >= 0 && height <= 300
 							&& chest >= 0 && chest <= 200 && waist >= 0
 							&& waist <= 200 && arms >= 0 && arms <= 200
-							&& shoulders >= 0 && shoulders <= 200 && forearms >= 0
-							&& forearms <= 200 && neck >= 0 && neck <= 200
-							&& hips >= 0 && hips <= 200 && thighs >= 0
-							&& thighs <= 200 && calves >= 0 && calves <= 200) {
+							&& shoulders >= 0 && shoulders <= 200
+							&& forearms >= 0 && forearms <= 200 && neck >= 0
+							&& neck <= 200 && hips >= 0 && hips <= 200
+							&& thighs >= 0 && thighs <= 200 && calves >= 0
+							&& calves <= 200) {
 
 						MainActivity.db = MainActivity.dbHelper
 								.getWritableDatabase();
@@ -642,13 +642,18 @@ public class UpdateBodyStats extends Fragment {
 							UserInformation.getData();
 							hideKeyboard(rootView);
 						}
-						
+
 						DatabaseUltility.UpdateToLogUser(userContent);
-						
+
+					} else {
+						Toast.makeText(
+								getActivity(),
+								"Body stats value (chest, waist ,arms ,shoulder ,forearms ,neck ,hips , thighs ,calves) must be positive integer and less than 200",
+								Toast.LENGTH_LONG).show();
 					}
-				} catch (Exception ex) {	
-					Toast.makeText(getActivity(), "" + ex, Toast.LENGTH_LONG)
-							.show();
+				} catch (Exception ex) {
+					Toast.makeText(getActivity(), ex.getMessage(),
+							Toast.LENGTH_LONG).show();
 				}
 			}
 

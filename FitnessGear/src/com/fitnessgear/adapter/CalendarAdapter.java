@@ -123,15 +123,20 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 		Cursor c = MainActivity.db.rawQuery(
 				"Select * from Log_Exercise where Day = '" + dayID + "'", null);
 		if (c.moveToNext()) {
-			img.setVisibility(View.VISIBLE);
+			img.setImageResource(R.drawable.exercise_icon);
 		}
 
 		Cursor c1 = MainActivity.db.rawQuery("Select * from Log_Note where Day = '"
 				+ dayID + "'", null);
 		if (c1.moveToNext()) {
-			imgNote.setVisibility(View.VISIBLE);
+			imgNote.setImageResource(R.drawable.note_icon);
 		}
 
+		Cursor c2 = MainActivity.db.rawQuery("Select * from Log where Day = '"
+				+ dayID + "'", null);
+		if (c2.moveToNext()) {
+			imgBody.setImageResource(R.drawable.body_icon);
+		}
 		// Set custom color if required
 		setCustomResources(dateTime, cellView, tv1);
 		cellView.setPadding(leftPadding, topPadding, rightPadding,
