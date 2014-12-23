@@ -93,26 +93,24 @@ public class ListExercisesAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		// String img = listExercises.get(position).getImg1();
 		String image1 = listExercises.get(position).getImg1();
 		String image2 = listExercises.get(position).getImg2();
 
 		// Decode String image1
-		// byte[] decodedString = Base64.decode(image1, Base64.DEFAULT);
-		// Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
-		// decodedString.length);
-		//
+		 byte[] decodedString = Base64.decode(image1, Base64.DEFAULT);
+		 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
+		 decodedString.length);
+		
+//		  Set image by bitmap
+		 holder.img1.setImageBitmap(decodedByte);
+
+		 // Decode String image2
+		 decodedString = Base64.decode(image2, Base64.DEFAULT);
+		 decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
+		 decodedString.length);
+		
 		 // Set image by bitmap
-		Bitmap bitMap = getBitmapFromURL(image1);
-		 holder.img1.setImageBitmap(bitMap);
-		//
-		// // Decode String image2
-		// decodedString = Base64.decode(image2, Base64.DEFAULT);
-		// decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
-		// decodedString.length);
-		//
-		// // Set image by bitmap
-		// holder.img2.setImageBitmap(decodedByte);
+		 holder.img2.setImageBitmap(decodedByte);
 
 		// Set Text for TextView exerciseName
 		// Text so long then display ...
@@ -156,24 +154,34 @@ public class ListExercisesAdapter extends BaseAdapter {
 		public TextView exerciseType;
 	}
 
-	public static Bitmap getBitmapFromURL(String src) {
-		try {
-			Log.e("src", src);
-			URL url = new URL(src);
-			HttpURLConnection connection = (HttpURLConnection) url
-					.openConnection();
-			connection.setDoInput(true);
-			connection.connect();
-			InputStream input = connection.getInputStream();
-			Bitmap myBitmap = BitmapFactory.decodeStream(input);
-			Log.e("Bitmap", "returned");
-			return myBitmap;
-		} catch (Exception e) {
-			e.printStackTrace();
-			Log.e("Exception", e.getMessage());
-			return null;
-		}
-	}
+//	private class LoadImage extends AsyncTask<Object, String, Bitmap> {
+//		private ImageView img;
+//	    private Bitmap bitmap = null;
+//		@Override
+//		protected void onPreExecute() {
+//			super.onPreExecute();
+//		}
+//
+//		protected Bitmap doInBackground(Object... args) {
+//			try {
+////				bitmap = BitmapFactory.decodeStream((InputStream) new URL(
+////						args[0]).getContent());
+//				img = (ImageView) args[0];
+//				String path = (String) args[1];
+//				Bitmap rootBitmap = BitmapFactory.decodeStream((InputStream) new URL(path).getContent());
+//				bitmap = Bitmap.createScaledBitmap(rootBitmap, 90, 90, false);
+//			} catch (Exception e) {
+//				e.printStackTrace();
+//			}
+//			return bitmap;
+//		}
+//
+//		protected void onPostExecute(Bitmap image) {
+//			if (bitmap != null) {
+//				img.setImageBitmap(bitmap);
+//	        }
+//		}
+//	}
 
 	// Filter Class
 	public void filter(String textFilter, int exerciseTypeID, int muscleID,
