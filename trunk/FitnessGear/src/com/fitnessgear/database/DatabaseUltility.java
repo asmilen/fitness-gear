@@ -156,14 +156,17 @@ public class DatabaseUltility {
 					+ " And Sets = " + item.getSets());
 
 			// Insert
-			ContentValues values = new ContentValues();
-			values.put(DatabaseUltility.Day, item.getDay());
-			values.put(DatabaseUltility.ExerciseID, item.getExerciseID());
-			values.put(DatabaseUltility.Sets, item.getSets());
-			values.put(DatabaseUltility.Reps, item.getReps());
-			values.put(DatabaseUltility.Kg, item.getKgs());
-			values.put(DatabaseUltility.Interval, item.getInterval());
-			db.insert("Log_Exercise", null, values);
+			if (item.getReps() != 0 || item.getKgs() != 0
+					|| item.getInterval() != 0) {
+				ContentValues values = new ContentValues();
+				values.put(DatabaseUltility.Day, item.getDay());
+				values.put(DatabaseUltility.ExerciseID, item.getExerciseID());
+				values.put(DatabaseUltility.Sets, item.getSets());
+				values.put(DatabaseUltility.Reps, item.getReps());
+				values.put(DatabaseUltility.Kg, item.getKgs());
+				values.put(DatabaseUltility.Interval, item.getInterval());
+				db.insert("Log_Exercise", null, values);
+			}
 		}
 
 	}
@@ -233,43 +236,15 @@ public class DatabaseUltility {
 		}
 	}
 
-	
-	private class LoadImage extends AsyncTask<String, String, Bitmap> {
-
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			// pDialog = new ProgressDialog(getActivity());
-			// pDialog.setMessage("Loading Image ....");
-			// pDialog.show();
-
-		}
-
-		protected Bitmap doInBackground(String... args) {
-			try {
-				bitmap = BitmapFactory.decodeStream((InputStream) new URL(
-						args[0]).getContent());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return bitmap;
-		}
-
-		protected void onPostExecute(Bitmap image) {
-			if (image != null) {
-
-				img1.setImageBitmap(image);
-				// pDialog.dismiss();
-			} else {
-				// pDialog.dismiss();
-			}
-		}
-	}
-
-
-	public static void LoadImageFromDatabase(String image12) {
+	public static String getMuscleName(int key) {
 		// TODO Auto-generated method stub
-		
-		
+		String name = "";
+		Cursor c = MainActivity.db.rawQuery("Select * from Muscles Where MuscleID = " + key, null);
+		if (c.moveToNext())
+			name = GetColumnValue(c, MuscleName);
+		return name;
 	}
+
 }
+
+

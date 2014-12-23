@@ -2,7 +2,9 @@ package com.fitnessgear;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map.Entry;
 
 import com.fitnessgear.database.DatabaseUltility;
 
@@ -21,6 +23,7 @@ import lecho.lib.hellocharts.view.ColumnChartView;
 import lecho.lib.hellocharts.view.PieChartView;
 import lecho.lib.hellocharts.view.PieChartView.PieChartOnValueTouchListener;
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -45,8 +48,10 @@ public class Report extends Fragment {
 		// TODO Auto-generated method stub
 		View rootView = inflater.inflate(R.layout.fragment_report, container,
 				false);
-		getFragmentManager().beginTransaction().add(R.id.container, new ColumnChartFragment()).commit();
-		getFragmentManager().beginTransaction().add(R.id.containerpiechart, new PieChartFragment()).commit();
+		getFragmentManager().beginTransaction()
+				.add(R.id.container, new ColumnChartFragment()).commit();
+		getFragmentManager().beginTransaction()
+				.add(R.id.containerpiechart, new PieChartFragment()).commit();
 		return rootView;
 	}
 
@@ -110,7 +115,7 @@ public class Report extends Fragment {
 
 			ArrayList<AxisValue> mylist = new ArrayList<AxisValue>();
 			for (int i = 0; i < numColumns; i++)
-				mylist.add(new AxisValue(numColumns-i));
+				mylist.add(new AxisValue(numColumns - i));
 
 			Axis axisX = new Axis();
 			axisX.setName("Weight Lifted Over Time(14 Days)");
@@ -122,7 +127,7 @@ public class Report extends Fragment {
 		}
 
 	}
-	
+
 	/**
 	 * A fragment containing a pie chart.
 	 */
@@ -140,9 +145,11 @@ public class Report extends Fragment {
 		}
 
 		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		public View onCreateView(LayoutInflater inflater, ViewGroup container,
+				Bundle savedInstanceState) {
 			setHasOptionsMenu(true);
-			View rootView = inflater.inflate(R.layout.fragment_pie_chart, container, false);
+			View rootView = inflater.inflate(R.layout.fragment_pie_chart,
+					container, false);
 
 			chart = (PieChartView) rootView.findViewById(R.id.pieChart);
 			chart.setOnValueTouchListener(new ValueTouchListener());
@@ -152,17 +159,37 @@ public class Report extends Fragment {
 			return rootView;
 		}
 
-		
-		
 		private void generateData() {
-			int numValues = 6;
-			String[] labels = new String[]{"Chest","triceps","biceps","legs","arm","neck"};
 			List<ArcValue> values = new ArrayList<ArcValue>();
-			for (int i = 0; i < numValues; ++i) {
-				ArcValue arcValue = new ArcValue((float) Math.random() * 30 + 15, Utils.pickColor());
-				
-				//setting label manually:
-				arcValue.setLabel(labels[i].toCharArray());				
+			Calendar c = Calendar.getInstance();
+
+			HashMap<Integer, Integer> myMap = new HashMap<Integer, Integer>();
+			for (int i = 0; i < 14; ++i) {
+				String DayID = (c.get(Calendar.DAY_OF_MONTH) - (13 - i)) + "/"
+						+ (c.get(Calendar.MONTH) + 1) + "/"
+						+ c.get(Calendar.YEAR);
+				String sql = "Select * from Log_Exercise,Exercise where Day = '"
+						+ DayID
+						+ "' AND Log_Exercise.ExerciseID=Exercise.ExerciseID";
+				Cursor cursorList = MainActivity.db.rawQuery(sql, null);
+				while (cursorList.moveToNext()) {
+					int Muscle = DatabaseUltility.GetIntColumnValue(cursorList,
+							DatabaseUltility.MuscleTarget);
+					if (myMap.containsKey(Muscle)) {
+						myMap.put(Muscle, myMap.get(Muscle) + 1);
+					} else
+						myMap.put(Muscle, 1);
+				}
+			}
+
+			for (Entry<Integer, Integer> entry : myMap.entrySet()) {
+				int key = entry.getKey();
+				int value = entry.getValue();
+				ArcValue arcValue = new ArcValue(value, Utils.pickColor());
+
+				// setting label manually:
+				arcValue.setLabel(DatabaseUltility.getMuscleName(key)
+						.toCharArray());
 				values.add(arcValue);
 			}
 
@@ -171,18 +198,19 @@ public class Report extends Fragment {
 			data.setHasLabelsOnlyForSelected(hasLabelForSelected);
 			data.setHasLabelsOutside(hasLabelsOutside);
 			data.setHasCenterCircle(hasCenterCircle);
-			//value formatter with custom parameters
-			data.setFormatter(new SimpleValueFormatter(1, false, null, "%".toCharArray()));
+			// value formatter with custom parameters
+			data.setFormatter(new SimpleValueFormatter(1, false, null, "%"
+					.toCharArray()));
 			chart.setPieChartData(data);
 		}
 
-		
-		
-		private class ValueTouchListener implements PieChartOnValueTouchListener {
+		private class ValueTouchListener implements
+				PieChartOnValueTouchListener {
 
 			@Override
 			public void onValueTouched(int selectedArc, ArcValue value) {
-				Toast.makeText(getActivity(), "Selected: " + value.getValue(), Toast.LENGTH_SHORT).show();
+				Toast.makeText(getActivity(), "Selected: " + value.getValue(),
+						Toast.LENGTH_SHORT).show();
 
 			}
 
@@ -195,5 +223,3 @@ public class Report extends Fragment {
 		}
 	}
 }
-
-
