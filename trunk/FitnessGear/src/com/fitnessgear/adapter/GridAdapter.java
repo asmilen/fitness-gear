@@ -18,6 +18,7 @@ public class GridAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private final ArrayList<WorkoutItem> item;
+	public String startdate;
 
 	public GridAdapter(Context c, ArrayList<WorkoutItem> item) {
 		// TODO Auto-generated constructor stub

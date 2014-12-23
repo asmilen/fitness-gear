@@ -1,6 +1,8 @@
 package com.fitnessgear.child;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 import com.fitnessgear.MainActivity;
 import com.fitnessgear.R;
@@ -12,9 +14,11 @@ import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.PlanItem;
 import com.fitnessgear.model.WorkoutItem;
 
+import android.R.bool;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.content.ContentValues;
 import android.content.DialogInterface;
@@ -26,9 +30,11 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnFocusChangeListener;
 import android.view.View.OnLongClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.TextView;
@@ -41,6 +47,7 @@ public class PlanDetail extends Activity {
 	private int planID;
 	private ArrayList<PlanItem> myListPlan;
 	private GridAdapter adapter;
+	private DatePickerDialog datePickerDialog;
 
 	private TextView planName;
 	private TextView author;
@@ -62,6 +69,9 @@ public class PlanDetail extends Activity {
 	private EditText txtTotalExercise;
 	private EditText txtTotalSets;
 	private EditText txtDescription;
+	
+	private String startDate;
+	private boolean isOkayClicked;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -292,108 +302,180 @@ public class PlanDetail extends Activity {
 
 	public void addToWorkout() {
 
-		MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
-		Cursor planInformationCursor = MainActivity.db.rawQuery("Select * "
-				+ "FROM Plan,Gender, FitnessLevel,Main_Goal "
-				+ "WHERE MainGoal = MainGoalID " + "AND Gender = GenderID "
-				+ "AND FitnessLevel = FitnessLevelID " + "AND PlanID = "
-				+ planID, null);
-		ContentValues contentPlan = new ContentValues();
-		while (planInformationCursor.moveToNext()) {
-			contentPlan.put("PlanName", DatabaseUltility.GetColumnValue(
-					planInformationCursor, DatabaseUltility.PlanName));
-			contentPlan.put("MainGoal", DatabaseUltility.GetIntColumnValue(
-					planInformationCursor, DatabaseUltility.MainGoalID));
-			contentPlan.put("Gender", DatabaseUltility.GetIntColumnValue(
-					planInformationCursor, DatabaseUltility.GenderID));
-			contentPlan.put("FitnessLevel", DatabaseUltility.GetIntColumnValue(
-					planInformationCursor, DatabaseUltility.FitnessLevelID));
-			contentPlan.put("CreatedBy", DatabaseUltility.GetColumnValue(
-					planInformationCursor, DatabaseUltility.CreatedBy));
-			contentPlan.put("DateCreated", DatabaseUltility.GetColumnValue(
-					planInformationCursor, DatabaseUltility.DateCreated));
-			contentPlan.put("TotalWeeks", DatabaseUltility.GetIntColumnValue(
-					planInformationCursor, DatabaseUltility.TotalWeeks));
-			contentPlan.put("AveDay", DatabaseUltility.GetFloatColumnValue(
-					planInformationCursor, DatabaseUltility.AveDay));
-			contentPlan.put("AveWorkoutTime", DatabaseUltility
-					.GetFloatColumnValue(planInformationCursor,
-							DatabaseUltility.AveWorkoutTime));
-			contentPlan.put("TotalTimeAWeek", DatabaseUltility
-					.GetIntColumnValue(planInformationCursor,
-							DatabaseUltility.TotalTimeAWeek));
-			contentPlan.put("TotalCardioTime", DatabaseUltility
-					.GetIntColumnValue(planInformationCursor,
-							DatabaseUltility.TotalCardioTime));
+		startDate = "";
+		
+		try {
+			// Set text to Edit text after select Date
+			final DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+
+				// when dialog box is closed, below method will be called.
+				public void onDateSet(DatePicker view, int selectedYear,
+						int selectedMonth, int selectedDay) {
+					if(isOkayClicked){
+					int year = Integer.valueOf(selectedYear);
+					int month = Integer.valueOf(selectedMonth + 1);
+					int day = Integer.valueOf(selectedDay);
+					startDate = day + "/" + month + "/" + year;
+					}
+					isOkayClicked = false;
+					
+				}
+			};
+			// Get current Date
+			Calendar cal = Calendar.getInstance(TimeZone.getDefault());
+			// Create Date Picker Dialog
+			datePickerDialog = new DatePickerDialog(this, datePickerListener,
+					cal.get(Calendar.YEAR), cal.get(Calendar.MONTH),
+					cal.get(Calendar.DAY_OF_MONTH));
+			datePickerDialog.setTitle("Select The Date");
+			datePickerDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Choose", new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
+					Cursor planInformationCursor = MainActivity.db.rawQuery("Select * "
+							+ "FROM Plan,Gender, FitnessLevel,Main_Goal "
+							+ "WHERE MainGoal = MainGoalID " + "AND Gender = GenderID "
+							+ "AND FitnessLevel = FitnessLevelID " + "AND PlanID = "
+							+ planID, null);
+					ContentValues contentPlan = new ContentValues();
+					while (planInformationCursor.moveToNext()) {
+						contentPlan.put("PlanName", DatabaseUltility.GetColumnValue(
+								planInformationCursor, DatabaseUltility.PlanName));
+						contentPlan.put("MainGoal", DatabaseUltility.GetIntColumnValue(
+								planInformationCursor, DatabaseUltility.MainGoalID));
+						contentPlan.put("Gender", DatabaseUltility.GetIntColumnValue(
+								planInformationCursor, DatabaseUltility.GenderID));
+						contentPlan.put("FitnessLevel", DatabaseUltility.GetIntColumnValue(
+								planInformationCursor, DatabaseUltility.FitnessLevelID));
+						contentPlan.put("CreatedBy", DatabaseUltility.GetColumnValue(
+								planInformationCursor, DatabaseUltility.CreatedBy));
+						contentPlan.put("DateCreated", DatabaseUltility.GetColumnValue(
+								planInformationCursor, DatabaseUltility.DateCreated));
+						contentPlan.put("TotalWeeks", DatabaseUltility.GetIntColumnValue(
+								planInformationCursor, DatabaseUltility.TotalWeeks));
+						contentPlan.put("AveDay", DatabaseUltility.GetFloatColumnValue(
+								planInformationCursor, DatabaseUltility.AveDay));
+						contentPlan.put("AveWorkoutTime", DatabaseUltility
+								.GetFloatColumnValue(planInformationCursor,
+										DatabaseUltility.AveWorkoutTime));
+						contentPlan.put("TotalTimeAWeek", DatabaseUltility
+								.GetIntColumnValue(planInformationCursor,
+										DatabaseUltility.TotalTimeAWeek));
+						contentPlan.put("TotalCardioTime", DatabaseUltility
+								.GetIntColumnValue(planInformationCursor,
+										DatabaseUltility.TotalCardioTime));
+						contentPlan.put("StartDate", startDate);
+					}
+
+					MainActivity.db.execSQL("Delete From Workout WHERE PlanID = 1");
+					Cursor workoutInformationCursor = MainActivity.db.rawQuery(
+							"SELECT * FROM Workout WHERE PlanID = " + planID, null);
+
+					ContentValues contentWorkout = new ContentValues();
+					ContentValues contentWorkoutExercise = new ContentValues();
+					int workoutUpdate = 0;
+					int workoutExerciseUpdate = 0;
+					while (workoutInformationCursor.moveToNext()) {
+						contentWorkout.put("WorkoutID", WorkoutID);
+						contentWorkout.put("PlanID", 1);
+						contentWorkout.put("WorkoutName", DatabaseUltility.GetColumnValue(
+								workoutInformationCursor, DatabaseUltility.WorkoutName));
+						contentWorkout.put("TotalWorkoutTime", DatabaseUltility
+								.GetIntColumnValue(workoutInformationCursor,
+										DatabaseUltility.TotalWorkoutTime));
+						contentWorkout.put("TotalCardioTime", DatabaseUltility
+								.GetIntColumnValue(workoutInformationCursor,
+										DatabaseUltility.TotalCardioTime));
+						contentWorkout.put("TotalExercises", DatabaseUltility
+								.GetIntColumnValue(workoutInformationCursor,
+										DatabaseUltility.TotalExercises));
+						contentWorkout.put("TotalSets", DatabaseUltility.GetIntColumnValue(
+								workoutInformationCursor, DatabaseUltility.TotalSets));
+						contentWorkout.put("AvaImage", DatabaseUltility.GetColumnValue(
+								workoutInformationCursor, DatabaseUltility.AvaImage));
+						contentWorkout.put("Description", DatabaseUltility.GetColumnValue(
+								workoutInformationCursor, DatabaseUltility.Description));
+						MainActivity.db.insert("Workout", null, contentWorkout);
+						MainActivity.db
+								.execSQL("Delete From Workout_Exercise WHERE WorkoutID = "
+										+ WorkoutID);
+						Cursor workoutExerciseInformationCursor = MainActivity.db.rawQuery(
+								"Select * From Workout_Exercise Where WorkoutID = "
+										+ DatabaseUltility.GetColumnValue(
+												workoutInformationCursor,
+												DatabaseUltility.WorkoutID), null);
+						while (workoutExerciseInformationCursor.moveToNext()) {
+							contentWorkoutExercise.put("WorkoutID", WorkoutID);
+							contentWorkoutExercise.put("ExerciseID", DatabaseUltility
+									.GetIntColumnValue(workoutExerciseInformationCursor,
+											DatabaseUltility.ExerciseID));
+							contentWorkoutExercise.put("Sets", DatabaseUltility
+									.GetIntColumnValue(workoutExerciseInformationCursor,
+											DatabaseUltility.Sets));
+							contentWorkoutExercise.put("RepsMin", DatabaseUltility
+									.GetIntColumnValue(workoutExerciseInformationCursor,
+											DatabaseUltility.RepsMin));
+							contentWorkoutExercise.put("RepsMax", DatabaseUltility
+									.GetIntColumnValue(workoutExerciseInformationCursor,
+											DatabaseUltility.RepsMax));
+							contentWorkoutExercise.put("Kg", DatabaseUltility
+									.GetIntColumnValue(workoutExerciseInformationCursor,
+											DatabaseUltility.Kg));
+							contentWorkoutExercise.put("Rests", DatabaseUltility
+									.GetIntColumnValue(workoutExerciseInformationCursor,
+											DatabaseUltility.Rests));
+							contentWorkoutExercise.put("Interval", DatabaseUltility
+									.GetIntColumnValue(workoutExerciseInformationCursor,
+											DatabaseUltility.Interval));
+							MainActivity.db.insert("Workout_Exercise", null,
+									contentWorkoutExercise);
+						}
+						WorkoutID++;
+
+					}
+					
+					 if (which == DialogInterface.BUTTON_POSITIVE) {
+                         isOkayClicked = true;
+                         DatePicker datePicker = datePickerDialog
+                                 .getDatePicker();
+                         datePickerListener.onDateSet(datePicker,
+                                 datePicker.getYear(),
+                                 datePicker.getMonth(),
+                                 datePicker.getDayOfMonth());
+                     }contentPlan.put("StartDate", startDate);
+					int success = MainActivity.db.update("Plan", contentPlan, "PlanID = 1", null);
+					if (success > 0) 
+					{
+						Toast.makeText(getApplicationContext(), "Add Plan to Workout succsess", Toast.LENGTH_LONG).show();
+					}
+					else
+					{
+						Toast.makeText(getApplicationContext(), "Error Connect to DB", Toast.LENGTH_LONG).show();
+					}
+				}
+			});
+			datePickerDialog.setButton(DialogInterface.BUTTON_NEGATIVE, "Cancel",new DialogInterface.OnClickListener() {
+				
+				@Override
+				public void onClick(DialogInterface dialog, int which) {
+					// TODO Auto-generated method stub
+					dialog.cancel();
+                    isOkayClicked = false;
+				}
+			});
+			datePickerDialog.show();
+			// Show Date Picker Dialog When edit text Focus
+
+			
+			
+		} catch (Exception e) {
+			Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_LONG).show();
 		}
-
-		MainActivity.db.execSQL("Delete From Workout WHERE PlanID = 1");
-		Cursor workoutInformationCursor = MainActivity.db.rawQuery(
-				"SELECT * FROM Workout WHERE PlanID = " + planID, null);
-
-		ContentValues contentWorkout = new ContentValues();
-		ContentValues contentWorkoutExercise = new ContentValues();
-		int workoutUpdate = 0;
-		int workoutExerciseUpdate = 0;
-		while (workoutInformationCursor.moveToNext()) {
-			contentWorkout.put("WorkoutID", WorkoutID);
-			contentWorkout.put("PlanID", 1);
-			contentWorkout.put("WorkoutName", DatabaseUltility.GetColumnValue(
-					workoutInformationCursor, DatabaseUltility.WorkoutName));
-			contentWorkout.put("TotalWorkoutTime", DatabaseUltility
-					.GetIntColumnValue(workoutInformationCursor,
-							DatabaseUltility.TotalWorkoutTime));
-			contentWorkout.put("TotalCardioTime", DatabaseUltility
-					.GetIntColumnValue(workoutInformationCursor,
-							DatabaseUltility.TotalCardioTime));
-			contentWorkout.put("TotalExercises", DatabaseUltility
-					.GetIntColumnValue(workoutInformationCursor,
-							DatabaseUltility.TotalExercises));
-			contentWorkout.put("TotalSets", DatabaseUltility.GetIntColumnValue(
-					workoutInformationCursor, DatabaseUltility.TotalSets));
-			contentWorkout.put("AvaImage", DatabaseUltility.GetColumnValue(
-					workoutInformationCursor, DatabaseUltility.AvaImage));
-			contentWorkout.put("Description", DatabaseUltility.GetColumnValue(
-					workoutInformationCursor, DatabaseUltility.Description));
-			MainActivity.db.insert("Workout", null, contentWorkout);
-			MainActivity.db
-					.execSQL("Delete From Workout_Exercise WHERE WorkoutID = "
-							+ WorkoutID);
-			Cursor workoutExerciseInformationCursor = MainActivity.db.rawQuery(
-					"Select * From Workout_Exercise Where WorkoutID = "
-							+ DatabaseUltility.GetColumnValue(
-									workoutInformationCursor,
-									DatabaseUltility.WorkoutID), null);
-			while (workoutExerciseInformationCursor.moveToNext()) {
-				contentWorkoutExercise.put("WorkoutID", WorkoutID);
-				contentWorkoutExercise.put("ExerciseID", DatabaseUltility
-						.GetIntColumnValue(workoutExerciseInformationCursor,
-								DatabaseUltility.ExerciseID));
-				contentWorkoutExercise.put("Sets", DatabaseUltility
-						.GetIntColumnValue(workoutExerciseInformationCursor,
-								DatabaseUltility.Sets));
-				contentWorkoutExercise.put("RepsMin", DatabaseUltility
-						.GetIntColumnValue(workoutExerciseInformationCursor,
-								DatabaseUltility.RepsMin));
-				contentWorkoutExercise.put("RepsMax", DatabaseUltility
-						.GetIntColumnValue(workoutExerciseInformationCursor,
-								DatabaseUltility.RepsMax));
-				contentWorkoutExercise.put("Kg", DatabaseUltility
-						.GetIntColumnValue(workoutExerciseInformationCursor,
-								DatabaseUltility.Kg));
-				contentWorkoutExercise.put("Rests", DatabaseUltility
-						.GetIntColumnValue(workoutExerciseInformationCursor,
-								DatabaseUltility.Rests));
-				contentWorkoutExercise.put("Interval", DatabaseUltility
-						.GetIntColumnValue(workoutExerciseInformationCursor,
-								DatabaseUltility.Interval));
-				MainActivity.db.insert("Workout_Exercise", null,
-						contentWorkoutExercise);
-			}
-			WorkoutID++;
-
-		}
-		MainActivity.db.update("Plan", contentPlan, "PlanID = 1", null);
+		
+		
+		
 		// Toast.makeText(getApplicationContext(), workoutExerciseUpdate+"",
 		// Toast.LENGTH_SHORT).show();
 	}

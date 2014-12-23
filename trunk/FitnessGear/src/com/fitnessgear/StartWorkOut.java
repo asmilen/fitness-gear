@@ -1,6 +1,9 @@
 package com.fitnessgear;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 import android.app.AlertDialog;
 import android.content.ContentValues;
@@ -9,6 +12,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -92,7 +96,7 @@ public class StartWorkOut extends Fragment {
 	}
 
 	public void getData() {
-
+		String startDate = null;
 		try {
 			MainActivity.db = MainActivity.dbHelper.getReadableDatabase();
 			Cursor c = MainActivity.db.rawQuery(
@@ -103,7 +107,6 @@ public class StartWorkOut extends Fragment {
 					"AND FitnessLevel = FitnessLevelID " +
 					"AND PlanID = 1", null);
 
-			ArrayList<String> data = new ArrayList<String>();
 			while (c.moveToNext()) {
 				planName.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.PlanName));
 				author.setText(DatabaseUltility.GetColumnValue(c, DatabaseUltility.CreatedBy));
@@ -117,6 +120,7 @@ public class StartWorkOut extends Fragment {
 				txtArverageTime.setText(""+DatabaseUltility.GetFloatColumnValue(c, DatabaseUltility.AveWorkoutTime)+"");
 				txtTotalTime.setText(""+DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalTimeAWeek));
 				txtTotalCadio.setText(""+DatabaseUltility.GetIntColumnValue(c, DatabaseUltility.TotalCardioTime));
+				startDate = DatabaseUltility.GetColumnValue(c, "StartDate");
 			}
 			Cursor workout = MainActivity.db.rawQuery("SELECT * FROM Workout WHERE PlanID = 1",
 					null);
@@ -136,7 +140,12 @@ public class StartWorkOut extends Fragment {
 
 
 		GridAdapter adapter = new GridAdapter(getActivity(), item);
-
+		adapter.startdate = startDate;
+		Calendar calendar = Calendar.getInstance();
+		Date d1 = new SimpleDateFormat("dd/mm/yyyy").parse(startDate);
+		Date d2 = calendar.getTime();   
+		long diff = Math.abs(d1.getTime() - d2.getTime());
+		long diffDays = diff / (24 * 60 * 60 * 1000);
 		grid.setAdapter(adapter);
 		//Set click for Grid View Start Workout
 		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
