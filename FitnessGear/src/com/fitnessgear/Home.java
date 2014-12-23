@@ -1,16 +1,29 @@
 package com.fitnessgear;
 
+import java.io.File;
+import java.io.InputStream;
+import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.app.AlertDialog.Builder;
 import android.content.ContentValues;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
@@ -21,10 +34,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -55,6 +70,18 @@ public class Home extends Fragment {
 	private EditText etDoB;
 	private DatePickerDialog datePicker;
 
+	ProgressDialog pDialog;
+	Bitmap bitmap;
+	private String IMAGE_FILEPATH;
+
+	private static int RESULT_LOAD_IMAGE_FROM_GALLERY = 1;
+	private static int RESULT_LOAD_IMAGE_TAKE_PHOTO = 2;
+
+	private String path;
+
+	private ArrayList<String> chooseImage;
+	private ArrayAdapter<String> chooseImageAdapter;
+
 	public Home() {
 		// TODO Auto-generated constructor stub
 	}
@@ -80,12 +107,20 @@ public class Home extends Fragment {
 			}
 		});
 		try {
+			chooseImage = new ArrayList<String>();
+			chooseImage.add("Take A Photo");
+			chooseImage.add("Choose Image From Gallery");
+			chooseImageAdapter = new ArrayAdapter<String>(getActivity(),
+					android.R.layout.simple_list_item_1, chooseImage);
+
 			pager = (ViewPager) rootView.findViewById(R.id.viewPager);
 			pagerTab = (PagerTabStrip) rootView
 					.findViewById(R.id.pagerTabStrip);
 			adapter = new HomeViewPagerAdapter(getChildFragmentManager());
-			pagerTab.setTabIndicatorColor(getResources().getColor(R.color.user_name));
-			pagerTab.setBackgroundColor(getResources().getColor(R.color.child_background));
+			pagerTab.setTabIndicatorColor(getResources().getColor(
+					R.color.user_name));
+			pagerTab.setBackgroundColor(getResources().getColor(
+					R.color.child_background));
 			pagerTab.setTextColor(getResources().getColor(R.color.user_name));
 			pagerTab.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
 			pager.setAdapter(adapter);
@@ -110,9 +145,98 @@ public class Home extends Fragment {
 		tvHeight = (TextView) rootView.findViewById(R.id.tvHeight);
 		tvBodyFat = (TextView) rootView.findViewById(R.id.tvBodyFat);
 		tvBMI = (TextView) rootView.findViewById(R.id.tvBMI);
+		avaImage.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				// new
+				// LoadImage().execute("http://www.learn2crack.com/wp-content/uploads/2014/04/node-cover-720x340.png");
+				AlertDialog.Builder builder = new AlertDialog.Builder(
+						getActivity());
+				builder.setTitle("Choose Image").setSingleChoiceItems(
+						chooseImageAdapter, 0,
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								// TODO Auto-generated method stub
+								switch (which) {
+								case 0:
+									takePhoto();
+									break;
+								case 1:
+									Intent i = new Intent(
+											Intent.ACTION_PICK,
+											android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+
+									startActivityForResult(i,
+											RESULT_LOAD_IMAGE_FROM_GALLERY);
+									break;
+								default:
+									break;
+								}
+							}
+						});
+				builder.show();
+
+				// Intent i = new Intent(
+				// Intent.ACTION_PICK,
+				// android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+				//
+				// startActivityForResult(i, RESULT_LOAD_IMAGE_FROM_GALLERY);
+			}
+		});
 		getData();
 
 		return rootView;
+	}
+
+	public void takePhoto() {
+		path = "";
+		Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
+		File folder = new File(Environment.getExternalStorageDirectory()
+				+ "/LoadImg");
+
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+		final Calendar c = Calendar.getInstance();
+		String new_Date = c.get(Calendar.DAY_OF_MONTH) + "-"
+				+ ((c.get(Calendar.MONTH)) + 1) + "-" + c.get(Calendar.YEAR)
+				+ " " + c.get(Calendar.HOUR) + "-" + c.get(Calendar.MINUTE)
+				+ "-" + c.get(Calendar.SECOND);
+		path = String.format(Environment.getExternalStorageDirectory()
+				+ "/LoadImg/%s.png", "LoadImg(" + new_Date + ")");
+		File photo = new File(path);
+		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
+		startActivityForResult(intent, RESULT_LOAD_IMAGE_TAKE_PHOTO);
+	}
+
+	@Override
+	public void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(requestCode, resultCode, data);
+		if (requestCode == RESULT_LOAD_IMAGE_FROM_GALLERY && null != data) {
+			Uri selectedImage = data.getData();
+			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+
+			Cursor cursor = getActivity().getContentResolver().query(
+					selectedImage, filePathColumn, null, null, null);
+			cursor.moveToFirst();
+
+			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+			String picturePath = cursor.getString(columnIndex);
+			cursor.close();
+
+			// ImageView imageView = (ImageView) findViewById(R.id.imgView);
+			avaImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+		}
+		if (requestCode == RESULT_LOAD_IMAGE_TAKE_PHOTO) {
+			// ImageView imageView = (ImageView) findViewById(R.id.imgView);
+			avaImage.setImageBitmap(BitmapFactory.decodeFile(path));
+		}
 	}
 
 	// <<<<<<< .mine
@@ -334,5 +458,37 @@ public class Home extends Fragment {
 		}
 
 		return super.onOptionsItemSelected(item);
+	}
+
+	private class LoadImage extends AsyncTask<String, String, Bitmap> {
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			pDialog = new ProgressDialog(getActivity());
+			pDialog.setMessage("Loading Image ....");
+			pDialog.show();
+		}
+
+		protected Bitmap doInBackground(String... args) {
+			try {
+				bitmap = BitmapFactory.decodeStream((InputStream) new URL(
+						args[0]).getContent());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return bitmap;
+		}
+
+		protected void onPostExecute(Bitmap image) {
+			if (image != null) {
+				avaImage.setImageBitmap(image);
+				pDialog.dismiss();
+			} else {
+				pDialog.dismiss();
+				Toast.makeText(getActivity(),
+						"Image Does Not exist or Network Error",
+						Toast.LENGTH_SHORT).show();
+			}
+		}
 	}
 }

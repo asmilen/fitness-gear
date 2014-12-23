@@ -1,5 +1,9 @@
 package com.fitnessgear.adapter;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -10,23 +14,33 @@ import com.fitnessgear.model.ExercisesItem;
 import com.fitnessgear.model.PlanItem;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class ListExercisesAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private ArrayList<ExercisesItem> listExercises;
 	private ArrayList<ExercisesItem> filterExercise;
+
+	public ImageView imageExercise;
+
+	ProgressDialog pDialog;
+	Bitmap bitmap;
+	private String IMAGE_FILEPATH;
 
 	public ListExercisesAdapter(Context mContext,
 			ArrayList<ExercisesItem> listExercises) {
@@ -84,25 +98,26 @@ public class ListExercisesAdapter extends BaseAdapter {
 		String image2 = listExercises.get(position).getImg2();
 
 		// Decode String image1
-		byte[] decodedString = Base64.decode(image1, Base64.DEFAULT);
-		Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
-				decodedString.length);
-
-		// Set image by bitmap
-		holder.img1.setImageBitmap(decodedByte);
-
-		// Decode String image2
-		decodedString = Base64.decode(image2, Base64.DEFAULT);
-		decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
-				decodedString.length);
-
-		// Set image by bitmap
-		holder.img2.setImageBitmap(decodedByte);
+		// byte[] decodedString = Base64.decode(image1, Base64.DEFAULT);
+		// Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
+		// decodedString.length);
+		//
+		 // Set image by bitmap
+		Bitmap bitMap = getBitmapFromURL(image1);
+		 holder.img1.setImageBitmap(bitMap);
+		//
+		// // Decode String image2
+		// decodedString = Base64.decode(image2, Base64.DEFAULT);
+		// decodedByte = BitmapFactory.decodeByteArray(decodedString, 0,
+		// decodedString.length);
+		//
+		// // Set image by bitmap
+		// holder.img2.setImageBitmap(decodedByte);
 
 		// Set Text for TextView exerciseName
-		//Text so long then display ...
-		if(listExercises.get(position).getExerciseName().length() > 50){
-			
+		// Text so long then display ...
+		if (listExercises.get(position).getExerciseName().length() > 50) {
+
 		}
 		holder.exerciseName.setText(listExercises.get(position)
 				.getExerciseName());
@@ -141,69 +156,95 @@ public class ListExercisesAdapter extends BaseAdapter {
 		public TextView exerciseType;
 	}
 
-	// Filter Class
-		public void filter(String textFilter, int exerciseTypeID, int muscleID,
-				int equipmentID) {
-
-			// VIet Ham Filter vao day
-			// Khi Select tu bang Plan phai select tu bang
-			// Gender,FitnessLevel,Main_Goal de lay ra Name cua cac bang
-			// Giong voi String sql o duoi
-			// Can add vao bien listPlan sau do goi ham notifyDataSetChanged()
-
-			textFilter = textFilter.toLowerCase(Locale.getDefault());
-
-			// BUILD QUERY WITH FILTER
-			String sql = "Select * from Exercise Where ";
-			if (exerciseTypeID != 1)
-				sql += "ExerciseType = " + exerciseTypeID + " AND ";
-			if (muscleID != 1)
-				sql += "MuscleTarget = " + muscleID + " AND ";
-			if (equipmentID != 1)
-				sql += "Equipment = " + equipmentID + " AND ";
-			if(textFilter != ""){
-				sql += "ExerciseName LIKE '%" + textFilter + "%' AND ";
-			}
-
-			// Delete last AND
-			String[] sql1 = sql.split(" ");
-			StringBuilder builder = new StringBuilder();
-			String delimiter = " ";
-			for (int i = 0; i < sql1.length - 1; i++) {
-				builder.append(sql1[i]);
-				builder.append(delimiter);
-			}
-			sql = builder.toString();
-
-			listExercises.clear();
-
-			// Exec query and add to listPlan
-			Cursor c = MainActivity.db.rawQuery(sql, null);
-			while (c.moveToNext()) {
-//				String mainGoalName = getGoalName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.MainGoal));
-//				String genderName = getGenderName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.Gender));
-//				String fitnessLevelName = getFitnessLevelName(DatabaseUltility.GetColumnValue(c, DatabaseUltility.FitnessLevel));
-				listExercises.add(new ExercisesItem(DatabaseUltility
-						.GetIntColumnValue(c, "Workout_Exercise."
-								+ DatabaseUltility.ExerciseID), DatabaseUltility
-						.GetColumnValue(c,
-								DatabaseUltility.ExerciseName), DatabaseUltility
-						.GetIntColumnValue(c,
-								DatabaseUltility.ExerciseType), DatabaseUltility
-						.GetIntColumnValue(c,
-								DatabaseUltility.MuscleTarget), DatabaseUltility
-						.GetIntColumnValue(c,
-								DatabaseUltility.Equipment), DatabaseUltility
-						.GetFloatColumnValue(c,
-								DatabaseUltility.Rating),
-						DatabaseUltility.GetColumnValue(c,
-								DatabaseUltility.Image1), DatabaseUltility
-								.GetColumnValue(c,
-										DatabaseUltility.Image2), DatabaseUltility
-								.GetColumnValue(c,
-										DatabaseUltility.Description)));
-
-			}
-			notifyDataSetChanged();
+	public static Bitmap getBitmapFromURL(String src) {
+		try {
+			Log.e("src", src);
+			URL url = new URL(src);
+			HttpURLConnection connection = (HttpURLConnection) url
+					.openConnection();
+			connection.setDoInput(true);
+			connection.connect();
+			InputStream input = connection.getInputStream();
+			Bitmap myBitmap = BitmapFactory.decodeStream(input);
+			Log.e("Bitmap", "returned");
+			return myBitmap;
+		} catch (Exception e) {
+			e.printStackTrace();
+			Log.e("Exception", e.getMessage());
+			return null;
 		}
+	}
+
+	// Filter Class
+	public void filter(String textFilter, int exerciseTypeID, int muscleID,
+			int equipmentID) {
+
+		// VIet Ham Filter vao day
+		// Khi Select tu bang Plan phai select tu bang
+		// Gender,FitnessLevel,Main_Goal de lay ra Name cua cac bang
+		// Giong voi String sql o duoi
+		// Can add vao bien listPlan sau do goi ham notifyDataSetChanged()
+
+		textFilter = textFilter.toLowerCase(Locale.getDefault());
+
+		// BUILD QUERY WITH FILTER
+		String sql = "Select * from Exercise Where ";
+		if (exerciseTypeID != 1)
+			sql += "ExerciseType = " + exerciseTypeID + " AND ";
+		if (muscleID != 1)
+			sql += "MuscleTarget = " + muscleID + " AND ";
+		if (equipmentID != 1)
+			sql += "Equipment = " + equipmentID + " AND ";
+		if (textFilter != "") {
+			sql += "ExerciseName LIKE '%" + textFilter + "%' AND ";
+		}
+
+		// Delete last AND
+		String[] sql1 = sql.split(" ");
+		StringBuilder builder = new StringBuilder();
+		String delimiter = " ";
+		for (int i = 0; i < sql1.length - 1; i++) {
+			builder.append(sql1[i]);
+			builder.append(delimiter);
+		}
+		sql = builder.toString();
+
+		listExercises.clear();
+
+		// Exec query and add to listPlan
+		Cursor c = MainActivity.db.rawQuery(sql, null);
+		while (c.moveToNext()) {
+			// String mainGoalName =
+			// getGoalName(DatabaseUltility.GetColumnValue(c,
+			// DatabaseUltility.MainGoal));
+			// String genderName =
+			// getGenderName(DatabaseUltility.GetColumnValue(c,
+			// DatabaseUltility.Gender));
+			// String fitnessLevelName =
+			// getFitnessLevelName(DatabaseUltility.GetColumnValue(c,
+			// DatabaseUltility.FitnessLevel));
+			listExercises
+					.add(new ExercisesItem(DatabaseUltility.GetIntColumnValue(
+							c, "Workout_Exercise."
+									+ DatabaseUltility.ExerciseID),
+							DatabaseUltility.GetColumnValue(c,
+									DatabaseUltility.ExerciseName),
+							DatabaseUltility.GetIntColumnValue(c,
+									DatabaseUltility.ExerciseType),
+							DatabaseUltility.GetIntColumnValue(c,
+									DatabaseUltility.MuscleTarget),
+							DatabaseUltility.GetIntColumnValue(c,
+									DatabaseUltility.Equipment),
+							DatabaseUltility.GetFloatColumnValue(c,
+									DatabaseUltility.Rating),
+							DatabaseUltility.GetColumnValue(c,
+									DatabaseUltility.Image1),
+							DatabaseUltility.GetColumnValue(c,
+									DatabaseUltility.Image2), DatabaseUltility
+									.GetColumnValue(c,
+											DatabaseUltility.Description)));
+
+		}
+		notifyDataSetChanged();
+	}
 }
