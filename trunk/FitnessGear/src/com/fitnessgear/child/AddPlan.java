@@ -117,7 +117,8 @@ public class AddPlan extends Activity {
 		btnCancel = (Button) findViewById(R.id.btnCancel);
 		btnCreatePlan = (Button) findViewById(R.id.btnCreatePlan);
 		btnCreatePlan.setEnabled(false);
-		btnCreatePlan.setTextColor(getResources().getColor(R.color.button_text));
+		btnCreatePlan
+				.setTextColor(getResources().getColor(R.color.button_text));
 
 		// Add Data to ArrayList for Spinner
 		mainGoalItem = new ArrayList<MainGoalItem>();
@@ -236,6 +237,8 @@ public class AddPlan extends Activity {
 						&& !totalTimeAWeek.getText().toString().equals("")
 						&& !totalCardioTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.text_title_color));
 				}
 			}
 
@@ -244,7 +247,8 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (planName.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(false);
-					btnCreatePlan.setTextColor(getResources().getColor(R.color.button_text));
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.button_text));
 				}
 
 			}
@@ -262,6 +266,8 @@ public class AddPlan extends Activity {
 						&& !totalTimeAWeek.getText().toString().equals("")
 						&& !totalCardioTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.text_title_color));
 				}
 			}
 
@@ -277,7 +283,8 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (totalWeek.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(false);
-					btnCreatePlan.setTextColor(getResources().getColor(R.color.button_text));
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.button_text));
 				}
 
 			}
@@ -296,6 +303,8 @@ public class AddPlan extends Activity {
 						&& !totalTimeAWeek.getText().toString().equals("")
 						&& !totalCardioTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.text_title_color));
 				}
 			}
 
@@ -311,7 +320,8 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (aveDay.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(false);
-					btnCreatePlan.setTextColor(getResources().getColor(R.color.button_text));
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.button_text));
 				}
 
 			}
@@ -330,6 +340,8 @@ public class AddPlan extends Activity {
 						&& !totalTimeAWeek.getText().toString().equals("")
 						&& !totalCardioTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.text_title_color));
 				}
 			}
 
@@ -345,7 +357,8 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (aveWorkoutTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(false);
-					btnCreatePlan.setTextColor(getResources().getColor(R.color.button_text));
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.button_text));
 				}
 
 			}
@@ -364,6 +377,8 @@ public class AddPlan extends Activity {
 						&& !totalTimeAWeek.getText().toString().equals("")
 						&& !totalCardioTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.text_title_color));
 				}
 			}
 
@@ -379,7 +394,8 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (totalTimeAWeek.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(false);
-					btnCreatePlan.setTextColor(getResources().getColor(R.color.button_text));
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.button_text));
 				}
 
 			}
@@ -398,6 +414,8 @@ public class AddPlan extends Activity {
 						&& !totalTimeAWeek.getText().toString().equals("")
 						&& !totalCardioTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.text_title_color));
 				}
 			}
 
@@ -413,7 +431,8 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (totalCardioTime.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(false);
-					btnCreatePlan.setTextColor(getResources().getColor(R.color.button_text));
+					btnCreatePlan.setTextColor(getResources().getColor(
+							R.color.button_text));
 				}
 
 			}

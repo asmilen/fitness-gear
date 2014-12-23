@@ -1,12 +1,18 @@
 package com.fitnessgear.database;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.fitnessgear.MainActivity;
@@ -16,6 +22,8 @@ import com.fitnessgear.model.LogExerciseList;
 // class dung de define ten cac cot trong database va lay du lieu tu database
 public class DatabaseUltility {
 
+	private Bitmap bitmap;
+	private ImageView img1;
 	// My PLan
 	public static final int MyplanId = 1;
 
@@ -217,11 +225,51 @@ public class DatabaseUltility {
 			userContent.put("UserID", ID);
 			SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
 			db.insert("User", null, userContent);
-			
+
 			ContentValues logContent = new ContentValues();
 			logContent.put("Day", dayID);
 			logContent.put("UserID", ID);
 			db.insert("Log", null, logContent);
 		}
+	}
+
+	
+	private class LoadImage extends AsyncTask<String, String, Bitmap> {
+
+		@Override
+		protected void onPreExecute() {
+			super.onPreExecute();
+			// pDialog = new ProgressDialog(getActivity());
+			// pDialog.setMessage("Loading Image ....");
+			// pDialog.show();
+
+		}
+
+		protected Bitmap doInBackground(String... args) {
+			try {
+				bitmap = BitmapFactory.decodeStream((InputStream) new URL(
+						args[0]).getContent());
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			return bitmap;
+		}
+
+		protected void onPostExecute(Bitmap image) {
+			if (image != null) {
+
+				img1.setImageBitmap(image);
+				// pDialog.dismiss();
+			} else {
+				// pDialog.dismiss();
+			}
+		}
+	}
+
+
+	public static void LoadImageFromDatabase(String image12) {
+		// TODO Auto-generated method stub
+		
+		
 	}
 }

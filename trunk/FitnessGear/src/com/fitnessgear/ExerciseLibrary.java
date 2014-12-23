@@ -1,12 +1,18 @@
 package com.fitnessgear;
 
+import java.io.InputStream;
+import java.net.URL;
 import java.util.ArrayList;
 
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
@@ -25,6 +31,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.fitnessgear.adapter.ListExercisesAdapter;
 import com.fitnessgear.adapter.ListFilterAdapter;
@@ -56,6 +63,8 @@ public class ExerciseLibrary extends Fragment {
 	// The image we are going to use for the Clear button
 	private Drawable clearbutton;
 	private Drawable searchbutton;
+	
+	
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -348,4 +357,6 @@ public class ExerciseLibrary extends Fragment {
 		in.hideSoftInputFromWindow(view.getWindowToken(),
 				InputMethodManager.HIDE_NOT_ALWAYS);
 	}
+	
+	
 }
