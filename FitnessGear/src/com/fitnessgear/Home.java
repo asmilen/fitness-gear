@@ -27,6 +27,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -57,7 +58,7 @@ public class Home extends Fragment {
 	private PagerTabStrip pagerTab;
 	private LinearLayout homeLayout;
 
-	private ImageView avaImage;
+	private static ImageView avaImage;
 	private static TextView tvUserName;
 	private static TextView tvAge;
 	private static TextView tvGender;
@@ -154,31 +155,41 @@ public class Home extends Fragment {
 				// LoadImage().execute("http://www.learn2crack.com/wp-content/uploads/2014/04/node-cover-720x340.png");
 				AlertDialog.Builder builder = new AlertDialog.Builder(
 						getActivity());
-				builder.setTitle("Choose Image").setSingleChoiceItems(
-						chooseImageAdapter, 0,
-						new DialogInterface.OnClickListener() {
+				builder.setTitle("Choose Image")
+						.setSingleChoiceItems(chooseImageAdapter, 0,
+								new DialogInterface.OnClickListener() {
 
-							@Override
-							public void onClick(DialogInterface dialog,
-									int which) {
-								// TODO Auto-generated method stub
-								switch (which) {
-								case 0:
-									takePhoto();
-									break;
-								case 1:
-									Intent i = new Intent(
-											Intent.ACTION_PICK,
-											android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
+										switch (which) {
+										case 0:
+											takePhoto();
+											break;
+										case 1:
+											Intent i = new Intent(
+													Intent.ACTION_PICK,
+													android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
 
-									startActivityForResult(i,
-											RESULT_LOAD_IMAGE_FROM_GALLERY);
-									break;
-								default:
-									break;
-								}
-							}
-						});
+											startActivityForResult(i,
+													RESULT_LOAD_IMAGE_FROM_GALLERY);
+											break;
+										default:
+											break;
+										}
+									}
+								})
+						.setNegativeButton("Cancel",
+								new DialogInterface.OnClickListener() {
+
+									@Override
+									public void onClick(DialogInterface dialog,
+											int which) {
+										// TODO Auto-generated method stub
+										dialog.cancel();
+									}
+								});
 				builder.show();
 
 				// Intent i = new Intent(
@@ -231,37 +242,34 @@ public class Home extends Fragment {
 			cursor.close();
 
 			// ImageView imageView = (ImageView) findViewById(R.id.imgView);
-			avaImage.setImageBitmap(BitmapFactory.decodeFile(picturePath));
+			Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false);
+			avaImage.setImageBitmap(bitmap);
+			ContentValues contentAvaImage = new ContentValues();
+			contentAvaImage.put("AvaImage", picturePath);
+			int updateUser = MainActivity.db.update("User", contentAvaImage,
+					"UserID = 1", null);
+			if (updateUser > 0) {
+				Toast.makeText(getActivity(), "Update Image Successfull",
+						Toast.LENGTH_LONG).show();
+			}
 		}
-		if (requestCode == RESULT_LOAD_IMAGE_TAKE_PHOTO) {
+		if (requestCode == RESULT_LOAD_IMAGE_TAKE_PHOTO && path != ""
+				&& null != data) {
 			// ImageView imageView = (ImageView) findViewById(R.id.imgView);
-			avaImage.setImageBitmap(BitmapFactory.decodeFile(path));
+			Bitmap bitmap = BitmapFactory.decodeFile(path);
+			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false);
+			avaImage.setImageBitmap(bitmap);
+			ContentValues contentAvaImage = new ContentValues();
+			contentAvaImage.put("AvaImage", path);
+			int updateUser = MainActivity.db.update("User", contentAvaImage,
+					"UserID = 1", null);
+			if (updateUser > 0) {
+				Toast.makeText(getActivity(), "Update Image Successfull" + path,
+						Toast.LENGTH_LONG).show();
+			}
 		}
 	}
-
-	// <<<<<<< .mine
-	//
-	// public static void getData() {
-	// Cursor user = MainActivity.db.rawQuery(
-	// "SELECT * FROM User Where UserID = 1", null);
-	// while (user.moveToNext()) {
-	// tvUserName.setText(DatabaseUltility.GetColumnValue(user,
-	// DatabaseUltility.UserName));
-	// // tvAge.setText("Age: " + DatabaseUltility.GetColumnValue(user,
-	// // DatabaseUltility.DateOfBirth));
-	// tvGender.setText("Gender: "
-	// + DatabaseUltility.GetColumnValue(user,
-	// DatabaseUltility.Gender));
-	// tvWeight.setText("Weight: "
-	// + DatabaseUltility.GetFloatColumnValue(user,
-	// DatabaseUltility.Weight));
-	// tvHeight.setText("Height: "
-	// + DatabaseUltility.GetFloatColumnValue(user,
-	// DatabaseUltility.Height));
-	// tvBodyFat.setText("Body Fat: "
-	// + DatabaseUltility.GetFloatColumnValue(user,
-	// DatabaseUltility.BodyFat));
-	// =======
 
 	public static void getData() {
 		Cursor user = MainActivity.db.rawQuery(
@@ -286,6 +294,8 @@ public class Home extends Fragment {
 			tvBodyFat.setText("Body Fat: "
 					+ DatabaseUltility.GetFloatColumnValue(user,
 							DatabaseUltility.BodyFat));
+			Log.i("AvaImage", DatabaseUltility.GetColumnValue(user,
+					DatabaseUltility.AvaImage));
 			float BMI = 0;
 			if (DatabaseUltility.GetFloatColumnValue(user,
 					DatabaseUltility.Weight) != 0
@@ -299,6 +309,11 @@ public class Home extends Fragment {
 			}
 			DecimalFormat form = new DecimalFormat("0.00");
 			tvBMI.setText("BMI: " + form.format(BMI));
+			//Get AvaImage from database
+//			Bitmap bitmap = BitmapFactory.decodeFile(DatabaseUltility.GetColumnValue(user,
+//					DatabaseUltility.AvaImage));
+//			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false);
+//			avaImage.setImageBitmap(bitmap);
 		}
 	}
 
@@ -374,10 +389,7 @@ public class Home extends Fragment {
 				// Get current Date
 				Calendar cal = Calendar.getInstance(TimeZone.getDefault());
 
-				// Delete last AND
-
 				// Create Date Picker Dialog
-
 				if (etDoB.getText().toString() != "") {
 					String[] dob = etDoB.getText().toString().split("/");
 					datePicker = new DatePickerDialog(getActivity(),
@@ -390,8 +402,8 @@ public class Home extends Fragment {
 							cal.get(Calendar.MONTH),
 							cal.get(Calendar.DAY_OF_MONTH));
 				}
-
 				datePicker.setTitle("Select The Date");
+
 				// Show Date Picker Dialog When edit text Focus
 				etDoB.setOnFocusChangeListener(new OnFocusChangeListener() {
 					@Override
@@ -458,37 +470,5 @@ public class Home extends Fragment {
 		}
 
 		return super.onOptionsItemSelected(item);
-	}
-
-	private class LoadImage extends AsyncTask<String, String, Bitmap> {
-		@Override
-		protected void onPreExecute() {
-			super.onPreExecute();
-			pDialog = new ProgressDialog(getActivity());
-			pDialog.setMessage("Loading Image ....");
-			pDialog.show();
-		}
-
-		protected Bitmap doInBackground(String... args) {
-			try {
-				bitmap = BitmapFactory.decodeStream((InputStream) new URL(
-						args[0]).getContent());
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-			return bitmap;
-		}
-
-		protected void onPostExecute(Bitmap image) {
-			if (image != null) {
-				avaImage.setImageBitmap(image);
-				pDialog.dismiss();
-			} else {
-				pDialog.dismiss();
-				Toast.makeText(getActivity(),
-						"Image Does Not exist or Network Error",
-						Toast.LENGTH_SHORT).show();
-			}
-		}
 	}
 }

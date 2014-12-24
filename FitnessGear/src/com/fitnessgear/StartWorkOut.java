@@ -138,7 +138,6 @@ public class StartWorkOut extends Fragment {
 						DatabaseUltility.GetColumnValue(workout, DatabaseUltility.TotalSets)));
 			}
 
-
 		GridAdapter adapter = new GridAdapter(getActivity(), item);
 		adapter.startdate = startDate;
 		Calendar calendar = Calendar.getInstance();
