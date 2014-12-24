@@ -2,24 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background"
     android:orientation="vertical" >
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="130dp" >
+        android:layout_height="130dp"
+        android:layout_margin="5dp"
+        android:background="@color/child_background" >
 
         <LinearLayout
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:gravity="center"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:background="@drawable/background_exercise_id"
-            android:layout_marginTop="5dp" >
+            android:gravity="center" >
 
             <TextView
                 android:id="@+id/textViewPosition"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="99" />
+                android:text="99"
+                android:textColor="@color/text_title_color" />
         </LinearLayout>
 
         <AbsoluteLayout
@@ -31,12 +36,13 @@
                 android:id="@+id/textViewEName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Exercise Name"
-                android:textStyle="bold"
                 android:layout_x="5dp"
                 android:layout_y="5dp"
+                android:text="Exercise Name"
                 android:textAllCaps="true"
-                android:textSize="15sp" />
+                android:textColor="@color/text_description"
+                android:textSize="15sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/textViewTargetSets"
@@ -44,7 +50,8 @@
                 android:layout_height="wrap_content"
                 android:layout_x="5dp"
                 android:layout_y="90dp"
-                android:text="Target Sets" />
+                android:text="Target Sets"
+                android:textColor="@color/text_title" />
 
             <TextView
                 android:id="@+id/textViewTotalReps"
@@ -52,14 +59,15 @@
                 android:layout_height="wrap_content"
                 android:layout_x="5dp"
                 android:layout_y="110dp"
-                android:text="Total Reps" />
+                android:text="Total Reps"
+                android:textColor="@color/text_title" />
         </AbsoluteLayout>
 
         <LinearLayout
             android:layout_width="0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="0.5"
-            android:layout_marginTop="5dp" >
+            android:layout_marginTop="5dp"
+            android:layout_weight="0.5" >
 
             <ImageView
                 android:id="@+id/imageViewTick"
@@ -80,7 +88,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:background="@color/list_background_pressed_end"
+        android:layout_margin="5dp"
+        android:background="@color/child_background"
         android:gravity="center_vertical"
         android:orientation="vertical" >
 
@@ -88,79 +97,118 @@
             android:id="@+id/textViewSetNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@color/list_background_pressed_start"
             android:gravity="center_vertical"
-            android:text="Set * of *" />
+            android:text="Set * of *"
+            android:textColor="@color/text_description"
+            android:layout_marginLeft="5dp" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="148dp"
-        android:orientation="vertical" >
+        android:layout_height="85dp"
+        android:layout_margin="5dp"
+        android:background="@color/child_background"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textViewTargetReps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Target Reps"
+            android:textColor="@color/text_description"
+            android:layout_marginLeft="5dp" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="85dp"
-            android:orientation="vertical" >
+            android:layout_height="match_parent"
+            android:gravity="right"
+            android:orientation="horizontal" >
 
             <LinearLayout
-                android:layout_width="200dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:focusableInTouchMode="true" >
-
-                <TextView
-                    android:id="@+id/textViewTargetReps"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Target Reps" />
+                android:orientation="vertical" >
 
                 <EditText
                     android:id="@+id/editTextKg"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_gravity="right"
+                    android:ems="3"
+                    android:gravity="center"
+                    android:hint="--"
                     android:inputType="number"
+                    android:maxLength="2"
                     android:textSize="22dp" >
-
-                    <requestFocus />
                 </EditText>
 
                 <TextView
-                    android:id="@+id/textViewX"
+                    android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="X"
-                    android:textSize="22dp" />
+                    android:layout_gravity="center_horizontal"
+                    android:text="Kg"
+                    android:textColor="@color/text_description"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textViewX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:text="X"
+                android:textSize="22dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
 
                 <EditText
                     android:id="@+id/editTextReps"
-                    android:layout_width="50dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="10"
+                    android:layout_gravity="right"
+                    android:ems="3"
+                    android:gravity="center"
                     android:hint="--"
                     android:inputType="number"
                     android:maxLength="2"
                     android:textSize="22dp" />
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Reps"
+                    android:textColor="@color/text_description"
+                    android:textSize="22sp" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
-
-            <Button
-                android:id="@+id/buttonSaveSet"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Save Set" />
         </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <Button
+            android:id="@+id/buttonSaveSet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_selector"
+            android:text="Save Set"
+            android:textColor="@color/text_title_color" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:background="@color/child_background"
         android:orientation="vertical" >
 
         <ListView
