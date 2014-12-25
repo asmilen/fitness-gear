@@ -46,11 +46,14 @@ import android.view.View.OnFocusChangeListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -76,6 +79,8 @@ public class Home extends Fragment {
 	private EditText etUserName;
 	private EditText etDoB;
 	private DatePickerDialog datePicker;
+	private Spinner spGender;
+	private String gender;
 
 	ProgressDialog pDialog;
 	Bitmap bitmap;
@@ -402,6 +407,31 @@ public class Home extends Fragment {
 
 			etUserName = (EditText) editUserView.findViewById(R.id.etUserName);
 			etDoB = (EditText) editUserView.findViewById(R.id.etDoB);
+			spGender = (Spinner) editUserView.findViewById(R.id.spGenderUser);
+			gender = "";
+			
+			ArrayList<String> arrayGender = new ArrayList<String>();
+			arrayGender.add("Male");
+			arrayGender.add("Female");
+			
+			ArrayAdapter<String> adapterGender = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item,arrayGender);
+			
+			spGender.setAdapter(adapterGender);
+			spGender.setOnItemSelectedListener(new OnItemSelectedListener() {
+
+				@Override
+				public void onItemSelected(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					gender = spGender.getSelectedItem().toString();
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> parent) {
+					// TODO Auto-generated method stub
+					
+				}
+			});
 
 			try {
 				// Set text to Edit text after select Date
@@ -413,6 +443,11 @@ public class Home extends Fragment {
 							userCursor, DatabaseUltility.UserName));
 					etDoB.setText(DatabaseUltility.GetColumnValue(userCursor,
 							DatabaseUltility.DateOfBirth));
+					for(int i = 0;i < arrayGender.size();i++){
+						if(arrayGender.get(i).toString().equalsIgnoreCase(DatabaseUltility.GetColumnValue(userCursor, DatabaseUltility.Gender))){
+							spGender.setSelection(i);
+						}
+					}
 				}
 				DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
 
@@ -500,6 +535,7 @@ public class Home extends Fragment {
 															.toString());
 											contentUser.put("DateOfBirth",
 													etDoB.getText().toString());
+											contentUser.put("Gender", gender);
 											int updateUser = MainActivity.db
 													.update("User",
 															contentUser,
