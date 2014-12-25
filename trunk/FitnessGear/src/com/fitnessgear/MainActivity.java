@@ -6,6 +6,7 @@ import java.util.Locale;
 
 import com.fitnessgear.adapter.NavigationDrawerAdapter;
 import com.fitnessgear.database.DataBaseHelper;
+import com.fitnessgear.database.DatabaseUltility;
 import com.fitnessgear.model.NavDrawerItem;
 
 import android.app.ActionBar;
@@ -71,6 +72,7 @@ public class MainActivity extends FragmentActivity {
 	public static SQLiteDatabase db = null;
 	public static int positionDisplay = 0;
 	
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -79,8 +81,6 @@ public class MainActivity extends FragmentActivity {
 		Display display = getWindowManager().getDefaultDisplay();
 		Point size = new Point();
 		display.getSize(size);
-		int width = size.x;
-		int height = size.y;
 		
 		//Khoi tao database
 		dbHelper = new DataBaseHelper(this);
@@ -92,6 +92,7 @@ public class MainActivity extends FragmentActivity {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		try{
 		
 		//Get title of activity
 		mTitle = mDrawerTitle = getTitle();
@@ -161,6 +162,11 @@ public class MainActivity extends FragmentActivity {
         
         if (savedInstanceState == null) {
         	displayView(positionDisplay);
+        }
+        
+
+        }catch(Exception ex){
+        	Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
         }
 	}
 	

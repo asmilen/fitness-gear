@@ -28,23 +28,26 @@ import android.widget.Toast;
 
 public class UpdateBodyStats extends Fragment {
 
-	private Button btnSaveUpdateStats;
-	private ScrollView updateStatsLayout;
+	private static Button btnSaveUpdateStats;
+	private static ScrollView updateStatsLayout;
 
-	private EditText etWeight;
-	private EditText etBodyFat;
-	private EditText etHeight;
-	private EditText etChest;
-	private EditText etWaist;
-	private EditText etArms;
-	private EditText etShoulders;
-	private EditText etForearms;
-	private EditText etNeck;
-	private EditText etHips;
-	private EditText etThighs;
-	private EditText etCalves;
+	private static EditText etWeight;
+	private static EditText etBodyFat;
+	private static EditText etHeight;
+	private static EditText etChest;
+	private static EditText etWaist;
+	private static EditText etArms;
+	private static EditText etShoulders;
+	private static EditText etForearms;
+	private static EditText etNeck;
+	private static EditText etHips;
+	private static EditText etThighs;
+	private static EditText etCalves;
 
 	private String UserID = "1";
+	
+	private static int buttonDisabledText;
+	private static int buttonEnabledText;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater,
@@ -81,505 +84,10 @@ public class UpdateBodyStats extends Fragment {
 		etHips = (EditText) rootView.findViewById(R.id.etHipsBody);
 		etThighs = (EditText) rootView.findViewById(R.id.etThighsBody);
 		etCalves = (EditText) rootView.findViewById(R.id.etCalvesBody);
-
-		Cursor bodyStats = MainActivity.db.rawQuery(
-				"SELECT * FROM User WHERE UserID = 1", null);
-
-		while (bodyStats.moveToNext()) {
-			etWeight.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Weight));
-			etBodyFat.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.BodyFat));
-			etHeight.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Height));
-			etChest.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Chest));
-			etWaist.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Waist));
-			etArms.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Arms));
-			etShoulders.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Shoulders));
-			etForearms.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Forearms));
-			etNeck.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Neck));
-			etHips.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Hips));
-			etThighs.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Thighs));
-			etCalves.setText(DatabaseUltility.GetColumnValue(bodyStats,
-					DatabaseUltility.Calves));
-		}
-		etWeight.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etWeight.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etBodyFat.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etBodyFat.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etHeight.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etHeight.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etChest.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etChest.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etWaist.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etWaist.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etArms.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etArms.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etShoulders.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etShoulders.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etForearms.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etForearms.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etNeck.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etNeck.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etHips.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etHips.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etThighs.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etThighs.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-		etCalves.addTextChangedListener(new TextWatcher() {
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before,
-					int count) {
-				// TODO Auto-generated method stub
-				if (etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(false);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.button_text));
-				}
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count,
-					int after) {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void afterTextChanged(Editable s) {
-				// TODO Auto-generated method stub
-				if (!etWeight.getText().toString().equals("")
-						&& !etBodyFat.getText().toString().equals("")
-						&& !etHeight.getText().toString().equals("")
-						&& !etChest.getText().toString().equals("")
-						&& !etWaist.getText().toString().equals("")
-						&& !etArms.getText().toString().equals("")
-						&& !etShoulders.getText().toString().equals("")
-						&& !etForearms.getText().toString().equals("")
-						&& !etNeck.getText().toString().equals("")
-						&& !etHips.getText().toString().equals("")
-						&& !etThighs.getText().toString().equals("")
-						&& !etCalves.getText().toString().equals("")) {
-					btnSaveUpdateStats.setEnabled(true);
-					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
-				}
-			}
-		});
-
+		
+		buttonDisabledText = getResources().getColor(R.color.button_text);
+		buttonEnabledText = getResources().getColor(R.color.text_title_color);
+		
 		btnSaveUpdateStats.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -658,8 +166,511 @@ public class UpdateBodyStats extends Fragment {
 			}
 
 		});
+		
+		getData();
 
 		return rootView;
+	}
+
+	public static void getData() {
+		Cursor bodyStats = MainActivity.db.rawQuery(
+				"SELECT * FROM User WHERE UserID = 1", null);
+
+		while (bodyStats.moveToNext()) {
+			etWeight.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Weight));
+			etBodyFat.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.BodyFat));
+			etHeight.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Height));
+			etChest.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Chest));
+			etWaist.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Waist));
+			etArms.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Arms));
+			etShoulders.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Shoulders));
+			etForearms.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Forearms));
+			etNeck.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Neck));
+			etHips.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Hips));
+			etThighs.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Thighs));
+			etCalves.setText(DatabaseUltility.GetColumnValue(bodyStats,
+					DatabaseUltility.Calves));
+		}
+		etWeight.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etWeight.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etBodyFat.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etBodyFat.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etHeight.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etHeight.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etChest.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etChest.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etWaist.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etWaist.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etArms.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etArms.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etShoulders.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etShoulders.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etForearms.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etForearms.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etNeck.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etNeck.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etHips.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etHips.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etThighs.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etThighs.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		etCalves.addTextChangedListener(new TextWatcher() {
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before,
+					int count) {
+				// TODO Auto-generated method stub
+				if (etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(false);
+					btnSaveUpdateStats.setTextColor(buttonDisabledText);
+				}
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count,
+					int after) {
+				// TODO Auto-generated method stub
+
+			}
+
+			@Override
+			public void afterTextChanged(Editable s) {
+				// TODO Auto-generated method stub
+				if (!etWeight.getText().toString().equals("")
+						&& !etBodyFat.getText().toString().equals("")
+						&& !etHeight.getText().toString().equals("")
+						&& !etChest.getText().toString().equals("")
+						&& !etWaist.getText().toString().equals("")
+						&& !etArms.getText().toString().equals("")
+						&& !etShoulders.getText().toString().equals("")
+						&& !etForearms.getText().toString().equals("")
+						&& !etNeck.getText().toString().equals("")
+						&& !etHips.getText().toString().equals("")
+						&& !etThighs.getText().toString().equals("")
+						&& !etCalves.getText().toString().equals("")) {
+					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(buttonEnabledText);
+				}
+			}
+		});
+		
 	}
 
 	public static UpdateBodyStats newInstance(String string) {

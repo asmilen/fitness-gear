@@ -187,16 +187,16 @@ public class UserInformation extends Fragment {
 			progressWeight.setSecondaryProgress(0);
 			tvWeight.setText(bodyWeight + "/" + goalWeight + " kg");
 			if(bodyWeight >= goalWeight){
-				float progress = (goalWeight / bodyWeight) * 100;
+				float progressForWeight = (goalWeight / bodyWeight) * 100;
 				progressWeight.setProgressDrawable(draw2);
 				progressWeight.setProgress(100);
-				progressWeight.setSecondaryProgress((int) progress);
+				progressWeight.setSecondaryProgress((int) progressForWeight);
 			}
 			if(bodyWeight < goalWeight){
-				float progress = (bodyWeight / goalWeight) * 100;
+				float progressForWeight = (bodyWeight / goalWeight) * 100;
 				progressWeight.setProgressDrawable(draw1);
 				progressWeight.setProgress(100);
-				progressWeight.setSecondaryProgress((int) progress);
+				progressWeight.setSecondaryProgress((int) progressForWeight);
 			}
 		}
 		if (goalBodyFat == 0) {
@@ -204,15 +204,17 @@ public class UserInformation extends Fragment {
 			progressBodyFat.setProgress(0);
 			progressBodyFat.setSecondaryProgress(0);
 		} else {
+			progressBodyFat.setProgress(0);
+			progressBodyFat.setSecondaryProgress(0);
 			tvBodyFat.setText(bodyBodyFat + "/" + goalBodyFat + " %");
 			if(bodyBodyFat >= goalBodyFat){
-				float progress = (bodyBodyFat / goalBodyFat) * 100;
+				float progressForBodyFat = (goalBodyFat / bodyBodyFat) * 100;
 				progressBodyFat.setProgressDrawable(draw2);
 				progressBodyFat.setProgress(100);
-				progressBodyFat.setSecondaryProgress((int) progress);
+				progressBodyFat.setSecondaryProgress((int) progressForBodyFat);
 			}
 			if(bodyBodyFat < goalBodyFat){
-				float progress = (goalBodyFat / bodyBodyFat) * 100;
+				float progress = (bodyBodyFat / goalBodyFat) * 100;
 				progressBodyFat.setProgressDrawable(draw1);
 				progressBodyFat.setProgress(100);
 				progressBodyFat.setSecondaryProgress((int) progress);
@@ -223,15 +225,17 @@ public class UserInformation extends Fragment {
 			progressHeight.setProgress(0);
 			progressHeight.setSecondaryProgress(0);
 		} else {
+			progressHeight.setProgress(0);
+			progressHeight.setSecondaryProgress(0);
 			tvHeight.setText(bodyHeight + "/" + goalHeight + " cm");
 			if(bodyHeight >= goalHeight){
-				float progress = (bodyHeight / goalHeight) * 100;
+				float progress = (goalHeight / bodyHeight) * 100;
 				progressHeight.setProgressDrawable(draw2);
 				progressHeight.setProgress(100);
 				progressHeight.setSecondaryProgress((int) progress);
 			}
 			if(bodyHeight < goalHeight){
-				float progress = (goalHeight / bodyHeight) * 100;
+				float progress = (bodyHeight / goalHeight) * 100;
 				progressHeight.setProgressDrawable(draw1);
 				progressHeight.setProgress(100);
 				progressHeight.setSecondaryProgress((int) progress);
@@ -244,13 +248,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvChest.setText(bodyChest + "/" + goalChest + " cm");
 			if(bodyChest >= goalChest){
-				float progress = (bodyChest / goalChest) * 100;
+				float progress = (goalChest / bodyChest) * 100;
 				progressChest.setProgressDrawable(draw2);
 				progressChest.setProgress(100);
 				progressChest.setSecondaryProgress((int) progress);
 			}
 			if(bodyHeight < goalChest){
-				float progress = (goalChest / bodyChest) * 100;
+				float progress = (bodyChest / goalChest) * 100;
 				progressChest.setProgressDrawable(draw1);
 				progressChest.setProgress(100);
 				progressChest.setSecondaryProgress((int) progress);
@@ -263,13 +267,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvWaist.setText(bodyWaist + "/" + goalWaist + " cm");
 			if(bodyWaist >= goalWaist){
-				float progress = (bodyWaist / goalWaist) * 100;
+				float progress = (goalWaist / bodyWaist) * 100;
 				progressWaist.setProgressDrawable(draw2);
 				progressWaist.setProgress(100);
 				progressWaist.setSecondaryProgress((int) progress);
 			}
 			if(bodyWaist < goalWaist){
-				float progress = (goalWaist / bodyWaist) * 100;
+				float progress = (bodyWaist / goalWaist) * 100;
 				progressWaist.setProgressDrawable(draw1);
 				progressWaist.setProgress(100);
 				progressWaist.setSecondaryProgress((int) progress);
@@ -282,13 +286,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvArms.setText(bodyArms + "/" + goalArms + " cm");
 			if(bodyArms >= goalArms){
-				float progress = (bodyArms / goalArms) * 100;
+				float progress = (goalArms / bodyArms) * 100;
 				progressArms.setProgressDrawable(draw2);
 				progressArms.setProgress(100);
 				progressArms.setSecondaryProgress((int) progress);
 			}
 			if(bodyArms < goalArms){
-				float progress = (goalArms / bodyArms) * 100;
+				float progress = (bodyArms / goalArms) * 100;
 				progressArms.setProgressDrawable(draw1);
 				progressArms.setProgress(100);
 				progressArms.setSecondaryProgress((int) progress);
@@ -301,13 +305,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvShoulders.setText(bodyShoulders + "/" + goalShoulders + " cm");
 			if(bodyShoulders >= goalShoulders){
-				float progress = (bodyShoulders / goalShoulders) * 100;
+				float progress = (goalShoulders / bodyShoulders) * 100;
 				progressShoulders.setProgressDrawable(draw2);
 				progressShoulders.setProgress(100);
 				progressShoulders.setSecondaryProgress((int) progress);
 			}
 			if(bodyShoulders < goalShoulders){
-				float progress = (goalShoulders / bodyShoulders) * 100;
+				float progress = (bodyShoulders / goalShoulders) * 100;
 				progressShoulders.setProgressDrawable(draw1);
 				progressShoulders.setProgress(100);
 				progressShoulders.setSecondaryProgress((int) progress);
@@ -320,13 +324,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvForearms.setText(bodyForearms + "/" + goalForearms + " cm");
 			if(bodyForearms >= goalForearms){
-				float progress = (bodyForearms / goalForearms) * 100;
+				float progress = (goalForearms / bodyForearms) * 100;
 				progressForearms.setProgressDrawable(draw2);
 				progressForearms.setProgress(100);
 				progressForearms.setSecondaryProgress((int) progress);
 			}
 			if(bodyForearms < goalForearms){
-				float progress = (goalForearms / bodyForearms) * 100;
+				float progress = (bodyForearms / goalForearms) * 100;
 				progressForearms.setProgressDrawable(draw1);
 				progressForearms.setProgress(100);
 				progressForearms.setSecondaryProgress((int) progress);
@@ -339,13 +343,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvNeck.setText(bodyNeck + "/" + goalNeck + " cm");
 			if(bodyNeck >= goalNeck){
-				float progress = (bodyNeck / goalNeck) * 100;
+				float progress = (goalNeck / bodyNeck) * 100;
 				progressNeck.setProgressDrawable(draw2);
 				progressNeck.setProgress(100);
 				progressNeck.setSecondaryProgress((int) progress);
 			}
 			if(bodyHeight < goalNeck){
-				float progress = (goalNeck / bodyNeck) * 100;
+				float progress = (bodyNeck / goalNeck) * 100;
 				progressNeck.setProgressDrawable(draw1);
 				progressNeck.setProgress(100);
 				progressNeck.setSecondaryProgress((int) progress);
@@ -358,7 +362,7 @@ public class UserInformation extends Fragment {
 		} else {
 			tvHips.setText(bodyHips + "/" + goalHips + " cm");
 			if(bodyHips >= goalHips){
-				float progress = (bodyHips / goalHips) * 100;
+				float progress = (goalHips / bodyHips) * 100;
 				progressHips.setProgressDrawable(draw2);
 				progressHips.setProgress(100);
 				progressHips.setSecondaryProgress((int) progress);
@@ -377,13 +381,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvThighs.setText(bodyThighs + "/" + goalThighs + " cm");
 			if(bodyThighs >= goalThighs){
-				float progress = (bodyThighs / goalThighs) * 100;
+				float progress = (goalThighs / bodyThighs) * 100;
 				progressThighs.setProgressDrawable(draw2);
 				progressThighs.setProgress(100);
 				progressThighs.setSecondaryProgress((int) progress);
 			}
 			if(bodyThighs < goalThighs){
-				float progress = (goalThighs / bodyThighs) * 100;
+				float progress = (bodyThighs / goalThighs) * 100;
 				progressThighs.setProgressDrawable(draw1);
 				progressThighs.setProgress(100);
 				progressThighs.setSecondaryProgress((int) progress);
@@ -396,13 +400,13 @@ public class UserInformation extends Fragment {
 		} else {
 			tvCalves.setText(bodyCalves + "/" + goalCalves + " cm");
 			if(bodyCalves >= goalCalves){
-				float progress = (bodyCalves / goalCalves) * 100;
+				float progress = (goalCalves / bodyCalves) * 100;
 				progressCalves.setProgressDrawable(draw2);
 				progressCalves.setProgress(100);
 				progressCalves.setSecondaryProgress((int) progress);
 			}
 			if(bodyCalves < goalCalves){
-				float progress = (goalCalves / bodyCalves) * 100;
+				float progress = (bodyCalves / goalCalves) * 100;
 				progressCalves.setProgressDrawable(draw1);
 				progressCalves.setProgress(100);
 				progressCalves.setSecondaryProgress((int) progress);
