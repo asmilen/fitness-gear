@@ -127,6 +127,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -164,6 +165,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -201,6 +203,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -238,6 +241,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -275,6 +279,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -312,6 +317,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -349,6 +355,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -386,6 +393,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -423,6 +431,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -460,6 +469,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -497,6 +507,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});
@@ -534,6 +545,7 @@ public class SetGoals extends Fragment {
 						&& !etThighs.getText().toString().equals("")
 						&& !etCalves.getText().toString().equals("")) {
 					btnSaveUpdateStats.setEnabled(true);
+					btnSaveUpdateStats.setTextColor(getResources().getColor(R.color.text_title_color));
 				}
 			}
 		});

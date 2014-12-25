@@ -1,6 +1,8 @@
 package com.fitnessgear;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.text.DecimalFormat;
@@ -17,8 +19,11 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.Matrix;
+import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -27,6 +32,7 @@ import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerTabStrip;
 import android.support.v4.view.ViewPager;
+import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -82,6 +88,7 @@ public class Home extends Fragment {
 
 	private ArrayList<String> chooseImage;
 	private ArrayAdapter<String> chooseImageAdapter;
+	private static Matrix mat;
 
 	public Home() {
 		// TODO Auto-generated constructor stub
@@ -191,12 +198,6 @@ public class Home extends Fragment {
 									}
 								});
 				builder.show();
-
-				// Intent i = new Intent(
-				// Intent.ACTION_PICK,
-				// android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-				//
-				// startActivityForResult(i, RESULT_LOAD_IMAGE_FROM_GALLERY);
 			}
 		});
 		getData();
@@ -208,18 +209,19 @@ public class Home extends Fragment {
 		path = "";
 		Intent intent = new Intent("android.media.action.IMAGE_CAPTURE");
 		File folder = new File(Environment.getExternalStorageDirectory()
-				+ "/LoadImg");
+				+ "/DCIM/Camera");
 
 		if (!folder.exists()) {
 			folder.mkdir();
 		}
 		final Calendar c = Calendar.getInstance();
-		String new_Date = c.get(Calendar.DAY_OF_MONTH) + "-"
-				+ ((c.get(Calendar.MONTH)) + 1) + "-" + c.get(Calendar.YEAR)
-				+ " " + c.get(Calendar.HOUR) + "-" + c.get(Calendar.MINUTE)
-				+ "-" + c.get(Calendar.SECOND);
+		String new_Date = c.get(Calendar.YEAR) + "-"
+				+ ((c.get(Calendar.MONTH)) + 1) + "-"
+				+ c.get(Calendar.DAY_OF_MONTH) + "-" + c.get(Calendar.HOUR)
+				+ "-" + c.get(Calendar.MINUTE) + "-" + c.get(Calendar.SECOND)
+				+ "-" + c.get(Calendar.MILLISECOND);
 		path = String.format(Environment.getExternalStorageDirectory()
-				+ "/LoadImg/%s.png", "LoadImg(" + new_Date + ")");
+				+ "/DCIM/Camera/%s.jpg", "C360_" + new_Date);
 		File photo = new File(path);
 		intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(photo));
 		startActivityForResult(intent, RESULT_LOAD_IMAGE_TAKE_PHOTO);
@@ -229,45 +231,63 @@ public class Home extends Fragment {
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		// TODO Auto-generated method stub
 		super.onActivityResult(requestCode, resultCode, data);
-		if (requestCode == RESULT_LOAD_IMAGE_FROM_GALLERY && null != data) {
-			Uri selectedImage = data.getData();
-			String[] filePathColumn = { MediaStore.Images.Media.DATA };
+		try {
+			if (requestCode == RESULT_LOAD_IMAGE_FROM_GALLERY && null != data) {
+				Uri selectedImage = data.getData();
+				String[] filePathColumn = { MediaStore.Images.Media.DATA };
 
-			Cursor cursor = getActivity().getContentResolver().query(
-					selectedImage, filePathColumn, null, null, null);
-			cursor.moveToFirst();
+				Cursor cursor = getActivity().getContentResolver().query(
+						selectedImage, filePathColumn, null, null, null);
+				cursor.moveToFirst();
 
-			int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-			String picturePath = cursor.getString(columnIndex);
-			cursor.close();
+				int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+				String picturePath = cursor.getString(columnIndex);
+				cursor.close();
 
-			// ImageView imageView = (ImageView) findViewById(R.id.imgView);
-			Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
-			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false);
-			avaImage.setImageBitmap(bitmap);
-			ContentValues contentAvaImage = new ContentValues();
-			contentAvaImage.put("AvaImage", picturePath);
-			int updateUser = MainActivity.db.update("User", contentAvaImage,
-					"UserID = 1", null);
-			if (updateUser > 0) {
-				Toast.makeText(getActivity(), "Update Image Successfull",
-						Toast.LENGTH_LONG).show();
+				// ImageView imageView = (ImageView) findViewById(R.id.imgView);
+				Bitmap bitmap = BitmapFactory.decodeFile(picturePath);
+				bitmap = Bitmap.createScaledBitmap(bitmap, 140, 150, false);
+				
+//				ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//			    bitmap.compress(CompressFormat.JPEG, 0, outputStream);
+//			    byte[] b = outputStream.toByteArray();
+//			    String pathImage = Base64.encodeToString(b, Base64.DEFAULT);
+			    
+				avaImage.setImageBitmap(bitmap);
+				ContentValues contentAvaImage = new ContentValues();
+				contentAvaImage.put("AvaImage", picturePath);
+				int updateUser = MainActivity.db.update("User",
+						contentAvaImage, "UserID = 1", null);
+				if (updateUser > 0) {
+					Toast.makeText(getActivity(), "Update Image Successfull",
+							Toast.LENGTH_LONG).show();
+				}
 			}
-		}
-		if (requestCode == RESULT_LOAD_IMAGE_TAKE_PHOTO && path != ""
-				&& null != data) {
-			// ImageView imageView = (ImageView) findViewById(R.id.imgView);
-			Bitmap bitmap = BitmapFactory.decodeFile(path);
-			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false);
-			avaImage.setImageBitmap(bitmap);
-			ContentValues contentAvaImage = new ContentValues();
-			contentAvaImage.put("AvaImage", path);
-			int updateUser = MainActivity.db.update("User", contentAvaImage,
-					"UserID = 1", null);
-			if (updateUser > 0) {
-				Toast.makeText(getActivity(), "Update Image Successfull" + path,
-						Toast.LENGTH_LONG).show();
+			if (requestCode == RESULT_LOAD_IMAGE_TAKE_PHOTO && path != "") {
+				// ImageView imageView = (ImageView) findViewById(R.id.imgView);
+
+				rotateImage(path);
+				
+				Bitmap bitmap = BitmapFactory.decodeFile(path);
+				bitmap = Bitmap.createScaledBitmap(bitmap, 140, 150, false);
+				bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+						bitmap.getHeight(), mat, true);
+//				 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+//				    bitmap.compress(CompressFormat.JPEG, 0, outputStream);
+//				    byte[] b = outputStream.toByteArray();
+//				    String pathImage = Base64.encodeToString(b, Base64.DEFAULT);
+				avaImage.setImageBitmap(bitmap);
+				ContentValues contentAvaImage = new ContentValues();
+				contentAvaImage.put("AvaImage", path);
+				int updateUser = MainActivity.db.update("User",
+						contentAvaImage, "UserID = 1", null);
+				if (updateUser > 0) {
+					Toast.makeText(getActivity(), "Update Image Successfull ", Toast.LENGTH_LONG)
+							.show();
+				}
 			}
+		} catch (Exception ex) {
+
 		}
 	}
 
@@ -309,12 +329,49 @@ public class Home extends Fragment {
 			}
 			DecimalFormat form = new DecimalFormat("0.00");
 			tvBMI.setText("BMI: " + form.format(BMI));
-			//Get AvaImage from database
-//			Bitmap bitmap = BitmapFactory.decodeFile(DatabaseUltility.GetColumnValue(user,
-//					DatabaseUltility.AvaImage));
-//			bitmap = Bitmap.createScaledBitmap(bitmap, 140, 140, false);
-//			avaImage.setImageBitmap(bitmap);
+			// Get AvaImage from database
+			String avatarImage = DatabaseUltility.GetColumnValue(user,
+					DatabaseUltility.AvaImage);
+			if (avatarImage != "" && avatarImage != null) {
+//				byte[] b = Base64.decode(avatarImage, Base64.DEFAULT);
+				rotateImage(avatarImage);
+				Bitmap bitmap = BitmapFactory.decodeFile(avatarImage);
+				bitmap = Bitmap.createScaledBitmap(bitmap, 140, 150, false);
+				bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.getWidth(),
+						bitmap.getHeight(), mat, true);
+				avaImage.setImageBitmap(bitmap);
+			}
 		}
+	}
+
+	public static Matrix rotateImage(String path) {
+		ExifInterface exif;
+		try {
+			exif = new ExifInterface(path);
+
+			int orientation = exif.getAttributeInt(
+					ExifInterface.TAG_ORIENTATION,
+					ExifInterface.ORIENTATION_NORMAL);
+
+			int angle = 0;
+
+			if (orientation == ExifInterface.ORIENTATION_ROTATE_90) {
+				angle = 90;
+			} else if (orientation == ExifInterface.ORIENTATION_ROTATE_180) {
+				angle = 180;
+			} else if (orientation == ExifInterface.ORIENTATION_ROTATE_270) {
+				angle = 270;
+			}
+
+			mat = new Matrix();
+
+			mat.postRotate(angle);
+			return mat;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	// An ban phim khi bam ra ben ngoai
