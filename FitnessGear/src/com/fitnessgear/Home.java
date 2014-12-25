@@ -58,6 +58,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fitnessgear.adapter.HomeViewPagerAdapter;
+import com.fitnessgear.child.PlanDetail;
 import com.fitnessgear.database.DatabaseUltility;
 
 public class Home extends Fragment {
@@ -106,6 +107,24 @@ public class Home extends Fragment {
 		View rootView = inflater.inflate(R.layout.fragment_home, container,
 				false);
 		setHasOptionsMenu(true);
+		
+		String userName = "";
+		String gender = "";
+		String dob = "";
+		Cursor userCursor = MainActivity.db.rawQuery(
+				"Select * From User Where UserID = 1", null);
+
+		while (userCursor.moveToNext()) {
+			userName = DatabaseUltility.GetColumnValue(userCursor,
+					DatabaseUltility.UserName);
+			gender = DatabaseUltility.GetColumnValue(userCursor, DatabaseUltility.Gender);
+			dob = DatabaseUltility.GetColumnValue(userCursor, DatabaseUltility.DateOfBirth);
+		}
+		if (userName.equals("") || gender.equals("") || dob.equals("")) {
+			Intent intent = new Intent(getActivity(), SetupAccount.class);
+			startActivity(intent);
+		}
+		
 
 		// Hide keyboard when click layout
 		homeLayout = (LinearLayout) rootView.findViewById(R.id.homeLayout);
@@ -116,6 +135,7 @@ public class Home extends Fragment {
 				// TODO Auto-generated method stub
 				hideKeyboard(view);
 				UserInformation.getData();
+				
 				return false;
 			}
 		});
@@ -482,7 +502,7 @@ public class Home extends Fragment {
 				Calendar cal = Calendar.getInstance(TimeZone.getDefault());
 
 				// Create Date Picker Dialog
-				if (etDoB.getText().toString() != "") {
+				if (!etDoB.getText().toString().equals("")) {
 					String[] dob = etDoB.getText().toString().split("/");
 					datePicker = new DatePickerDialog(getActivity(),
 							datePickerListener, Integer.valueOf(dob[2]),
