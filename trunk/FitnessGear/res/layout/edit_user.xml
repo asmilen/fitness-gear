@@ -40,5 +40,20 @@
         android:layout_x="100dp"
         android:layout_y="60dp"
         android:singleLine="true" />
+    
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:layout_x="10dp"
+        android:layout_y="120dp" />
+
+    <Spinner
+        android:id="@+id/spGenderUser"
+        android:layout_width="210dp"
+        android:layout_height="wrap_content"
+        android:layout_x="100dp"
+        android:layout_y="110dp" />
 
 </AbsoluteLayout>
