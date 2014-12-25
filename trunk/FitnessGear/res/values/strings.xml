@@ -67,6 +67,7 @@
     <string name="title_activity_log_note">LogNote</string>
     <string name="title_activity_log_body_stats">LogBodyStats</string>
     <string name="title_activity_create_workout_detail">CreateWorkoutDetail</string>
-	
-    
+    <string name="title_activity_first">FirstActivity</string>
+    <string name="title_activity_setup_account">SetupAccount</string>
+
 </resources>
