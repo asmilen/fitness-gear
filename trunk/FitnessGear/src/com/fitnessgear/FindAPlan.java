@@ -103,6 +103,7 @@ public class FindAPlan extends Fragment {
 	}
 
 	public void getData() {
+		
 		// Create List Filter
 		listFilterData = new ArrayList<FilterItem>();
 		listFilterData.add(new FilterItem("Level", "All Levels"));
@@ -349,6 +350,7 @@ public class FindAPlan extends Fragment {
 				startActivity(planDetailIntent);
 			}
 		});
+		
 	}
 
 	// Tao ra anh nut clear va anh nut search

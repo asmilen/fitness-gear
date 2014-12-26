@@ -97,6 +97,7 @@ public class ExerciseLibrary extends Fragment {
 	}
 
 	public void getData() {
+		try{
 		// Create List Filter
 		listFilterData = new ArrayList<FilterItem>();
 		listFilterData.add(new FilterItem("Exercise Type", "All Types"));
@@ -137,6 +138,9 @@ public class ExerciseLibrary extends Fragment {
 					.GetColumnValue(exerciseEquipment,
 							DatabaseUltility.EquipmentName)));
 		}
+		exerciseType.close();
+		exerciseMuscle.close();
+		exerciseEquipment.close();
 
 		final ArrayAdapter<ExerciseTypeItem> levelAdapter = new ArrayAdapter<ExerciseTypeItem>(
 				getActivity(), android.R.layout.simple_list_item_1, listTypes);
@@ -288,6 +292,7 @@ public class ExerciseLibrary extends Fragment {
 							.GetColumnValue(listExerciseCursor,
 									DatabaseUltility.Description)));
 		}
+		listExerciseCursor.close();
 
 		adapter = new ListExercisesAdapter(getActivity(), myListExercise);
 
@@ -329,12 +334,12 @@ public class ExerciseLibrary extends Fragment {
 						ExerciseDetail.class);
 				exerciseDetailIntent.putExtra("ExerciseID",
 						myListExercise.get(position).getExerciseID());
-				// exerciseDetailIntent.putExtra("workoutID", workoutID);
-				// searchExercise.clearFocus();
 				startActivity(exerciseDetailIntent);
 			}
 		});
-
+	}catch(Exception ex){
+		Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG).show();
+	}
 	}
 
 	// Tao ra anh nut clear va anh nut search
