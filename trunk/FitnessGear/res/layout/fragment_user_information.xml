@@ -53,7 +53,8 @@
                     android:layout_y="10dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvWeight"
@@ -82,7 +83,8 @@
                     android:layout_y="50dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvHeight"
@@ -111,7 +113,8 @@
                     android:layout_y="90dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvBodyFat"
@@ -140,7 +143,8 @@
                     android:layout_y="130dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvWaist"
@@ -169,7 +173,8 @@
                     android:layout_y="170dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvChest"
@@ -198,7 +203,8 @@
                     android:layout_y="210dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvArms"
@@ -228,7 +234,8 @@
                     android:layout_y="250dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvForearms"
@@ -257,7 +264,8 @@
                     android:layout_y="290dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvShoulders"
@@ -286,7 +294,8 @@
                     android:layout_y="330dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvHips"
@@ -315,7 +324,8 @@
                     android:layout_y="370dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvThighs"
@@ -344,7 +354,8 @@
                     android:layout_y="410dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvCalves"
@@ -373,7 +384,8 @@
                     android:layout_y="450dp"
                     android:max="100"
                     android:progress="1"
-                    android:progressDrawable="@drawable/custome_progress_bar" />
+                    android:progressDrawable="@drawable/custome_progress_bar"
+                    android:background="@drawable/background_progress_bar" />
 
                 <TextView
                     android:id="@+id/tvNeck"
