@@ -82,7 +82,8 @@ public class TrackWorkoutFragment extends Fragment {
 				.findViewById(R.id.textViewSetNumber);
 		TextView textViewX = (TextView) rootView.findViewById(R.id.textViewX);
 		EditText editTextKg = (EditText) rootView.findViewById(R.id.editTextKg);
-
+		TextView textView1 = (TextView) rootView.findViewById(R.id.textView1);
+		
 		ImageView img1 = (ImageView) rootView.findViewById(R.id.imageViewTick);
 		ImageView img2 = (ImageView) rootView.findViewById(R.id.imageView2);
 
@@ -127,6 +128,7 @@ public class TrackWorkoutFragment extends Fragment {
 		if (item.getKg() == 0) {
 			editTextKg.setVisibility(View.GONE);
 			textViewX.setVisibility(View.GONE);
+			textView1.setVisibility(View.GONE);
 		}
 
 		// Hide keyboard when touched outside edittext area
