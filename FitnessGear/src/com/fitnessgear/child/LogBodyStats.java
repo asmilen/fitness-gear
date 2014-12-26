@@ -63,8 +63,10 @@ public class LogBodyStats  extends Fragment{
 						DatabaseUltility.Thighs));
 				etCalves.setText(DatabaseUltility.GetColumnValue(bodyStats,
 						DatabaseUltility.Calves));
+				bodyStats.close();
 		}
 		}
+		c.close();
 		return rootView;
 	}
 

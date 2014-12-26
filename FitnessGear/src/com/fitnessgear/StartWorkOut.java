@@ -139,12 +139,14 @@ public class StartWorkOut extends Fragment {
 			}
 
 		GridAdapter adapter = new GridAdapter(getActivity(), item);
-		adapter.startdate = startDate;
-		Calendar calendar = Calendar.getInstance();
-		Date d1 = new SimpleDateFormat("dd/mm/yyyy").parse(startDate);
-		Date d2 = calendar.getTime();   
-		long diff = Math.abs(d1.getTime() - d2.getTime());
-		long diffDays = diff / (24 * 60 * 60 * 1000);
+		
+		String dayId = DatabaseUltility.getDayID();
+		Date d1 = new SimpleDateFormat("dd/MM/yyyy").parse(startDate);
+		Date d2 = new SimpleDateFormat("dd/MM/yyyy").parse(dayId);
+		long diff = Math.abs(d2.getTime() - d1.getTime());
+		adapter.today = (int) (diff / (24 * 60 * 60 * 1000));
+		
+		
 		grid.setAdapter(adapter);
 		//Set click for Grid View Start Workout
 		grid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

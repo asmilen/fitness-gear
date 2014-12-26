@@ -13,6 +13,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Color;
+import android.opengl.Visibility;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -123,20 +124,21 @@ public class CalendarAdapter extends CaldroidGridAdapter {
 		Cursor c = MainActivity.db.rawQuery(
 				"Select * from Log_Exercise where Day = '" + dayID + "'", null);
 		if (c.moveToNext()) {
-			img.setImageResource(R.drawable.exercise_icon);
+			img.setVisibility(View.VISIBLE);
 		}
-
+		c.close();
 		Cursor c1 = MainActivity.db.rawQuery("Select * from Log_Note where Day = '"
 				+ dayID + "'", null);
 		if (c1.moveToNext()) {
-			imgNote.setImageResource(R.drawable.note_icon);
+			imgNote.setVisibility(View.VISIBLE);
 		}
-
+		c1.close();
 		Cursor c2 = MainActivity.db.rawQuery("Select * from Log where Day = '"
 				+ dayID + "'", null);
 		if (c2.moveToNext()) {
-			imgBody.setImageResource(R.drawable.body_icon);
+			imgBody.setVisibility(View.VISIBLE);
 		}
+		c2.close();
 		// Set custom color if required
 		setCustomResources(dateTime, cellView, tv1);
 		cellView.setPadding(leftPadding, topPadding, rightPadding,

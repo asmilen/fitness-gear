@@ -21,25 +21,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:orientation="horizontal">
-
+		 <ImageView
+            android:id="@+id/imageViewCustomCellWhite"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:visibility="visible"
+            android:src="@drawable/white_icon" />
         <ImageView
             android:id="@+id/imageViewCustomCell"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:visibility="visible"
-            android:src="@drawable/white_icon" />
+            android:visibility="gone"
+            android:src="@drawable/exercise_icon" />
         <ImageView
             android:id="@+id/imageViewCustomCellBody"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:visibility="visible"
-            android:src="@drawable/white_icon" />
+            android:visibility="gone"
+            android:src="@drawable/body_icon" />
         <ImageView
             android:id="@+id/imageViewCustomCellNote"
             android:layout_width="15dp"
             android:layout_height="15dp"
-            android:visibility="visible"
-            android:src="@drawable/white_icon" />
+            android:visibility="gone"
+            android:src="@drawable/note_icon" />
 
     </LinearLayout>
     
