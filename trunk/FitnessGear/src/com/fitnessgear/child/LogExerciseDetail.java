@@ -32,6 +32,9 @@ public class LogExerciseDetail extends Fragment {
 		View rootView = inflater.inflate(R.layout.activity_log_exercise_detail,
 				container, false);
 		String dayID = getArguments().getString("dayID");
+		Cursor listExerciseCursor = MainActivity.db.rawQuery(
+				"Select Distinct ExerciseID from Log_Exercise Where Day= '"
+						+ dayID+"'", null);
 		try {
 
 			// Khoi tao ArrayList tu LogExerciseItem class
@@ -39,27 +42,29 @@ public class LogExerciseDetail extends Fragment {
 					.GetListFromLogExercise(dayID);
 			myListExerciseID = new ArrayList<Integer>();
 
-			Cursor listExerciseCursor = MainActivity.db.rawQuery(
-					"Select Distinct ExerciseID from Log_Exercise Where Day= '"
-							+ dayID+"'", null);
+			
 
 			while (listExerciseCursor.moveToNext()) {
 				myListExerciseID.add(DatabaseUltility.GetIntColumnValue(
 						listExerciseCursor, DatabaseUltility.ExerciseID));
 			}
 
+			// adapter
+			LogExerciseAdapter adapter = new LogExerciseAdapter(getActivity(),
+					myListExerciseDetail, myListExerciseID);
+
+			// Set adapter
+			ListView listview = (ListView) rootView.findViewById(R.id.listViewSet);
+			listview.setAdapter(adapter);
 		} catch (Exception ex) {
 			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
 					.show();
 		}
-
-		// adapter
-		LogExerciseAdapter adapter = new LogExerciseAdapter(getActivity(),
-				myListExerciseDetail, myListExerciseID);
-
-		// Set adapter
-		ListView listview = (ListView) rootView.findViewById(R.id.listViewSet);
-		listview.setAdapter(adapter);
+		finally
+		{
+			listExerciseCursor.close();
+		}
+		
 		return rootView;
 	}
 	

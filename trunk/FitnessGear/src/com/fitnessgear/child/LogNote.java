@@ -56,27 +56,31 @@ public class LogNote extends Fragment {
 				false);
 		setHasOptionsMenu(true);
 
-		logNoteLayout = (LinearLayout) rootView
-				.findViewById(R.id.logNoteLayout);
+		try {
+			logNoteLayout = (LinearLayout) rootView
+					.findViewById(R.id.logNoteLayout);
 
-		MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
-		contentNote = (EditText) rootView.findViewById(R.id.contentNote);
-		timeNote = (TextView) rootView.findViewById(R.id.timeNote);
-		listNote = (ListView) rootView.findViewById(R.id.listNote);
+			MainActivity.db = MainActivity.dbHelper.getWritableDatabase();
+			contentNote = (EditText) rootView.findViewById(R.id.contentNote);
+			timeNote = (TextView) rootView.findViewById(R.id.timeNote);
+			listNote = (ListView) rootView.findViewById(R.id.listNote);
 
-		logNoteLayout.setOnTouchListener(new OnTouchListener() {
+			logNoteLayout.setOnTouchListener(new OnTouchListener() {
 
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				// TODO Auto-generated method stub
-				hideKeyboard(v);
-				contentNote.clearFocus();
-				return false;
-			}
-		});
+				@Override
+				public boolean onTouch(View v, MotionEvent event) {
+					// TODO Auto-generated method stub
+					hideKeyboard(v);
+					contentNote.clearFocus();
+					return false;
+				}
+			});
 
-		getData();
-
+			getData();
+		} catch (Exception ex) {
+			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
+					.show();
+		}
 		return rootView;
 	}
 
@@ -88,28 +92,36 @@ public class LogNote extends Fragment {
 		Cursor noteCursor = MainActivity.db.rawQuery(
 				"Select * From Log_Note Where day = '" + dayID + "'", null);
 
-		listNoteItem = new ArrayList<LogNoteItem>();
-		while (noteCursor.moveToNext()) {
-			noteID = DatabaseUltility.GetIntColumnValue(noteCursor,
-					DatabaseUltility.NoteID);
-			listNoteItem.add(new LogNoteItem(dayID, DatabaseUltility
-					.GetIntColumnValue(noteCursor, DatabaseUltility.NoteID),
-					DatabaseUltility.GetColumnValue(noteCursor,
-							DatabaseUltility.NoteDetail)));
-		}
-		noteID++;
-
-		noteAdapter = new NoteAdapter(getActivity(), listNoteItem);
-		listNote.setAdapter(noteAdapter);
-		listNote.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view,
-					int position, long id) {
-				// TODO Auto-generated method stub
-				showDialog(listNoteItem.get(position).getNoteID());
+		try {
+			listNoteItem = new ArrayList<LogNoteItem>();
+			while (noteCursor.moveToNext()) {
+				noteID = DatabaseUltility.GetIntColumnValue(noteCursor,
+						DatabaseUltility.NoteID);
+				listNoteItem.add(new LogNoteItem(dayID,
+						DatabaseUltility.GetIntColumnValue(noteCursor,
+								DatabaseUltility.NoteID), DatabaseUltility
+								.GetColumnValue(noteCursor,
+										DatabaseUltility.NoteDetail)));
 			}
-		});
+			noteID++;
+
+			noteAdapter = new NoteAdapter(getActivity(), listNoteItem);
+			listNote.setAdapter(noteAdapter);
+			listNote.setOnItemClickListener(new OnItemClickListener() {
+
+				@Override
+				public void onItemClick(AdapterView<?> parent, View view,
+						int position, long id) {
+					// TODO Auto-generated method stub
+					showDialog(listNoteItem.get(position).getNoteID());
+				}
+			});
+		} catch (Exception ex) {
+			Toast.makeText(getActivity(), ex.getMessage(), Toast.LENGTH_LONG)
+					.show();
+		} finally {
+			noteCursor.close();
+		}
 	}
 
 	public static Fragment newInstance(String string) {
@@ -153,7 +165,8 @@ public class LogNote extends Fragment {
 										etContentNote.getText().toString());
 								int updateNote = MainActivity.db.update(
 										"Log_Note", contentValueNote,
-										"NoteID = ? AND day = ?" , new String[]{""+noteID,dayID});
+										"NoteID = ? AND day = ?", new String[] {
+												"" + noteID, dayID });
 								if (updateNote > 0) {
 									getData();
 								}

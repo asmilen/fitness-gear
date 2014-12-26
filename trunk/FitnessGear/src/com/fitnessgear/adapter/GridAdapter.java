@@ -8,6 +8,7 @@ import com.fitnessgear.model.WorkoutItem;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,12 +19,13 @@ public class GridAdapter extends BaseAdapter {
 
 	private Context mContext;
 	private final ArrayList<WorkoutItem> item;
-	public String startdate;
+	public int today;
 
 	public GridAdapter(Context c, ArrayList<WorkoutItem> item) {
 		// TODO Auto-generated constructor stub
 		mContext = c;
 		this.item = item;
+		today = -1;
 	}
 
 	@Override
@@ -87,6 +89,10 @@ public class GridAdapter extends BaseAdapter {
 		if (workoutItem.getHeader() == null) {
 			holder.txtTime.setText(item.get(position).getWorkoutName());
 			holder.txtExercise.setText(item.get(position).getDescription());
+			if (position == today)
+			{
+				holder.txtTime.setBackgroundColor(Color.RED);
+			}
 		} else {
 			holder.header.setText(item.get(position).getHeader());
 		}

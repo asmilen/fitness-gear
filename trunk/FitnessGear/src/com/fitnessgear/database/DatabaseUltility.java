@@ -146,15 +146,12 @@ public class DatabaseUltility {
 	// Update data to Log_exercise
 	public static void UpdateToLogExercise(LogExerciseList mylist)
 			throws Exception {
+		// Delete if exist
+		SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
+		db.execSQL("Delete from Log_Exercise Where Day = '" + getDayID() + "'");
 
 		ArrayList<LogExerciseItem> list = mylist.getMyLogExerciseList();
 		for (LogExerciseItem item : list) {
-			SQLiteDatabase db = MainActivity.dbHelper.getWritableDatabase();
-			// Delete if exist
-			db.execSQL("Delete from Log_Exercise Where ExerciseID = "
-					+ item.getExerciseID() + " And Day =" + item.getDay()
-					+ " And Sets = " + item.getSets());
-
 			// Insert
 			if (item.getReps() != 0 || item.getKgs() != 0
 					|| item.getInterval() != 0) {
@@ -177,19 +174,23 @@ public class DatabaseUltility {
 		String sql = "Select * " + "FROM Log_Exercise Where Day = '" + DayID
 				+ "'";
 		Cursor listExerciseCursor = MainActivity.db.rawQuery(sql, null);
+		try {
 
-		while (listExerciseCursor.moveToNext()) {
-			myListExerciseDetail.add(new LogExerciseItem(DayID,
-					DatabaseUltility.GetIntColumnValue(listExerciseCursor,
-							DatabaseUltility.ExerciseID), DatabaseUltility
-							.GetIntColumnValue(listExerciseCursor,
-									DatabaseUltility.Sets), DatabaseUltility
-							.GetIntColumnValue(listExerciseCursor,
-									DatabaseUltility.Reps), DatabaseUltility
-							.GetIntColumnValue(listExerciseCursor,
-									DatabaseUltility.Kg), DatabaseUltility
-							.GetIntColumnValue(listExerciseCursor,
-									DatabaseUltility.Interval)));
+			while (listExerciseCursor.moveToNext()) {
+				myListExerciseDetail.add(new LogExerciseItem(DayID,
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor,
+								DatabaseUltility.ExerciseID), DatabaseUltility
+								.GetIntColumnValue(listExerciseCursor,
+										DatabaseUltility.Sets),
+						DatabaseUltility.GetIntColumnValue(listExerciseCursor,
+								DatabaseUltility.Reps), DatabaseUltility
+								.GetIntColumnValue(listExerciseCursor,
+										DatabaseUltility.Kg), DatabaseUltility
+								.GetIntColumnValue(listExerciseCursor,
+										DatabaseUltility.Interval)));
+			}
+		} finally {
+			listExerciseCursor.close();
 		}
 		return myListExerciseDetail;
 
@@ -239,12 +240,11 @@ public class DatabaseUltility {
 	public static String getMuscleName(int key) {
 		// TODO Auto-generated method stub
 		String name = "";
-		Cursor c = MainActivity.db.rawQuery("Select * from Muscles Where MuscleID = " + key, null);
+		Cursor c = MainActivity.db.rawQuery(
+				"Select * from Muscles Where MuscleID = " + key, null);
 		if (c.moveToNext())
 			name = GetColumnValue(c, MuscleName);
 		return name;
 	}
 
 }
-
-

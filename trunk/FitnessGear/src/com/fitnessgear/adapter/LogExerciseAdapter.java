@@ -106,10 +106,17 @@ public class LogExerciseAdapter extends BaseAdapter {
 			for (int i = 0; i < listExercises.size(); i++) {
 				LogExerciseItem item = listExercises.get(i);
 				if (item.getExerciseID() == ExerciseID) {
-					listSet.add("Set " + item.getSets() + ": " + item.getKgs()
-							+ " kg x " + item.getReps() + " reps");
+					if (item.getInterval() != 0) {
+
+						listSet.add(convert(item.getInterval()));
+					} else {
+						listSet.add("Set " + item.getSets() + ": "
+								+ item.getKgs() + " kg x " + item.getReps()
+								+ " reps");
+					}
 				}
-				//Toast.makeText(mContext, item.getExerciseID()+ " " + item.getSets(),Toast.LENGTH_LONG).show(); 
+				// Toast.makeText(mContext, item.getExerciseID()+ " " +
+				// item.getSets(),Toast.LENGTH_LONG).show();
 			}
 		} catch (Exception ex) {
 			Toast.makeText(mContext, ex.getMessage(), Toast.LENGTH_LONG).show();
@@ -122,6 +129,24 @@ public class LogExerciseAdapter extends BaseAdapter {
 
 		holder.listSet.setAdapter(aa);
 		return convertView;
+	}
+
+	String convert(int data) {
+		int h = data / 3600;
+		int m = (data / 60) % 60;
+		int s = data % 60;
+		String h1 = convertTime(h);
+		String m1 = convertTime(m);
+		String s1 = convertTime(s);
+		return h1 + ":" + m1 + ":" + s1;
+
+	}
+
+	String convertTime(int data) {
+		if (data < 10) {
+			return "0" + data;
+		}
+		return data + "";
 	}
 
 	public static class ViewHolder {
