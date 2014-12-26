@@ -232,8 +232,7 @@ public class AddPlan extends Activity {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
 						&& !totalWeek.getText().toString().equals("")
-						&& !aveDay.getText().toString().equals("")
-						) {
+						&& !aveDay.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -258,8 +257,7 @@ public class AddPlan extends Activity {
 					int count) {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
-						&& !totalWeek.getText().toString().equals("")
-						) {
+						&& !totalWeek.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -292,8 +290,7 @@ public class AddPlan extends Activity {
 					int count) {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
-						&& !totalWeek.getText().toString().equals("")
-						) {
+						&& !totalWeek.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -326,8 +323,7 @@ public class AddPlan extends Activity {
 					int count) {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
-						&& !totalWeek.getText().toString().equals("")
-						) {
+						&& !totalWeek.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -360,8 +356,7 @@ public class AddPlan extends Activity {
 					int count) {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
-						&& !totalWeek.getText().toString().equals("")
-						) {
+						&& !totalWeek.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -394,8 +389,7 @@ public class AddPlan extends Activity {
 					int count) {
 				// TODO Auto-generated method stub
 				if (!planName.getText().toString().equals("")
-						&& !totalWeek.getText().toString().equals("")
-						) {
+						&& !totalWeek.getText().toString().equals("")) {
 					btnCreatePlan.setEnabled(true);
 					btnCreatePlan.setTextColor(getResources().getColor(
 							R.color.text_title_color));
@@ -491,31 +485,31 @@ public class AddPlan extends Activity {
 				String textPlanName = planName.getText().toString();
 				int numTotalWeek = Integer.parseInt(totalWeek.getText()
 						.toString());
-				float numAveDay = 0 , numAveWorkoutTime = 0;
-				int numTotalTimeAWeek = 0 , numTotalCardioTime = 0;
-				try{
-				 numAveDay = Float.parseFloat(aveDay.getText().toString());
+				float numAveDay = 0, numAveWorkoutTime = 0;
+				int numTotalTimeAWeek = 0, numTotalCardioTime = 0;
+				try {
+					numAveDay = Float.parseFloat(aveDay.getText().toString());
+				} catch (Exception ex) {
 				}
-				catch (Exception ex) {}
-				try{
+				try {
 					numAveWorkoutTime = Float.parseFloat(aveWorkoutTime
 							.getText().toString());
-					}
-					catch (Exception ex) {}
-				try{
+				} catch (Exception ex) {
+				}
+				try {
 					numTotalTimeAWeek = Integer.parseInt(totalTimeAWeek
 							.getText().toString());
-					}
-					catch (Exception ex) {}
-				try{
+				} catch (Exception ex) {
+				}
+				try {
 					numTotalCardioTime = Integer.parseInt(totalCardioTime
 							.getText().toString());
-					}
-					catch (Exception ex) {}
-				 
-				 
-				 
-				if (DataValidated(textPlanName.length(),numTotalWeek,numAveDay,numAveWorkoutTime,numTotalTimeAWeek,numTotalCardioTime)) {
+				} catch (Exception ex) {
+				}
+
+				if (DataValidated(textPlanName.length(), numTotalWeek,
+						numAveDay, numAveWorkoutTime, numTotalTimeAWeek,
+						numTotalCardioTime)) {
 					final EditText numberWorkout = new EditText(AddPlan.this);
 					numberWorkout.setInputType(InputType.TYPE_CLASS_NUMBER);
 					InputFilter[] fArray = new InputFilter[1];
@@ -564,25 +558,53 @@ public class AddPlan extends Activity {
 																Integer.parseInt(totalWeek
 																		.getText()
 																		.toString()));
-												contentPlan.put("AveDay", Float
-														.parseFloat(aveDay
-																.getText()
-																.toString()));
-												contentPlan.put(
-														"AveWorkoutTime",
-														Float.parseFloat(aveWorkoutTime
-																.getText()
-																.toString()));
-												contentPlan
-														.put("TotalTimeAWeek",
-																Integer.parseInt(totalTimeAWeek
-																		.getText()
-																		.toString()));
-												contentPlan
-														.put("TotalCardioTime",
-																Integer.parseInt(totalCardioTime
-																		.getText()
-																		.toString()));
+												String aveDay1 = aveDay
+														.getText().toString();
+												if (aveDay1 != null
+														&& !aveDay1.equals("")) {
+													contentPlan
+															.put("AveDay",
+																	Float.parseFloat(aveDay1));
+												} else
+													contentPlan
+															.put("AveDay", 0);
+
+												String aveWorkoutTime1 = aveWorkoutTime
+														.getText().toString();
+												if (aveWorkoutTime1 != null
+														&& !aveWorkoutTime1
+																.equals("")) {
+													contentPlan
+															.put("AveWorkoutTime",
+																	Float.parseFloat(aveWorkoutTime1));
+												}
+												else
+													contentPlan
+															.put("AveWorkoutTime", 0);
+												String TotaltimeAWeek1 = totalTimeAWeek
+														.getText().toString();
+												if (TotaltimeAWeek1 != null
+														&& !TotaltimeAWeek1
+																.equals("")) {
+													contentPlan
+															.put("TotalTimeAWeek",
+																	Integer.parseInt(TotaltimeAWeek1));
+												}
+												else
+													contentPlan
+															.put("TotalTimeAWeek", 0);
+												String cardioTime = totalCardioTime
+														.getText().toString();
+												if (cardioTime != null
+														&& !cardioTime
+																.equals("")) {
+													contentPlan
+															.put("TotalCardioTime",
+																	Integer.parseInt(cardioTime));
+												}
+												else
+													contentPlan
+															.put("TotalCardioTime2", 0);
 												int maxWorkout = Integer
 														.parseInt(totalWeek
 																.getText()
@@ -634,10 +656,9 @@ public class AddPlan extends Activity {
 											// dialog.dismiss();
 										}
 									}).show();
-				}
-				else
-				{
-					Toast.makeText(getApplicationContext(), ErrorMessage, Toast.LENGTH_LONG).show();
+				} else {
+					Toast.makeText(getApplicationContext(), ErrorMessage,
+							Toast.LENGTH_LONG).show();
 				}
 			}
 
@@ -645,30 +666,31 @@ public class AddPlan extends Activity {
 					float numAveDay, float numAveWorkoutTime,
 					int numTotalTimeAWeek, int numTotalCardioTime) {
 				// TODO Auto-generated method stub
-				ErrorMessage ="";
-				
+				ErrorMessage = "";
+
 				if (!(length > 4 && length < 50))
 					ErrorMessage += "Plan name must be greater than 4 and less than 50 characters \n";
-				
-				if (!( numTotalWeek < 99 && numTotalWeek >= 1))
+
+				if (!(numTotalWeek < 99 && numTotalWeek >= 1))
 					ErrorMessage += "Total week must be greater than 1 week and less than 99 weeks \n";
-				
+
 				if (numAveDay != 0)
-				if (!(numAveDay < 100 && numAveDay >= 1))
-					ErrorMessage += "Average day must be greater or equal 1 day and less than 99.9 days \n";
+					if (!(numAveDay <= 7 && numAveDay >= 1))
+						ErrorMessage += "Average day must between 1 and 7 days \n";
 				if (numAveWorkoutTime != 0)
-				if (!( numAveWorkoutTime < 99 && numAveWorkoutTime >1))
-					ErrorMessage += "Average workout time must be greater than 1 minute and less than 99.9 minutes \n";
-				
+					if (!(numAveWorkoutTime < 99 && numAveWorkoutTime > 1))
+						ErrorMessage += "Average workout time must be greater than 1 minute and less than 99.9 minutes \n";
+
 				if (numTotalTimeAWeek != 0)
-				if (!( numTotalTimeAWeek < 999 && numTotalTimeAWeek > 1))
-					ErrorMessage += "Total time train per week must be greater than 1 minute and less than 999 minutes \n";
-				
+					if (!(numTotalTimeAWeek < 999 && numTotalTimeAWeek > 1))
+						ErrorMessage += "Total time train per week must be greater than 1 minute and less than 999 minutes \n";
+
 				if (numTotalCardioTime != 0)
-				if (!( numTotalCardioTime < 99 && numTotalCardioTime > 1))
-					ErrorMessage += "Total cardio time must be greater than 1 minute and less than 999 minutes \n";
-				
-				if (ErrorMessage.equals("")) return true;
+					if (!(numTotalCardioTime < 99 && numTotalCardioTime > 1))
+						ErrorMessage += "Total cardio time must be greater than 1 minute and less than 999 minutes \n";
+
+				if (ErrorMessage.equals(""))
+					return true;
 				return false;
 			}
 		});
