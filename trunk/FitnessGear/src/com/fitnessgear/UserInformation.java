@@ -197,85 +197,79 @@ public class UserInformation extends Fragment {
 				tvWeight.setText(bodyWeight + " kg");
 				progressWeight.setProgress(0);
 				progressWeight.setSecondaryProgress(0);
-//				progressWeight.setBackground(normalProgressColor);
+				progressWeight.setBackground(normalProgressColor);
 			} else {
+				progressWeight.setProgress(0);
+				progressWeight.setSecondaryProgress(0);
 				tvWeight.setText(bodyWeight + "/" + goalWeight + " kg");
 				if (bodyWeight >= goalWeight) {
-					progressWeight.setProgress(0);
-					progressWeight.setSecondaryProgress(0);
 					progressWeight.setBackground(bodyStatsColor);
 					float progress = (goalWeight / bodyWeight) * 100;
 					progressWeight.setProgress((int) progress);
 				}
 				if (bodyWeight < goalWeight) {
-					progressWeight.setProgress(0);
-					progressWeight.setSecondaryProgress(0);
 					progressWeight.setBackground(goalStatsColor);
 					float progress = (bodyWeight / goalWeight) * 100;
 					progressWeight.setSecondaryProgress((int) progress);
 				}
-				// if (progress1 > 100)
-				// {
-				// progress1 = (bodyWeight/goalWeight)*100;
-				// progressWeight.setSecondaryProgress((int)progress1);
-				// progressWeight.setProgressDrawable(draw1);
-				// }
 			}
 			if (goalBodyFat == 0) {
 				tvBodyFat.setText(bodyBodyFat + " %");
 				progressBodyFat.setProgress(0);
 				progressBodyFat.setSecondaryProgress(0);
+				progressBodyFat.setBackground(normalProgressColor);
 			} else {
+				progressBodyFat.setProgress(0);
+				progressBodyFat.setSecondaryProgress(0);
 				tvBodyFat.setText(bodyBodyFat + "/" + goalBodyFat + " %");
+				if (bodyBodyFat >= goalBodyFat) {
+					progressBodyFat.setBackground(bodyStatsColor);
+					float progress = (goalBodyFat / bodyBodyFat) * 100;
+					progressBodyFat.setProgress((int) progress);
+				}
+				if (bodyBodyFat < goalBodyFat) {
+					progressBodyFat.setBackground(goalStatsColor);
+					float progress = (bodyBodyFat / goalBodyFat) * 100;
+					progressBodyFat.setSecondaryProgress((int) progress);
+				}
 			}
 			if (goalHeight == 0) {
 				tvHeight.setText(bodyHeight + " cm");
 				progressHeight.setProgress(0);
 				progressHeight.setSecondaryProgress(0);
+				progressHeight.setBackground(normalProgressColor);
 			} else {
 				progressHeight.setProgress(0);
 				progressHeight.setSecondaryProgress(0);
 				tvHeight.setText(bodyHeight + "/" + goalHeight + " cm");
-
-				// if (bodyHeight >= goalHeight) {
-				// float progress = (goalHeight / bodyHeight) * 100;
-				// progressHeight.setProgressDrawable(draw2);
-				// progressHeight.setProgress(100);
-				// progressHeight.setSecondaryProgress((int) progress);
-				// }
-				// if (bodyHeight < goalHeight) {
-				// float progress = (bodyHeight / goalHeight) * 100;
-				// progressHeight.setProgressDrawable(draw1);
-				// progressHeight.setProgress(100);
-				// progressHeight.setSecondaryProgress((int) progress);
-				// }
-				float progress1 = (goalHeight / bodyHeight) * 100;
-				progressHeight.setProgress(100);
-				if (progress1 <= 100) {
-					progressHeight.setSecondaryProgress((int) progress1);
-					progressHeight.setProgressDrawable(draw2);
-				} else {
-					float progress2 = (bodyHeight / goalHeight) * 100;
-					progressHeight.setSecondaryProgress((int) progress2);
-					progressHeight.setProgressDrawable(draw1);
+				if (bodyHeight >= goalHeight) {
+					progressHeight.setBackground(bodyStatsColor);
+					float progress = (goalHeight / bodyHeight) * 100;
+					progressHeight.setProgress((int) progress);
+				}
+				if (bodyHeight < goalHeight) {
+					progressHeight.setBackground(goalStatsColor);
+					float progress = (bodyHeight / goalHeight) * 100;
+					progressHeight.setSecondaryProgress((int) progress);
 				}
 			}
 			if (goalChest == 0) {
 				tvChest.setText(bodyChest + " cm");
 				progressChest.setProgress(0);
 				progressChest.setSecondaryProgress(0);
+				progressChest.setBackground(normalProgressColor);
 			} else {
+				progressChest.setProgress(0);
+				progressChest.setSecondaryProgress(0);
 				tvChest.setText(bodyChest + "/" + goalChest + " cm");
 				if (bodyChest >= goalChest) {
+					progressChest.setBackground(bodyStatsColor);
 					float progress = (goalChest / bodyChest) * 100;
-					progressChest.setProgressDrawable(draw2);
-					progressChest.setProgress(100);
-					progressChest.setSecondaryProgress((int) progress);
+					progressChest.setProgress((int) progress);
 				}
-				if (bodyHeight < goalChest) {
+				if (bodyChest < goalChest) {
+					progressChest.setBackground(goalStatsColor);
 					float progress = (bodyChest / goalChest) * 100;
-					progressChest.setProgressDrawable(draw1);
-					progressChest.setProgress(100);
 					progressChest.setSecondaryProgress((int) progress);
 				}
 			}
@@ -283,18 +277,19 @@ public class UserInformation extends Fragment {
 				tvWaist.setText(bodyWaist + " cm");
 				progressWaist.setProgress(0);
 				progressWaist.setSecondaryProgress(0);
+				progressWaist.setBackground(normalProgressColor);
 			} else {
+				progressWaist.setProgress(0);
+				progressWaist.setSecondaryProgress(0);
 				tvWaist.setText(bodyWaist + "/" + goalWaist + " cm");
 				if (bodyWaist >= goalWaist) {
+					progressWaist.setBackground(bodyStatsColor);
 					float progress = (goalWaist / bodyWaist) * 100;
-					progressWaist.setProgressDrawable(draw2);
-					progressWaist.setProgress(100);
-					progressWaist.setSecondaryProgress((int) progress);
+					progressWaist.setProgress((int) progress);
 				}
 				if (bodyWaist < goalWaist) {
+					progressWaist.setBackground(goalStatsColor);
 					float progress = (bodyWaist / goalWaist) * 100;
-					progressWaist.setProgressDrawable(draw1);
-					progressWaist.setProgress(100);
 					progressWaist.setSecondaryProgress((int) progress);
 				}
 			}
@@ -302,18 +297,19 @@ public class UserInformation extends Fragment {
 				tvArms.setText(bodyArms + " cm");
 				progressArms.setProgress(0);
 				progressArms.setSecondaryProgress(0);
+				progressArms.setBackground(normalProgressColor);
 			} else {
+				progressArms.setProgress(0);
+				progressArms.setSecondaryProgress(0);
 				tvArms.setText(bodyArms + "/" + goalArms + " cm");
 				if (bodyArms >= goalArms) {
+					progressArms.setBackground(bodyStatsColor);
 					float progress = (goalArms / bodyArms) * 100;
-					progressArms.setProgressDrawable(draw2);
-					progressArms.setProgress(100);
-					progressArms.setSecondaryProgress((int) progress);
+					progressArms.setProgress((int) progress);
 				}
 				if (bodyArms < goalArms) {
+					progressArms.setBackground(goalStatsColor);
 					float progress = (bodyArms / goalArms) * 100;
-					progressArms.setProgressDrawable(draw1);
-					progressArms.setProgress(100);
 					progressArms.setSecondaryProgress((int) progress);
 				}
 			}
@@ -321,19 +317,21 @@ public class UserInformation extends Fragment {
 				tvShoulders.setText(bodyShoulders + " cm");
 				progressShoulders.setProgress(0);
 				progressShoulders.setSecondaryProgress(0);
+				progressShoulders.setBackground(normalProgressColor);
 			} else {
+				progressShoulders.setProgress(0);
+				progressShoulders.setSecondaryProgress(0);
 				tvShoulders
 						.setText(bodyShoulders + "/" + goalShoulders + " cm");
 				if (bodyShoulders >= goalShoulders) {
+					
+					progressShoulders.setBackground(bodyStatsColor);
 					float progress = (goalShoulders / bodyShoulders) * 100;
-					progressShoulders.setProgressDrawable(draw2);
-					progressShoulders.setProgress(100);
-					progressShoulders.setSecondaryProgress((int) progress);
+					progressShoulders.setProgress((int) progress);
 				}
 				if (bodyShoulders < goalShoulders) {
+					progressShoulders.setBackground(bodyStatsColor);
 					float progress = (bodyShoulders / goalShoulders) * 100;
-					progressShoulders.setProgressDrawable(draw1);
-					progressShoulders.setProgress(100);
 					progressShoulders.setSecondaryProgress((int) progress);
 				}
 			}
@@ -341,18 +339,19 @@ public class UserInformation extends Fragment {
 				tvForearms.setText(bodyForearms + " cm");
 				progressForearms.setProgress(0);
 				progressForearms.setSecondaryProgress(0);
+				progressForearms.setBackground(normalProgressColor);
 			} else {
+				progressForearms.setProgress(0);
+				progressForearms.setSecondaryProgress(0);
 				tvForearms.setText(bodyForearms + "/" + goalForearms + " cm");
 				if (bodyForearms >= goalForearms) {
+					progressForearms.setBackground(bodyStatsColor);
 					float progress = (goalForearms / bodyForearms) * 100;
-					progressForearms.setProgressDrawable(draw2);
-					progressForearms.setProgress(100);
-					progressForearms.setSecondaryProgress((int) progress);
+					progressForearms.setProgress((int) progress);
 				}
 				if (bodyForearms < goalForearms) {
+					progressForearms.setBackground(goalStatsColor);
 					float progress = (bodyForearms / goalForearms) * 100;
-					progressForearms.setProgressDrawable(draw1);
-					progressForearms.setProgress(100);
 					progressForearms.setSecondaryProgress((int) progress);
 				}
 			}
@@ -360,18 +359,19 @@ public class UserInformation extends Fragment {
 				tvNeck.setText(bodyNeck + " cm");
 				progressNeck.setProgress(0);
 				progressNeck.setSecondaryProgress(0);
+				progressNeck.setBackground(normalProgressColor);
 			} else {
+				progressNeck.setProgress(0);
+				progressNeck.setSecondaryProgress(0);
 				tvNeck.setText(bodyNeck + "/" + goalNeck + " cm");
 				if (bodyNeck >= goalNeck) {
+					progressNeck.setBackground(bodyStatsColor);
 					float progress = (goalNeck / bodyNeck) * 100;
-					progressNeck.setProgressDrawable(draw2);
-					progressNeck.setProgress(100);
-					progressNeck.setSecondaryProgress((int) progress);
+					progressNeck.setProgress((int) progress);
 				}
 				if (bodyHeight < goalNeck) {
+					progressNeck.setBackground(goalStatsColor);
 					float progress = (bodyNeck / goalNeck) * 100;
-					progressNeck.setProgressDrawable(draw1);
-					progressNeck.setProgress(100);
 					progressNeck.setSecondaryProgress((int) progress);
 				}
 			}
@@ -379,18 +379,19 @@ public class UserInformation extends Fragment {
 				tvHips.setText(bodyHips + " cm");
 				progressHips.setProgress(0);
 				progressHips.setSecondaryProgress(0);
+				progressHips.setBackground(normalProgressColor);
 			} else {
+				progressHips.setProgress(0);
+				progressHips.setSecondaryProgress(0);
 				tvHips.setText(bodyHips + "/" + goalHips + " cm");
 				if (bodyHips >= goalHips) {
+					progressHips.setBackground(bodyStatsColor);
 					float progress = (goalHips / bodyHips) * 100;
-					progressHips.setProgressDrawable(draw2);
-					progressHips.setProgress(100);
-					progressHips.setSecondaryProgress((int) progress);
+					progressHips.setProgress((int) progress);
 				}
 				if (bodyHips < goalHeight) {
+					progressHips.setBackground(goalStatsColor);
 					float progress = (bodyHips / goalHips) * 100;
-					progressHips.setProgressDrawable(draw1);
-					progressHips.setProgress(100);
 					progressHips.setSecondaryProgress((int) progress);
 				}
 			}
@@ -398,18 +399,19 @@ public class UserInformation extends Fragment {
 				tvThighs.setText(bodyThighs + " cm");
 				progressThighs.setProgress(0);
 				progressThighs.setSecondaryProgress(0);
+				progressThighs.setBackground(normalProgressColor);
 			} else {
+				progressThighs.setProgress(0);
+				progressThighs.setSecondaryProgress(0);
 				tvThighs.setText(bodyThighs + "/" + goalThighs + " cm");
 				if (bodyThighs >= goalThighs) {
+					progressThighs.setBackground(bodyStatsColor);
 					float progress = (goalThighs / bodyThighs) * 100;
-					progressThighs.setProgressDrawable(draw2);
-					progressThighs.setProgress(100);
-					progressThighs.setSecondaryProgress((int) progress);
+					progressThighs.setProgress((int) progress);
 				}
 				if (bodyThighs < goalThighs) {
+					progressThighs.setBackground(goalStatsColor);
 					float progress = (bodyThighs / goalThighs) * 100;
-					progressThighs.setProgressDrawable(draw1);
-					progressThighs.setProgress(100);
 					progressThighs.setSecondaryProgress((int) progress);
 				}
 			}
@@ -417,18 +419,19 @@ public class UserInformation extends Fragment {
 				tvCalves.setText(bodyCalves + " cm");
 				progressCalves.setProgress(0);
 				progressCalves.setSecondaryProgress(0);
+				progressCalves.setBackground(normalProgressColor);
 			} else {
+				progressCalves.setProgress(0);
+				progressCalves.setSecondaryProgress(0);
 				tvCalves.setText(bodyCalves + "/" + goalCalves + " cm");
 				if (bodyCalves >= goalCalves) {
+					progressCalves.setBackground(bodyStatsColor);
 					float progress = (goalCalves / bodyCalves) * 100;
-					progressCalves.setProgressDrawable(draw2);
-					progressCalves.setProgress(100);
-					progressCalves.setSecondaryProgress((int) progress);
+					progressCalves.setProgress((int) progress);
 				}
 				if (bodyCalves < goalCalves) {
+					progressCalves.setBackground(goalStatsColor);
 					float progress = (bodyCalves / goalCalves) * 100;
-					progressCalves.setProgressDrawable(draw1);
-					progressCalves.setProgress(100);
 					progressCalves.setSecondaryProgress((int) progress);
 				}
 			}
